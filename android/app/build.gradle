@@ -22,10 +22,12 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def flutterNdkVersion = localProperties.getProperty('flutter.ndkVersion')
+
 android {
     namespace "it.gdgpescara.filch"
     compileSdkVersion flutter.compileSdkVersion
-    ndkVersion flutter.ndkVersion
+    ndkVersion flutterNdkVersion
 
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8

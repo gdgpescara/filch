@@ -24,6 +24,11 @@ dependencies:
   firebase_crashlytics: ^3.3.7
   cloud_functions: ^4.4.2
   cloud_firestore: ^4.9.3
+  equatable: ^2.0.5
+  flutter_svg: ^2.0.7
+  rive: ^0.11.17
+  loggy: ^2.0.3
+  flutter_loggy: ^2.0.2
 
 dev_dependencies:
   flutter_test:
@@ -39,4 +44,5 @@ flutter:
 
   assets:
       - assets/images/
+      - assets/animations/
 
