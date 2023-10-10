@@ -1,0 +1,96 @@
+name: filch
+sdkPath: .fvm/flutter_sdk
+packages:
+  - .
+
+ide:
+  intellij: true
+
+command:
+  bootstrap:
+    runPubGetInParallel: false
+    usePubspecOverrides: true
+  clean:
+    hooks:
+      post: melos exec --flutter --concurrency=1 -- "flutter clean" && find . -type f -name "*.iml" -exec rm -f {} \;
+
+
+scripts:
+  generate:
+    run: melos build_runner:build
+
+  build_runner:build:
+    run: |
+      melos exec --concurrency=1 --fail-fast --depends-on="build_runner" -- \
+        "dart pub run build_runner build --delete-conflicting-outputs"
+
+  generate:with_selection:
+    run: melos build_runner:build
+    select-package:
+      depends-on: "build_runner"
+
+  lint:all:
+    run:  melos run format --no-select && melos run analyze --no-select
+
+  fix:all:
+    run: melos exec --flutter --concurrency=1 -- "dart fix --apply"
+
+  test:all:
+    run: melos run test --no-select
+
+  analyze:
+    run: melos exec --flutter --concurrency=1 --fail-fast -- "flutter analyze . --fatal-infos"
+
+  test:
+    run: melos exec --flutter --concurrency=1 --fail-fast -- "flutter test --coverage --reporter expanded"
+    packageFilters:
+      dirExists: test
+
+  test:update_goldens:
+    run: melos exec --flutter --concurrency=1 --fail-fast --depends-on="golden_toolkit" -- "flutter test --update-goldens --reporter expanded"
+
+  format:
+    run: melos exec --flutter --concurrency=1 --fail-fast -- "dart format -o write . --line-length=120"
+
+  generate:icon_font:
+    run: melos exec --fail-fast -- "/bin/zsh scripts/generate_icon_font.sh"
+
+  test:show_coverage:
+    run: melos exec --fail-fast -- "genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html"
+    description: Generate html coverage and show
+    packageFilters:
+      dirExists: coverage
+
+  test:show_coverage:win:
+    run: melos exec --fail-fast -- "perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml -o coverage\html coverage\lcov.info && start coverage\html\index.html"
+    description: Generate html coverage and show
+    packageFilters:
+      dirExists: coverage
+
+  test:remove_generated_file_from_coverage:
+    run: melos exec --fail-fast -- "lcov --remove coverage/lcov.info "**/**/*.g.dart" "lib/dependency_injection/*" -o coverage/lcov.info"
+    description: Remove generated file from coverage
+    packageFilters:
+      dirExists: coverage
+
+  # build scripts ------------------------------------------------------------------------------
+  build:android:aab:
+    run: |
+      melos exec --flutter --concurrency=1 --fail-fast -- \
+        "flutter build appbundle -t lib/main.dart --release --obfuscate --split-debug-info=bundle/debug --dart-define-from-file=.env/wnv.json"
+    select-package:
+      scope: "filch"
+
+  build:android:apk:
+    run: |
+      melos exec --flutter --concurrency=1 --fail-fast -- \
+        "flutter build apk -t lib/main.dart --release --obfuscate --split-debug-info=android/debug --dart-define-from-file=.env/env.json"
+    select-package:
+      scope: "filch"
+
+  build:ios:ipa:
+    run: |
+      melos exec --flutter --concurrency=1 --fail-fast -- \
+        "flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --dart-define-from-file=.env/env.json"
+    select-package:
+      scope: "filch"
