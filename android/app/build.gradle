@@ -22,11 +22,23 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
+def keystorePropertiesFile = rootProject.file('.keystore/keystore.properties')
+def keystoreProperties = new Properties()
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+def secretsProperties = new Properties()
+def secretsFile = rootProject.file('secrets.properties')
+if (secretsFile.exists()) {
+    secretsFile.withReader('UTF-8') { reader ->
+        secretsProperties.load(reader)
+    }
+}
+
 def flutterNdkVersion = localProperties.getProperty('flutter.ndkVersion')
 
 android {
     namespace "it.gdgpescara.filch"
-    compileSdkVersion flutter.compileSdkVersion
+    compileSdk 34
     ndkVersion flutterNdkVersion
 
     compileOptions {
@@ -44,16 +56,35 @@ android {
 
     defaultConfig {
         applicationId "it.gdgpescara.filch"
-        minSdkVersion flutter.minSdkVersion
-        targetSdkVersion flutter.targetSdkVersion
+        minSdkVersion 21
+        targetSdkVersion 33
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true
+        manifestPlaceholders([
+                'applicationName'    : 'android.app.Application',
+                'facebookAppId'      : secretsProperties['facebookAppId'],
+                'facebookClientToken': secretsProperties['facebookClientToken']
+        ])
+    }
+
+    signingConfigs {
+        release {
+            storeFile rootProject.file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
     }
 
     buildTypes {
+        debug {
+            signingConfig signingConfigs.release
+        }
         release {
-            signingConfig signingConfigs.debug
+            signingConfig signingConfigs.release
+            shrinkResources true
+            minifyEnabled true
         }
     }
 }

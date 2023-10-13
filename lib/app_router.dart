@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'functionalities/home/home_page.dart';
-import 'functionalities/login/login_page.dart';
+import 'functionalities/sign_in/sign_in_page.dart';
 import 'functionalities/sorting_ceremony/sorting_ceremony_page.dart';
 import 'functionalities/splash/splash_page.dart';
 
@@ -15,8 +15,8 @@ class AppRouter {
           builder: (context) => const SplashPage(),
           settings: settings,
         ),
-        LoginPage.routeName: MaterialPageRoute<void>(
-          builder: (context) => const LoginPage(),
+        SignInPage.routeName: MaterialPageRoute<void>(
+          builder: (context) => const SignInPage(),
           fullscreenDialog: true,
           settings: settings,
         ),

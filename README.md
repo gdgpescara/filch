@@ -44,3 +44,17 @@ To generate code you can use melos commands:
 ```bash
 melos run generate
 ```
+
+### Generate locale string
+    
+```bash
+dart run slang
+```
+## Secrets tath you need
+
+### Android
+- .keystore
+- secrets.properties
+
+### iOS
+- Secrets.xcconfig

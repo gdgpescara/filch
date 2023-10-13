@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../dependency_injection/dependency_injection.dart';
 import '../_shared/widgets/loader_animation.dart';
+import '../_shared/widgets/logo.dart';
 import '../home/home_page.dart';
-import '../login/login_page.dart';
+import '../sign_in/sign_in_page.dart';
 import '../sorting_ceremony/sorting_ceremony_page.dart';
 import 'state/splash_cubit.dart';
 
@@ -27,7 +27,7 @@ class _SplashPageState extends State<SplashPage> {
         listener: (context, state) async {
           switch (state) {
             case UserLoggedOut():
-              await Navigator.of(context).pushNamed<void>(LoginPage.routeName);
+              await Navigator.of(context).pushNamed<void>(SignInPage.routeName);
               if (mounted) {
                 await context.read<SplashCubit>().init();
               }
@@ -61,7 +61,7 @@ class _SplashPageState extends State<SplashPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                SvgPicture.asset('assets/images/logo.svg'),
+                Logo.dark(),
                 const SizedBox(height: 16),
                 const LoaderAnimation(),
               ],
