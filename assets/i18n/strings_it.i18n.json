@@ -4,6 +4,9 @@
     "buttons": {
       "cancel": "Annulla",
       "confirm": "Conferma"
+    },
+    "errors": {
+      "generic": "Si è verificato un errore"
     }
   },
   "sign_in": {
@@ -21,5 +24,19 @@
         "sign_in": "Accedi",
         "change_password": "Cambia Password"
     }
+  },
+  "sorting_ceremony": {
+    "loading" : [
+      "Hmm, difficile, molto difficile. Molto meglio di quanto non facessi il Cappello, vuoi dirmi dove vuoi andare?",
+      "Dove dovresti essere? Questo è il posto che ti renderà grande.",
+      "Sì, sì, certo... è la tua voglia che mi dice cosa fare...",
+      "Hai un carattere eccezionale. Dovevo ammetterlo in Pytherin.",
+      "Un cuore nobile, tu sarai un vero Dashclaw.",
+      "La tua audacia ti porta in Kerasdor.",
+      "Pensavo di trovarti un posto in Dashclaw, ma hai determinazione da Pytherin.",
+      "Un'anima gentile, meglio per te in Gopherpuff.",
+      "Una mente acuta e creativa, Sarai un bravo Dashclaw.",
+      "Il tuo coraggio è il tuo vero valore, vai in Kerasdor."
+    ]
   }
 }

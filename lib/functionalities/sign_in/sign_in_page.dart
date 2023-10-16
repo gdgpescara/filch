@@ -1,4 +1,3 @@
-import 'package:filch/functionalities/sign_in/widgets/staff_sign_in.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -8,6 +7,7 @@ import '../_shared/widgets/remove_focus_container.dart';
 import 'state/sign_in_cubit.dart';
 import 'widgets/providers_sign_in.dart';
 import 'widgets/sign_in_switcher_button.dart';
+import 'widgets/staff_sign_in.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
@@ -51,7 +51,7 @@ class SignInPage extends StatelessWidget {
                           child: child(),
                         );
                       },
-                    )
+                    ),
                   ],
                 ),
               ),

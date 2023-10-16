@@ -142,3 +142,4 @@ app.*.map.json
 /ios/Runner/GoogleService-Info.plist
 /android/secrets.properties
 /ios/Secrets.xcconfig
+/functions/.idea/
