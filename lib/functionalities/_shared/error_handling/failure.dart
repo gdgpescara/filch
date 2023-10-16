@@ -1,3 +1,4 @@
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:equatable/equatable.dart';
 
 class Failure extends Error with EquatableMixin {
@@ -18,4 +19,9 @@ class Failure extends Error with EquatableMixin {
 // Object not found.
 class NotFoundFailure extends Failure {
   NotFoundFailure() : super(code: 'not-found', message: 'Object not found.');
+}
+
+class FirebaseFunctionsFailure extends Failure {
+  FirebaseFunctionsFailure(FirebaseFunctionsException e) : super(code: e.code, message: 'message: ${e.message}, details: ${e.details}');
+
 }

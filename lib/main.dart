@@ -1,10 +1,14 @@
 import 'dart:async';
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:loggy/loggy.dart';
+
 import 'application.dart';
 import 'dependency_injection/dependency_injection.config.dart';
 import 'dependency_injection/dependency_injection.dart';
@@ -21,6 +25,15 @@ void main() {
         logPrinter: const PrettyDeveloperPrinter(),
       );
       injector.init();
+
+      if (kDebugMode) {
+        FirebaseFunctions.instance.useFunctionsEmulator('http://192.168.178.168', 5001);
+        FirebaseFirestore.instance.settings = const Settings(
+          host: 'http://192.168.178.168:8080',
+          sslEnabled: false,
+          persistenceEnabled: false,
+        );
+      }
 
       runApp(TranslationProvider(child: const Application()));
     },
