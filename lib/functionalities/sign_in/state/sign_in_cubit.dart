@@ -22,7 +22,7 @@ class SignInCubit extends Cubit<SignInState> {
     this._facebookSignInUseCase,
     this._appleSignInUseCase,
     this._twitterSignInUseCase,
-  ) : super(SignInInitial());
+  ) : super(SignInWithProviders());
 
   final UserPasswordSignInUseCase _userPasswordSignInUseCase;
   final GoogleSignInUseCase _googleSignInUseCase;
@@ -30,12 +30,14 @@ class SignInCubit extends Cubit<SignInState> {
   final AppleSignInUseCase _appleSignInUseCase;
   final TwitterSignInUseCase _twitterSignInUseCase;
 
-  void emailPasswordSignIn(Map<String, String> formValue) {
-    _userPasswordSignInUseCase(formValue['email']!, formValue['password']!).actions(
-      progress: () => emit(const SignInLoading()),
-      success: (_) => emit(const SignInSuccess()),
-      failure: (e) => emit(SignInFailure(e)),
-    );
+  void emailPasswordSignIn(Map<String, Object?> formValue) {
+    if(formValue['email'] is String && formValue['password'] is String) {
+      _userPasswordSignInUseCase(formValue['email']! as String, formValue['password']! as String).actions(
+        progress: () => _emitAction(const SignInLoading(ProvidersEnum.emailPassword)),
+        success: (_) => _emitAction(const SignInSuccess()),
+        failure: (e) => _emitAction(SignInFailure(e)),
+      );
+    }
   }
 
   void providerSignIn(ProvidersEnum provider) {
@@ -50,33 +52,47 @@ class SignInCubit extends Cubit<SignInState> {
 
   void _googleSignIn() {
     _googleSignInUseCase().actions(
-      progress: () => emit(const SignInLoading(ProvidersEnum.google)),
-      success: (_) => emit(const SignInSuccess()),
-      failure: (e) => emit(SignInFailure(e)),
+      progress: () => _emitAction(const SignInLoading(ProvidersEnum.google)),
+      success: (_) => _emitAction(const SignInSuccess()),
+      failure: (e) => _emitAction(SignInFailure(e)),
     );
   }
 
   void _facebookSignIn() {
     _facebookSignInUseCase().actions(
-      progress: () => emit(const SignInLoading(ProvidersEnum.facebook)),
-      success: (_) => emit(const SignInSuccess()),
-      failure: (e) => emit(SignInFailure(e)),
+      progress: () => _emitAction(const SignInLoading(ProvidersEnum.facebook)),
+      success: (_) => _emitAction(const SignInSuccess()),
+      failure: (e) => _emitAction(SignInFailure(e)),
     );
   }
 
   void _appleSignIn() {
     _appleSignInUseCase().actions(
-      progress: () => emit(const SignInLoading(ProvidersEnum.apple)),
-      success: (_) => emit(const SignInSuccess()),
-      failure: (e) => emit(SignInFailure(e)),
+      progress: () => _emitAction(const SignInLoading(ProvidersEnum.apple)),
+      success: (_) => _emitAction(const SignInSuccess()),
+      failure: (e) => _emitAction(SignInFailure(e)),
     );
   }
 
   void _twitterSignIn() {
     _twitterSignInUseCase().actions(
-      progress: () => emit(const SignInLoading(ProvidersEnum.twitter)),
-      success: (_) => emit(const SignInSuccess()),
-      failure: (e) => emit(SignInFailure(e)),
+      progress: () => _emitAction(const SignInLoading(ProvidersEnum.twitter)),
+      success: (_) => _emitAction(const SignInSuccess()),
+      failure: (e) => _emitAction(SignInFailure(e)),
     );
+  }
+
+  void _emitAction(SignInActionsState action) {
+    final current = state;
+    emit(action);
+    emit(current);
+  }
+
+  void switchSignIn() {
+      if(state is SignInWithProviders) {
+        emit(SignInWithUserPassword());
+      } else {
+        emit(SignInWithProviders());
+      }
   }
 }

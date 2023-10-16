@@ -1,9 +1,25 @@
 {
   "app_name": "Filch",
-  "sign_in_providers": {
-    "facebook": "Facebook",
-    "twitter": "Twitter",
-    "google": "Google",
-    "apple": "Apple"
+  "commons": {
+    "buttons": {
+      "cancel": "Annulla",
+      "confirm": "Conferma"
+    }
+  },
+  "sign_in": {
+    "sign_in_providers": {
+      "button": "Accesso partecipanti",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "google": "Google",
+      "apple": "Apple"
+    },
+    "staff_sign_in": {
+        "button": "Accesso Staff",
+        "email": "Email",
+        "password": "Password",
+        "sign_in": "Accedi",
+        "change_password": "Cambia Password"
+    }
   }
 }

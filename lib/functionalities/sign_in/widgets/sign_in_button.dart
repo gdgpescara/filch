@@ -5,15 +5,21 @@ import '../../../i18n/strings.g.dart';
 import '../domain/models/providers_enum.dart';
 import '../state/sign_in_cubit.dart';
 
-class ProviderSignInButton extends StatelessWidget {
-  const ProviderSignInButton({super.key, required this.provider});
+class SignInButton extends StatelessWidget {
+  const SignInButton({super.key, required this.provider, this.onPressed});
 
   final ProvidersEnum provider;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => context.read<SignInCubit>().providerSignIn(provider),
+      onPressed: () {
+        if (onPressed != null) {
+          return onPressed?.call();
+        }
+        context.read<SignInCubit>().providerSignIn(provider);
+      },
       child: _child(provider),
     );
   }
@@ -23,7 +29,7 @@ class ProviderSignInButton extends StatelessWidget {
       children: [
         // _providerIcon(provider),
         // const SizedBox(width: 16),
-        Expanded(child: Text(_providerName)),
+        Expanded(child: Text(_providerName, textAlign: TextAlign.center)),
         const SizedBox(width: 16),
         _providerLoading,
       ],
@@ -40,9 +46,10 @@ class ProviderSignInButton extends StatelessWidget {
       );
 
   String get _providerName => {
-        ProvidersEnum.google: t.sign_in_providers.google,
-        ProvidersEnum.facebook: t.sign_in_providers.facebook,
-        ProvidersEnum.apple: t.sign_in_providers.apple,
-        ProvidersEnum.twitter: t.sign_in_providers.twitter,
+        ProvidersEnum.google: t.sign_in.sign_in_providers.google,
+        ProvidersEnum.facebook: t.sign_in.sign_in_providers.facebook,
+        ProvidersEnum.apple: t.sign_in.sign_in_providers.apple,
+        ProvidersEnum.twitter: t.sign_in.sign_in_providers.twitter,
+        ProvidersEnum.emailPassword: t.sign_in.staff_sign_in.sign_in,
       }[provider]!;
 }

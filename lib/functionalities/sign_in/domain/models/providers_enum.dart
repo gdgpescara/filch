@@ -2,5 +2,6 @@ enum ProvidersEnum {
   google,
   facebook,
   apple,
-  twitter;
+  twitter,
+  emailPassword;
 }
