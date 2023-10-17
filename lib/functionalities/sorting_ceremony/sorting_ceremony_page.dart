@@ -15,7 +15,7 @@ class SortingCeremonyPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<SortingCeremonyCubit>(
-      create: (context) => injector(),
+      create: (context) => injector()..startSortingCeremony(),
       child: WillPopScope(
         onWillPop: () async => false,
         child: Scaffold(

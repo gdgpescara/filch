@@ -1,13 +1,14 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-
-import '../repositories/user_repository.dart';
 
 @lazySingleton
 class HasHouseUseCase {
-  HasHouseUseCase(this._userRepository);
-  final UserRepository _userRepository;
+  HasHouseUseCase(this._auth);
 
-  Future<bool> call() {
-    return _userRepository.hasHouse();
+  final FirebaseAuth _auth;
+
+  Future<bool> call() async {
+    final idToken = await _auth.currentUser!.getIdTokenResult(true);
+    return idToken.claims?.containsKey('house') ?? false;
   }
 }

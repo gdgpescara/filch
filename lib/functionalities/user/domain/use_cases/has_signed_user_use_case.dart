@@ -1,13 +1,13 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-import '../repositories/user_repository.dart';
 
 @lazySingleton
 class HasSignedUserUseCase {
-  HasSignedUserUseCase(this._userRepository);
-  final UserRepository _userRepository;
+  HasSignedUserUseCase(this._auth);
+  final FirebaseAuth _auth;
 
   bool call() {
-    return _userRepository.hasSignedUser();
+    return _auth.currentUser != null && _auth.currentUser?.getIdToken() != null;
   }
 }

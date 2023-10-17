@@ -26,6 +26,7 @@
     }
   },
   "sorting_ceremony": {
+    "assigned": "You are in $house",
     "loading" : [
       "Hmm, difficult, very difficult. Much better than I ever was, would you tell me where you want to go?",
       "Where you should be? This is the place that will make you great.",

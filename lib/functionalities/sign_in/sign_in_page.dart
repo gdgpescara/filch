@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../dependency_injection/dependency_injection.dart';
+import '../../i18n/strings.g.dart';
 import '../_shared/widgets/logo.dart';
 import '../_shared/widgets/remove_focus_container.dart';
 import 'state/sign_in_cubit.dart';
@@ -26,6 +27,14 @@ class SignInPage extends StatelessWidget {
             listener: (context, state) {
               if (state is SignInSuccess) {
                 Navigator.pop(context);
+              }
+              if(state is SignInFailure) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(t.commons.errors.generic),
+                    backgroundColor: Theme.of(context).colorScheme.error,
+                  ),
+                );
               }
             },
             child: Scaffold(

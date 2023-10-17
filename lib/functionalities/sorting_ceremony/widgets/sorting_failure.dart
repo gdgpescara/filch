@@ -10,7 +10,11 @@ class SortingFailure extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(t.commons.errors.generic),
+      child: Text(
+        t.commons.errors.generic,
+        style: Theme.of(context).textTheme.titleLarge,
+        textAlign: TextAlign.center,
+      ),
     );
   }
 }
