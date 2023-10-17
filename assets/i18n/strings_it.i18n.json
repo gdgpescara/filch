@@ -26,6 +26,7 @@
     }
   },
   "sorting_ceremony": {
+    "assigned": "Sei stato assegnato a $house",
     "loading" : [
       "Hmm, difficile, molto difficile. Molto meglio di quanto non facessi il Cappello, vuoi dirmi dove vuoi andare?",
       "Dove dovresti essere? Questo è il posto che ti renderà grande.",

@@ -18,8 +18,8 @@ class SplashCubit extends Cubit<SplashState> {
   final HasHouseUseCase _hasHouseUseCase;
 
   Future<void> init() async {
+    await Future<void>.delayed(const Duration(seconds: 2));
     if (!_hasSignedUserUseCase()) {
-      await Future<void>.delayed(const Duration(seconds: 4));
       emit(const UserLoggedOut());
       return;
     }

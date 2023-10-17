@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:loggy/loggy.dart';
@@ -26,10 +25,13 @@ void main() {
       );
       injector.init();
 
-      if (kDebugMode) {
-        FirebaseFunctions.instance.useFunctionsEmulator('http://192.168.178.168', 5001);
+      if (const String.fromEnvironment('ENV') == 'local') {
+        FirebaseFunctions.instance.useFunctionsEmulator(
+          const String.fromEnvironment('HOST'),
+          const int.fromEnvironment('FUNCTION_PORT'),
+        );
         FirebaseFirestore.instance.settings = const Settings(
-          host: 'http://192.168.178.168:8080',
+          host: '${const String.fromEnvironment('HOST')}:${const int.fromEnvironment('FIRESTORE_PORT')}',
           sslEnabled: false,
           persistenceEnabled: false,
         );

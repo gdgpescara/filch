@@ -13,16 +13,17 @@ class SortingCeremonyCubit extends Cubit<SortingCeremonyState> {
 
   final AssignHouseUseCase _assignHouseUseCase;
 
-  void startSortingCeremony() {
+  Future<void> startSortingCeremony() async {
+    await Future<void>.delayed(const Duration(seconds: 5));
     _assignHouseUseCase().actions(
       progress: () => emit(SortingCeremonyLoading()),
       success: (house) async {
-        emit(SortingCeremonySuccess(house: house));
-        await Future.delayed(const Duration(seconds: 8), () {});
+        emit(SortingCeremonySuccess(house: house.toUpperCase()));
+        await Future<void>.delayed(const Duration(seconds: 5));
         emit(SortingCeremonyFinish());
       },
       failure: (failure) {
-        if(failure.code == 'already-sorted') {
+        if (failure.code == 'already-exists') {
           emit(SortingCeremonyFinish());
         } else {
           emit(SortingCeremonyFailure(failure: failure.message));
