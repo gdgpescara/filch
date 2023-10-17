@@ -31,6 +31,8 @@ dependencies:
   flutter_loggy: ^2.0.2
   flutter_facebook_auth: ^6.0.2
   reactive_forms: ^16.1.0
+  qr_flutter: ^4.1.0
+  cached_network_image: ^3.3.0
 
 dev_dependencies:
   flutter_test:
