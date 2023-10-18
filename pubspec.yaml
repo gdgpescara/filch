@@ -48,5 +48,6 @@ flutter:
 
   assets:
       - assets/images/
+      - assets/images/houses/
       - assets/animations/
 
