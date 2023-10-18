@@ -3,7 +3,8 @@
   "commons": {
     "buttons": {
       "cancel": "Annulla",
-      "confirm": "Conferma"
+      "confirm": "Conferma",
+      "sign_out": "Esci"
     },
     "errors": {
       "generic": "Si è verificato un errore"

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../dependency_injection/dependency_injection.dart';
+import '../../../i18n/strings.g.dart';
 import 'state/profile_cubit.dart';
 
 class ProfileView extends StatelessWidget {
@@ -24,6 +25,14 @@ class ProfileView extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  const SizedBox(height: 20),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: context.read<ProfileCubit>().signOut,
+                      child: Text(t.commons.buttons.sign_out.toUpperCase()),
+                    ),
+                  ),
                   const SizedBox(height: 20),
                   Container(
                     width: 100,

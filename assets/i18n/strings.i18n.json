@@ -3,7 +3,8 @@
   "commons": {
     "buttons": {
       "cancel": "Cancel",
-      "confirm": "Confirm"
+      "confirm": "Confirm",
+      "sign_out": "Sign Out"
     },
     "errors": {
       "generic": "An unknown error occurred."

@@ -11,23 +11,25 @@ class AppRouter {
   static const initialRoute = SplashPage.routeName;
 
   static RouteFactory get generateAppRoute => (settings) => {
-        SplashPage.routeName: MaterialPageRoute<void>(
-          builder: (context) => const SplashPage(),
-          settings: settings,
+        SplashPage.routeName: PageRouteBuilder<void>(
+          pageBuilder: (_, __, ___) => const SplashPage(),
+          transitionDuration: const Duration(milliseconds: 800),
+          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
         ),
-        SignInPage.routeName: MaterialPageRoute<void>(
-          builder: (context) => const SignInPage(),
-          fullscreenDialog: true,
-          settings: settings,
+        SignInPage.routeName: PageRouteBuilder<void>(
+          pageBuilder: (_, __, ___) => const SignInPage(),
+          transitionDuration: const Duration(milliseconds: 800),
+          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
         ),
-        SortingCeremonyPage.routeName: MaterialPageRoute<void>(
-          builder: (context) => const SortingCeremonyPage(),
-          fullscreenDialog: true,
-          settings: settings,
+        SortingCeremonyPage.routeName: PageRouteBuilder<void>(
+          pageBuilder: (_, __, ___) => const SortingCeremonyPage(),
+          transitionDuration: const Duration(milliseconds: 800),
+          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
         ),
-        HomePage.routeName: MaterialPageRoute<void>(
-          builder: (context) => const HomePage(),
-          settings: settings,
+        HomePage.routeName: PageRouteBuilder<void>(
+          pageBuilder: (_, __, ___) => const HomePage(),
+          transitionDuration: const Duration(milliseconds: 800),
+          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
         ),
       }[settings.name];
 }
