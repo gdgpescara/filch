@@ -10,10 +10,11 @@ class SortingSuccess extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        t.sorting_ceremony.assigned(house: house),
-        style: Theme.of(context).textTheme.displayLarge,
-        textAlign: TextAlign.center,
+      child: Image.asset(
+        'assets/images/houses/$house.png',
+        height: 200,
+        width: 200,
+        semanticLabel: t.sorting_ceremony.assigned(house: house),
       ),
     );
   }

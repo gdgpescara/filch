@@ -27,6 +27,6 @@ class ProfileCubit extends Cubit<ProfileState> {
 
   void signOut() {
     _signOutUseCase();
-    emit(const ProfileState());
+    emit(const SignedOut());
   }
 }

@@ -18,7 +18,7 @@ class SortingCeremonyCubit extends Cubit<SortingCeremonyState> {
     _assignHouseUseCase().actions(
       progress: () => emit(SortingCeremonyLoading()),
       success: (house) async {
-        emit(SortingCeremonySuccess(house: house.toUpperCase()));
+        emit(SortingCeremonySuccess(house: house));
         await Future<void>.delayed(const Duration(seconds: 5));
         emit(SortingCeremonyFinish());
       },
