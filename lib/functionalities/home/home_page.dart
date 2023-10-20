@@ -12,7 +12,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentView = 0;
+  int currentView = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +21,31 @@ class _HomePageState extends State<HomePage> {
         index: currentView,
         children: const [
           Center(child: Text('Quests')),
+          Center(child: Text('current quest')),
           ProfileView(),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        child: const Icon(Icons.add),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       bottomNavigationBar: BottomNavigationBar(
+        enableFeedback: true,
         currentIndex: currentView,
         onTap: (index) => setState(() => currentView = index),
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.videogame_asset_rounded),
-            label: 'Quests',
+            icon: Icon(Icons.videogame_asset_outlined),
+            activeIcon: Icon(Icons.videogame_asset_rounded),
+            tooltip: 'Archived quests',
+            label: 'Archived quests',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_rounded),
+            icon: Icon(Icons.location_searching_rounded),
+            activeIcon: Icon(Icons.my_location),
+            tooltip: 'Current quest',
+            label: 'Current quest',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline_rounded),
+            activeIcon: Icon(Icons.person_rounded),
+            tooltip: 'Profile',
             label: 'Profile',
           ),
         ],

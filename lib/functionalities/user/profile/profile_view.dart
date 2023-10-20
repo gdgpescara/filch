@@ -4,6 +4,7 @@ import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../dependency_injection/dependency_injection.dart';
 import '../../../i18n/strings.g.dart';
+import '../../splash/splash_page.dart';
 import 'state/profile_cubit.dart';
 import 'widgets/user_picture.dart';
 
@@ -14,7 +15,14 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ProfileCubit>(
       create: (context) => injector()..init(),
-      child: BlocBuilder<ProfileCubit, ProfileState>(
+      child: BlocConsumer<ProfileCubit, ProfileState>(
+        listenWhen: (previous, current) => current is SignedOut,
+        listener: (context, state) {
+          if (state is SignedOut) {
+            Navigator.pushNamedAndRemoveUntil(context, SplashPage.routeName, (route) => false);
+          }
+        },
+        buildWhen: (previous, current) => current is! SignedOut,
         builder: (context, state) {
           return SafeArea(
             child: Padding(

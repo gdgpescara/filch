@@ -7,7 +7,7 @@ class LoaderAnimation extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const SizedBox(
-      height: 298,
+      height: 295,
       width: 20,
       child: RiveAnimation.asset(
         'assets/animations/loader.riv',

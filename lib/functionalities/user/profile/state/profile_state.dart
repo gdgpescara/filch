@@ -19,3 +19,7 @@ class ProfileState extends Equatable {
   @override
   List<Object?> get props => [user, house];
 }
+
+class SignedOut extends ProfileState {
+  const SignedOut() : super(user: null, house: null);
+}
