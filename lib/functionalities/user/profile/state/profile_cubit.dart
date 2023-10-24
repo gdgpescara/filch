@@ -3,8 +3,8 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../use_cases/get_signed_user.dart';
 import '../../use_cases/get_signed_user_house_use_case.dart';
+import '../../use_cases/get_signed_user_use_case.dart';
 import '../../use_cases/sign_out_use_case.dart';
 
 part 'profile_state.dart';

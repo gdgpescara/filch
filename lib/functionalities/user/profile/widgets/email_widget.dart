@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../../dependency_injection/dependency_injection.dart';
 import '../../../_shared/widgets/app_card.dart';
-import '../../use_cases/get_signed_user.dart';
+import '../../use_cases/get_signed_user_use_case.dart';
 
 class EmailWidget extends StatelessWidget {
   const EmailWidget({super.key});

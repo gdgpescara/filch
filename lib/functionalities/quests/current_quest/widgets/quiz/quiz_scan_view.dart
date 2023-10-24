@@ -5,6 +5,7 @@ import 'package:mobile_scanner/mobile_scanner.dart';
 import '../../../../_shared/widgets/app_card.dart';
 import '../../../../_shared/widgets/loader_animation.dart';
 import '../../state/current_quest_cubit.dart';
+import '../commons/quest_description_widget.dart';
 import 'state/quiz_cubit.dart';
 
 class QuizScanView extends StatelessWidget {
@@ -42,11 +43,18 @@ class QuizScanView extends StatelessWidget {
             } else {
               child = const LoaderAnimation();
             }
-            return AppCard(
-              child: AnimatedSwitcher(
-                duration: const Duration(milliseconds: 800),
-                child: child,
-              ),
+            return Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                QuestDescriptionWidget(activeQuest: currentQuestState.activeQuest),
+                const SizedBox(height: 20),
+                AppCard(
+                  child: AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 800),
+                    child: child,
+                  ),
+                ),
+              ],
             );
           },
         );

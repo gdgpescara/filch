@@ -5,8 +5,8 @@ import '../../../../../i18n/strings.g.dart';
 import '../../../../_shared/widgets/app_card.dart';
 import '../../../models/active_quest.dart';
 
-class QuestDescriptionWidget extends StatelessWidget {
-  const QuestDescriptionWidget({super.key, required this.activeQuest});
+class QuestionWidget extends StatelessWidget {
+  const QuestionWidget({super.key, required this.activeQuest});
 
   final ActiveQuest activeQuest;
 
@@ -18,12 +18,12 @@ class QuestDescriptionWidget extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            t.active_quest.actors.description.label,
+            t.active_quest.quiz.question.label,
             style: GoogleFonts.jetBrainsMono(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10, width: double.infinity),
           Text(
-            activeQuest.quest.description,
+            activeQuest.quest.question ?? '',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],

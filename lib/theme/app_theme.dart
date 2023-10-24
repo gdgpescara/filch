@@ -18,7 +18,6 @@ final darkTheme = ThemeData(
   inputDecorationTheme: _inputDecorationTheme,
 );
 
-
 final _inputDecorationTheme = InputDecorationTheme(
   filled: true,
   isDense: true,

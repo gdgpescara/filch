@@ -1,6 +1,6 @@
 part of 'quiz_cubit.dart';
 
-abstract class QuizState extends Equatable {
+sealed class QuizState extends Equatable {
   const QuizState();
 }
 
@@ -57,6 +57,7 @@ class QuizAnswerSent extends QuizAnswerState {
   @override
   List<Object> get props => [isCorrect, points];
 }
+
 class QuizAnswerFailure extends QuizAnswerState {
   const QuizAnswerFailure();
 

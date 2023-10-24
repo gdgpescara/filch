@@ -3,9 +3,9 @@ import 'package:injectable/injectable.dart';
 
 import '../../../_shared/error_handling/error_catcher.dart';
 import '../../../_shared/error_handling/failure.dart';
-import '../../../user/use_cases/get_signed_user.dart';
 import '../../../user/use_cases/get_signed_user_firestore_doc_use_case.dart';
 import '../../../user/use_cases/get_signed_user_house_use_case.dart';
+import '../../../user/use_cases/get_signed_user_use_case.dart';
 import '../../models/archived_quest.dart';
 import '../../models/quest.dart';
 

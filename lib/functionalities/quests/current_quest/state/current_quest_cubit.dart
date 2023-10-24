@@ -19,7 +19,6 @@ class CurrentQuestCubit extends Cubit<CurrentQuestState> {
   final GetSignedUserActiveQuestUseCase _getSignedUserActiveQuestUseCase;
   final SearchForQuestUseCase _searchForQuestUseCase;
 
-
   void loadCurrentQuest() {
     _getSignedUserActiveQuestUseCase().actions(
       progress: () => emit(const CurrentQuestLoading()),

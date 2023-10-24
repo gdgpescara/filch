@@ -6,6 +6,7 @@ import '../../_shared/json_converters/timestamp_date_time_converter.dart';
 import 'quest.dart';
 
 part 'active_quest.g.dart';
+
 @JsonSerializable(explicitToJson: true)
 class ActiveQuest extends Equatable {
   const ActiveQuest({
@@ -22,6 +23,7 @@ class ActiveQuest extends Equatable {
     final difference = DateTime.now().difference(activatedAt);
     return quest.executionTime - difference;
   }
+
   Map<String, dynamic> toJson() => _$ActiveQuestToJson(this);
 
   @override

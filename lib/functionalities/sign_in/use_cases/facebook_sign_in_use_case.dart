@@ -8,7 +8,6 @@ import '../../_shared/error_handling/error_catcher.dart';
 class FacebookSignInUseCase {
   FacebookSignInUseCase();
 
-
   Future<UserCredential> call() async {
     return runSafetyFuture(() async {
       final loginResult = await FacebookAuth.instance.login();

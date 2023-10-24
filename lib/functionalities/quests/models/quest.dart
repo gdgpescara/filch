@@ -35,7 +35,6 @@ class Quest extends Equatable {
 
   factory Quest.fromJson(Map<String, dynamic> json) => _$QuestFromJson(json);
 
-  @JsonKey(includeToJson: false)
   final String id;
   final String description;
   final int malus;

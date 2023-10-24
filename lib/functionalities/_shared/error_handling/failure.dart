@@ -22,6 +22,6 @@ class NotFoundFailure extends Failure {
 }
 
 class FirebaseFunctionsFailure extends Failure {
-  FirebaseFunctionsFailure(FirebaseFunctionsException e) : super(code: e.code, message: 'message: ${e.message}, details: ${e.details}');
-
+  FirebaseFunctionsFailure(FirebaseFunctionsException e)
+      : super(code: e.code, message: 'message: ${e.message}, details: ${e.details}');
 }

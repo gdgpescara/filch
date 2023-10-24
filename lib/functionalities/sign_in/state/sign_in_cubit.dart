@@ -31,7 +31,7 @@ class SignInCubit extends Cubit<SignInState> {
   final TwitterSignInUseCase _twitterSignInUseCase;
 
   void emailPasswordSignIn(Map<String, Object?> formValue) {
-    if(formValue['email'] is String && formValue['password'] is String) {
+    if (formValue['email'] is String && formValue['password'] is String) {
       _userPasswordSignInUseCase(formValue['email']! as String, formValue['password']! as String).actions(
         progress: () => _emitAction(const SignInLoading(ProvidersEnum.emailPassword)),
         success: (_) => _emitAction(const SignInSuccess()),
@@ -89,10 +89,10 @@ class SignInCubit extends Cubit<SignInState> {
   }
 
   void switchSignIn() {
-      if(state is SignInWithProviders) {
-        emit(SignInWithUserPassword());
-      } else {
-        emit(SignInWithProviders());
-      }
+    if (state is SignInWithProviders) {
+      emit(SignInWithUserPassword());
+    } else {
+      emit(SignInWithProviders());
+    }
   }
 }
