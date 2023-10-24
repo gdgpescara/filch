@@ -1,8 +1,8 @@
 import 'package:cloud_functions/cloud_functions.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../_shared/error_handling/error_catcher.dart';
-import '../../../_shared/error_handling/failure.dart';
+import '../../_shared/error_handling/error_catcher.dart';
+import '../../_shared/error_handling/failure.dart';
 
 @lazySingleton
 class AssignHouseUseCase {

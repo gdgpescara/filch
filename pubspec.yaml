@@ -19,28 +19,31 @@ dependencies:
   google_fonts: ^6.1.0
   slang: ^3.25.0
   slang_flutter: ^3.25.0
-  firebase_core: ^2.17.0
-  firebase_auth: ^4.10.1
-  firebase_crashlytics: ^3.3.7
-  cloud_functions: ^4.4.2
-  cloud_firestore: ^4.9.3
+  firebase_core: ^2.19.0
+  firebase_auth: ^4.11.1
+  firebase_crashlytics: ^3.4.1
+  cloud_functions: ^4.5.1
+  cloud_firestore: ^4.11.0
   equatable: ^2.0.5
   flutter_svg: ^2.0.7
   rive: ^0.11.17
   loggy: ^2.0.3
   flutter_loggy: ^2.0.2
   flutter_facebook_auth: ^6.0.2
-  reactive_forms: ^16.1.0
+  reactive_forms: ^16.1.1
   qr_flutter: ^4.1.0
   cached_network_image: ^3.3.0
+  json_annotation: ^4.8.1
+  mobile_scanner: ^3.5.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.3
+  flutter_lints: ^3.0.0
   build_runner: ^2.4.6
   injectable_generator: ^2.4.1
   slang_build_runner: ^3.25.0
+  json_serializable: ^6.7.1
   melos: ^3.1.1
 
 flutter:

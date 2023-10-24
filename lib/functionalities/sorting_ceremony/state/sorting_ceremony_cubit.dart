@@ -3,7 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../_shared/error_handling/future_extension.dart';
-import '../domain/usa_cases/assign_house_use_case.dart';
+import '../usa_cases/assign_house_use_case.dart';
 
 part 'sorting_ceremony_state.dart';
 
@@ -14,7 +14,7 @@ class SortingCeremonyCubit extends Cubit<SortingCeremonyState> {
   final AssignHouseUseCase _assignHouseUseCase;
 
   Future<void> startSortingCeremony() async {
-    await Future<void>.delayed(const Duration(seconds: 5));
+    await Future<void>.delayed(const Duration(seconds: 10));
     _assignHouseUseCase().actions(
       progress: () => emit(SortingCeremonyLoading()),
       success: (house) async {

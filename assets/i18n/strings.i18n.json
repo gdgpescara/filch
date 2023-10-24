@@ -4,10 +4,36 @@
     "buttons": {
       "cancel": "Cancel",
       "confirm": "Confirm",
+      "ok": "OK",
       "sign_out": "Sign Out"
     },
+    "dialogs": {
+      "title": "Ops!"
+    },
     "errors": {
-      "generic": "An unknown error occurred."
+      "generic": "An unknown error occurred.",
+      "generic_retry": "An unknown error occurred. Please try again."
+    },
+    "duration": {
+      "hours": {
+        "one": "$n hour",
+        "other": "$n hours"
+      },
+      "minutes": {
+        "one": "$n minute",
+        "other": "$n minutes"
+      },
+      "seconds": {
+        "one": "$n second",
+        "other": "$n seconds"
+      }
+    }
+  },
+  "home": {
+    "bottom_nav": {
+      "archived_quests": "Archived Quests",
+      "current_quest": "Current Quest",
+      "profile": "Profile"
     }
   },
   "sign_in": {
@@ -28,7 +54,7 @@
   },
   "sorting_ceremony": {
     "assigned": "You are in $house",
-    "loading" : [
+    "loading": [
       "Hmm, difficult, very difficult. Much better than I ever was, would you tell me where you want to go?",
       "Where you should be? This is the place that will make you great.",
       "Yes, yes, of course... it's your desire that tells me what to do...",
@@ -40,5 +66,51 @@
       "A sharp and creative mind, you'll be a fine Dashclaw.",
       "Your courage is your true value, go to Kerasdor."
     ]
+  },
+  "active_quest": {
+    "time_remaining": {
+      "hours": {
+        "one": "$n hour remaining",
+        "other": "$n hours remaining"
+      },
+      "minutes": {
+        "one": "$n minute remaining",
+        "other": "$n minutes remaining"
+      },
+      "seconds": {
+        "one": "$n second remaining",
+        "other": "$n seconds remaining"
+      }
+    },
+    "actors": {
+      "description": {
+        "label": "description:"
+      }
+    },
+    "quiz": {
+      "question": {
+        "label": "question:"
+      },
+      "answer_option": {
+        "label": "answer options:"
+      },
+      "scan_error": "I think you are not in the right place, try again.",
+      "answer": {
+        "evaluating": "Evaluating answer...",
+        "correct": {
+          "one": "Great work! $n point to $house",
+          "other": "Great work! $n points to $house"
+        },
+        "incorrect": {
+          "one": "Oh no! $house loose $n point",
+          "other": "Oh no! $house loose $n points"
+        }
+      }
+    },
+    "social": {
+      "description": {
+        "label": "description:"
+      }
+    }
   }
 }

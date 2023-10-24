@@ -3,19 +3,12 @@ import {logger} from "firebase-functions/v2";
 import {getFirestore} from "firebase-admin/firestore";
 import {sortingHatAlgorithm} from "./sorting-hat-algorithm";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
-import * as functions from "firebase-functions";
+import {getSignedInUser} from "../../shared/get_signed_in_user";
 
 export const sortingCeremony = onCall(
   {region: "europe-west3"},
   async (request) => {
-    const uid = request.auth?.uid;
-
-    if (!uid) {
-      logger.error("User is not logged in");
-      throw new HttpsError("unauthenticated", "User is not logged in");
-    }
-
-    const loggedUser = await getAuth().getUser(uid);
+    const loggedUser = await getSignedInUser(request);
 
     if (loggedUser.customClaims?.house) {
       logger.error("User already has a house");
@@ -32,32 +25,16 @@ export const sortingCeremony = onCall(
       .collection("houses")
       .doc(house.id)
       .collection("members")
-      .doc(uid)
+      .doc(loggedUser.uid)
       .set({
         email: loggedUser.email,
       });
 
-    await getAuth().setCustomUserClaims(uid, {
+    await getAuth().setCustomUserClaims(loggedUser.uid, {
       house: house.id,
     });
 
     logger.info("Assigned house", house.id, "to user", loggedUser.email);
 
     return house.id;
-  });
-
-export const updateHouseMembers = functions
-  .region("europe-west3")
-  .firestore
-  .document("houses/{houseId}/members/{memberId}")
-  .onWrite(async (change, context) => {
-    const houseId = context.params.houseId;
-    const membersCount = await change.after.ref.parent.count().get();
-
-    await getFirestore()
-      .collection("houses")
-      .doc(houseId)
-      .update({
-        members: membersCount.data().count,
-      });
   });

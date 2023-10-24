@@ -2,8 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
-class GetLoggedUserHouseUseCase {
-  GetLoggedUserHouseUseCase(this._auth);
+class GetSignedUserHouseUseCase {
+  GetSignedUserHouseUseCase(this._auth);
 
   final FirebaseAuth _auth;
 

@@ -3,9 +3,9 @@ import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../domain/use_cases/get_logger_user_house_use_case.dart';
-import '../../domain/use_cases/get_signed_user.dart';
-import '../../domain/use_cases/sign_out_use_case.dart';
+import '../../use_cases/get_signed_user.dart';
+import '../../use_cases/get_signed_user_house_use_case.dart';
+import '../../use_cases/sign_out_use_case.dart';
 
 part 'profile_state.dart';
 
@@ -18,7 +18,7 @@ class ProfileCubit extends Cubit<ProfileState> {
   ) : super(ProfileState(user: getSignedUserUseCase()));
 
   final SignOutUseCase _signOutUseCase;
-  final GetLoggedUserHouseUseCase _getLoggedUserHouseUseCase;
+  final GetSignedUserHouseUseCase _getLoggedUserHouseUseCase;
 
   Future<void> init() async {
     final house = await _getLoggedUserHouseUseCase();

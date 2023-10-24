@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../domain/models/providers_enum.dart';
+import '../models/providers_enum.dart';
 import 'sign_in_button.dart';
 
 class ProvidersSignIn extends StatelessWidget {

@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../../dependency_injection/dependency_injection.dart';
 import '../../../i18n/strings.g.dart';
+import '../../_shared/widgets/app_card.dart';
 import '../../splash/splash_page.dart';
 import 'state/profile_cubit.dart';
+import 'widgets/email_widget.dart';
 import 'widgets/user_picture.dart';
+import 'widgets/user_qr_code.dart';
 
 class ProfileView extends StatelessWidget {
   const ProfileView({super.key});
@@ -41,20 +43,10 @@ class ProfileView extends StatelessWidget {
                   const SizedBox(height: 20),
                   UserPicture(imageUrl: state.user?.photoURL, house: state.house),
                   const SizedBox(height: 20),
-                  Text(state.user?.email ?? '', style: Theme.of(context).textTheme.titleLarge),
+                  const EmailWidget(),
                   const SizedBox(height: 20),
-                  Expanded(
-                    child: QrImageView(
-                      data: state.user?.uid ?? '',
-                      dataModuleStyle: QrDataModuleStyle(
-                        dataModuleShape: QrDataModuleShape.square,
-                        color: Theme.of(context).colorScheme.onSurface,
-                      ),
-                      eyeStyle: QrEyeStyle(
-                        color: Theme.of(context).colorScheme.onSurface,
-                        eyeShape: QrEyeShape.square,
-                      ),
-                    ),
+                  const Expanded(
+                    child: AppCard(child: UserQrCode()),
                   ),
                 ],
               ),

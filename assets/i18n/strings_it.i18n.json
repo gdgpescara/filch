@@ -4,10 +4,36 @@
     "buttons": {
       "cancel": "Annulla",
       "confirm": "Conferma",
+      "ok": "OK",
       "sign_out": "Esci"
     },
+    "dialogs": {
+      "title": "Ops!"
+    },
     "errors": {
-      "generic": "Si è verificato un errore"
+      "generic": "Si è verificato un errore",
+      "generic_retry": "Si è verificato un errore, riprova più tardi"
+    },
+    "duration": {
+      "hours": {
+        "one": "$n ora",
+        "other": "$n ore"
+      },
+      "minutes": {
+        "one": "$n minuto",
+        "other": "$n minuti"
+      },
+      "seconds": {
+        "one": "$n secondo",
+        "other": "$n secondi"
+      }
+    }
+  },
+  "home": {
+    "bottom_nav": {
+      "archived_quests": "Missioni Archiviate",
+      "current_quest": "Missione Corrente",
+      "profile": "Profilo"
     }
   },
   "sign_in": {
@@ -19,16 +45,16 @@
       "apple": "Apple"
     },
     "staff_sign_in": {
-        "button": "Accesso Staff",
-        "email": "Email",
-        "password": "Password",
-        "sign_in": "Accedi",
-        "change_password": "Cambia Password"
+      "button": "Accesso Staff",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Accedi",
+      "change_password": "Cambia Password"
     }
   },
   "sorting_ceremony": {
     "assigned": "Sei stato assegnato a $house",
-    "loading" : [
+    "loading": [
       "Hmm, difficile, molto difficile. Molto meglio di quanto non facessi il Cappello, vuoi dirmi dove vuoi andare?",
       "Dove dovresti essere? Questo è il posto che ti renderà grande.",
       "Sì, sì, certo... è la tua voglia che mi dice cosa fare...",
@@ -40,5 +66,51 @@
       "Una mente acuta e creativa, Sarai un bravo Dashclaw.",
       "Il tuo coraggio è il tuo vero valore, vai in Kerasdor."
     ]
+  },
+  "active_quest": {
+    "time_remaining": {
+      "hours": {
+        "one": "$n ora rimanente",
+        "other": "$n ore rimanenti"
+      },
+      "minutes": {
+        "one": "$n minuto rimanente",
+        "other": "$n minuti rimanenti"
+      },
+      "seconds": {
+        "one": "$n secondo rimanente",
+        "other": "$n secondi rimanenti"
+      }
+    },
+    "actors": {
+      "description": {
+        "label": "descrizione:"
+      }
+    },
+    "quiz": {
+      "question": {
+        "label": "domanda:"
+      },
+      "answer_option": {
+        "label": "opzioni di risposta:"
+      },
+      "scan_error": "Penso che tu non sia nel posto giusto, riprova",
+      "answer": {
+        "evaluating": "Valutazione della risposta...",
+        "correct": {
+          "one": "Ottimo lavoro! $n punto a $house",
+          "other": "Ottimo lavoro! $n punti a $house"
+        },
+        "incorrect": {
+          "one": "Oh no! $house perde $n punto",
+          "other": "Oh no! $house perde $n punti"
+        }
+      }
+    },
+    "social": {
+      "description": {
+        "label": "descrizione:"
+      }
+    }
   }
 }

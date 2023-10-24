@@ -1,6 +1,6 @@
 import {firestore} from "firebase-admin";
-import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 import {HttpsError} from "firebase-functions/v2/https";
+import QueryDocumentSnapshot = firestore.QueryDocumentSnapshot;
 
 export const sortingHatAlgorithm = (items: QueryDocumentSnapshot[]) => {
   const sum = items.reduce((acc, item) => acc + item.data()["members"], 0);

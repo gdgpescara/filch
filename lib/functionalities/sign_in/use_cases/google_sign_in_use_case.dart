@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../_shared/error_handling/error_catcher.dart';
+import '../../_shared/error_handling/error_catcher.dart';
 
 @lazySingleton
 class GoogleSignInUseCase {
