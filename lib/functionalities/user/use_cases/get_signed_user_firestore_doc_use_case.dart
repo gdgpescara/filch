@@ -25,11 +25,7 @@ class GetSignedUserFirestoreDocUseCase {
       if (!firestoreUserSnap.exists) {
         return null;
       }
-      final fuser = FirestoreUser.fromJson({...?firestoreUserSnap.data(), 'uid': user.uid});
-      if(fuser.activeQuest != null) {
-        await _firestore.collection('quests').doc().set(fuser.activeQuest!.quest.toJson());
-      }
-      return fuser;
+      return FirestoreUser.fromJson({...?firestoreUserSnap.data(), 'uid': user.uid});
     });
   }
 }

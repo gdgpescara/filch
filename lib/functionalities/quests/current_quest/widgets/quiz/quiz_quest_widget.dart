@@ -66,6 +66,8 @@ class QuizQuestWidget extends StatelessWidget {
                     ),
                   );
                   break;
+                default:
+                  break;
               }
             },
             buildWhen: (previous, current) => current is! QuizAnswerState,

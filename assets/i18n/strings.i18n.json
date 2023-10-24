@@ -5,7 +5,8 @@
       "cancel": "Cancel",
       "confirm": "Confirm",
       "ok": "OK",
-      "sign_out": "Sign Out"
+      "sign_out": "Sign Out",
+      "try_again": "Try Again"
     },
     "dialogs": {
       "title": "Ops!"

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../i18n/strings.g.dart';
 import '../_shared/widgets/dark_map_container.dart';
+import '../quests/archived_quests/archived_quests_view.dart';
 import '../quests/current_quest/current_quest_view.dart';
 import '../user/profile/profile_view.dart';
 
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         child: IndexedStack(
           index: currentView,
           children: const [
-            Center(child: Text('Quests')),
+            ArchivedQuestsView(),
             CurrentQuestView(),
             ProfileView(),
           ],

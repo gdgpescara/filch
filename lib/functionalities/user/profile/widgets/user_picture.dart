@@ -36,7 +36,12 @@ class UserPicture extends StatelessWidget {
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
               ),
-              child: house != null ? Image.asset('assets/images/houses/$house.png', fit: BoxFit.contain,) : const SizedBox(),
+              child: house != null
+                  ? Image.asset(
+                      'assets/images/houses/$house.png',
+                      fit: BoxFit.contain,
+                    )
+                  : const SizedBox(),
             ),
           ),
         ],

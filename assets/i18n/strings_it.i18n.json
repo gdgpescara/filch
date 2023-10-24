@@ -5,7 +5,8 @@
       "cancel": "Annulla",
       "confirm": "Conferma",
       "ok": "OK",
-      "sign_out": "Esci"
+      "sign_out": "Esci",
+      "try_again": "Riprova"
     },
     "dialogs": {
       "title": "Ops!"

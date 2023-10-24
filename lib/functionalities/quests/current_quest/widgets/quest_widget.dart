@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../models/active_quest.dart';
 import '../../models/quest_types_enum.dart';
-import 'actor/quest_qr_code_widget.dart';
-import 'commons/quest_description_widget.dart';
+import 'actor/actor_quest_widget.dart';
 import 'commons/time_remaining.dart';
 import 'quiz/quiz_quest_widget.dart';
 
@@ -13,7 +12,7 @@ class QuestWidget extends StatelessWidget {
   final ActiveQuest activeQuest;
 
   Widget get _specificQuestWidget => switch (activeQuest.quest.type) {
-        QuestTypeEnum.actor => const QuestQrCodeWidget(),
+        QuestTypeEnum.actor => const ActorQuestWidget(),
         QuestTypeEnum.quiz => const QuizQuestWidget(),
         QuestTypeEnum.social => const SizedBox(),
       };
@@ -29,8 +28,6 @@ class QuestWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TimeRemaining(activeQuest),
-              const SizedBox(height: 20),
-              QuestDescriptionWidget(activeQuest: activeQuest),
               const SizedBox(height: 20),
               _specificQuestWidget,
             ],

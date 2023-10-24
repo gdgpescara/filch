@@ -24,7 +24,7 @@ class QuizCubit extends Cubit<QuizState> {
     _validateQuizQrCodeUseCase(quest, scanResult).actions(
       progress: () => emit(const QuizLoading()),
       success: (result) {
-        if(result) {
+        if (result) {
           emit(const QuizActive());
         } else {
           emit(const QuizActivationFailure());

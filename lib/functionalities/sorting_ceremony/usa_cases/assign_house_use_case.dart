@@ -16,8 +16,7 @@ class AssignHouseUseCase {
     return runSafetyFuture(
       () async {
         const url = String.fromEnvironment('SORTING_CEREMONY_URL');
-        final result =
-            await _functions.httpsCallableFromUrl(url).call<String>();
+        final result = await _functions.httpsCallableFromUrl(url).call<String>();
         return result.data;
       },
       onException: (e) {

@@ -29,7 +29,7 @@ class SignInPage extends StatelessWidget {
               if (state is SignInSuccess) {
                 Navigator.pop(context);
               }
-              if(state is SignInFailure) {
+              if (state is SignInFailure) {
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
                     content: Text(t.commons.errors.generic),
@@ -59,6 +59,7 @@ class SignInPage extends StatelessWidget {
                               _ => const SizedBox(),
                             };
                           }
+
                           return AnimatedSwitcher(
                             duration: const Duration(milliseconds: 300),
                             child: child(),
