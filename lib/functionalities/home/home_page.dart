@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../../i18n/strings.g.dart';
+import '../_shared/widgets/dark_map_container.dart';
+import '../quests/current_quest/current_quest_view.dart';
 import '../user/profile/profile_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -17,36 +20,41 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: IndexedStack(
-        index: currentView,
-        children: const [
-          Center(child: Text('Quests')),
-          Center(child: Text('current quest')),
-          ProfileView(),
-        ],
+      extendBodyBehindAppBar: true,
+      extendBody: true,
+      body: DarkMapContainer(
+        child: IndexedStack(
+          index: currentView,
+          children: const [
+            Center(child: Text('Quests')),
+            CurrentQuestView(),
+            ProfileView(),
+          ],
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.transparent,
         enableFeedback: true,
         currentIndex: currentView,
         onTap: (index) => setState(() => currentView = index),
-        items: const [
+        items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.videogame_asset_outlined),
-            activeIcon: Icon(Icons.videogame_asset_rounded),
-            tooltip: 'Archived quests',
-            label: 'Archived quests',
+            icon: const Icon(Icons.videogame_asset_outlined),
+            activeIcon: const Icon(Icons.videogame_asset_rounded),
+            tooltip: t.home.bottom_nav.archived_quests,
+            label: t.home.bottom_nav.archived_quests,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.location_searching_rounded),
-            activeIcon: Icon(Icons.my_location),
-            tooltip: 'Current quest',
-            label: 'Current quest',
+            icon: const Icon(Icons.location_searching_rounded),
+            activeIcon: const Icon(Icons.my_location),
+            tooltip: t.home.bottom_nav.current_quest,
+            label: t.home.bottom_nav.current_quest,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline_rounded),
-            activeIcon: Icon(Icons.person_rounded),
-            tooltip: 'Profile',
-            label: 'Profile',
+            icon: const Icon(Icons.person_outline_rounded),
+            activeIcon: const Icon(Icons.person_rounded),
+            tooltip: t.home.bottom_nav.profile,
+            label: t.home.bottom_nav.profile,
           ),
         ],
       ),

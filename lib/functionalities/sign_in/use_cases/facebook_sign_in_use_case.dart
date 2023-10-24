@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:injectable/injectable.dart';
 
-import '../../../_shared/error_handling/error_catcher.dart';
+import '../../_shared/error_handling/error_catcher.dart';
 
 @lazySingleton
 class FacebookSignInUseCase {

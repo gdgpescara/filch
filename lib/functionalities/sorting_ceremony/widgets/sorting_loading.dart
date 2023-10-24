@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../../i18n/strings.g.dart';
 
 class SortingLoading extends StatelessWidget {
-  const SortingLoading({Key? key}) : super(key: key);
+  const SortingLoading({super.key});
 
   @override
   Widget build(BuildContext context) {

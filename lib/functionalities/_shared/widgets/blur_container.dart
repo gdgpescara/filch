@@ -16,7 +16,7 @@ class BlurContainer extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
         child: Container(
           alignment: Alignment.center,
-          color: Colors.grey[400]?.withOpacity(.25),
+          color: Colors.white.withOpacity(.10),
           child: child,
         ),
       ),

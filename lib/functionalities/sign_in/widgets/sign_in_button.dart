@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../i18n/strings.g.dart';
-import '../domain/models/providers_enum.dart';
+import '../models/providers_enum.dart';
 import '../state/sign_in_cubit.dart';
 
 class SignInButton extends StatelessWidget {

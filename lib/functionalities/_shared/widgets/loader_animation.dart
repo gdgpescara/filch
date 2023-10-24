@@ -8,7 +8,7 @@ class LoaderAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     return const SizedBox(
       height: 295,
-      width: 20,
+      width: 36,
       child: RiveAnimation.asset(
         'assets/animations/loader.riv',
         animations: ['bounce'],

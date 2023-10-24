@@ -38,7 +38,7 @@ class UserPicture extends StatelessWidget {
               ),
               child: house != null ? Image.asset('assets/images/houses/$house.png', fit: BoxFit.contain,) : const SizedBox(),
             ),
-          )
+          ),
         ],
       ),
     );

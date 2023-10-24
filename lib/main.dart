@@ -30,10 +30,9 @@ void main() {
           const String.fromEnvironment('HOST'),
           const int.fromEnvironment('FUNCTION_PORT'),
         );
-        FirebaseFirestore.instance.settings = const Settings(
-          host: '${const String.fromEnvironment('HOST')}:${const int.fromEnvironment('FIRESTORE_PORT')}',
-          sslEnabled: false,
-          persistenceEnabled: false,
+        FirebaseFirestore.instance.useFirestoreEmulator(
+          const String.fromEnvironment('HOST'),
+          const int.fromEnvironment('FIRESTORE_PORT'),
         );
       }
 

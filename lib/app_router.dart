@@ -11,25 +11,15 @@ class AppRouter {
   static const initialRoute = SplashPage.routeName;
 
   static RouteFactory get generateAppRoute => (settings) => {
-        SplashPage.routeName: PageRouteBuilder<void>(
-          pageBuilder: (_, __, ___) => const SplashPage(),
-          transitionDuration: const Duration(milliseconds: 800),
-          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
-        ),
-        SignInPage.routeName: PageRouteBuilder<void>(
-          pageBuilder: (_, __, ___) => const SignInPage(),
-          transitionDuration: const Duration(milliseconds: 800),
-          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
-        ),
-        SortingCeremonyPage.routeName: PageRouteBuilder<void>(
-          pageBuilder: (_, __, ___) => const SortingCeremonyPage(),
-          transitionDuration: const Duration(milliseconds: 800),
-          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
-        ),
-        HomePage.routeName: PageRouteBuilder<void>(
-          pageBuilder: (_, __, ___) => const HomePage(),
-          transitionDuration: const Duration(milliseconds: 800),
-          transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
-        ),
+        SplashPage.routeName: _pageRouteBuilder<void>(const SplashPage()),
+        SignInPage.routeName: _pageRouteBuilder<void>(const SignInPage()),
+        SortingCeremonyPage.routeName: _pageRouteBuilder<void>(const SortingCeremonyPage()),
+        HomePage.routeName: _pageRouteBuilder<void>(const HomePage()),
       }[settings.name];
+
+  static PageRouteBuilder<T> _pageRouteBuilder<T>(Widget child) => PageRouteBuilder<T>(
+        pageBuilder: (_, __, ___) => child,
+        transitionDuration: const Duration(milliseconds: 800),
+        transitionsBuilder: (_, a, __, c) => FadeTransition(opacity: a, child: c),
+      );
 }

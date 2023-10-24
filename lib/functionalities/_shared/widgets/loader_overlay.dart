@@ -26,19 +26,6 @@ class LoaderOverlay extends StatelessWidget {
     );
   }
 
-  // static void dark(BuildContext context, {String? message, Widget? messageWidget}) {
-  //   showDialog<void>(
-  //     context: context,
-  //     barrierDismissible: false,
-  //     useSafeArea: false,
-  //     barrierColor: Colors.black.withOpacity(.8),
-  //     builder: (context) => LoaderOverlay._(
-  //       message: message,
-  //       messageWidget: messageWidget,
-  //     ),
-  //   );
-  // }
-
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -47,19 +34,19 @@ class LoaderOverlay extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (message != null || messageWidget != null) ...[
-              SvgPicture.asset('assets/images/logo.svg', height: 50),
-              const SizedBox(height: 16),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
-                child: messageWidget ??
-                    Text(
-                      message!,
-                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(fontWeight: FontWeight.w600),
-                    ),
-              ),
+            if (message == null && messageWidget == null) ...[
+              SvgPicture.asset('assets/images/logo_light.svg', height: 100),
+              const SizedBox(height: 20),
             ],
             const LoaderAnimation(),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: messageWidget ??
+                  Text(
+                    message!,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                  ),
+            ),
           ],
         ),
       ),

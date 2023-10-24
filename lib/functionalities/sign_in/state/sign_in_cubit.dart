@@ -5,12 +5,12 @@ import 'package:injectable/injectable.dart';
 
 import '../../_shared/error_handling/failure.dart';
 import '../../_shared/error_handling/future_extension.dart';
-import '../domain/models/providers_enum.dart';
-import '../domain/use_cases/apple_sign_in_use_case.dart';
-import '../domain/use_cases/facebook_sign_in_use_case.dart';
-import '../domain/use_cases/google_sign_in_use_case.dart';
-import '../domain/use_cases/twitter_sign_in_use_case.dart';
-import '../domain/use_cases/user_password_sign_in_use_case.dart';
+import '../models/providers_enum.dart';
+import '../use_cases/apple_sign_in_use_case.dart';
+import '../use_cases/facebook_sign_in_use_case.dart';
+import '../use_cases/google_sign_in_use_case.dart';
+import '../use_cases/twitter_sign_in_use_case.dart';
+import '../use_cases/user_password_sign_in_use_case.dart';
 
 part 'sign_in_state.dart';
 
