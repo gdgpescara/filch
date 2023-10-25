@@ -1,7 +1,7 @@
 name: filch
 description: DevFest Pescara 2023 app.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-version: 1.0.0+1
+publish_to: 'none'
+version: 0.0.1
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -26,7 +26,7 @@ dependencies:
   cloud_firestore: ^4.12.0
   equatable: ^2.0.5
   flutter_svg: ^2.0.7
-  rive: ^0.11.17
+  rive: ^0.12.0
   loggy: ^2.0.3
   flutter_loggy: ^2.0.2
   flutter_facebook_auth: ^6.0.2
