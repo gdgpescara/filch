@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../../i18n/strings.g.dart';
 import '../_shared/widgets/dark_map_container.dart';
-import '../quests/archived_quests/archived_quests_view.dart';
 import '../quests/current_quest/current_quest_view.dart';
 import '../user/profile/profile_view.dart';
 
@@ -27,7 +26,7 @@ class _HomePageState extends State<HomePage> {
         child: IndexedStack(
           index: currentView,
           children: const [
-            ArchivedQuestsView(),
+            Text('ssss'),
             CurrentQuestView(),
             ProfileView(),
           ],
@@ -40,10 +39,10 @@ class _HomePageState extends State<HomePage> {
         onTap: (index) => setState(() => currentView = index),
         items: [
           BottomNavigationBarItem(
-            icon: const Icon(Icons.videogame_asset_outlined),
-            activeIcon: const Icon(Icons.videogame_asset_rounded),
-            tooltip: t.home.bottom_nav.archived_quests,
-            label: t.home.bottom_nav.archived_quests,
+            icon: const Icon(Icons.military_tech_outlined),
+            activeIcon: const Icon(Icons.military_tech_rounded),
+            tooltip: t.home.bottom_nav.ranking,
+            label: t.home.bottom_nav.ranking,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.location_searching_rounded),

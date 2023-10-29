@@ -5,7 +5,7 @@ import '../../quests/models/active_quest.dart';
 
 part 'firestore_user.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class FirestoreUser extends Equatable {
   const FirestoreUser({
     required this.uid,

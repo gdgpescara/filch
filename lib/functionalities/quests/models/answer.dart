@@ -3,7 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'answer.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class Answer extends Equatable {
   const Answer({
     required this.id,

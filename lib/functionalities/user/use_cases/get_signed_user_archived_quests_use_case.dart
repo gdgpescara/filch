@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../_shared/error_handling/error_catcher.dart';
-import '../../quests/models/archived_quest.dart';
+import '../../_shared/models/points.dart';
 import 'get_signed_user_use_case.dart';
 
 @lazySingleton

@@ -32,8 +32,8 @@
   },
   "home": {
     "bottom_nav": {
-      "archived_quests": "Missioni Archiviate",
-      "current_quest": "Missione Corrente",
+      "ranking": "Classifica",
+      "current_quest": "Missione",
       "profile": "Profilo"
     }
   },
@@ -84,11 +84,13 @@
       }
     },
     "actors": {
+      "hint": "Cerca la persona giusta e chiedile di scansionare il tuo codice QR",
       "description": {
         "label": "descrizione:"
       }
     },
     "quiz": {
+        "hint": "Cerca il posto giusto e scansiona il codice QR",
       "question": {
         "label": "domanda:"
       },

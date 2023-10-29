@@ -5,7 +5,7 @@ import 'package:injectable/injectable.dart';
 import '../../../_shared/error_handling/future_extension.dart';
 import '../../../user/use_cases/get_signed_user_active_quest_use_case.dart';
 import '../../models/active_quest.dart';
-import '../use_cases/search_for_quest_use_case.dart';
+import '../../use_cases/search_for_quest_use_case.dart';
 
 part 'current_quest_state.dart';
 

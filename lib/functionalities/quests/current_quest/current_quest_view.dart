@@ -3,9 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../dependency_injection/dependency_injection.dart';
 import '../../_shared/widgets/loader_animation.dart';
+import '../commons/no_quest_assigned_widget.dart';
+import '../quiz/quest_widget.dart';
 import 'state/current_quest_cubit.dart';
-import 'widgets/no_quest_assigned_widget.dart';
-import 'widgets/quest_widget.dart';
 
 class CurrentQuestView extends StatelessWidget {
   const CurrentQuestView({super.key});

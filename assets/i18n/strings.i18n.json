@@ -32,8 +32,8 @@
   },
   "home": {
     "bottom_nav": {
-      "archived_quests": "Archived Quests",
-      "current_quest": "Current Quest",
+      "ranking": "Ranking",
+      "current_quest": "Quest",
       "profile": "Profile"
     }
   },
@@ -84,11 +84,13 @@
       }
     },
     "actors": {
+      "hint": "Find the right person and ask him/her to scan the QR code.",
       "description": {
         "label": "description:"
       }
     },
     "quiz": {
+      "hint": "Find the right place and scan the QR code.",
       "question": {
         "label": "question:"
       },
