@@ -90,7 +90,7 @@
       }
     },
     "quiz": {
-        "hint": "Cerca il posto giusto e scansiona il codice QR",
+      "hint": "Cerca il posto giusto e scansiona il codice QR",
       "question": {
         "label": "domanda:"
       },
@@ -123,5 +123,35 @@
         "other": "punti: "
       }
     }
+  },
+  "profile": {
+    "my_points": {
+      "label": "i miei punti: ",
+      "detail_button": {
+        "label": "Mostra dettaglio punti"
+      }
+    }
+  },
+  "my_points_details": {
+    "title": "I miei punti",
+    "points_item_card": {
+      "type": {
+        "label": "tipo: ",
+        "value(map)": {
+          "quest": "Missione",
+          "staff": "Staff"
+        }
+      },
+      "points": {
+        "label($n)": {
+          "one": "punto: ",
+          "other": "punti: "
+        }
+      },
+      "assigned_at": {
+        "label": "assegnati il: "
+      }
+    },
+    "empty": "Non hai ancora punti,"
   }
 }

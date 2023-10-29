@@ -21,7 +21,7 @@ class SubmitAnswerUseCase {
       () async {
         const url = String.fromEnvironment('SUBMIT_ANSWER_URL');
         final result = await _functions.httpsCallableFromUrl(url).call<bool>({
-          'quest': quest.toJson(),
+          'quest': quest.id,
           'answers': answers,
         });
         return (

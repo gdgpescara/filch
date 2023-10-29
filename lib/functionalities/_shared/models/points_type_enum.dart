@@ -1,0 +1,4 @@
+enum PointsTypeEnum {
+  quest,
+  staff;
+}
