@@ -10,7 +10,7 @@ import 'quest_types_enum.dart';
 
 part 'quest.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class Quest extends Equatable {
   const Quest({
     required this.id,
@@ -40,8 +40,10 @@ class Quest extends Equatable {
   final int malus;
   final int points;
   @TimestampDateTimeConverter()
+  @JsonKey(includeToJson: false)
   final DateTime validityStart;
   @TimestampDateTimeConverter()
+  @JsonKey(includeToJson: false)
   final DateTime validityEnd;
   @IntDurationConverter()
   final Duration executionTime;

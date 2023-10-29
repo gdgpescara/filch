@@ -7,7 +7,7 @@ import 'quest.dart';
 
 part 'active_quest.g.dart';
 
-@JsonSerializable(explicitToJson: true)
+@JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ActiveQuest extends Equatable {
   const ActiveQuest({
     required this.quest,

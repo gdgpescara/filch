@@ -52,6 +52,9 @@ dart run slang
 ```
 ## Secrets tath you need
 
+### Flutter
+- .env 
+
 ### Android
 - .keystore
 - secrets.properties
