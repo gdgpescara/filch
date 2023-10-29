@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../_shared/models/house.dart';
 import '../state/houses_ranking_cubit.dart';
 import 'houses_ranking_card.dart';
 
