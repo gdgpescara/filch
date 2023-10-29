@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../i18n/strings.g.dart';
 import '../_shared/widgets/dark_map_container.dart';
 import '../quests/current_quest/current_quest_view.dart';
+import '../ranking/houses_ranking_view.dart';
 import '../user/profile/profile_view.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,7 +27,7 @@ class _HomePageState extends State<HomePage> {
         child: IndexedStack(
           index: currentView,
           children: const [
-            Text('ssss'),
+            HousesRankingView(),
             CurrentQuestView(),
             ProfileView(),
           ],
