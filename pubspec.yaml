@@ -23,10 +23,10 @@ dependencies:
   firebase_auth: ^4.12.0
   firebase_crashlytics: ^3.4.2
   cloud_functions: ^4.5.2
-  cloud_firestore: ^4.12.0
+  cloud_firestore: ^4.12.1
   equatable: ^2.0.5
-  flutter_svg: ^2.0.7
-  rive: ^0.12.0
+  flutter_svg: ^2.0.8
+  rive: ^0.12.1
   loggy: ^2.0.3
   flutter_loggy: ^2.0.2
   flutter_facebook_auth: ^6.0.2

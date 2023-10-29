@@ -115,5 +115,13 @@
         "label": "description:"
       }
     }
+  },
+  "house_ranking": {
+    "points": {
+      "label($n)": {
+        "one": "point: ",
+        "other": "points: "
+      }
+    }
   }
 }
