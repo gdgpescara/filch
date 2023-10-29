@@ -4,10 +4,10 @@ import {searchForQuest} from "./features/quests/search-for-quest";
 import {updateHouseMembers} from "./features/sorting-ceremony/house-manager";
 import {actorQueueSentinel} from "./features/quests/actor-quest-queue-manager";
 import {submitAnswer} from "./features/quests/submit-answer";
-import {
-  expiredActiveQuestCleaner,
-  questQueueCleaner,
-} from "./features/quests/quest-cron";
+// import {
+//   expiredActiveQuestCleaner,
+//   questQueueCleaner,
+// } from "./features/quests/quest-cron";
 import {
   memberPointsSentinel,
   userPointsSentinel,
@@ -24,8 +24,8 @@ exports.actorQueueSentinel = actorQueueSentinel;
 exports.submitAnswer = submitAnswer;
 
 // Cron jobs [Start]
-exports.expiredActiveQuestCleaner = expiredActiveQuestCleaner;
-exports.questQueueCleaner = questQueueCleaner;
+// exports.expiredActiveQuestCleaner = expiredActiveQuestCleaner;
+// exports.questQueueCleaner = questQueueCleaner;
 // Cron jobs [End]
 
 exports.assignPoints = assignPoints;
