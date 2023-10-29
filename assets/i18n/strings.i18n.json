@@ -123,5 +123,35 @@
         "other": "points: "
       }
     }
+  },
+  "profile": {
+    "my_points": {
+      "label": "my points: ",
+      "detail_button": {
+        "label": "Show points details"
+      }
+    }
+  },
+  "my_points_details": {
+    "title": "My points",
+    "points_item_card": {
+      "type": {
+        "label": "type: ",
+        "value(map)": {
+          "quest": "Quest",
+          "staff": "Staff"
+        }
+      },
+      "points": {
+        "label($n)": {
+          "one": "point: ",
+          "other": "points: "
+        }
+      },
+      "assigned_at": {
+        "label": "assigned on: "
+      }
+    },
+    "empty": "You have no points yet."
   }
 }

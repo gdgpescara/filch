@@ -5,7 +5,7 @@ import '../../../../dependency_injection/dependency_injection.dart';
 import '../../use_cases/get_signed_user_use_case.dart';
 
 class UserQrCode extends StatelessWidget {
-  const UserQrCode({super.key, this.dimension = 250});
+  const UserQrCode({super.key, this.dimension = 150});
 
   final double dimension;
 

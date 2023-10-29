@@ -1,28 +1,37 @@
-import {onCall} from "firebase-functions/v2/https";
+import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
 import {Quest} from "./types/quest";
 import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {Points} from "../points/types/points";
+import {PointsTypeEnum} from "../points/types/points-type-enum";
 
 export const submitAnswer = onCall(
   {region: "europe-west3"},
   async (request) => {
     const loggedUser = await getSignedInUser(request);
-    const quest = request.data.quest as Quest;
+    const questId = request.data.quest as string;
     const answers = request.data.answers as number[];
+    const questSnap = await getFirestore()
+      .collection("quests")
+      .doc(questId)
+      .get();
+    const quest = questSnap.data() as Quest | null;
+    if (!quest) {
+      throw new HttpsError("not-found", "Quest not found");
+    }
     const correctAnswers = quest.answers
       ?.filter((answer) => answer.isCorrect)
       .map((answer) => answer.id);
 
     if (!correctAnswers) {
-      throw new Error("Quest has no correct answers");
+      throw new HttpsError("not-found", "Quest has no correct answers");
     }
 
     const isCorrect = correctAnswers.every((e) => answers.includes(e));
     const house = loggedUser.customClaims?.["house"];
 
     const archivedPoints = <Points>{
-      quest: quest,
+      type: PointsTypeEnum.quest,
       points: isCorrect ? quest.points : -quest.malus,
       assignedAt: Timestamp.now(),
     };

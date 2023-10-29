@@ -3,6 +3,7 @@ import 'package:cloud_functions/cloud_functions.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:intl/intl.dart';
 
 final injector = GetIt.asNewInstance();
 
@@ -19,4 +20,8 @@ abstract class ExternalPackages {
 
   @lazySingleton
   FirebaseFunctions get functions => FirebaseFunctions.instanceFor(region: 'europe-west3');
+
+  @lazySingleton
+  @Named('full')
+  DateFormat get dateFormat => DateFormat('dd MMM yyyy • HH:mm');
 }
