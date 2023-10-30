@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'functionalities/home/home_page.dart';
-import 'functionalities/sign_in/sign_in_page.dart';
-import 'functionalities/sorting_ceremony/sorting_ceremony_page.dart';
-import 'functionalities/splash/splash_page.dart';
-import 'functionalities/user/user_points/user_points_page.dart';
+import 'common_functionalities/splash/splash_page.dart';
+import 'staff_functionalities/home/staff_home_page.dart';
+import 'user_functionalities/home/user_home_page.dart';
+import 'common_functionalities/sign_in/sign_in_page.dart';
+import 'user_functionalities/sorting_ceremony/sorting_ceremony_page.dart';
+import 'user_functionalities/user_points/user_points_page.dart';
 
 class AppRouter {
   AppRouter._();
@@ -15,8 +16,9 @@ class AppRouter {
         SplashPage.routeName: _pageRouteBuilder<void>(const SplashPage()),
         SignInPage.routeName: _pageRouteBuilder<void>(const SignInPage()),
         SortingCeremonyPage.routeName: _pageRouteBuilder<void>(const SortingCeremonyPage()),
-        HomePage.routeName: _pageRouteBuilder<void>(const HomePage()),
+        UserHomePage.routeName: _pageRouteBuilder<void>(const UserHomePage()),
         UserPointsPage.routeName: _pageRouteBuilder<void>(const UserPointsPage()),
+        StaffHomePage.routeName: _pageRouteBuilder<void>(const StaffHomePage()),
       }[settings.name];
 
   static PageRouteBuilder<T> _pageRouteBuilder<T>(Widget child) => PageRouteBuilder<T>(
