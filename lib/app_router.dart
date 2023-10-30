@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'common_functionalities/sign_in/sign_in_page.dart';
 import 'common_functionalities/splash/splash_page.dart';
 import 'staff_functionalities/home/staff_home_page.dart';
 import 'user_functionalities/home/user_home_page.dart';
-import 'common_functionalities/sign_in/sign_in_page.dart';
 import 'user_functionalities/sorting_ceremony/sorting_ceremony_page.dart';
 import 'user_functionalities/user_points/user_points_page.dart';
 

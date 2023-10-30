@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class IsStaffUserUseCase {
   IsStaffUserUseCase(this._auth);
+
   final FirebaseAuth _auth;
 
   bool call() {

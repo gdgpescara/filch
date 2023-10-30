@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../common_functionalities/widgets/app_card.dart';
 import '../../../i18n/strings.g.dart';
 import '../../../utils/extensions/duration_extension.dart';
-import '../../../common_functionalities/widgets/app_card.dart';
 import '../models/active_quest.dart';
 
 class TimeRemaining extends StatelessWidget {

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../dependency_injection/dependency_injection.dart';
 import '../../common_functionalities/widgets/dark_map_container.dart';
+import '../../dependency_injection/dependency_injection.dart';
 import 'state/sorting_ceremony_cubit.dart';
 import 'widgets/sorting_failure.dart';
 import 'widgets/sorting_loading.dart';

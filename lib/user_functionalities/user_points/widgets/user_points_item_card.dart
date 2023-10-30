@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-import '../../../dependency_injection/dependency_injection.dart';
-import '../../../i18n/strings.g.dart';
 import '../../../common_functionalities/models/points.dart';
 import '../../../common_functionalities/widgets/app_card.dart';
+import '../../../dependency_injection/dependency_injection.dart';
+import '../../../i18n/strings.g.dart';
 import 'user_points_value.dart';
 
 class UserPointsItemCard extends StatelessWidget {

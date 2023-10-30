@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../i18n/strings.g.dart';
 import '../../../common_functionalities/widgets/app_card.dart';
+import '../../../i18n/strings.g.dart';
 import '../current_quest/state/current_quest_cubit.dart';
 import 'question_widget.dart';
 import 'quiz_submit_button.dart';

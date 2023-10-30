@@ -2,8 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../user/models/firestore_user.dart';
 import '../json_converters/timestamp_date_time_converter.dart';
+import '../user/models/firestore_user.dart';
 import 'points_type_enum.dart';
 
 part 'points.g.dart';

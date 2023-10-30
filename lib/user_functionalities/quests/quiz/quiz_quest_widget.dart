@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:slang/builder/utils/string_extensions.dart';
 
+import '../../../common_functionalities/widgets/loader_overlay.dart';
 import '../../../dependency_injection/dependency_injection.dart';
 import '../../../i18n/strings.g.dart';
 import '../../../theme/app_theme.dart';
-import '../../../common_functionalities/widgets/loader_overlay.dart';
 import '../current_quest/state/current_quest_cubit.dart';
 import 'multiple_choice_widget.dart';
 import 'quiz_scan_view.dart';

@@ -6,12 +6,14 @@ sealed class QuizState extends Equatable {
 
 class QuizNeedActivation extends QuizState {
   const QuizNeedActivation();
+
   @override
   List<Object> get props => [];
 }
 
 class QuizLoading extends QuizState {
   const QuizLoading();
+
   @override
   List<Object> get props => [];
 }
