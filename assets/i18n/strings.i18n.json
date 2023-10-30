@@ -84,7 +84,7 @@
       }
     },
     "actors": {
-      "hint": "Find the right person and ask him/her to scan the QR code.",
+      "hint": "Ask to the right person to scan the QR code.",
       "description": {
         "label": "description:"
       }

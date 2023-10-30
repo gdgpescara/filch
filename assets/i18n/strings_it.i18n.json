@@ -84,7 +84,7 @@
       }
     },
     "actors": {
-      "hint": "Cerca la persona giusta e chiedile di scansionare il tuo codice QR",
+      "hint": "Chiedi alla persona giusta di scansionare il codice QR",
       "description": {
         "label": "descrizione:"
       }
