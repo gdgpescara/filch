@@ -1,10 +1,10 @@
-import 'package:filch/user_functionalities/user_points/state/user_points_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../common_functionalities/widgets/dark_map_container.dart';
 import '../../dependency_injection/dependency_injection.dart';
 import '../../i18n/strings.g.dart';
-import '../../common_functionalities/widgets/dark_map_container.dart';
+import 'state/user_points_cubit.dart';
 import 'widgets/user_points_list.dart';
 
 class UserPointsPage extends StatelessWidget {

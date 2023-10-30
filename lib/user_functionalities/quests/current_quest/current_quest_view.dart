@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../dependency_injection/dependency_injection.dart';
 import '../../../common_functionalities/widgets/loader_animation.dart';
+import '../../../dependency_injection/dependency_injection.dart';
 import '../commons/no_quest_assigned_widget.dart';
 import '../quiz/quest_widget.dart';
 import 'state/current_quest_cubit.dart';

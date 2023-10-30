@@ -4,6 +4,7 @@ class DarkMapContainer extends StatelessWidget {
   const DarkMapContainer({super.key, required this.child});
 
   final Widget child;
+
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(

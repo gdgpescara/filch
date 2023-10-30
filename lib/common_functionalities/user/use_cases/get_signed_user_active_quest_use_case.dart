@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
-import '../../error_handling/error_catcher.dart';
 import '../../../user_functionalities/quests/models/active_quest.dart';
+import '../../error_handling/error_catcher.dart';
 import 'get_signed_user_firestore_doc_use_case.dart';
 
 @lazySingleton

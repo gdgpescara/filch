@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../common_functionalities/widgets/loader_animation.dart';
 import '../../dependency_injection/dependency_injection.dart';
 import '../../i18n/strings.g.dart';
-import '../../common_functionalities/widgets/loader_animation.dart';
 import 'state/houses_ranking_cubit.dart';
 import 'widgets/houses_ranking_list.dart';
 

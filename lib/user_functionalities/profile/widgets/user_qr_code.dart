@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
-import '../../../dependency_injection/dependency_injection.dart';
 import '../../../common_functionalities/user/use_cases/get_signed_user_use_case.dart';
+import '../../../dependency_injection/dependency_injection.dart';
 
 class UserQrCode extends StatelessWidget {
   const UserQrCode({super.key, this.dimension = 150});

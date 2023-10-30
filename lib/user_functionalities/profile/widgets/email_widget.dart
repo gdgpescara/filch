@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../dependency_injection/dependency_injection.dart';
-import '../../../common_functionalities/widgets/app_card.dart';
 import '../../../common_functionalities/user/use_cases/get_signed_user_use_case.dart';
+import '../../../common_functionalities/widgets/app_card.dart';
+import '../../../dependency_injection/dependency_injection.dart';
 
 class EmailWidget extends StatelessWidget {
   const EmailWidget({super.key});

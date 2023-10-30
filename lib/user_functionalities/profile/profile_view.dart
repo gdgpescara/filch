@@ -1,12 +1,12 @@
-import 'package:filch/user_functionalities/profile/state/profile_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common_functionalities/splash/splash_page.dart';
+import '../../common_functionalities/widgets/app_card.dart';
 import '../../dependency_injection/dependency_injection.dart';
 import '../../i18n/strings.g.dart';
-import '../../common_functionalities/widgets/app_card.dart';
 import '../user_points/user_points_card.dart';
+import 'state/profile_cubit.dart';
 import 'widgets/email_widget.dart';
 import 'widgets/user_picture.dart';
 import 'widgets/user_qr_code.dart';

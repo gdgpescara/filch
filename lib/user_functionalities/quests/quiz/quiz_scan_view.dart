@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-import '../../../i18n/strings.g.dart';
 import '../../../common_functionalities/widgets/app_card.dart';
+import '../../../i18n/strings.g.dart';
 import '../commons/quest_description_widget.dart';
 import '../current_quest/state/current_quest_cubit.dart';
 import 'state/quiz_cubit.dart';

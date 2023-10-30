@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
 @lazySingleton
 class SignOutUseCase {
   SignOutUseCase(this._auth);
+
   final FirebaseAuth _auth;
 
   Future<void> call() {

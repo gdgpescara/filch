@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../i18n/strings.g.dart';
 import '../../../common_functionalities/models/house.dart';
 import '../../../common_functionalities/widgets/app_card.dart';
+import '../../../i18n/strings.g.dart';
 import 'house_ranking_logo.dart';
 
 class HousesRankingCard extends StatelessWidget {
