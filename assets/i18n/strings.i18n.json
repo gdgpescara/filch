@@ -34,7 +34,8 @@
     "bottom_nav": {
       "ranking": "Ranking",
       "current_quest": "Quest",
-      "profile": "Profile"
+      "profile": "Profile",
+      "scan": "Scan"
     }
   },
   "sign_in": {

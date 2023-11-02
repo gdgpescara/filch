@@ -34,7 +34,8 @@
     "bottom_nav": {
       "ranking": "Classifica",
       "current_quest": "Missione",
-      "profile": "Profilo"
+      "profile": "Profilo",
+      "scan": "Scan"
     }
   },
   "sign_in": {
