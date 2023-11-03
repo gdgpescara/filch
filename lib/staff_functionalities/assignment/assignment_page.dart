@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../common_functionalities/models/points_type_enum.dart';
 import '../../common_functionalities/widgets/dark_map_container.dart';
 import '../../dependency_injection/dependency_injection.dart';
 import 'state/assignment_cubit.dart';
@@ -9,12 +10,12 @@ import 'state/assignment_cubit.dart';
 class AssignmentPage extends StatelessWidget {
   const AssignmentPage({
     super.key,
-    required this.points,
+    required this.args,
   });
 
   static const routeName = 'assignment';
 
-  final int points;
+  final AssignmentPageArgs args;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,14 @@ class AssignmentPage extends StatelessWidget {
               selector: (state) => state is AssignmentInitial ? state.scannedUsers : [],
               builder: (context, users) {
                 return IconButton(
-                  onPressed: users.isNotEmpty ? () => context.read<AssignmentCubit>().assign(points) : null,
+                  onPressed: users.isNotEmpty
+                      ? () => context.read<AssignmentCubit>().assign(
+                            points: args.points,
+                            quest: args.quest,
+                            type: args.type,
+                            users: users,
+                          )
+                      : null,
                   icon: const Icon(Icons.save),
                 );
               },
@@ -81,4 +89,19 @@ class AssignmentPage extends StatelessWidget {
       ),
     );
   }
+}
+
+@immutable
+class AssignmentPageArgs {
+  const AssignmentPageArgs.points(this.points)
+      : quest = null,
+        type = PointsTypeEnum.staff;
+
+  const AssignmentPageArgs.quest(this.quest)
+      : points = null,
+        type = PointsTypeEnum.quest;
+
+  final int? points;
+  final String? quest;
+  final PointsTypeEnum type;
 }

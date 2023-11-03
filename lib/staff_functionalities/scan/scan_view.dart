@@ -19,7 +19,7 @@ class ScanView extends StatelessWidget {
             return switch (state) {
               ScanLoading() => const CircularProgressIndicator(),
               ScanFailure() => Container(),
-              ScanLoaded() => AssignablePointsList(points: state.points),
+              ScanLoaded() => AssignablePointsList(points: state.points, quests: state.quests),
             };
           },
         ),
