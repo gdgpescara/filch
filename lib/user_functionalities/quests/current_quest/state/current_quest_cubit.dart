@@ -29,6 +29,10 @@ class CurrentQuestCubit extends Cubit<CurrentQuestState> {
     );
   }
 
+  void timeExpired() {
+    _canRequestForQuest();
+  }
+
   void _canRequestForQuest() {
     _canRequestForQuestUseCase().actions(
       progress: () => emit(const CurrentQuestLoading()),

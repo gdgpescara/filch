@@ -4,13 +4,11 @@ import {QuestSubTypeEnum} from "./quest-sub-type-enum";
 
 export type Quest = {
   id: string;
-  description: string;
-  malus: number;
+  description: { [key: string]: string };
   points: number;
   validityStart: Date;
   validityEnd: Date;
   executionTime: number;
-  isOneTime: boolean;
   type: QuestTypeEnum;
 
   // Actor quest section
@@ -22,7 +20,7 @@ export type Quest = {
 
   // Quiz quest section
   qrCode: string | null;
-  question: string | null;
+  question: { [key: string]: string } | null;
   answers: Answer[] | null;
 
   // Social quest section

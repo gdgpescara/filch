@@ -19,10 +19,10 @@ class QuizQuestWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<QuizCubit>(
       create: (_) => injector(),
-      child: BlocBuilder<CurrentQuestCubit, CurrentQuestState>(
-        buildWhen: (previous, current) => current is CurrentQuestLoaded,
+      child: BlocSelector<CurrentQuestCubit, CurrentQuestState, CurrentQuestLoaded?>(
+        selector: (state) => state is CurrentQuestLoaded ? state : null,
         builder: (context, currentQuestState) {
-          currentQuestState as CurrentQuestLoaded;
+          if (currentQuestState == null) return const SizedBox();
           return BlocConsumer<QuizCubit, QuizState>(
             listenWhen: (previous, current) => current is QuizAnswerState || current is QuizActivationFailure,
             listener: (context, state) {

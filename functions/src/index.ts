@@ -14,6 +14,7 @@ import {
 } from "./features/points/points-manager";
 import {assignPoints} from "./features/points/assign-points";
 import {onUserDeleteSentinel} from "./features/user/user_manager";
+import {scanHouseMate} from "./features/quests/social_qr_code_quest";
 
 initializeApp();
 
@@ -25,6 +26,7 @@ exports.updateHouseMembers = updateHouseMembers;
 exports.searchForQuest = searchForQuest;
 exports.actorQueueSentinel = actorQueueSentinel;
 exports.submitAnswer = submitAnswer;
+exports.scanHouseMate = scanHouseMate;
 
 // Cron jobs [Start]
 exports.expiredActiveQuestCleaner = expiredActiveQuestCleaner;

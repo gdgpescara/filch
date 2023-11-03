@@ -112,6 +112,13 @@
     "social": {
       "description": {
         "label": "descrizione:"
+      },
+      "qr_code": {
+        "correct": {
+          "one": "Ottimo lavoro! $n punto a $house",
+          "other": "Ottimo lavoro! $n punti a $house"
+        },
+        "incorrect": "Oh no! $house non riceve punti"
       }
     }
   },
