@@ -23,6 +23,7 @@ class Points extends Equatable {
   final int points;
   final String? assignedBy;
   @TimestampDateTimeConverter()
+  @JsonKey(includeToJson: false)
   final DateTime assignedAt;
 
   Map<String, dynamic> toJson() => _$PointsToJson(this);
