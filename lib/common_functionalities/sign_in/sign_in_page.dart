@@ -26,16 +26,40 @@ class SignInPage extends StatelessWidget {
           child: BlocListener<SignInCubit, SignInState>(
             listenWhen: (previous, current) => current is SignInActionsState,
             listener: (context, state) {
-              if (state is SignInSuccess) {
-                Navigator.pop(context);
-              }
-              if (state is SignInFailure) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(t.commons.errors.generic),
-                    backgroundColor: Theme.of(context).colorScheme.error,
-                  ),
-                );
+              switch (state) {
+                case SignInSuccess():
+                  Navigator.pop(context);
+                  break;
+                case SignInFailure(failure: final failure):
+                  switch (failure.code) {
+                    case 'account-exists-with-different-credential':
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(
+                            failure.message,
+                            style: Theme.of(context)
+                                .textTheme
+                                .displayMedium
+                                ?.copyWith(color: Theme.of(context).colorScheme.onError),
+                          ),
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                          duration: const Duration(seconds: 20),
+                          showCloseIcon: true,
+                        ),
+                      );
+                      break;
+                    default:
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          content: Text(t.commons.errors.generic),
+                          backgroundColor: Theme.of(context).colorScheme.error,
+                        ),
+                      );
+                      break;
+                  }
+                  break;
+                default:
+                  break;
               }
             },
             child: Scaffold(

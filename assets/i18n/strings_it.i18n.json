@@ -125,6 +125,14 @@
     }
   },
   "profile": {
+    "user_info": {
+      "name": {
+        "label": "nome: "
+      },
+      "email": {
+        "label": "email: "
+      }
+    },
     "my_points": {
       "label": "i miei punti: ",
       "detail_button": {
