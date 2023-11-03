@@ -26,19 +26,11 @@ def keystorePropertiesFile = rootProject.file('.keystore/keystore.properties')
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-def secretsProperties = new Properties()
-def secretsFile = rootProject.file('secrets.properties')
-if (secretsFile.exists()) {
-    secretsFile.withReader('UTF-8') { reader ->
-        secretsProperties.load(reader)
-    }
-}
-
 def flutterNdkVersion = localProperties.getProperty('flutter.ndkVersion')
 
 android {
     namespace "it.gdgpescara.filch"
-    compileSdk 34
+    compileSdk 33
     ndkVersion flutterNdkVersion
 
     compileOptions {
@@ -62,9 +54,7 @@ android {
         versionName flutterVersionName
         multiDexEnabled true
         manifestPlaceholders([
-                'applicationName'    : 'android.app.Application',
-                'facebookAppId'      : secretsProperties['facebookAppId'],
-                'facebookClientToken': secretsProperties['facebookClientToken']
+                'applicationName': 'android.app.Application'
         ])
     }
 

@@ -56,7 +56,8 @@ class _SplashPageState extends State<SplashPage> {
           }
         },
         child: Scaffold(
-          body: DecoratedBox(
+          body: Container(
+            width: double.infinity,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -65,7 +66,6 @@ class _SplashPageState extends State<SplashPage> {
             ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Logo.dark(),
                 const SizedBox(height: 16),

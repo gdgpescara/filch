@@ -143,3 +143,4 @@ app.*.map.json
 /android/secrets.properties
 /ios/Secrets.xcconfig
 /functions/.idea/
+/android/app/src/main/res/values/strings.xml

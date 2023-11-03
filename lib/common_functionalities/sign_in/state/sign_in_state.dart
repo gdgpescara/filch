@@ -38,7 +38,7 @@ class SignInSuccess extends SignInActionsState {
 }
 
 class SignInFailure extends SignInActionsState {
-  const SignInFailure(this.failure);
+  const SignInFailure({required this.failure});
 
   final Failure failure;
 
