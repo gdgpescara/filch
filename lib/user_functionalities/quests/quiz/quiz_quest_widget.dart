@@ -40,7 +40,7 @@ class QuizQuestWidget extends StatelessWidget {
                       content: Text(
                         state.isCorrect
                             ? t.active_quest.quiz.answer.correct(n: state.points, house: state.house.capitalize())
-                            : t.active_quest.quiz.answer.incorrect(n: state.points, house: state.house.capitalize()),
+                            : t.active_quest.quiz.answer.incorrect(house: state.house.capitalize()),
                       ),
                       backgroundColor: state.isCorrect
                           ? Theme.of(context).extension<CustomColors>()?.success

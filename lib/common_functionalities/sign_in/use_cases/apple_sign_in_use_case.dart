@@ -11,15 +11,17 @@ class AppleSignInUseCase {
   final FirebaseAuth _auth;
 
   Future<UserCredential> call() async {
-    return runSafetyFuture(() {
-      final appleProvider = AppleAuthProvider();
-      return _auth.signInWithProvider(appleProvider);
-    },
+    return runSafetyFuture(
+      () {
+        final appleProvider = AppleAuthProvider();
+        return _auth.signInWithProvider(appleProvider);
+      },
       onException: (e) {
         if (e is FirebaseAuthException) {
           return Failure(code: e.code, message: e.message ?? '');
         }
         return Failure.genericFromException(e);
-      },);
+      },
+    );
   }
 }

@@ -7,6 +7,7 @@ import '../../dependency_injection/dependency_injection.dart';
 import '../../i18n/strings.g.dart';
 import '../user_points/user_points_card.dart';
 import 'state/profile_cubit.dart';
+import 'widgets/remove_account_button.dart';
 import 'widgets/user_info.dart';
 import 'widgets/user_picture.dart';
 import 'widgets/user_qr_code.dart';
@@ -55,6 +56,8 @@ class ProfileView extends StatelessWidget {
                 const AppCard(child: UserQrCode()),
                 const SizedBox(height: 20),
                 const UserPointsCard(),
+                const SizedBox(height: 20),
+                const RemoveAccountButton(),
               ],
             ),
           );
