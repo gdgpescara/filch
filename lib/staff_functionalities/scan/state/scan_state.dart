@@ -16,10 +16,24 @@ class ScanFailure extends ScanState {
 }
 
 class ScanLoaded extends ScanState {
-  const ScanLoaded(this.points);
+  const ScanLoaded({
+    this.points = const [],
+    this.quests = const [],
+  });
 
   final List<AssignablePoints> points;
+  final List<Quest> quests;
+
+  ScanLoaded copyWith({
+    List<AssignablePoints>? points,
+    List<Quest>? quests,
+  }) {
+    return ScanLoaded(
+      points: points ?? this.points,
+      quests: quests ?? this.quests,
+    );
+  }
 
   @override
-  List<Object?> get props => [points];
+  List<Object?> get props => [points, quests];
 }

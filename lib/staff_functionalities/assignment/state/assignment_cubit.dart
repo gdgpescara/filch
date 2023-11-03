@@ -19,9 +19,13 @@ class AssignmentCubit extends Cubit<AssignmentState> {
     emit(AssignmentInitial({...actualValues, ...values}.toList()));
   }
 
-  Future<void> assign(int points) async {
-    final users = state is AssignmentInitial ? (state as AssignmentInitial).scannedUsers : <String>[];
-    _assignPointsUseCase(points, users, PointsTypeEnum.staff).actions(
+  Future<void> assign({
+    int? points,
+    String? quest,
+    required PointsTypeEnum type,
+    required List<String> users,
+  }) async {
+    _assignPointsUseCase(points: points ?? 0, users: users, quest: quest, pointsType: type).actions(
       progress: () => emit(const Assigning()),
       success: (_) => emit(const Assigned()),
       failure: (_) => emit(const AssignFailure()),
