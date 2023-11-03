@@ -32,29 +32,32 @@ export const submitAnswer = onCall(
 
     const archivedPoints = <Points>{
       type: PointsTypeEnum.quest,
-      points: isCorrect ? quest.points : -quest.malus,
+      points: quest.points,
       assignedAt: Timestamp.now(),
     };
 
     const batch = getFirestore().batch();
-    batch.set(
-      getFirestore()
-        .collection("users")
-        .doc(loggedUser.uid)
-        .collection("points")
-        .doc(quest.id),
-      archivedPoints,
-    );
-    batch.set(
-      getFirestore()
-        .collection("houses")
-        .doc(house)
-        .collection("members")
-        .doc(loggedUser.uid)
-        .collection("points")
-        .doc(quest.id),
-      archivedPoints,
-    );
+    if (isCorrect) {
+      batch.set(
+        getFirestore()
+          .collection("users")
+          .doc(loggedUser.uid)
+          .collection("points")
+          .doc(quest.id),
+        archivedPoints,
+      );
+      batch.set(
+        getFirestore()
+          .collection("houses")
+          .doc(house)
+          .collection("members")
+          .doc(loggedUser.uid)
+          .collection("points")
+          .doc(quest.id),
+        archivedPoints,
+      );
+    }
+
     batch.update(
       getFirestore().collection("users").doc(loggedUser.uid),
       {

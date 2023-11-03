@@ -77,20 +77,20 @@ scripts:
   build:android:aab:
     run: |
       melos exec --flutter --concurrency=1 --fail-fast -- \
-        "flutter build appbundle -t lib/main.dart --release --obfuscate --split-debug-info=bundle/debug --dart-define-from-file=.env/wnv.json"
+        "flutter build appbundle -t lib/main.dart --release --obfuscate --split-debug-info=bundle/debug --dart-define-from-file=.env/remote.json"
     select-package:
       scope: "filch"
 
   build:android:apk:
     run: |
       melos exec --flutter --concurrency=1 --fail-fast -- \
-        "flutter build apk -t lib/main.dart --release --obfuscate --split-debug-info=android/debug --dart-define-from-file=.env/env.json"
+        "flutter build apk -t lib/main.dart --release --obfuscate --split-debug-info=android/debug --dart-define-from-file=.env/remote.json"
     select-package:
       scope: "filch"
 
   build:ios:ipa:
     run: |
       melos exec --flutter --concurrency=1 --fail-fast -- \
-        "flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --dart-define-from-file=.env/env.json"
+        "flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --dart-define-from-file=.env/remote.json"
     select-package:
       scope: "filch"

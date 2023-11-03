@@ -10,10 +10,10 @@ class ActorQuestWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CurrentQuestCubit, CurrentQuestState>(
-      buildWhen: (previous, current) => current is CurrentQuestLoaded,
+    return BlocSelector<CurrentQuestCubit, CurrentQuestState, CurrentQuestLoaded?>(
+      selector: (state) => state is CurrentQuestLoaded ? state : null,
       builder: (context, state) {
-        state as CurrentQuestLoaded;
+        if (state == null) return const SizedBox();
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [

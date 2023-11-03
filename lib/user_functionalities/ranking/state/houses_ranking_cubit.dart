@@ -12,10 +12,16 @@ part 'houses_ranking_state.dart';
 
 @injectable
 class HousesRankingCubit extends Cubit<HousesRankingState> {
-  HousesRankingCubit(this._getHousesUseCase, this._getSignedUserHouseUseCase) : super(const HousesRankingLoading());
+  HousesRankingCubit(
+    this._getHousesUseCase,
+    this._getSignedUserHouseUseCase,
+    // this._getFeatureFlagsUseCase,
+  ) : super(const HousesRankingLoading());
 
   final GetHousesUseCase _getHousesUseCase;
   final GetSignedUserHouseUseCase _getSignedUserHouseUseCase;
+
+  // final GetFeatureFlagsUseCase _getFeatureFlagsUseCase;
 
   void loadHouses() {
     if (state.userHouse == null) {

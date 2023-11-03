@@ -23,7 +23,7 @@ class QuestionWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10, width: double.infinity),
           Text(
-            activeQuest.quest.question ?? '',
+            activeQuest.quest.question?[LocaleSettings.currentLocale.languageCode] ?? '',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
