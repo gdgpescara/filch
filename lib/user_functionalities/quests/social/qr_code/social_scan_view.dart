@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../../../common_functionalities/models/points_type_enum.dart';
 import '../../../../common_functionalities/use_cases/assign_points_use_case.dart';
 import '../../../../common_functionalities/widgets/app_card.dart';
 import '../../../../dependency_injection/dependency_injection.dart';
 import '../../../../i18n/strings.g.dart';
 import '../../commons/quest_description_widget.dart';
 import '../../current_quest/state/current_quest_cubit.dart';
+
 class SocialScanView extends StatelessWidget {
   const SocialScanView({super.key});
 
@@ -50,10 +52,11 @@ class SocialScanView extends StatelessWidget {
         onDetect: (capture) {
           final barcodes = capture.barcodes;
           if (barcodes.isNotEmpty && barcodes.first.rawValue != null) {
-            // injector<AssignPointsUseCase>()(
-            //       points: currentQuestState.activeQuest.quest.points,
-            //       barcodes.first.rawValue!,
-            //     );
+            injector<AssignPointsUseCase>()(
+              points: currentQuestState.activeQuest.quest.points,
+              users: [barcodes.first.rawValue!],
+              pointsType: PointsTypeEnum.quest,
+            );
           }
         },
       ),
