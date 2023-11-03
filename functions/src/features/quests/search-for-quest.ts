@@ -12,36 +12,48 @@ export const searchForQuest = onCall(
   async (request) => {
     const loggedUser = await getSignedInUser(request);
 
+    // Get configurations
+    const config = await getFirestore()
+      .collection("configuration")
+      .doc("feature_flags")
+      .get();
+    const actorQuestEnabled = config.data()?.actorQuestEnabled ?? false;
+    const quizQuestEnabled = config.data()?.quizQuestEnabled ?? false;
+    const socialQuestEnabled = config.data()?.socialQuestEnabled ?? false;
+
+
     // Search for a quest
     let questFound: ActiveQuest | undefined = undefined;
 
     // 1. Search if actor quest is available
-    logger.info("Searching for actor quest");
-    const actorQuestsSnapshot = await getFirestore()
-      .collection("quests")
-      .where("type", "==", QuestTypeEnum.actor)
-      .where("requestAccepted", "==", true)
-      .get();
+    if (actorQuestEnabled) {
+      logger.info("Searching for actor quest");
+      const actorQuestsSnapshot = await getFirestore()
+        .collection("quests")
+        .where("type", "==", QuestTypeEnum.actor)
+        .where("requestAccepted", "==", true)
+        .get();
 
-    const actorQuests = actorQuestsSnapshot.docs.filter((doc) => {
-      return doc.data().validityStart <= Timestamp.now() &&
-        doc.data().validityEnd > Timestamp.now();
-    });
+      const actorQuests = actorQuestsSnapshot.docs.filter((doc) => {
+        return doc.data().validityStart <= Timestamp.now() &&
+          doc.data().validityEnd > Timestamp.now();
+      });
 
-    if (actorQuests.length > 0) {
-      logger.info("Actor quest found");
-      const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
-      questFound = <ActiveQuest>{
-        quest: <Quest>{
-          ...actorQuests[randomIndex].data(),
-          id: actorQuests[randomIndex].id,
-        },
-        activatedAt: Timestamp.now(),
-      };
+      if (actorQuests.length > 0) {
+        logger.info("Actor quest found");
+        const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
+        questFound = <ActiveQuest>{
+          quest: <Quest>{
+            ...actorQuests[randomIndex].data(),
+            id: actorQuests[randomIndex].id,
+          },
+          activatedAt: Timestamp.now(),
+        };
+      }
     }
 
     // 2. Search if quiz quest if actor quest is not available
-    if (!questFound) {
+    if (!questFound && quizQuestEnabled) {
       logger.info("Searching for quiz quest");
       const quizQuestsSnapshot = await getFirestore()
         .collection("quests")
@@ -67,7 +79,7 @@ export const searchForQuest = onCall(
     }
 
     // 3. Search if social quest if actor quest and quiz quest are not available
-    if (!questFound) {
+    if (!questFound && socialQuestEnabled) {
       logger.info("Searching for social quest");
       const socialQuestsSnapshot = await getFirestore()
         .collection("quests")

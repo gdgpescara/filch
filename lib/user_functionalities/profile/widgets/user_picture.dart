@@ -25,7 +25,9 @@ class UserPicture extends StatelessWidget {
                   width: 2,
                 ),
               ),
-              child: imageUrl != null ? Image.network(imageUrl ?? '') : const Icon(Icons.person_rounded, size: 50),
+              child: imageUrl != null
+                  ? Image.network(imageUrl ?? '', fit: BoxFit.cover)
+                  : const Icon(Icons.person_rounded, size: 50),
             ),
             Align(
               alignment: Alignment.bottomRight,
