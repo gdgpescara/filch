@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../common_functionalities/widgets/loader_animation.dart';
 import '../../../dependency_injection/dependency_injection.dart';
 import '../commons/no_quest_assigned_widget.dart';
+import '../commons/quest_request_closed_widget.dart';
 import '../quiz/quest_widget.dart';
 import 'state/current_quest_cubit.dart';
 
@@ -19,6 +20,7 @@ class CurrentQuestView extends StatelessWidget {
           return switch (state) {
             CurrentQuestLoading() => const Center(child: LoaderAnimation()),
             CurrentQuestLoaded(activeQuest: final activeQuest) => QuestWidget(activeQuest),
+            QuestRequestClosed() => const QuestRequestClosedWidget(),
             _ => const NoQuestAssignedWidget(),
           };
         },

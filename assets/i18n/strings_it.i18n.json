@@ -69,6 +69,8 @@
     ]
   },
   "active_quest": {
+    "search_button": "Cerca una missione",
+    "request_closed": "La richiesta di missioni è chiusa. Prova più tardi.",
     "time_remaining": {
       "hours": {
         "one": "$n ora rimanente",
