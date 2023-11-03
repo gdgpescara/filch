@@ -70,6 +70,8 @@
     ]
   },
   "active_quest": {
+    "search_button": "Cerca una missione",
+    "request_closed": "La richiesta di missioni è chiusa. Prova più tardi.",
     "time_remaining": {
       "hours": {
         "one": "$n ora rimanente",
@@ -105,10 +107,7 @@
           "one": "Ottimo lavoro! $n punto a $house",
           "other": "Ottimo lavoro! $n punti a $house"
         },
-        "incorrect": {
-          "one": "Oh no! $house perde $n punto",
-          "other": "Oh no! $house perde $n punti"
-        }
+        "incorrect": "Oh no! $house non riceve punti"
       }
     },
     "social": {
@@ -126,11 +125,29 @@
     }
   },
   "profile": {
+    "user_info": {
+      "name": {
+        "label": "nome: "
+      },
+      "email": {
+        "label": "email: "
+      }
+    },
     "my_points": {
       "label": "i miei punti: ",
       "detail_button": {
         "label": "Mostra dettaglio punti"
       }
+    },
+    "remove_account": {
+      "button": "Rimuovi Account",
+      "dialog": {
+        "title": "Rimuovi Account",
+        "content": "Sei sicuro di voler rimuovere il tuo account? Questa operazione è irreversibile.",
+        "confirm": "Rimuovi Account"
+      },
+      "success": "Il tuo account è stato rimosso con successo.",
+      "error": "Si è verificato un errore durante la rimozione del tuo account, riprova più tardi."
     }
   },
   "my_points_details": {

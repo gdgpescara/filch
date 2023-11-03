@@ -15,8 +15,9 @@ export type Quest = {
 
   // Actor quest section
   queueTime: number | null;
-  actorUid: string | null;
+  actor: string | null;
   maxQueue: number | null;
+  groupSize: number | null;
   requestAccepted: boolean | null;
 
   // Quiz quest section

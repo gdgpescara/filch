@@ -70,6 +70,8 @@
     ]
   },
   "active_quest": {
+    "search_button": "Search for a quest",
+    "request_closed": "The quest request is closed. Try later.",
     "time_remaining": {
       "hours": {
         "one": "$n hour remaining",
@@ -105,10 +107,7 @@
           "one": "Great work! $n point to $house",
           "other": "Great work! $n points to $house"
         },
-        "incorrect": {
-          "one": "Oh no! $house loose $n point",
-          "other": "Oh no! $house loose $n points"
-        }
+        "incorrect": "Oh no! no points for $house"
       }
     },
     "social": {
@@ -126,11 +125,29 @@
     }
   },
   "profile": {
+    "user_info": {
+      "name": {
+        "label": "name: "
+      },
+      "email": {
+        "label": "email: "
+      }
+    },
     "my_points": {
       "label": "my points: ",
       "detail_button": {
         "label": "Show points details"
       }
+    },
+    "remove_account": {
+      "button": "Remove Account",
+      "dialog": {
+        "title": "Remove Account",
+        "content": "Are you sure you want to remove your account? This action cannot be undone.",
+        "confirm": "Remove Account"
+      },
+      "success": "Your account has been removed.",
+      "error": "An error occurred while removing your account."
     }
   },
   "my_points_details": {

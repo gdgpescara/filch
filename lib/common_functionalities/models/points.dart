@@ -21,9 +21,9 @@ class Points extends Equatable {
 
   final PointsTypeEnum type;
   final int points;
-  @JsonKey(toJson: userToJson)
-  final FirestoreUser? assignedBy;
+  final String? assignedBy;
   @TimestampDateTimeConverter()
+  @JsonKey(includeToJson: false)
   final DateTime assignedAt;
 
   Map<String, dynamic> toJson() => _$PointsToJson(this);

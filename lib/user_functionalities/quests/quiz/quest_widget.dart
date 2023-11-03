@@ -4,6 +4,7 @@ import '../actor/actor_quest_widget.dart';
 import '../commons/time_remaining.dart';
 import '../models/active_quest.dart';
 import '../models/quest_types_enum.dart';
+import '../social/social_quest_widget.dart';
 import 'quiz_quest_widget.dart';
 
 class QuestWidget extends StatelessWidget {
@@ -14,7 +15,7 @@ class QuestWidget extends StatelessWidget {
   Widget get _specificQuestWidget => switch (activeQuest.quest.type) {
         QuestTypeEnum.actor => const ActorQuestWidget(),
         QuestTypeEnum.quiz => const QuizQuestWidget(),
-        QuestTypeEnum.social => const SizedBox(),
+        QuestTypeEnum.social => const SocialQuestWidget(),
       };
 
   @override

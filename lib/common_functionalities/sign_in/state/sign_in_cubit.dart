@@ -35,7 +35,7 @@ class SignInCubit extends Cubit<SignInState> {
       _userPasswordSignInUseCase(formValue['email']! as String, formValue['password']! as String).actions(
         progress: () => _emitAction(const SignInLoading(ProvidersEnum.emailPassword)),
         success: (_) => _emitAction(const SignInSuccess()),
-        failure: (e) => _emitAction(SignInFailure(e)),
+        failure: (e) => _emitAction(SignInFailure(failure: e)),
       );
     }
   }
@@ -54,7 +54,7 @@ class SignInCubit extends Cubit<SignInState> {
     _googleSignInUseCase().actions(
       progress: () => _emitAction(const SignInLoading(ProvidersEnum.google)),
       success: (_) => _emitAction(const SignInSuccess()),
-      failure: (e) => _emitAction(SignInFailure(e)),
+      failure: (e) => _emitAction(SignInFailure(failure: e)),
     );
   }
 
@@ -62,7 +62,7 @@ class SignInCubit extends Cubit<SignInState> {
     _facebookSignInUseCase().actions(
       progress: () => _emitAction(const SignInLoading(ProvidersEnum.facebook)),
       success: (_) => _emitAction(const SignInSuccess()),
-      failure: (e) => _emitAction(SignInFailure(e)),
+      failure: (e) => _emitAction(SignInFailure(failure: e)),
     );
   }
 
@@ -70,7 +70,7 @@ class SignInCubit extends Cubit<SignInState> {
     _appleSignInUseCase().actions(
       progress: () => _emitAction(const SignInLoading(ProvidersEnum.apple)),
       success: (_) => _emitAction(const SignInSuccess()),
-      failure: (e) => _emitAction(SignInFailure(e)),
+      failure: (e) => _emitAction(SignInFailure(failure: e)),
     );
   }
 
@@ -78,7 +78,7 @@ class SignInCubit extends Cubit<SignInState> {
     _twitterSignInUseCase().actions(
       progress: () => _emitAction(const SignInLoading(ProvidersEnum.twitter)),
       success: (_) => _emitAction(const SignInSuccess()),
-      failure: (e) => _emitAction(SignInFailure(e)),
+      failure: (e) => _emitAction(SignInFailure(failure: e)),
     );
   }
 

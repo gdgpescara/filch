@@ -13,7 +13,7 @@ import {Quest} from "./types/quest";
  * if the quest is expired.
  */
 export const expiredActiveQuestCleaner = onSchedule({
-  schedule: "every 1 minute",
+  schedule: "every 1 minutes",
   timeZone: "Europe/Rome",
   region: "europe-west3",
 }, async () => {
@@ -36,7 +36,7 @@ export const expiredActiveQuestCleaner = onSchedule({
  * in the queue subcollection if the queueItem is expired.
  */
 export const questQueueCleaner = onSchedule({
-  schedule: "every 1 minute",
+  schedule: "every 1 minutes",
   timeZone: "Europe/Rome",
   region: "europe-west3",
 }, async () => {

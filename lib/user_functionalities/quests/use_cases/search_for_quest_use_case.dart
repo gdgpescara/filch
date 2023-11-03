@@ -16,7 +16,7 @@ class SearchForQuestUseCase {
   final FirebaseFunctions _functions;
   final GetSignedUserActiveQuestUseCase _getSignedUserActiveQuestUseCase;
 
-  Future<ActiveQuest> call() async {
+  Future<ActiveQuest> call() {
     return runSafetyFuture(
       () async {
         const url = String.fromEnvironment('SEARCH_FOR_QUEST_URL');
