@@ -15,12 +15,10 @@ class Quest extends Equatable {
   const Quest({
     required this.id,
     required this.description,
-    required this.malus,
     required this.points,
     required this.validityStart,
     required this.validityEnd,
     required this.executionTime,
-    required this.isOneTime,
     required this.type,
     required this.queueTime,
     required this.actor,
@@ -37,8 +35,7 @@ class Quest extends Equatable {
   factory Quest.fromJson(Map<String, dynamic> json) => _$QuestFromJson(json);
 
   final String id;
-  final String description;
-  final int malus;
+  final Map<String, String> description;
   final int points;
   @TimestampDateTimeConverter()
   @JsonKey(includeToJson: false)
@@ -48,7 +45,6 @@ class Quest extends Equatable {
   final DateTime validityEnd;
   @IntDurationConverter()
   final Duration executionTime;
-  final bool isOneTime;
   final QuestTypeEnum type;
 
   //region Actor quest section
@@ -63,7 +59,7 @@ class Quest extends Equatable {
 
   //region Quiz quest section
   final String? qrCode;
-  final String? question;
+  final Map<String, String>? question;
   final List<Answer>? answers;
 
   //endregion
@@ -82,12 +78,10 @@ class Quest extends Equatable {
   List<Object?> get props => [
         id,
         description,
-        malus,
         points,
         validityStart,
         validityEnd,
         executionTime,
-        isOneTime,
         type,
         queueTime,
         actor,

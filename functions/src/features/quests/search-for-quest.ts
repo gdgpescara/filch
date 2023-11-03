@@ -14,7 +14,7 @@ export const searchForQuest = onCall(
 
     // Get configurations
     const config = await getFirestore()
-      .collection("configuration")
+      .collection("configurations")
       .doc("feature_flags")
       .get();
     const actorQuestEnabled = config.data()?.actorQuestEnabled ?? false;

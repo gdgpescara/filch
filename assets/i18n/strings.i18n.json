@@ -113,6 +113,13 @@
     "social": {
       "description": {
         "label": "description:"
+      },
+      "qr_code": {
+        "correct": {
+          "one": "Great work! $n point to $house",
+          "other": "Great work! $n points to $house"
+        },
+        "incorrect": "Oh no! no points for $house"
       }
     }
   },

@@ -11,13 +11,19 @@ class AssignPointsUseCase {
 
   final FirebaseFunctions _functions;
 
-  Future<bool> call(int points, List<String> users, PointsTypeEnum pointsType) {
+  Future<bool> call({
+    required int points,
+    required List<String> users,
+    required PointsTypeEnum pointsType,
+    String? quest,
+  }) {
     return runSafetyFuture(
       () async {
         const url = String.fromEnvironment('ASSIGN_POINTS_URL');
         final result = await _functions.httpsCallableFromUrl(url).call<bool>({
           'points': points,
           'users': users,
+          'quest': quest,
           'pointsType': pointsType.toString(),
         });
         return result.data;

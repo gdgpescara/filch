@@ -26,7 +26,7 @@ class SubmitAnswerUseCase {
         });
         return (
           result.data,
-          result.data ? quest.points : quest.malus,
+          quest.points,
           await _getSignedUserHouseUseCase(),
         );
       },

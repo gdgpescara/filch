@@ -23,7 +23,7 @@ class QuestDescriptionWidget extends StatelessWidget {
           ),
           const SizedBox(height: 10, width: double.infinity),
           Text(
-            activeQuest.quest.description,
+            activeQuest.quest.description[LocaleSettings.currentLocale.languageCode] ?? '',
             style: Theme.of(context).textTheme.bodyLarge,
           ),
         ],
