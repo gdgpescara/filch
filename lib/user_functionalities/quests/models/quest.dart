@@ -23,7 +23,7 @@ class Quest extends Equatable {
     required this.isOneTime,
     required this.type,
     required this.queueTime,
-    required this.actorUid,
+    required this.actor,
     required this.maxQueue,
     required this.requestAccepted,
     required this.qrCode,
@@ -53,7 +53,7 @@ class Quest extends Equatable {
   //region Actor quest section
   @IntDurationConverter()
   final Duration? queueTime;
-  final String? actorUid;
+  final String? actor;
   final int? maxQueue;
   final bool? requestAccepted;
 
@@ -88,7 +88,7 @@ class Quest extends Equatable {
         isOneTime,
         type,
         queueTime,
-        actorUid,
+        actor,
         maxQueue,
         requestAccepted,
         qrCode,

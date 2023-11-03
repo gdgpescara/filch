@@ -21,8 +21,7 @@ class Points extends Equatable {
 
   final PointsTypeEnum type;
   final int points;
-  @JsonKey(toJson: userToJson)
-  final FirestoreUser? assignedBy;
+  final String? assignedBy;
   @TimestampDateTimeConverter()
   final DateTime assignedAt;
 

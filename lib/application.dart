@@ -18,14 +18,12 @@ class Application extends StatelessWidget {
       create: (context) => injector(),
       child: BlocListener<AppCubit, AppState>(
         listener: (context, state) {
-          if(state is AppUnauthenticated) {
+          if (state is AppUnauthenticated) {
             Navigator.pushNamedAndRemoveUntil(context, SplashPage.routeName, (route) => false);
           }
         },
         child: MaterialApp(
-          locale: TranslationProvider
-              .of(context)
-              .flutterLocale,
+          locale: TranslationProvider.of(context).flutterLocale,
           themeMode: ThemeMode.dark,
           darkTheme: darkTheme(),
           theme: lightTheme(),
