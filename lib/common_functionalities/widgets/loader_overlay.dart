@@ -39,14 +39,15 @@ class LoaderOverlay extends StatelessWidget {
               const SizedBox(height: 20),
             ],
             const LoaderAnimation(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: messageWidget ??
-                  Text(
-                    message!,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-                  ),
-            ),
+            if (message != null || messageWidget != null)
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: messageWidget ??
+                    Text(
+                      message!,
+                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                    ),
+              ),
           ],
         ),
       ),
