@@ -20,7 +20,7 @@ class AppRouter {
         UserHomePage.routeName: _pageRouteBuilder<void>(const UserHomePage()),
         UserPointsPage.routeName: _pageRouteBuilder<void>(const UserPointsPage()),
         StaffHomePage.routeName: _pageRouteBuilder<void>(const StaffHomePage()),
-        AssignmentPage.routeName: _pageRouteBuilder<void>(const AssignmentPage()),
+        AssignmentPage.routeName: _pageRouteBuilder<void>(AssignmentPage(points: (settings.arguments as int?) ?? 0)),
       }[settings.name];
 
   static PageRouteBuilder<T> _pageRouteBuilder<T>(Widget child) => PageRouteBuilder<T>(

@@ -12,14 +12,17 @@ class ScanView extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<ScanCubit>(
       create: (context) => injector()..load(),
-      child: BlocBuilder<ScanCubit, ScanState>(
-        builder: (context, state) {
-          return switch (state) {
-            ScanLoading() => const CircularProgressIndicator(),
-            ScanFailure() => Container(),
-            ScanLoaded() => AssignablePointsList(points: state.points),
-          };
-        },
+      child: Scaffold(
+        appBar: AppBar(),
+        body: BlocBuilder<ScanCubit, ScanState>(
+          builder: (context, state) {
+            return switch (state) {
+              ScanLoading() => const CircularProgressIndicator(),
+              ScanFailure() => Container(),
+              ScanLoaded() => AssignablePointsList(points: state.points),
+            };
+          },
+        ),
       ),
     );
   }
