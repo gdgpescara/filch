@@ -18,6 +18,13 @@ class NoQuestAssigned extends CurrentQuestState {
   List<Object> get props => [];
 }
 
+class QuestRequestClosed extends CurrentQuestState {
+  const QuestRequestClosed();
+
+  @override
+  List<Object> get props => [];
+}
+
 class CurrentQuestLoaded extends CurrentQuestState {
   const CurrentQuestLoaded({required this.activeQuest});
 

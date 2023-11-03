@@ -69,6 +69,8 @@
     ]
   },
   "active_quest": {
+    "search_button": "Search for a quest",
+    "request_closed": "The quest request is closed. Try later.",
     "time_remaining": {
       "hours": {
         "one": "$n hour remaining",
