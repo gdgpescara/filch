@@ -13,13 +13,59 @@ class AssignablePointsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: points.length,
-      itemBuilder: (context, index) => ListTile(
-        title: Text(points[index].points.toString()),
-        subtitle: Text(points[index].description),
-        onTap: () => Navigator.pushNamed(context, AssignmentPage.routeName),
-      ),
+    return ListView(
+      children: [
+        SizedBox(
+          height: 150,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: points.length,
+            itemBuilder: (context, index) => SizedBox(
+              width: 150,
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed(
+                  AssignmentPage.routeName,
+                  arguments: points[index].points,
+                ),
+                child: Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(points[index].points.toString()),
+                      Text(points[index].description),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        SizedBox(
+          height: 150,
+          child: ListView.builder(
+            scrollDirection: Axis.horizontal,
+            itemCount: points.length,
+            itemBuilder: (context, index) => SizedBox(
+              width: 150,
+              child: GestureDetector(
+                onTap: () => Navigator.of(context).pushNamed(
+                  AssignmentPage.routeName,
+                  arguments: points[index].points,
+                ),
+                child: Card(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(points[index].points.toString()),
+                      Text(points[index].description),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

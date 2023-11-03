@@ -23,7 +23,7 @@ class SocialQuestWidget extends StatelessWidget {
             switch (state.activeQuest.quest.subType) {
               QuestSubTypeEnum.qrCode => const SocialScanView(),
               _ => const SizedBox(),
-            }
+            },
           ],
         );
       },
