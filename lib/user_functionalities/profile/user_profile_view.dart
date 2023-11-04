@@ -51,7 +51,7 @@ class UserProfileView extends StatelessWidget {
               children: [
                 UserPicture(imageUrl: state.user?.photoURL, house: state.house),
                 const SizedBox(height: 20),
-                UserInfo(state.user),
+                UserInfo(state.user, hasNimbusTicket: state.isNimbusUser),
                 const SizedBox(height: 20),
                 const AppCard(child: UserQrCode()),
                 const SizedBox(height: 20),

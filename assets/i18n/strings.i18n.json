@@ -141,7 +141,7 @@
       },
       "nimbus_ticket": {
         "label": "nimbus ticket: ",
-        "message": "Wow hai un biglietto nimbus. Sei molto fortunato!\nTutti i tuoi punti saranno raddoppiati!"
+        "message": "Wow, you got a nimbus ticket.\nYou’re very lucky, quests will give you more points!"
       }
     },
     "my_points": {

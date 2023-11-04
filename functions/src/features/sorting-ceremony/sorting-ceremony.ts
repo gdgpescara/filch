@@ -27,11 +27,13 @@ export const sortingCeremony = onCall(
       .collection("members")
       .doc(loggedUser.uid)
       .set({
+        displayName: loggedUser.displayName,
         email: loggedUser.email,
       });
 
     await getAuth().setCustomUserClaims(loggedUser.uid, {
       house: house.id,
+      ...loggedUser.customClaims,
     });
 
     logger.info("Assigned house", house.id, "to user", loggedUser.email);

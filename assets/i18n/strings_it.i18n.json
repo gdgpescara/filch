@@ -141,7 +141,7 @@
       },
       "nimbus_ticket": {
         "label": "biglietto nimbus: ",
-        "message": "Wow "
+        "message": "Wow, hai un biglietto nimbus.\nSei molto fortunato, le missioni ti daranno più punti!"
       }
     },
     "my_points": {

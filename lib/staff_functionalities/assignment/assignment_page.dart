@@ -30,8 +30,8 @@ class AssignmentPage extends StatelessWidget {
         listener: (context, state) {
           switch (state) {
             case Assigning():
-                LoaderOverlay.show(context, message: t.point_assignment.page.assigning);
-                break;
+              LoaderOverlay.show(context, message: t.point_assignment.page.assigning);
+              break;
             case AssignFailure():
               Navigator.pop(context);
               ScaffoldMessenger.of(context).showSnackBar(

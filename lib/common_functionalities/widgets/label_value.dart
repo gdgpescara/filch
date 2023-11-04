@@ -18,10 +18,13 @@ class LabelValue extends StatelessWidget {
           textAlign: TextAlign.left,
           style: GoogleFonts.jetBrainsMono(fontWeight: FontWeight.bold),
         ),
-        const SizedBox(height: 8, width: double.infinity),
-        Text(
-          value ?? ' - ',
-          style: Theme.of(context).textTheme.titleMedium,
+        const SizedBox(height: 8),
+        SizedBox(
+          width: double.infinity,
+          child: Text(
+            value ?? ' - ',
+            style: Theme.of(context).textTheme.titleMedium,
+          ),
         ),
       ],
     );

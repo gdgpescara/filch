@@ -13,12 +13,16 @@ import {
   userPointsSentinel,
 } from "./features/points/points-manager";
 import {assignPoints} from "./features/points/assign-points";
-import {onUserDeleteSentinel} from "./features/user/user_manager";
+import {
+  onUserCreateSentinel,
+  onUserDeleteSentinel,
+} from "./features/user/user_manager";
 import {scanHouseMate} from "./features/quests/social_qr_code_quest";
 
 initializeApp();
 
 exports.onUserDeleteSentinel = onUserDeleteSentinel;
+exports.onUserCreateSentinel = onUserCreateSentinel;
 
 exports.sortingCeremony = sortingCeremony;
 exports.updateHouseMembers = updateHouseMembers;
