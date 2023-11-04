@@ -31,7 +31,7 @@ export const assignPoints = onCall(
     const points = <Points>{
       type: type,
       points: assignedPoints * multiplier,
-      assignedBy: loggedUser,
+      assignedBy: loggedUser.uid,
       assignedAt: Timestamp.now(),
     };
 
