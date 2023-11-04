@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../common_functionalities/widgets/dark_map_container.dart';
 import '../../i18n/strings.g.dart';
-import '../profile/profile_view.dart';
+import '../profile/user_profile_view.dart';
 import '../quests/current_quest/current_quest_view.dart';
 import '../ranking/houses_ranking_view.dart';
 
@@ -29,7 +29,7 @@ class _UserHomePageState extends State<UserHomePage> {
           children: const [
             HousesRankingView(),
             CurrentQuestView(),
-            ProfileView(),
+            UserProfileView(),
           ],
         ),
       ),
