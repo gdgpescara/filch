@@ -24,7 +24,7 @@ class AssignPointsUseCase {
           'points': points,
           'users': users,
           'quest': quest,
-          'pointsType': pointsType.toString(),
+          'type': pointsType.name,
         });
         return result.data;
       },

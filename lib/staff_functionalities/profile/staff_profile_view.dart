@@ -2,24 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common_functionalities/splash/splash_page.dart';
-import '../../common_functionalities/widgets/app_card.dart';
+import '../../common_functionalities/widgets/user_info.dart';
+import '../../common_functionalities/widgets/user_picture.dart';
 import '../../dependency_injection/dependency_injection.dart';
 import '../../i18n/strings.g.dart';
-import '../user_points/user_points_card.dart';
-import 'state/profile_cubit.dart';
-import 'widgets/remove_account_button.dart';
-import 'widgets/user_info.dart';
-import 'widgets/user_picture.dart';
-import 'widgets/user_qr_code.dart';
+import 'state/staff_profile_cubit.dart';
 
-class ProfileView extends StatelessWidget {
-  const ProfileView({super.key});
+class StaffProfileView extends StatelessWidget {
+  const StaffProfileView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<ProfileCubit>(
-      create: (context) => injector()..init(),
-      child: BlocConsumer<ProfileCubit, ProfileState>(
+    return BlocProvider<StaffProfileCubit>(
+      create: (context) => injector(),
+      child: BlocConsumer<StaffProfileCubit, StaffProfileState>(
         listenWhen: (previous, current) => current is SignedOut,
         listener: (context, state) {
           if (state is SignedOut) {
@@ -39,7 +35,7 @@ class ProfileView extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(8),
                   child: TextButton(
-                    onPressed: context.read<ProfileCubit>().signOut,
+                    onPressed: context.read<StaffProfileCubit>().signOut,
                     child: Text(t.commons.buttons.sign_out.toUpperCase()),
                   ),
                 ),
@@ -49,15 +45,9 @@ class ProfileView extends StatelessWidget {
               padding: const EdgeInsets.all(20).copyWith(bottom: 20 + kBottomNavigationBarHeight),
               shrinkWrap: true,
               children: [
-                UserPicture(imageUrl: state.user?.photoURL, house: state.house),
+                const UserPicture(),
                 const SizedBox(height: 20),
-                const UserInfo(),
-                const SizedBox(height: 20),
-                const AppCard(child: UserQrCode()),
-                const SizedBox(height: 20),
-                const UserPointsCard(),
-                const SizedBox(height: 20),
-                const RemoveAccountButton(),
+                UserInfo(state.user),
               ],
             ),
           );
