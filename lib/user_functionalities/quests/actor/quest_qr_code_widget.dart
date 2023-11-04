@@ -13,7 +13,7 @@ class QuestQrCodeWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const UserQrCode(dimension: 200),
+          const UserQrCode(),
           const SizedBox(height: 10),
           Text(t.active_quest.actors.hint),
         ],

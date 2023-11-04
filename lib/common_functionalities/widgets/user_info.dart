@@ -30,6 +30,7 @@ class UserInfo extends StatelessWidget {
             value: user?.email,
           ),
           if (hasNimbusTicket) ...[
+            const SizedBox(height: 20),
             LabelValue(
               label: t.profile.user_info.nimbus_ticket.label,
               value: t.profile.user_info.nimbus_ticket.message,

@@ -18,32 +18,38 @@ export const assignPoints = onCall(
         .map(async (uid: string) => await getAuth().getUser(uid)),
     );
 
-    // Calculate multiplier
-    let multiplier = 1;
+    // Calculate group groupMultiplier
+    let groupMultiplier = 1;
     if (users.length > 1) {
       const houses = users.map((user) => user.customClaims?.["house"]);
       if ([...new Set(houses)].length === 1) {
-        multiplier = 1.25;
+        groupMultiplier = 1.25;
       } else {
-        multiplier = 1.5;
+        groupMultiplier = 1.5;
       }
     }
+
     const points = <Points>{
       type: type,
-      points: assignedPoints * multiplier,
+      points: Math.round(assignedPoints * groupMultiplier),
       assignedBy: loggedUser.uid,
       assignedAt: Timestamp.now(),
     };
 
     const batch = getFirestore().batch();
     for (const user of users) {
+      const isNimbusUser = user.customClaims?.["isNimbusUser"] ?? false;
+      let userPoints = {...points};
+      if (isNimbusUser) {
+        userPoints = {...points, points: Math.round(points.points * 1.3)};
+      }
       batch.set(
         getFirestore()
           .collection("users")
           .doc(user.uid)
           .collection("points")
           .doc(),
-        points,
+        userPoints,
       );
       batch.set(
         getFirestore()
@@ -53,7 +59,7 @@ export const assignPoints = onCall(
           .doc(user.uid)
           .collection("points")
           .doc(),
-        points,
+        userPoints,
       );
       if (type == PointsTypeEnum.quest) {
         const docRef = await getFirestore()
