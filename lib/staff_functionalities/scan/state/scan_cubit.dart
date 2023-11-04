@@ -6,7 +6,7 @@ import '../../../common_functionalities/error_handling/stream_extension.dart';
 import '../../../common_functionalities/models/assignable_points.dart';
 import '../../../common_functionalities/user/use_cases/get_assignable_points_use_case.dart';
 import '../../../user_functionalities/quests/models/quest.dart';
-import '../../../user_functionalities/quests/use_cases/get_quests_use_case.dart';
+import '../../../user_functionalities/quests/use_cases/get_signed_user_quests_use_case.dart';
 
 part 'scan_state.dart';
 
@@ -18,7 +18,7 @@ class ScanCubit extends Cubit<ScanState> {
   ) : super(const ScanLoading());
 
   final GetAssignablePointsUseCase _getAssignablePointsUseCase;
-  final GetQuestsUseCase _getQuestsUseCase;
+  final GetSignedUserQuestsUseCase _getQuestsUseCase;
 
   void load() {
     _getAssignablePointsUseCase().actions(

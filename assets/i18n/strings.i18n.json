@@ -138,6 +138,10 @@
       },
       "email": {
         "label": "email: "
+      },
+      "nimbus_ticket": {
+        "label": "nimbus ticket: ",
+        "message": "Wow hai un biglietto nimbus. Sei molto fortunato!\nTutti i tuoi punti saranno raddoppiati!"
       }
     },
     "my_points": {
@@ -178,5 +182,20 @@
       }
     },
     "empty": "You have no points yet."
+  },
+  "point_assignment": {
+    "free_points": {
+      "label": "Select points to assign: "
+    },
+    "user_quests": {
+      "label": "Select a quest to assign points: "
+    },
+    "page": {
+      "title": "Scan users QR code",
+      "assign_button": "Assign points",
+      "assigning": "Assigning points...",
+      "success": "Points assigned successfully.",
+      "error": "An error occurred while assigning points."
+    }
   }
 }

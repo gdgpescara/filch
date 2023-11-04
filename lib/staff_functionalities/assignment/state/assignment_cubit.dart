@@ -25,10 +25,16 @@ class AssignmentCubit extends Cubit<AssignmentState> {
     required PointsTypeEnum type,
     required List<String> users,
   }) async {
+    final currentState = state;
     _assignPointsUseCase(points: points ?? 0, users: users, quest: quest, pointsType: type).actions(
-      progress: () => emit(const Assigning()),
-      success: (_) => emit(const Assigned()),
-      failure: (_) => emit(const AssignFailure()),
+      progress: () => emitAction(currentState, const Assigning()),
+      success: (_) => emitAction(currentState,const Assigned()),
+      failure: (_) => emitAction(currentState, const AssignFailure()),
     );
+  }
+
+  void emitAction(AssignmentState state, AssignmentState actionState) {
+    emit(actionState);
+    emit(state);
   }
 }

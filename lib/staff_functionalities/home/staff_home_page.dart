@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../common_functionalities/widgets/dark_map_container.dart';
 import '../../i18n/strings.g.dart';
-import '../../user_functionalities/profile/profile_view.dart';
+import '../profile/staff_profile_view.dart';
 import '../scan/scan_view.dart';
 
 class StaffHomePage extends StatefulWidget {
@@ -20,12 +20,15 @@ class _StaffHomePageState extends State<StaffHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.transparent,
+      extendBody: true,
+      extendBodyBehindAppBar: true,
       body: DarkMapContainer(
         child: IndexedStack(
           index: _currentIndex,
           children: const [
             ScanView(),
-            ProfileView(),
+            StaffProfileView(),
           ],
         ),
       ),

@@ -12,7 +12,7 @@ class AssignablePoints extends Equatable {
 
   factory AssignablePoints.fromJson(Map<String, dynamic> json) => _$AssignablePointsFromJson(json);
 
-  final String description;
+  final Map<String, String> description;
   final int? points;
 
   @override
