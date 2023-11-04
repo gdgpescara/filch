@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-import '../../../common_functionalities/error_handling/future_extension.dart';
-import '../../../common_functionalities/sign_in/sign_in_page.dart';
-import '../../../common_functionalities/splash/splash_page.dart';
-import '../../../common_functionalities/user/use_cases/remove_account_use_case.dart';
-import '../../../common_functionalities/widgets/loader_overlay.dart';
-import '../../../dependency_injection/dependency_injection.dart';
-import '../../../i18n/strings.g.dart';
-import '../../../theme/app_theme.dart';
+import '../../dependency_injection/dependency_injection.dart';
+import '../../i18n/strings.g.dart';
+import '../../theme/app_theme.dart';
+import '../error_handling/future_extension.dart';
+import '../sign_in/sign_in_page.dart';
+import '../splash/splash_page.dart';
+import '../user/use_cases/remove_account_use_case.dart';
+import 'loader_overlay.dart';
 
 class RemoveAccountButton extends StatelessWidget {
   const RemoveAccountButton({super.key});

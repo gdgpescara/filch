@@ -14,6 +14,7 @@ class GetAssignablePointsUseCase {
     return runSafetyStream(() {
       return _firestore
           .collection('assignable_points')
+          .orderBy('points', descending: false)
           .snapshots()
           .map((snapshot) => snapshot.docs.map((doc) => AssignablePoints.fromJson(doc.data())).toList());
     });
