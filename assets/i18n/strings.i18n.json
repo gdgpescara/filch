@@ -35,7 +35,8 @@
       "ranking": "Ranking",
       "current_quest": "Quest",
       "profile": "Profile",
-      "scan": "Scan"
+      "scan": "Scan",
+      "shifts": "Shifts"
     }
   },
   "sign_in": {
@@ -197,5 +198,9 @@
       "success": "Points assigned successfully.",
       "error": "An error occurred while assigning points."
     }
+  },
+  "shifts": {
+    "title": "Daily Shifts",
+    "me": "Me"
   }
 }

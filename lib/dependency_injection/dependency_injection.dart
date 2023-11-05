@@ -23,5 +23,13 @@ abstract class ExternalPackages {
 
   @lazySingleton
   @Named('full')
-  DateFormat get dateFormat => DateFormat('dd MMM yyyy • HH:mm');
+  DateFormat get dateFormatFull => DateFormat('dd MMM yyyy • HH:mm');
+
+  @lazySingleton
+  @Named('date')
+  DateFormat get dateFormatDate => DateFormat('dd MMM yyyy');
+
+  @lazySingleton
+  @Named('weekDay')
+  DateFormat get dateFormatWeekDay => DateFormat('EEE');
 }

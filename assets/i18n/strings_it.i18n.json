@@ -35,7 +35,8 @@
       "ranking": "Classifica",
       "current_quest": "Missione",
       "profile": "Profilo",
-      "scan": "Scan"
+      "scan": "Scan",
+      "shifts": "Turni"
     }
   },
   "sign_in": {
@@ -197,5 +198,9 @@
       "success": "I punti sono stati assegnati con successo.",
       "error": "Si è verificato un errore durante l'assegnazione dei punti, riprova più tardi."
     }
+  },
+  "shifts": {
+    "title": "Turni giornalieri",
+    "me": "Io"
   }
 }

@@ -1,0 +1,178 @@
+[
+  {
+    "user": {
+      "uid": "UGnpwnSUewgeerLkVqatfBNlAmt2",
+      "displayName": "Utente Speciale",
+      "email": "speciale@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "checkIn",
+    "notes": "Check-in duty (morning)"
+  },
+  {
+    "user": {
+      "uid": "user1",
+      "displayName": "Persona 1",
+      "email": "persona1@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "checkIn",
+    "notes": "Check-in duty (afternoon)"
+  },
+  {
+    "user": {
+      "uid": "user2",
+      "displayName": "Persona 2",
+      "email": "persona2@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "coffee",
+    "notes": "Coffee service (morning)"
+  },
+  {
+    "user": {
+      "uid": "user3",
+      "displayName": "Persona 3",
+      "email": "persona3@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "coffee",
+    "notes": "Coffee service (afternoon)"
+  },
+  {
+    "user": {
+      "uid": "user4",
+      "displayName": "Persona 4",
+      "email": "persona4@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "lunch",
+    "notes": "Lunch break (morning)"
+  },
+  {
+    "user": {
+      "uid": "user5",
+      "displayName": "Persona 5",
+      "email": "persona5@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "lunch",
+    "notes": "Lunch break (afternoon)"
+  },
+  {
+    "user": {
+      "uid": "user6",
+      "displayName": "Persona 6",
+      "email": "persona6@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "wardrobe",
+    "notes": "Wardrobe assistance (morning)"
+  },
+  {
+    "user": {
+      "uid": "user7",
+      "displayName": "Persona 7",
+      "email": "persona7@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "wardrobe",
+    "notes": "Wardrobe assistance (afternoon)"
+  },
+  {
+    "user": {
+      "uid": "user8",
+      "displayName": "Persona 8",
+      "email": "persona8@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "taxi",
+    "notes": "Taxi service (morning)"
+  },
+  {
+    "user": {
+      "uid": "user9",
+      "displayName": "Persona 9",
+      "email": "persona9@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "taxi",
+    "notes": "Taxi service (afternoon)"
+  },
+  {
+    "user": {
+      "uid": "user10",
+      "displayName": "Persona 10",
+      "email": "persona10@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "coordination",
+    "notes": "Coordination duty (morning)"
+  },
+  {
+    "user": {
+      "uid": "user1",
+      "displayName": "Persona 1",
+      "email": "persona1@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "coordination",
+    "notes": "Coordination duty (afternoon)"
+  },
+  {
+    "user": {
+      "uid": "user2",
+      "displayName": "Persona 2",
+      "email": "persona2@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "masterOfCeremony",
+    "notes": "Master of Ceremony (morning)"
+  },
+  {
+    "user": {
+      "uid": "user3",
+      "displayName": "Persona 3",
+      "email": "persona3@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "masterOfCeremony",
+    "notes": "Master of Ceremony (afternoon)"
+  },
+  {
+    "user": {
+      "uid": "user4",
+      "displayName": "Persona 4",
+      "email": "persona4@example.com"
+    },
+    "start": "2023-11-05T08:00:00",
+    "duration": 60,
+    "location": "masterOfCeremonyAssistant",
+    "notes": "Assistant to Master of Ceremony (morning)"
+  },
+  {
+    "user": {
+      "uid": "user5",
+      "displayName": "Persona 5",
+      "email": "persona5@example.com"
+    },
+    "start": "2023-11-05T09:00:00",
+    "duration": 60,
+    "location": "masterOfCeremonyAssistant",
+    "notes": "Assistant to Master of Ceremony (afternoon)"
+  }
+]
