@@ -1,7 +1,7 @@
 name: filch
 description: DevFest Pescara 2023 app.
 publish_to: 'none'
-version: 0.1.0+2
+version: 0.2.0+3
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -37,6 +37,8 @@ dependencies:
   json_annotation: ^4.8.1
   mobile_scanner: ^3.5.2
   intl: ^0.18.1
+  time_planner: ^0.1.2+1
+  collection: ^1.17.2 # Flutter constraint
 
 dev_dependencies:
   flutter_test:

@@ -4,6 +4,7 @@ import '../../common_functionalities/widgets/dark_map_container.dart';
 import '../../i18n/strings.g.dart';
 import '../profile/staff_profile_view.dart';
 import '../scan/scan_view.dart';
+import '../shifts/shifts_view.dart';
 
 class StaffHomePage extends StatefulWidget {
   const StaffHomePage({super.key});
@@ -28,6 +29,7 @@ class _StaffHomePageState extends State<StaffHomePage> {
           index: _currentIndex,
           children: const [
             ScanView(),
+            ShiftsView(),
             StaffProfileView(),
           ],
         ),
@@ -43,6 +45,12 @@ class _StaffHomePageState extends State<StaffHomePage> {
             activeIcon: const Icon(Icons.qr_code_scanner_rounded),
             tooltip: t.home.bottom_nav.scan,
             label: t.home.bottom_nav.scan,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.access_time_rounded),
+            activeIcon: const Icon(Icons.access_time_filled_rounded),
+            tooltip: t.home.bottom_nav.shifts,
+            label: t.home.bottom_nav.shifts,
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.person_outline_rounded),

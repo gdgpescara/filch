@@ -16,10 +16,10 @@ class HousesRankingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      borderColor: isUserHouse ? Theme.of(context).colorScheme.onSurface : null,
+      borderColor: _borderByPosition,
       child: Row(
         children: [
-          HouseRankingLogo(house, position),
+          HouseRankingLogo(house, position, isUserHouse),
           const SizedBox(width: 24),
           Expanded(
             child: Column(
@@ -49,5 +49,18 @@ class HousesRankingCard extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Color get _borderByPosition {
+    switch (position) {
+      case 1:
+        return Colors.yellow;
+      case 2:
+        return Colors.grey;
+      case 3:
+        return Colors.brown;
+      default:
+        return Colors.transparent;
+    }
   }
 }
