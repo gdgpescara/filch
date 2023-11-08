@@ -48,7 +48,7 @@ class _SingleChoiceWidgetState extends State<SingleChoiceWidget> {
                     for (final answer in answers)
                       ReactiveRadioListTile<int>(
                         formControlName: 'answer',
-                        title: Text(answer.text),
+                        title: Text(answer.text[LocaleSettings.currentLocale.languageCode] ?? ''),
                         enableFeedback: true,
                         contentPadding: EdgeInsets.zero,
                         value: answer.id,

@@ -13,7 +13,7 @@ class GiveUpQuestUseCase {
   Future<bool> call() {
     return runSafetyFuture(
       () async {
-        const url = String.fromEnvironment('LEAVE_ACTIVE_QUEST');
+        const url = String.fromEnvironment('REMOVE_ACTIVE_QUEST_URL');
         final result = await _functions.httpsCallableFromUrl(url).call<bool>();
         return result.data;
       },

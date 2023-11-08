@@ -1,5 +1,5 @@
 export type Answer = {
   id: number;
-  text: string;
+  text: { [key: string]: string };
   isCorrect: boolean;
 }
