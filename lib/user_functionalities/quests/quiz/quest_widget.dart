@@ -5,6 +5,7 @@ import '../commons/time_remaining.dart';
 import '../models/active_quest.dart';
 import '../models/quest_types_enum.dart';
 import '../social/social_quest_widget.dart';
+import 'give_up_button.dart';
 import 'quiz_quest_widget.dart';
 
 class QuestWidget extends StatelessWidget {
@@ -31,6 +32,8 @@ class QuestWidget extends StatelessWidget {
               TimeRemaining(activeQuest),
               const SizedBox(height: 20),
               _specificQuestWidget,
+              const SizedBox(height: 20),
+              const GiveUpButton(),
             ],
           ),
         ),

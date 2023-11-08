@@ -122,6 +122,11 @@
         },
         "incorrect": "Oh no! no points for $house"
       }
+    },
+    "give_up": {
+      "button": "Relascio",
+      "title": "Give up the quest",
+      "content": "Are you sure you want to give up on the quest?"
     }
   },
   "house_ranking": {
