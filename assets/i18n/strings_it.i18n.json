@@ -201,6 +201,7 @@
   },
   "shifts": {
     "title": "Turni giornalieri",
-    "me": "Io"
+    "me": "Io",
+    "empty": "Nessun turno disponibile"
   }
 }

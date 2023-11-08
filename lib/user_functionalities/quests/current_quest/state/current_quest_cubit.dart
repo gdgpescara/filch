@@ -3,6 +3,7 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../common_functionalities/error_handling/future_extension.dart';
+import '../../../../common_functionalities/error_handling/stream_extension.dart';
 import '../../../../common_functionalities/user/use_cases/get_signed_user_active_quest_use_case.dart';
 import '../../models/active_quest.dart';
 import '../../use_cases/can_request_for_quest_use_case.dart';
