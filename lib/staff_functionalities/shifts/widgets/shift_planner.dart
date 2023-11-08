@@ -17,6 +17,9 @@ class ShiftPlanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final groupedShiftsByUser = groupBy(shifts, (shift) => shift.user.uid);
+    if (groupedShiftsByUser.isEmpty) {
+      return Center(child: Text(t.shifts.empty));
+    }
     return TimePlanner(
       startHour: 8,
       endHour: 23,

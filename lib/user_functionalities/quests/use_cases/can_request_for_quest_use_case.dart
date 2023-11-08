@@ -8,10 +8,11 @@ class CanRequestForQuestUseCase {
 
   final GetFeatureFlagsUseCase _getFeatureFlagsUseCase;
 
-  Future<bool> call() async {
-    final featureFlag = await _getFeatureFlagsUseCase();
-    return (featureFlag['actorQuestEnabled'] ?? false) ||
-        (featureFlag['quizQuestEnabled'] ?? false) ||
-        (featureFlag['socialQuestEnabled'] ?? false);
+  Stream<bool> call() {
+    return _getFeatureFlagsUseCase().map((featureFlag) {
+      return (featureFlag['actorQuestEnabled'] ?? false) ||
+          (featureFlag['quizQuestEnabled'] ?? false) ||
+          (featureFlag['socialQuestEnabled'] ?? false);
+    });
   }
 }

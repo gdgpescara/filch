@@ -201,6 +201,7 @@
   },
   "shifts": {
     "title": "Daily Shifts",
-    "me": "Me"
+    "me": "Me",
+    "empty": "No shift available"
   }
 }
