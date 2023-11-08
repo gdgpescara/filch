@@ -43,7 +43,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.1
   build_runner: ^2.4.6
   injectable_generator: ^2.4.1
   slang_build_runner: ^3.25.0
