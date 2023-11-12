@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 0.2.0+3
 
 environment:
-  sdk: '>=3.1.2 <4.0.0'
+  sdk: ">=3.0.7 <4.0.0"
 
 dependencies:
   flutter:
@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.1
   time_planner: ^0.1.2+1
   collection: ^1.17.2 # Flutter constraint
+  confetti: ^0.7.0
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,6 @@ flutter:
   uses-material-design: true
 
   assets:
-      - assets/images/
-      - assets/images/houses/
-      - assets/animations/
+    - assets/images/
+    - assets/images/houses/
+    - assets/animations/

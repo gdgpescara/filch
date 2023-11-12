@@ -1,5 +1,5 @@
 name: filch
-sdkPath: .fvm/flutter_sdk
+sdkPath: ../../../.puro/envs/my_env/flutter
 packages:
   - .
 
@@ -13,7 +13,6 @@ command:
   clean:
     hooks:
       post: melos exec --flutter --concurrency=1 -- "flutter clean" && find . -type f -name "*.iml" -exec rm -f {} \;
-
 
 scripts:
   generate:
@@ -30,7 +29,7 @@ scripts:
       depends-on: "build_runner"
 
   lint:all:
-    run:  melos run format --no-select && melos run analyze --no-select
+    run: melos run format --no-select && melos run analyze --no-select
 
   fix:all:
     run: melos exec --flutter --concurrency=1 -- "dart fix --apply"
