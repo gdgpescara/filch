@@ -9,10 +9,13 @@ class GetFeatureFlagsUseCase {
 
   final FirebaseFirestore _firestore;
 
-  Future<Map<String, bool>> call() {
-    return runSafetyFuture(() async {
-      final config = await _firestore.collection('configurations').doc('feature_flags').get();
-      return config.data()!.map((key, value) => MapEntry(key, value as bool));
+  Stream<Map<String, bool>> call() {
+    return runSafetyStream(() {
+      return _firestore
+          .collection('configurations')
+          .doc('feature_flags')
+          .snapshots()
+          .map((event) => event.data()!.map((key, value) => MapEntry(key, value as bool)));
     });
   }
 }

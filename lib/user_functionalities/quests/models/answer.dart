@@ -15,7 +15,7 @@ class Answer extends Equatable {
 
   final int id;
 
-  final String text;
+  final Map<String, String> text;
   final bool isCorrect;
 
   Map<String, dynamic> toJson() => _$AnswerToJson(this);

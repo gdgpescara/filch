@@ -18,6 +18,7 @@ import {
   onUserDeleteSentinel,
 } from "./features/user/user_manager";
 import {scanHouseMate} from "./features/quests/social_qr_code_quest";
+import {removeActiveQuest} from "./features/quests/remove-active-quest";
 
 initializeApp();
 
@@ -31,6 +32,7 @@ exports.searchForQuest = searchForQuest;
 exports.actorQueueSentinel = actorQueueSentinel;
 exports.submitAnswer = submitAnswer;
 exports.scanHouseMate = scanHouseMate;
+exports.removeActiveQuest = removeActiveQuest;
 
 // Cron jobs [Start]
 exports.expiredActiveQuestCleaner = expiredActiveQuestCleaner;

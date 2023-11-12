@@ -1,7 +1,7 @@
 name: filch
 description: DevFest Pescara 2023 app.
 publish_to: 'none'
-version: 0.2.0+3
+version: 0.3.0+4
 
 environment:
   sdk: ">=3.0.7 <4.0.0"
@@ -26,7 +26,7 @@ dependencies:
   cloud_firestore: ^4.12.2
   equatable: ^2.0.5
   flutter_svg: ^2.0.9
-  rive: ^0.12.2
+  rive: ^0.12.3
   loggy: ^2.0.3
   flutter_loggy: ^2.0.2
   flutter_facebook_auth: ^6.0.2
@@ -44,17 +44,29 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.0
+  flutter_lints: ^3.0.1
   build_runner: ^2.4.6
   injectable_generator: ^2.4.1
   slang_build_runner: ^3.25.0
   json_serializable: ^6.7.1
+  flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.5
   melos: ^3.2.0
 
 flutter:
   uses-material-design: true
 
   assets:
-    - assets/images/
-    - assets/images/houses/
-    - assets/animations/
+      - assets/images/
+      - assets/images/houses/
+      - assets/animations/
+
+flutter_launcher_icons:
+  android: false
+  ios: true
+  remove_alpha_ios: true
+  image_path: "assets/images/devfest.png"
+
+flutter_native_splash:
+  background_image: "assets/images/old_map_dark.png"
+  image: "assets/images/devfest.png"
