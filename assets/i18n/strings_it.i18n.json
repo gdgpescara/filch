@@ -122,6 +122,11 @@
         },
         "incorrect": "Oh no! $house non riceve punti"
       }
+    },
+    "give_up": {
+      "button": "Relascio",
+      "title": "Rinuncia alla quest",
+      "content": "Sei sicuro di voler rinunciare alla quest?"
     }
   },
   "house_ranking": {
@@ -201,6 +206,7 @@
   },
   "shifts": {
     "title": "Turni giornalieri",
-    "me": "Io"
+    "me": "Io",
+    "empty": "Nessun turno disponibile"
   }
 }

@@ -58,7 +58,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
                     for (final answer in answers)
                       ReactiveCheckboxListTile(
                         formControlName: '${answer.id}',
-                        title: Text(answer.text),
+                        title: Text(answer.text[LocaleSettings.currentLocale.languageCode] ?? ''),
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
                   ],
