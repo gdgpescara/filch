@@ -14,7 +14,7 @@ class WinnerHouseLoading extends WinnerHouseState {
 class WinnerHouseLoaded extends WinnerHouseState {
   const WinnerHouseLoaded({required this.house});
 
-  final House house;
+  final HouseDetail house;
 
   @override
   List<Object> get props => [house];

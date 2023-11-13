@@ -1,10 +1,9 @@
-import 'dart:math';
-
 import 'package:confetti/confetti.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../common_functionalities/models/house_detail.dart';
 import '../../common_functionalities/widgets/app_card.dart';
 import '../../common_functionalities/widgets/dark_map_container.dart';
 import '../../common_functionalities/widgets/loader_animation.dart';
@@ -12,14 +11,9 @@ import '../../dependency_injection/dependency_injection.dart';
 import '../../i18n/strings.g.dart';
 import 'state/winner_house_cubit.dart';
 
-class WinningView extends StatefulWidget {
+class WinningView extends StatelessWidget {
   const WinningView({super.key});
 
-  @override
-  State<WinningView> createState() => _WinningViewState();
-}
-
-class _WinningViewState extends State<WinningView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,11 +26,9 @@ class _WinningViewState extends State<WinningView> {
                 return BlocBuilder<WinnerHouseCubit, WinnerHouseState>(
                   builder: (context, state) {
                     return switch (state) {
-                      WinnerHouseLoading() =>
-                        const Center(child: LoaderAnimation()),
-                      WinnerHouseFailure() =>
-                        Center(child: Text(t.commons.errors.generic_retry)),
-                      WinnerHouseLoaded() => const WinnerHouseViewContent(),
+                      WinnerHouseLoading() => const Center(child: LoaderAnimation()),
+                      WinnerHouseFailure() => Center(child: Text(t.commons.errors.generic_retry)),
+                      WinnerHouseLoaded() => WinnerHouseViewContent(house: state.house),
                     };
                   },
                 );
@@ -50,82 +42,76 @@ class _WinningViewState extends State<WinningView> {
 }
 
 class WinnerHouseViewContent extends StatefulWidget {
-  const WinnerHouseViewContent({super.key});
+  const WinnerHouseViewContent({
+    super.key,
+    required this.house,
+  });
+
+  final HouseDetail house;
 
   @override
   State<WinnerHouseViewContent> createState() => _WinnerHouseViewContentState();
 }
 
 class _WinnerHouseViewContentState extends State<WinnerHouseViewContent> {
-  final _confettiController =
-      ConfettiController(duration: const Duration(seconds: 2));
+  final _confettiController = ConfettiController(duration: const Duration(seconds: 2));
 
   @override
   void initState() {
-    _confettiController.play();
-
     super.initState();
+    _confettiController.play();
   }
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        CustomScrollView(
-          slivers: [
-            SliverToBoxAdapter(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 32,
-                ),
-                child: Column(
-                  children: [
-                    Image.asset(
-                      'assets/images/houses/dashclaw.png',
-                      width: MediaQuery.sizeOf(
-                            context,
-                          ).width /
-                          1.5,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Points: ${Random().nextInt(10000)}',
-                      style: GoogleFonts.jetBrainsMono(
-                        fontSize: 30,
-                      ),
-                    ),
-                  ],
-                ),
+        ListView(
+          padding: const EdgeInsets.only(
+            top: 32,
+            right: 16,
+            bottom: 16,
+            left: 16,
+          ),
+          children: [
+            Center(
+              child: Image.asset(
+                'assets/images/houses/${widget.house.id}.png',
+                width: MediaQuery.sizeOf(context).width / 1.5,
               ),
             ),
-            SliverList.builder(
-              itemCount: 100,
+            const SizedBox(height: 16),
+            Center(
+              child: Text(
+                'Points: ${widget.house.points}',
+                style: GoogleFonts.jetBrainsMono(fontSize: 30),
+              ),
+            ),
+            const SizedBox(height: 32),
+            ListView.separated(
+              shrinkWrap: true,
+              primary: false,
+              itemCount: widget.house.members.length,
+              separatorBuilder: (context, index) => const SizedBox(height: 16),
               itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 16,
-                  ),
-                  child: AppCard(
-                    child: Row(
-                      children: [
-                        const CircleAvatar(radius: 20),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: Text(
-                            'Username',
-                            style: GoogleFonts.jetBrainsMono(
-                              fontSize: 20,
-                            ),
-                          ),
+                final member = widget.house.members[index];
+                return AppCard(
+                  child: Row(
+                    children: [
+                      const CircleAvatar(radius: 20),
+                      const SizedBox(width: 16),
+                      Expanded(
+                        child: Text(
+                          member.displayName ?? member.email,
+                          style: GoogleFonts.jetBrainsMono(fontSize: 20),
                         ),
-                        const SizedBox(width: 16),
-                        Text(
-                          '${Random().nextInt(10000)} pt',
-                          style: GoogleFonts.jetBrainsMono(),
-                        ),
-                      ],
-                    ),
+                      ),
+                      const SizedBox(width: 16),
+                      Text(
+                        '${member.points ?? 0} pt',
+                        style: GoogleFonts.jetBrainsMono(),
+                      ),
+                    ],
                   ),
                 );
               },
@@ -156,7 +142,11 @@ class _WinnerHouseViewContentState extends State<WinnerHouseViewContent> {
 }
 
 class ConfettiThrower extends StatelessWidget {
-  const ConfettiThrower({required this.controller, super.key});
+  const ConfettiThrower({
+    required this.controller,
+    super.key,
+  });
+
   final ConfettiController controller;
 
   @override
