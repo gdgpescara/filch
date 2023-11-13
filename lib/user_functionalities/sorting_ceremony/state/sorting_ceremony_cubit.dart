@@ -15,7 +15,7 @@ class SortingCeremonyCubit extends Cubit<SortingCeremonyState> {
 
   Future<void> startSortingCeremony() async {
     await Future<void>.delayed(const Duration(seconds: 10));
-    _assignHouseUseCase().actions(
+    await _assignHouseUseCase().actions(
       progress: () => emit(SortingCeremonyLoading()),
       success: (house) async {
         emit(SortingCeremonySuccess(house: house));

@@ -4,12 +4,12 @@ import 'error_catcher.dart';
 import 'failure.dart';
 
 extension FutureExtension<T> on Future<T> {
-  void actions({
+  Future<void> actions({
     VoidCallback? progress,
     void Function(T)? success,
     void Function(Failure)? failure,
-  }) {
+  }) async {
     progress?.call();
-    then((value) => success?.call(value)).catchError(onErrorHandler(failure));
+    await then((value) => success?.call(value)).catchError(onErrorHandler(failure));
   }
 }

@@ -83,7 +83,7 @@ class _WinnerHouseViewContentState extends State<WinnerHouseViewContent> {
             const SizedBox(height: 16),
             Center(
               child: Text(
-                'Points: ${widget.house.points}',
+                t.house_winning.points(n: widget.house.points),
                 style: GoogleFonts.jetBrainsMono(fontSize: 30),
               ),
             ),
