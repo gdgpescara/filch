@@ -1,10 +1,10 @@
 name: filch
 description: DevFest Pescara 2023 app.
 publish_to: 'none'
-version: 0.3.0+4
+version: 1.0.0+5
 
 environment:
-  sdk: ">=3.0.7 <4.0.0"
+  sdk: '>=3.1.2 <4.0.0'
 
 dependencies:
   flutter:
@@ -70,3 +70,4 @@ flutter_launcher_icons:
 flutter_native_splash:
   background_image: "assets/images/old_map_dark.png"
   image: "assets/images/devfest.png"
+  ios_content_mode: center

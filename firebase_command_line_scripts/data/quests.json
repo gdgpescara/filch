@@ -1,0 +1,57 @@
+[
+  {
+    "description": {
+      "en": "string",
+      "it": "string"
+    },
+    "points": 10,
+    "validityStart": "2023-11-05T08:00:00",
+    "validityEnd": "2023-11-05T08:00:00",
+    "executionTime": 10,
+    "type": "actor",
+    "queueTime": 10,
+    "actor": "string",
+    "maxQueue": 10,
+    "groupSize": 4,
+    "requestAccepted": true
+  },
+  {
+    "description": {
+      "en": "string",
+      "it": "string"
+    },
+    "points": 10,
+    "validityStart": "2023-11-05T08:00:00",
+    "validityEnd": "2023-11-05T08:00:00",
+    "executionTime": 10,
+    "type": "quiz",
+    "qrCode": "string",
+    "question": {
+      "en": "string",
+      "it": "string"
+    },
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "string",
+          "it": "string"
+        },
+        "isCorrect": true
+      }
+    ]
+  },
+  {
+    "description": {
+      "en": "string",
+      "it": "string"
+    },
+    "points": 10,
+    "validityStart": "2023-11-05T08:00:00",
+    "validityEnd": "2023-11-05T08:00:00",
+    "executionTime": 10,
+    "type": "social",
+    "subType": "qrCode",
+    "verificationFunction": "https://scanhousemate-hoj3oup52q-ey.a.run.app"
+  }
+]
