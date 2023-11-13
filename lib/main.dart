@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -24,6 +25,11 @@ void main() {
         logPrinter: const PrettyDeveloperPrinter(),
       );
       injector.init();
+      FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
+      PlatformDispatcher.instance.onError = (error, stack) {
+        FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);
+        return true;
+      };
 
       if (const String.fromEnvironment('ENV') == 'local') {
         FirebaseFunctions.instance.useFunctionsEmulator(

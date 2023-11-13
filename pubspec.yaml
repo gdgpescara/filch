@@ -19,18 +19,18 @@ dependencies:
   google_fonts: ^6.1.0
   slang: ^3.25.0
   slang_flutter: ^3.25.0
-  firebase_core: ^2.21.0
-  firebase_auth: ^4.12.1
-  firebase_crashlytics: ^3.4.3
-  cloud_functions: ^4.5.3
-  cloud_firestore: ^4.12.2
+  firebase_core: ^2.22.0
+  firebase_auth: ^4.13.0
+  firebase_crashlytics: ^3.4.4
+  cloud_functions: ^4.5.4
+  cloud_firestore: ^4.13.0
   equatable: ^2.0.5
   flutter_svg: ^2.0.9
   rive: ^0.12.3
   loggy: ^2.0.3
   flutter_loggy: ^2.0.2
   flutter_facebook_auth: ^6.0.2
-  google_sign_in: ^6.1.5
+  google_sign_in: ^6.1.6
   reactive_forms: ^16.1.1
   qr_flutter: ^4.1.0
   cached_network_image: ^3.3.0
@@ -50,7 +50,6 @@ dev_dependencies:
   json_serializable: ^6.7.1
   flutter_launcher_icons: ^0.13.1
   flutter_native_splash: ^2.3.5
-  rename_app: ^1.3.1
   melos: ^3.2.0
 
 flutter:
@@ -70,3 +69,4 @@ flutter_launcher_icons:
 flutter_native_splash:
   background_image: "assets/images/old_map_dark.png"
   image: "assets/images/devfest.png"
+  ios_content_mode: center
