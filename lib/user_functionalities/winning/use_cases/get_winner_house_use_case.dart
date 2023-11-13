@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../common_functionalities/error_handling/error_catcher.dart';
-import '../../../common_functionalities/models/house.dart';
+import '../../../common_functionalities/models/house_detail.dart';
 
 @lazySingleton
 class GetWinnerHouseUseCase {
@@ -10,18 +10,29 @@ class GetWinnerHouseUseCase {
 
   final FirebaseFirestore _firestore;
 
-  Future<House> call() {
-    return runSafetyFuture<House>(() async {
+  Future<HouseDetail> call() {
+    return runSafetyFuture(() async {
       final results = await _firestore
           .collection('houses')
           .orderBy('points', descending: true)
+          .limit(1)
           .get();
 
-      if (results.docs.isNotEmpty) {
-        return House.fromJson(results.docs.first.data());
+      if (results.docs.isEmpty) {
+        throw Exception('No winning house found');
       }
 
-      //TODO Gestire casata
+      final members = await results.docs.first.reference
+          .collection('members')
+          .orderBy('points', descending: true)
+          .get();
+      return HouseDetail.fromJson(
+        {
+          'id': results.docs.first.id,
+          'points': results.docs.first.data()['points'],
+          'members': members.docs.map((e) => e.data()).toList(),
+        },
+      );
     });
   }
 }

@@ -28,3 +28,10 @@ class HousesRankingFailure extends HousesRankingState {
   @override
   List<Object?> get props => [userHouse];
 }
+
+class HousesRankingFreezed extends HousesRankingState {
+  const HousesRankingFreezed([super.userHouse]);
+
+  @override
+  List<Object?> get props => [userHouse];
+}
