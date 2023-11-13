@@ -4,10 +4,7 @@ import {searchForQuest} from "./features/quests/search-for-quest";
 import {updateHouseMembers} from "./features/sorting-ceremony/house-manager";
 import {actorQueueSentinel} from "./features/quests/actor-quest-queue-manager";
 import {submitAnswer} from "./features/quests/submit-answer";
-import {
-  expiredActiveQuestCleaner,
-  questQueueCleaner,
-} from "./features/quests/quest-cron";
+import {activeQuestsCleaner} from "./features/quests/quest-cron";
 import {
   memberPointsSentinel,
   userPointsSentinel,
@@ -35,8 +32,7 @@ exports.scanHouseMate = scanHouseMate;
 exports.removeActiveQuest = removeActiveQuest;
 
 // Cron jobs [Start]
-exports.expiredActiveQuestCleaner = expiredActiveQuestCleaner;
-exports.questQueueCleaner = questQueueCleaner;
+exports.questQueueCleaner = activeQuestsCleaner;
 // Cron jobs [End]
 
 exports.assignPoints = assignPoints;

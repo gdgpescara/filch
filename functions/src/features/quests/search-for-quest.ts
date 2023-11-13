@@ -2,10 +2,10 @@ import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
 import {QuestTypeEnum} from "./types/quest-type-enum";
-import {Quest} from "./types/quest";
 import {ActiveQuest} from "./types/active-quest";
 import {logger} from "firebase-functions/v2";
 import {randomIntFromInterval} from "../../shared/utils";
+import {Quest} from "./types/quest";
 
 export const searchForQuest = onCall(
   {region: "europe-west3"},
@@ -21,6 +21,9 @@ export const searchForQuest = onCall(
     const quizQuestEnabled = config.data()?.quizQuestEnabled ?? false;
     const socialQuestEnabled = config.data()?.socialQuestEnabled ?? false;
 
+    logger.info("Can search for actor quest: " + actorQuestEnabled);
+    logger.info("Can search for quiz quest: " + quizQuestEnabled);
+    logger.info("Can search for social quest: " + socialQuestEnabled);
 
     // Search for a quest
     let questFound: ActiveQuest | undefined = undefined;
@@ -39,8 +42,10 @@ export const searchForQuest = onCall(
           doc.data().validityEnd > Timestamp.now();
       });
 
+      logger.info(`Found ${actorQuests.length} actor quests`);
+
       if (actorQuests.length > 0) {
-        logger.info("Actor quest found");
+        logger.info("Sarch for actor quest");
         const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
         questFound = <ActiveQuest>{
           quest: <Quest>{
@@ -65,8 +70,10 @@ export const searchForQuest = onCall(
           doc.data().validityEnd > Timestamp.now();
       });
 
+      logger.info(`Found ${quizQuests.length} quiz quests`);
+
       if (quizQuests.length > 0) {
-        logger.info("Quiz quest found");
+        logger.info("Sarch for quiz quest");
         const randomIndex = randomIntFromInterval(0, quizQuests.length - 1);
         questFound = <ActiveQuest>{
           quest: <Quest>{
@@ -90,6 +97,8 @@ export const searchForQuest = onCall(
         return doc.data().validityStart <= Timestamp.now() &&
           doc.data().validityEnd > Timestamp.now();
       });
+
+      logger.info(`Found ${socialQuests.length} social quests`);
 
       if (socialQuests.length > 0) {
         logger.info("Social quest found");
