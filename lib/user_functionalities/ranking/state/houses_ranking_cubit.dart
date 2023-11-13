@@ -26,6 +26,7 @@ class HousesRankingCubit extends Cubit<HousesRankingState> {
   void init() {
     _isRankingFreezedUseCase().actions(
       progress: () => emit(const HousesRankingLoading()),
+      failure: (_) => emit(const HousesRankingFailure(null)),
       success: (rankingFreezed) {
         if (rankingFreezed) {
           emit(const HousesRankingFreezed());
@@ -36,9 +37,9 @@ class HousesRankingCubit extends Cubit<HousesRankingState> {
     );
   }
 
-  void loadHouses() {
+  Future<void> loadHouses() async {
     if (state.userHouse == null) {
-      _getSignedUserHouseUseCase().actions(
+      await _getSignedUserHouseUseCase().actions(
         progress: () => emit(const HousesRankingLoading()),
         success: (userHouse) => emit(HousesRankingLoading(userHouse)),
         failure: (_) => emit(const HousesRankingFailure(null)),
