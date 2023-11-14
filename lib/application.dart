@@ -27,6 +27,7 @@ class Application extends StatelessWidget {
           themeMode: ThemeMode.dark,
           darkTheme: darkTheme(),
           theme: lightTheme(),
+          debugShowCheckedModeBanner: false,
           supportedLocales: AppLocaleUtils.supportedLocales,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           initialRoute: AppRouter.initialRoute,
