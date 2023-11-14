@@ -39,6 +39,7 @@ dependencies:
   intl: ^0.18.1
   time_planner: ^0.1.2+1
   collection: ^1.17.2 # Flutter constraint
+  confetti: ^0.7.0
 
 dev_dependencies:
   flutter_test:

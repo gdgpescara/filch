@@ -56,7 +56,7 @@ class _RemoveAccountDialogState extends State<_RemoveAccountDialog> {
 
   Future<void> _removeAccount(BuildContext context) async {
     await Navigator.pushNamed(context, SignInPage.routeName);
-    injector<RemoveAccountUseCase>()().actions(
+    await injector<RemoveAccountUseCase>()().actions(
       progress: () => LoaderOverlay.show(context),
       success: (_) => _navigateToSplash(context),
       failure: (e) => _showError(context),

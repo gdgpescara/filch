@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
 import '../actor/actor_quest_widget.dart';
+import '../commons/give_up_button.dart';
 import '../commons/time_remaining.dart';
 import '../models/active_quest.dart';
 import '../models/quest_types_enum.dart';
 import '../social/social_quest_widget.dart';
-import '../commons/give_up_button.dart';
 import 'quiz_quest_widget.dart';
 
 class QuestWidget extends StatelessWidget {

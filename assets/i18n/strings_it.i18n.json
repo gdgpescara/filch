@@ -137,6 +137,12 @@
       }
     }
   },
+  "house_winning": {
+    "points": {
+      "one": "Punto: $n",
+      "other": "Punti: $n"
+    }
+  },
   "profile": {
     "user_info": {
       "name": {
