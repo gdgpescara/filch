@@ -10,10 +10,12 @@ class AppleSignInUseCase {
 
   final FirebaseAuth _auth;
 
-  Future<UserCredential> call() async {
+  Future<UserCredential> call() {
     return runSafetyFuture(
       () {
-        final appleProvider = AppleAuthProvider();
+        final appleProvider = AppleAuthProvider()
+          ..addScope('email')
+          ..addScope('name');
         return _auth.signInWithProvider(appleProvider);
       },
       onException: (e) {

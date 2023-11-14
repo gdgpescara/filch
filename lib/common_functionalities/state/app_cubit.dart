@@ -1,12 +1,13 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
+import 'safe_emitter_cubit.dart';
+
 part 'app_state.dart';
 
 @injectable
-class AppCubit extends Cubit<AppState> {
+class AppCubit extends SafeEmitterCubit<AppState> {
   AppCubit(this._auth) : super(const AppUnauthenticated());
 
   final FirebaseAuth _auth;

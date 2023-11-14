@@ -1,10 +1,10 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../error_handling/failure.dart';
 import '../../error_handling/future_extension.dart';
+import '../../state/safe_emitter_cubit.dart';
 import '../models/providers_enum.dart';
 import '../use_cases/apple_sign_in_use_case.dart';
 import '../use_cases/facebook_sign_in_use_case.dart';
@@ -15,7 +15,7 @@ import '../use_cases/user_password_sign_in_use_case.dart';
 part 'sign_in_state.dart';
 
 @injectable
-class SignInCubit extends Cubit<SignInState> {
+class SignInCubit extends SafeEmitterCubit<SignInState> {
   SignInCubit(
     this._userPasswordSignInUseCase,
     this._googleSignInUseCase,

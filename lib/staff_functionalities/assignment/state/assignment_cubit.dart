@@ -1,15 +1,15 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../common_functionalities/error_handling/future_extension.dart';
 import '../../../common_functionalities/models/points_type_enum.dart';
+import '../../../common_functionalities/state/safe_emitter_cubit.dart';
 import '../../../common_functionalities/use_cases/assign_points_use_case.dart';
 
 part 'assignment_state.dart';
 
 @injectable
-class AssignmentCubit extends Cubit<AssignmentState> {
+class AssignmentCubit extends SafeEmitterCubit<AssignmentState> {
   AssignmentCubit(this._assignPointsUseCase) : super(const AssignmentInitial());
 
   final AssignPointsUseCase _assignPointsUseCase;

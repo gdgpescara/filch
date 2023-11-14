@@ -1,5 +1,5 @@
 name: filch
-sdkPath: ../../../.puro/envs/my_env/flutter
+sdkPath: .fvm/flutter_sdk
 packages:
   - .
 

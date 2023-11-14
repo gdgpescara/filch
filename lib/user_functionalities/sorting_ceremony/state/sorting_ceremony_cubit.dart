@@ -1,14 +1,14 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../common_functionalities/error_handling/future_extension.dart';
+import '../../../common_functionalities/state/safe_emitter_cubit.dart';
 import '../usa_cases/assign_house_use_case.dart';
 
 part 'sorting_ceremony_state.dart';
 
 @injectable
-class SortingCeremonyCubit extends Cubit<SortingCeremonyState> {
+class SortingCeremonyCubit extends SafeEmitterCubit<SortingCeremonyState> {
   SortingCeremonyCubit(this._assignHouseUseCase) : super(SortingCeremonyLoading());
 
   final AssignHouseUseCase _assignHouseUseCase;

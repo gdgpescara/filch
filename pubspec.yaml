@@ -1,7 +1,7 @@
 name: filch
 description: DevFest Pescara 2023 app.
 publish_to: 'none'
-version: 1.0.0+5
+version: 1.0.0+8
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -24,6 +24,7 @@ dependencies:
   firebase_crashlytics: ^3.4.4
   cloud_functions: ^4.5.4
   cloud_firestore: ^4.13.0
+  firebase_messaging: ^14.7.4
   equatable: ^2.0.5
   flutter_svg: ^2.0.9
   rive: ^0.12.3
