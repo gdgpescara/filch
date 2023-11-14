@@ -49,7 +49,6 @@ dev_dependencies:
   slang_build_runner: ^3.25.0
   json_serializable: ^6.7.1
   flutter_launcher_icons: ^0.13.1
-  flutter_native_splash: ^2.3.5
   melos: ^3.2.0
 
 flutter:
@@ -64,9 +63,4 @@ flutter_launcher_icons:
   android: false
   ios: true
   remove_alpha_ios: true
-  image_path: "assets/images/devfest.png"
-
-flutter_native_splash:
-  background_image: "assets/images/old_map_dark.png"
-  image: "assets/images/devfest.png"
-  ios_content_mode: center
+  image_path: "assets/images/icon.png"
