@@ -1,9 +1,9 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../common_functionalities/error_handling/stream_extension.dart';
 import '../../../common_functionalities/models/assignable_points.dart';
+import '../../../common_functionalities/state/safe_emitter_cubit.dart';
 import '../../../common_functionalities/user/use_cases/get_assignable_points_use_case.dart';
 import '../../../user_functionalities/quests/models/quest.dart';
 import '../../../user_functionalities/quests/use_cases/get_signed_user_quests_use_case.dart';
@@ -11,7 +11,7 @@ import '../../../user_functionalities/quests/use_cases/get_signed_user_quests_us
 part 'scan_state.dart';
 
 @injectable
-class ScanCubit extends Cubit<ScanState> {
+class ScanCubit extends SafeEmitterCubit<ScanState> {
   ScanCubit(
     this._getAssignablePointsUseCase,
     this._getQuestsUseCase,

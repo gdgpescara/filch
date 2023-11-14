@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../state/safe_emitter_cubit.dart';
 import '../../user/use_cases/has_house_use_case.dart';
 import '../../user/use_cases/has_signed_user_use_case.dart';
 import '../../user/use_cases/is_staff_user_use_case.dart';
@@ -9,7 +9,7 @@ import '../../user/use_cases/is_staff_user_use_case.dart';
 part 'splash_state.dart';
 
 @injectable
-class SplashCubit extends Cubit<SplashState> {
+class SplashCubit extends SafeEmitterCubit<SplashState> {
   SplashCubit(
     this._hasSignedUserUseCase,
     this._hasHouseUseCase,

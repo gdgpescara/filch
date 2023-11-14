@@ -10,7 +10,7 @@ class IsRankingFreezedUseCase {
 
   Stream<bool> call() {
     return _getFeatureFlagsUseCase().map((featureFlag) {
-      return featureFlag['freeze_ranking'] ?? false;
+      return featureFlag['freezeRanking'] ?? false;
     });
   }
 }

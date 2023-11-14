@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import '../models/providers_enum.dart';
@@ -11,7 +13,7 @@ class ProvidersSignIn extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: ProvidersEnum.values
-          .where((p) => p != ProvidersEnum.emailPassword)
+          .where((p) => (p != ProvidersEnum.apple || Platform.isIOS) && (p != ProvidersEnum.emailPassword))
           .map(
             (e) => Padding(
               padding: const EdgeInsets.only(bottom: 8),
@@ -21,4 +23,5 @@ class ProvidersSignIn extends StatelessWidget {
           .toList(),
     );
   }
+
 }

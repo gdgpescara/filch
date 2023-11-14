@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../common_functionalities/error_handling/future_extension.dart';
+import '../../../../common_functionalities/state/safe_emitter_cubit.dart';
 import '../../models/active_quest.dart';
 import '../../models/quest.dart';
 import '../../use_cases/submit_answer_use_case.dart';
@@ -11,7 +11,7 @@ import '../../use_cases/validate_quiz_qr_code_use_case.dart';
 part 'quiz_state.dart';
 
 @injectable
-class QuizCubit extends Cubit<QuizState> {
+class QuizCubit extends SafeEmitterCubit<QuizState> {
   QuizCubit(
     this._validateQuizQrCodeUseCase,
     this._submitAnswerUseCase,

@@ -1,8 +1,8 @@
-import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../../common_functionalities/error_handling/future_extension.dart';
+import '../../../../../common_functionalities/state/safe_emitter_cubit.dart';
 import '../../../../../common_functionalities/user/use_cases/get_signed_user_house_use_case.dart';
 import '../../../models/active_quest.dart';
 import '../../../use_cases/social_quest_registration_use_case.dart';
@@ -10,7 +10,7 @@ import '../../../use_cases/social_quest_registration_use_case.dart';
 part 'social_qr_code_state.dart';
 
 @injectable
-class SocialQrCodeCubit extends Cubit<SocialQrCodeState> {
+class SocialQrCodeCubit extends SafeEmitterCubit<SocialQrCodeState> {
   SocialQrCodeCubit(
     this._socialQuestRegistrationUseCase,
     this._getSignedUserHouseUseCase,

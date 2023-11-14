@@ -1,10 +1,10 @@
 part of 'user_home_cubit.dart';
 
-abstract class UserHomeState extends Equatable {
-  const UserHomeState();
-}
+class UserHomeState extends Equatable {
+  const UserHomeState([this.isRankingFreezed = false]);
 
-class UserHomeInitial extends UserHomeState {
+  final bool isRankingFreezed;
+
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [isRankingFreezed];
 }

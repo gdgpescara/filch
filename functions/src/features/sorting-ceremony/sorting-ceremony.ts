@@ -5,6 +5,12 @@ import {sortingHatAlgorithm} from "./sorting-hat-algorithm";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
 
+export type Member = {
+  displayName?: string;
+  email?: string;
+  photoURL?: string;
+};
+
 export const sortingCeremony = onCall(
   {region: "europe-west3"},
   async (request) => {
@@ -21,15 +27,23 @@ export const sortingCeremony = onCall(
 
     const house = sortingHatAlgorithm(housesSnapshot.docs);
 
+    let member: Member = {
+      displayName: loggedUser.displayName,
+      email: loggedUser.email,
+    };
+
+    if (loggedUser.photoURL) {
+      member = {
+        ...member,
+        photoURL: loggedUser.photoURL,
+      };
+    }
     await getFirestore()
       .collection("houses")
       .doc(house.id)
       .collection("members")
       .doc(loggedUser.uid)
-      .set({
-        displayName: loggedUser.displayName,
-        email: loggedUser.email,
-      });
+      .set(member);
 
     await getAuth().setCustomUserClaims(loggedUser.uid, {
       house: house.id,
