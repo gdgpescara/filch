@@ -34,6 +34,7 @@ export const assignPoints = onCall(
       points: Math.round(assignedPoints * groupMultiplier),
       assignedBy: loggedUser.uid,
       assignedAt: Timestamp.now(),
+      quest: questId,
     };
 
     const batch = getFirestore().batch();

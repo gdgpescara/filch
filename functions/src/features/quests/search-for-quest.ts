@@ -1,11 +1,13 @@
 import {HttpsError, onCall} from "firebase-functions/v2/https";
-import {getFirestore, Timestamp} from "firebase-admin/firestore";
+import {Filter, getFirestore, Timestamp} from "firebase-admin/firestore";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
 import {QuestTypeEnum} from "./types/quest-type-enum";
 import {ActiveQuest} from "./types/active-quest";
 import {logger} from "firebase-functions/v2";
 import {randomIntFromInterval} from "../../shared/utils";
 import {Quest} from "./types/quest";
+import {Points} from "../points/types/points";
+import {PointsTypeEnum} from "../points/types/points-type-enum";
 
 export const searchForQuest = onCall(
   {region: "europe-west3"},
@@ -60,9 +62,26 @@ export const searchForQuest = onCall(
     // 2. Search if quiz quest if actor quest is not available
     if (!questFound && quizQuestEnabled) {
       logger.info("Searching for quiz quest");
+      const userPointsSnap = await getFirestore()
+        .collection("users")
+        .doc(loggedUser.uid)
+        .collection("points")
+        .get();
+      const userQuestPoints = userPointsSnap.docs
+        .map((doc) => {
+          return <Points>{...doc.data()};
+        })
+        .filter((value) => value.type == PointsTypeEnum.quest && value.quest)
+        .map((value) => value.quest);
       const quizQuestsSnapshot = await getFirestore()
         .collection("quests")
         .where("type", "==", QuestTypeEnum.quiz)
+        .where(
+          Filter.or(
+            Filter.where("parentQuest", "in", userQuestPoints),
+            Filter.where("parentQuest", "==", null)
+          )
+        )
         .get();
 
       const quizQuests = quizQuestsSnapshot.docs.filter((doc) => {
