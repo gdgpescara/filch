@@ -7,4 +7,5 @@ export type Points = {
   type: PointsTypeEnum;
   points: number;
   assignedAt: Timestamp;
+  quest: string | null;
 }

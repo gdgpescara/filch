@@ -90,6 +90,6 @@ scripts:
   build:ios:ipa:
     run: |
       melos exec --flutter --concurrency=1 --fail-fast -- \
-        "flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --dart-define-from-file=.env/remote.json"
+        "flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json"
     select-package:
       scope: "filch"
