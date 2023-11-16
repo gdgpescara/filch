@@ -4,6 +4,7 @@ import {Quest} from "./types/quest";
 import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {Points} from "../points/types/points";
 import {PointsTypeEnum} from "../points/types/points-type-enum";
+import {logger} from "firebase-functions/v2";
 
 export const submitAnswer = onCall(
   {region: "europe-west3"},
@@ -15,10 +16,13 @@ export const submitAnswer = onCall(
       .collection("quests")
       .doc(questId)
       .get();
-    const quest = questSnap.data() as Quest | null;
-    if (!quest) {
+    if (!questSnap.data()) {
       throw new HttpsError("not-found", "Quest not found");
     }
+    const quest = <Quest>{...questSnap.data(), id: questSnap.id};
+
+    logger.info("Quest answers: " + quest.id);
+
     const correctAnswers = quest.answers
       ?.filter((answer) => answer.isCorrect)
       .map((answer) => answer.id);
@@ -27,8 +31,12 @@ export const submitAnswer = onCall(
       throw new HttpsError("not-found", "Quest has no correct answers");
     }
 
+    logger.info("Correct answers: " + correctAnswers);
+
     const isCorrect = correctAnswers.every((e) => answers.includes(e));
     const house = loggedUser.customClaims?.["house"];
+
+    logger.info("Is correct: " + isCorrect);
 
     const archivedPoints = <Points>{
       type: PointsTypeEnum.quest,

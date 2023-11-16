@@ -17,6 +17,9 @@ class QuizScanView extends StatelessWidget {
       buildWhen: (previous, current) => current is CurrentQuestLoaded,
       builder: (context, currentQuestState) {
         currentQuestState as CurrentQuestLoaded;
+        if (currentQuestState.activeQuest.quest.qrCode == null) {
+          context.read<QuizCubit>().setQuizActive();
+        }
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [

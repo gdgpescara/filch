@@ -27,7 +27,7 @@
     "type": "actor",
     "queueTime": 30,
     "actor": "CxRqLDVIyXR3sfpFkZ9H13ZACFF2",
-    "maxQueue": 8,
+    "maxQueue": 4,
     "groupSize": 2,
     "requestAccepted": true
   },
@@ -43,7 +43,7 @@
     "type": "actor",
     "queueTime": 30,
     "actor": "iycmZP3Ps9YczNo3iC602JFmRP83",
-    "maxQueue": 4,
+    "maxQueue": 2,
     "groupSize": 1,
     "requestAccepted": true
   },

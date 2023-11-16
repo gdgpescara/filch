@@ -15,17 +15,19 @@ class GetSignedUserFirestoreDocUseCase {
   final FirebaseFirestore _firestore;
   final FirebaseAuth _auth;
 
-  Future<FirestoreUser?> call() {
-    return runSafetyFuture(() async {
+  Stream<FirestoreUser?> call() {
+    return runSafetyStream(() async* {
       final user = _auth.currentUser;
       if (user == null) {
-        return null;
+        yield null;
+        return;
       }
-      final firestoreUserSnap = await _firestore.collection('users').doc(user.uid).get();
-      if (!firestoreUserSnap.exists) {
-        return null;
-      }
-      return FirestoreUser.fromJson({...?firestoreUserSnap.data(), 'uid': user.uid});
+      yield* _firestore.collection('users').doc(user.uid).snapshots().map((snapshot) {
+        if (!snapshot.exists) {
+          return null;
+        }
+        return FirestoreUser.fromJson({...?snapshot.data(), 'uid': user.uid});
+      });
     });
   }
 }

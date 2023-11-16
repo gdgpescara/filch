@@ -12,10 +12,9 @@ class GetSignedUserActiveQuestUseCase {
 
   final GetSignedUserFirestoreDocUseCase _getSignedUserFirestoreDocUseCase;
 
-  Future<ActiveQuest?> call() {
-    return runSafetyFuture(() async {
-      final firestoreUser = await _getSignedUserFirestoreDocUseCase();
-      return firestoreUser?.activeQuest;
+  Stream<ActiveQuest?> call() {
+    return runSafetyStream(() async* {
+      yield* _getSignedUserFirestoreDocUseCase().map((user) => user?.activeQuest);
     });
   }
 }

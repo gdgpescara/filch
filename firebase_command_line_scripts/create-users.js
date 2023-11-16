@@ -151,8 +151,8 @@ const staff = [
         password: "AbCdEfGh"
     },
     {
-        email: "severus.pyhthon@actor.it",
-        nome: "Severus Pyhthon",
+        email: "severus.python@actor.it",
+        nome: "Severus Python",
         password: "IjKlMnOp"
     },
     {

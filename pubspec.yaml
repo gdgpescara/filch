@@ -1,7 +1,7 @@
 name: filch
 description: DevFest Pescara 2023 app.
 publish_to: 'none'
-version: 1.0.1+9
+version: 1.0.2+10
 
 environment:
   sdk: '>=3.1.2 <4.0.0'

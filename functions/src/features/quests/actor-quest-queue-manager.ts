@@ -12,7 +12,12 @@ export const actorQueueSentinel = functions
       const questSnap = await questRef.get();
       const quest = questSnap.data() as Quest;
       if (questSnap.exists && quest.maxQueue == queueCount.data().count) {
-        await questRef.update({requestAccepted: false});
+        await questRef.update({
+          requestAccepted: false,
+          queueCount: queueCount.data().count,
+        });
+      } else {
+        await questRef.update({queueCount: queueCount.data().count});
       }
     }
   });

@@ -10,7 +10,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 const uploadQuests = () => {
-    fs.readFile('data/actor-quiz-a5.json', 'utf8', (err, data) => {
+    fs.readFile('data/actor-quiz-a8.json', 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading the JSON file:', err);
             return;
