@@ -1,0 +1,326 @@
+[
+  {
+    "id": "HEVFopocFu5gv5I4uagl",
+    "qrCode": "q.xpyU#32Q6w",
+    "question": {
+      "en": "The bezoar is an antidote for which of these potions?",
+      "it": "Il bezoario è un antidoto di quale di queste pozioni?"
+    },
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Love Potion",
+          "it": "Amortentia"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Polyjuice Potion",
+          "it": "Pozione Polisucco"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Veritaserum",
+          "it": "Veritaserum"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "All of the above",
+          "it": "Tutte le precedenti"
+        },
+        "isCorrect": true
+      }
+    ],
+    "description": {
+      "en": "An elf has been spotted near the event. It doesn't know whether to enter or exit, it just spins around itself...",
+      "it": "E' stato avvistato un elfo nei pressi dell'evento. Non sa se entrare o uscire, gira solo su se stesso"
+    },
+    "parentQuests": [
+      "7Ht3teqLm6gVA2ZnjSqK"
+    ],
+    "type": "quiz",
+    "points": 5,
+    "executionTime": 1,
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "validityStart": "2023-11-15T07:00:00.000Z"
+  },
+  {
+    "id": "Ptm51p3R3lPgcNZ59vHm",
+    "executionTime": 1,
+    "qrCode": "q.xpyU#32Q6w",
+    "question": {
+      "en": "What cannot be missing from the emergency kit of a skilled Potioneer?",
+      "it": "Cosa non può mancare nel kit di emergenza di un bravo Pozionista?"
+    },
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Grindylow skin",
+          "it": "Pelle di Girilacco"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Asphodel root",
+          "it": "Radice di asfodelo"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Moonwort",
+          "it": "Lunaria"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Bezoar",
+          "it": "Bezoario"
+        },
+        "isCorrect": true
+      }
+    ],
+    "description": {
+      "en": "An elf has been spotted near the event. It doesn't know whether to enter or exit, it just spins around itself...",
+      "it": "E' stato avvistato un elfo nei pressi dell'evento. Non sa se entrare o uscire, gira solo su se stesso"
+    },
+    "parentQuests": [
+      "7Ht3teqLm6gVA2ZnjSqK"
+    ],
+    "type": "quiz",
+    "points": 5,
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "validityStart": "2023-11-15T07:00:00.000Z"
+  },
+  {
+    "id": "fsfqMNQpIb2osyBXGHRE",
+    "executionTime": 1,
+    "qrCode": "q.xpyU#32Q6w",
+    "question": {
+      "en": "What is the main characteristic of the Amortentia potion?",
+      "it": "Qual è la caratteristica principale della pozione Amortentia?"
+    },
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "It has a different smell for each person",
+          "it": "Ha per ogni persona un odore diverso"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "It takes on a different appearance depending on the last ingredient added",
+          "it": "Assume un aspetto diverso a seconda dell'ultimo ingrediente inserito"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "It has different effects depending on the last ingredient added",
+          "it": "Ha effetti diversi a seconda dell'ultimo ingrediente inserito"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "None of the above",
+          "it": "Nessuna delle precedenti"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "An elf has been spotted near the event. It doesn't know whether to enter or exit, it just spins around itself...",
+      "it": "E' stato avvistato un elfo nei pressi dell'evento. Non sa se entrare o uscire, gira solo su se stesso"
+    },
+    "parentQuests": [
+      "7Ht3teqLm6gVA2ZnjSqK"
+    ],
+    "type": "quiz",
+    "points": 5,
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "validityStart": "2023-11-15T07:00:00.000Z"
+  },
+  {
+    "id": "j8p0zUoPwFPt5GVY1dGr",
+    "executionTime": 1,
+    "qrCode": "q.xpyU#32Q6w",
+    "question": {
+      "en": "What does the Polyjuice Potion do?",
+      "it": "Cosa fa la pozione Polisucco?"
+    },
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Transforms the drinker into another person",
+          "it": "Trasforma chi la beve in un'altra persona"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Is a powerful restorative",
+          "it": "È un potente ricostituente"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Creates a love obsession",
+          "it": "Crea un'ossessione d'amore"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Forces the drinker to tell the truth",
+          "it": "Costringe chi la beve a dire la verità"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "An elf has been spotted near the event. It doesn't know whether to enter or exit, it just spins around itself...",
+      "it": "E' stato avvistato un elfo nei pressi dell'evento. Non sa se entrare o uscire, gira solo su se stesso"
+    },
+    "parentQuests": [
+      "7Ht3teqLm6gVA2ZnjSqK"
+    ],
+    "type": "quiz",
+    "points": 5,
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "validityStart": "2023-11-15T07:00:00.000Z"
+  },
+  {
+    "id": "uolUbCcQATofG4Z8xODQ",
+    "executionTime": 1,
+    "qrCode": "q.xpyU#32Q6w",
+    "question": {
+      "en": "Which of these is NOT an ingredient of the Potion of Confusion?",
+      "it": "Quale di questi NON è un ingrediente della pozione Gambemolli?"
+    },
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Acromantula venom",
+          "it": "Veleno di acromantula"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Toasted Effac grains",
+          "it": "Chicchi di Effac tostati"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Troll boogers",
+          "it": "Caccole di Troll"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Moonstone dust",
+          "it": "Polvere di Pietra di Luna"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "An elf has been spotted near the event. It doesn't know whether to enter or exit, it just spins around itself...",
+      "it": "E' stato avvistato un elfo nei pressi dell'evento. Non sa se entrare o uscire, gira solo su se stesso"
+    },
+    "parentQuests": [
+      "7Ht3teqLm6gVA2ZnjSqK"
+    ],
+    "type": "quiz",
+    "points": 5,
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "validityStart": "2023-11-15T07:00:00.000Z"
+  },
+  {
+    "id": "xUMW6Sx5vLt2owPZvuiW",
+    "executionTime": 1,
+    "qrCode": "q.xpyU#32Q6w",
+    "question": {
+      "en": "Which of these is an ingredient of the Sleeping Draught?",
+      "it": "Quale di questi è un ingrediente della pozione Soporosa?"
+    },
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Crystal-clear water",
+          "it": "Acqua Cristallina"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Mandrake",
+          "it": "Mandragola"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Asphodel root",
+          "it": "Radice di Asfodelo"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "River Lethe water",
+          "it": "Acqua del fiume Lete"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "An elf has been spotted near the event. It doesn't know whether to enter or exit, it just spins around itself...",
+      "it": "E' stato avvistato un elfo nei pressi dell'evento. Non sa se entrare o uscire, gira solo su se stesso"
+    },
+    "parentQuests": [
+      "7Ht3teqLm6gVA2ZnjSqK"
+    ],
+    "type": "quiz",
+    "points": 5,
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "validityStart": "2023-11-15T07:00:00.000Z"
+  }
+]

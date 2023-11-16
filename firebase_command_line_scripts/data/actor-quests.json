@@ -1,0 +1,66 @@
+[
+  {
+    "description": {
+      "en": "Professor Python is here!\nAn unmissable opportunity to learn something new about Potions from one of the foremost experts.\nJust find him and wait for him to be ready to reveal some fragments of his extensive knowledge to us... but be careful not to provoke him. His irritable temperament is known to everyone, and contradicting him could prove counterproductive... or worse.",
+      "it": "Il Professor Python è qui!\nUn'occasione imperdibile per imparare qualcosa di nuovo sulle Pozioni da uno dei massimi esperti.\nBasterà trovarlo e attendere che sia pronto a svelarci qualche frammento delle sue vaste conoscenze... ma prestando attenzione a non farlo inalberare. Il suo temperamento irascibile è noto a tutti, e contraddirlo potrebbe rivelarsi controproducente... o peggio."
+    },
+    "points": 10,
+    "validityStart": "2023-11-18T08:00:00",
+    "validityEnd": "2023-11-18T23:59:00",
+    "executionTime": 30,
+    "type": "actor",
+    "queueTime": 30,
+    "actor": "6BTCy8xsYNOeOWkhvzI6TBSs4nM2",
+    "maxQueue": 8,
+    "groupSize": 4,
+    "requestAccepted": true
+  },
+  {
+    "description": {
+      "en": "The approaching times are dark... Death Eaters are back in circulation so you need to be ready! Professor Dartous decided to create a Duelist Club: find him, face your opponent and win!",
+      "it": "I tempi che si avvicinano sono oscuri... i Mangiamorte sono di nuovo in circolazione perciò è necessario essere pronti! Il Professor Dartous ha deciso di creare un Club dei Duellanti: trovalo, affronta il tuo avversario e aggiudicati la vittoria!"
+    },
+    "points": 10,
+    "validityStart": "2023-11-18T08:00:00",
+    "validityEnd": "2023-11-18T23:59:00",
+    "executionTime": 30,
+    "type": "actor",
+    "queueTime": 30,
+    "actor": "CxRqLDVIyXR3sfpFkZ9H13ZACFF2",
+    "maxQueue": 8,
+    "groupSize": 2,
+    "requestAccepted": true
+  },
+  {
+    "description": {
+      "en": "The Professor of Divination is in trouble. If you help her solve her problem you could get a reward from her... Talk to her and find out what’s bothering her!",
+      "it": "La professoressa di Divinazione è in ambasce. Se la aiuterai a risolvere il suo problema potresti ottenere da lei una ricompensa... Parla con lei e scopri cosa la turba!"
+    },
+    "points": 10,
+    "validityStart": "2023-11-18T08:00:00",
+    "validityEnd": "2023-11-18T23:59:00",
+    "executionTime": 30,
+    "type": "actor",
+    "queueTime": 30,
+    "actor": "iycmZP3Ps9YczNo3iC602JFmRP83",
+    "maxQueue": 4,
+    "groupSize": 1,
+    "requestAccepted": true
+  },
+  {
+    "description": {
+      "en": "Time for Care of Magical Creatures! Prof. Silvanus Kerasburn is waiting for you to study a new and fascinating creature: the Sphinx of Memphis! Everyone knows that sphinxes pose a riddle to those who meet them and if the answer is wrong... well, no one has ever been able to tell what the consequences are. The Sphinx of Memphis, however, is a very rare species! To overcome its challenge you have to answer its questions WRONG! Can you pass Mr. Kerasburn’s exam?",
+      "it": "Ora di Cura delle Creature Magiche! Il Prof. Kerasburn ti aspetta per studiare una nuova ed affascinante creatura: la Sfinge di Menfi! Tutti sanno che le sfingi pongono un indovinello a chi le incontra e se la risposta è sbagliata... be', nessuno ha mai potuto raccontare quali siano le conseguenze. La Sfinge di Menfi però è una specie rarissima! Per superare la sua sfida bisogna rispondere alle sue domande in MODO SBAGLIATO! Ce la farai a superare l'esame del prof. Kerasburn?"
+    },
+    "points": 10,
+    "validityStart": "2023-11-18T08:00:00",
+    "validityEnd": "2023-11-18T23:59:00",
+    "executionTime": 30,
+    "type": "actor",
+    "queueTime": 30,
+    "actor": "Xcaay2JGvue1gxcSD7UWBtRurU63",
+    "maxQueue": 10,
+    "groupSize": 5,
+    "requestAccepted": true
+  }
+]

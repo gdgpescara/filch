@@ -9,17 +9,10 @@ import '../quests/current_quest/current_quest_view.dart';
 import '../ranking/houses_ranking_view.dart';
 import 'state/user_home_cubit.dart';
 
-class UserHomePage extends StatefulWidget {
+class UserHomePage extends StatelessWidget {
   const UserHomePage({super.key});
 
   static const routeName = 'user-homepage';
-
-  @override
-  State<UserHomePage> createState() => _UserHomePageState();
-}
-
-class _UserHomePageState extends State<UserHomePage> {
-  int currentView = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +20,12 @@ class _UserHomePageState extends State<UserHomePage> {
       create: (context) => injector()..checkRankingFreezed(),
       child: BlocBuilder<UserHomeCubit, UserHomeState>(
         builder: (context, state) {
-          currentView = state.isRankingFreezed ? 0 : currentView;
           return Scaffold(
             extendBodyBehindAppBar: true,
             extendBody: true,
             body: DarkMapContainer(
               child: IndexedStack(
-                index: currentView,
+                index: state.currentView,
                 children: [
                   const HousesRankingView(),
                   if (!state.isRankingFreezed) const CurrentQuestView(),
@@ -44,8 +36,8 @@ class _UserHomePageState extends State<UserHomePage> {
             bottomNavigationBar: BottomNavigationBar(
               backgroundColor: Colors.transparent,
               enableFeedback: true,
-              currentIndex: currentView,
-              onTap: (index) => setState(() => currentView = index),
+              currentIndex: state.currentView,
+              onTap: context.read<UserHomeCubit>().changeView,
               items: [
                 BottomNavigationBarItem(
                   icon: const Icon(Icons.military_tech_outlined),
@@ -53,12 +45,13 @@ class _UserHomePageState extends State<UserHomePage> {
                   tooltip: t.home.bottom_nav.ranking,
                   label: t.home.bottom_nav.ranking,
                 ),
-                if (!state.isRankingFreezed) BottomNavigationBarItem(
-                  icon: const Icon(Icons.location_searching_rounded),
-                  activeIcon: const Icon(Icons.my_location),
-                  tooltip: t.home.bottom_nav.current_quest,
-                  label: t.home.bottom_nav.current_quest,
-                ),
+                if (!state.isRankingFreezed)
+                  BottomNavigationBarItem(
+                    icon: const Icon(Icons.location_searching_rounded),
+                    activeIcon: const Icon(Icons.my_location),
+                    tooltip: t.home.bottom_nav.current_quest,
+                    label: t.home.bottom_nav.current_quest,
+                  ),
                 BottomNavigationBarItem(
                   icon: const Icon(Icons.person_outline_rounded),
                   activeIcon: const Icon(Icons.person_rounded),

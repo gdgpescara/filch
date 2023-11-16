@@ -19,8 +19,8 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RemoveFocusContainer(
-      child: WillPopScope(
-        onWillPop: () async => false,
+      child: PopScope(
+        canPop: false,
         child: BlocProvider<SignInCubit>(
           create: (context) => injector(),
           child: BlocListener<SignInCubit, SignInState>(

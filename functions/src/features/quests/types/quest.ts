@@ -19,7 +19,7 @@ export type Quest = {
   requestAccepted: boolean | null;
 
   // Quiz quest section
-  parentQuest: string | null;
+  parentQuests: string[] | null;
   qrCode: string | null;
   question: { [key: string]: string } | null;
   answers: Answer[] | null;

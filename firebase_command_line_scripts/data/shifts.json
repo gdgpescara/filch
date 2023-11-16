@@ -1,178 +1,178 @@
 [
   {
     "user": {
-      "uid": "UGnpwnSUewgeerLkVqatfBNlAmt2",
-      "displayName": "Utente Speciale",
-      "email": "speciale@example.com"
+      "uid": "qBvThGBaobXqKZUV4uvAoEtneYs1",
+      "displayName": "Simone Di Nardo Di Maio",
+      "email": "simone.dinardo.dimaio@staff.it"
     },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
+    "start": "2023-11-18T08:00:00",
+    "duration": 120,
     "location": "checkIn",
-    "notes": "Check-in duty (morning)"
+    "notes": "Check-in duty"
   },
   {
     "user": {
-      "uid": "user1",
-      "displayName": "Persona 1",
-      "email": "persona1@example.com"
+      "uid": "qBvThGBaobXqKZUV4uvAoEtneYs1",
+      "displayName": "Simone Di Nardo Di Maio",
+      "email": "simone.dinardo.dimaio@staff.it"
     },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
+    "start": "2023-11-18T09:50:00",
+    "duration": 75,
+    "location": "masterOfCeremonyAssistant",
+    "notes": "Master of ceremony assistant room 13 - 14"
+  },
+  {
+    "user": {
+      "uid": "qBvThGBaobXqKZUV4uvAoEtneYs1",
+      "displayName": "Simone Di Nardo Di Maio",
+      "email": "simone.dinardo.dimaio@staff.it"
+    },
+    "start": "2023-11-18T11:10:00",
+    "duration": 115,
+    "location": "masterOfCeremony",
+    "notes": "Master of ceremony room 3"
+  },
+  {
+    "user": {
+      "uid": "qBvThGBaobXqKZUV4uvAoEtneYs1",
+      "displayName": "Simone Di Nardo Di Maio",
+      "email": "simone.dinardo.dimaio@staff.it"
+    },
+    "start": "2023-11-18T13:55:00",
+    "duration": 275,
+    "location": "masterOfCeremony",
+    "notes": "Master of ceremony room 3"
+  },
+  {
+    "user": {
+      "uid": "qBvThGBaobXqKZUV4uvAoEtneYs1",
+      "displayName": "Simone Di Nardo Di Maio",
+      "email": "simone.dinardo.dimaio@staff.it"
+    },
+    "start": "2023-11-19T09:00:00",
+    "duration": 45,
     "location": "checkIn",
-    "notes": "Check-in duty (afternoon)"
+    "notes": "Check-in duty"
   },
   {
     "user": {
-      "uid": "user2",
-      "displayName": "Persona 2",
-      "email": "persona2@example.com"
+      "uid": "qBvThGBaobXqKZUV4uvAoEtneYs1",
+      "displayName": "Simone Di Nardo Di Maio",
+      "email": "simone.dinardo.dimaio@staff.it"
     },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
-    "location": "coffee",
-    "notes": "Coffee service (morning)"
-  },
-  {
-    "user": {
-      "uid": "user3",
-      "displayName": "Persona 3",
-      "email": "persona3@example.com"
-    },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
-    "location": "coffee",
-    "notes": "Coffee service (afternoon)"
-  },
-  {
-    "user": {
-      "uid": "user4",
-      "displayName": "Persona 4",
-      "email": "persona4@example.com"
-    },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
-    "location": "lunch",
-    "notes": "Lunch break (morning)"
-  },
-  {
-    "user": {
-      "uid": "user5",
-      "displayName": "Persona 5",
-      "email": "persona5@example.com"
-    },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
-    "location": "lunch",
-    "notes": "Lunch break (afternoon)"
-  },
-  {
-    "user": {
-      "uid": "user6",
-      "displayName": "Persona 6",
-      "email": "persona6@example.com"
-    },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
-    "location": "wardrobe",
-    "notes": "Wardrobe assistance (morning)"
-  },
-  {
-    "user": {
-      "uid": "user7",
-      "displayName": "Persona 7",
-      "email": "persona7@example.com"
-    },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
-    "location": "wardrobe",
-    "notes": "Wardrobe assistance (afternoon)"
-  },
-  {
-    "user": {
-      "uid": "user8",
-      "displayName": "Persona 8",
-      "email": "persona8@example.com"
-    },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
-    "location": "taxi",
-    "notes": "Taxi service (morning)"
-  },
-  {
-    "user": {
-      "uid": "user9",
-      "displayName": "Persona 9",
-      "email": "persona9@example.com"
-    },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
-    "location": "taxi",
-    "notes": "Taxi service (afternoon)"
-  },
-  {
-    "user": {
-      "uid": "user10",
-      "displayName": "Persona 10",
-      "email": "persona10@example.com"
-    },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
-    "location": "coordination",
-    "notes": "Coordination duty (morning)"
-  },
-  {
-    "user": {
-      "uid": "user1",
-      "displayName": "Persona 1",
-      "email": "persona1@example.com"
-    },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
-    "location": "coordination",
-    "notes": "Coordination duty (afternoon)"
-  },
-  {
-    "user": {
-      "uid": "user2",
-      "displayName": "Persona 2",
-      "email": "persona2@example.com"
-    },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
+    "start": "2023-11-19T9:45:00",
+    "duration": 115,
     "location": "masterOfCeremony",
-    "notes": "Master of Ceremony (morning)"
+    "notes": "Master of ceremony room 3"
   },
   {
     "user": {
-      "uid": "user3",
-      "displayName": "Persona 3",
-      "email": "persona3@example.com"
+      "uid": "qBvThGBaobXqKZUV4uvAoEtneYs1",
+      "displayName": "Simone Di Nardo Di Maio",
+      "email": "simone.dinardo.dimaio@staff.it"
     },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
+    "start": "2023-11-19T12:00:00",
+    "duration": 50,
     "location": "masterOfCeremony",
-    "notes": "Master of Ceremony (afternoon)"
+    "notes": "Master of ceremony room 3"
   },
   {
     "user": {
-      "uid": "user4",
-      "displayName": "Persona 4",
-      "email": "persona4@example.com"
+      "uid": "7IF2BTG7T7WFy7lQd0hXdoYHa9C2",
+      "displayName": "Alessandro Iacobucci",
+      "email": "alessandro.iacobucci@staff.it"
     },
-    "start": "2023-11-05T08:00:00",
-    "duration": 60,
-    "location": "masterOfCeremonyAssistant",
-    "notes": "Assistant to Master of Ceremony (morning)"
+    "start": "2023-11-18T8:00:00",
+    "duration": 120,
+    "location": "coffee",
+    "notes": "Coffee duty"
   },
   {
     "user": {
-      "uid": "user5",
-      "displayName": "Persona 5",
-      "email": "persona5@example.com"
+      "uid": "7IF2BTG7T7WFy7lQd0hXdoYHa9C2",
+      "displayName": "Alessandro Iacobucci",
+      "email": "alessandro.iacobucci@staff.it"
     },
-    "start": "2023-11-05T09:00:00",
-    "duration": 60,
+    "start": "2023-11-18T11:00:00",
+    "duration": 30,
+    "location": "coffee",
+    "notes": "Coffee duty"
+  },
+  {
+    "user": {
+      "uid": "7IF2BTG7T7WFy7lQd0hXdoYHa9C2",
+      "displayName": "Alessandro Iacobucci",
+      "email": "alessandro.iacobucci@staff.it"
+    },
+    "start": "2023-11-18T12:45:00",
+    "duration": 75,
+    "location": "coffee",
+    "notes": "Coffee duty"
+  },
+  {
+    "user": {
+      "uid": "1GnaIiIOFcR5VOE9mQDMxCLVmRQ2",
+      "displayName": "Antonio Villanova",
+      "email": "antonio.villanova@staff.it"
+    },
+    "start": "2023-11-18T8:00:00",
+    "duration": 185,
+    "location": "checkIn",
+    "notes": "Check-in duty"
+  },
+  {
+    "user": {
+      "uid": "1GnaIiIOFcR5VOE9mQDMxCLVmRQ2",
+      "displayName": "Antonio Villanova",
+      "email": "antonio.villanova@staff.it"
+    },
+    "start": "2023-11-18T12:45:00",
+    "duration": 75,
+    "location": "lunch",
+    "notes": "Catering room 10 - 12"
+  },
+  {
+    "user": {
+      "uid": "1GnaIiIOFcR5VOE9mQDMxCLVmRQ2",
+      "displayName": "Antonio Villanova",
+      "email": "antonio.villanova@staff.it"
+    },
+    "start": "2023-11-18T13:55:00",
+    "duration": 160,
+    "location": "masterOfCeremony",
+    "notes": "Master of ceremony room 34"
+  },
+  {
+    "user": {
+      "uid": "1GnaIiIOFcR5VOE9mQDMxCLVmRQ2",
+      "displayName": "Antonio Villanova",
+      "email": "antonio.villanova@staff.it"
+    },
+    "start": "2023-11-19T9:00:00",
+    "duration": 160,
+    "location": "checkIn",
+    "notes": "Check-in duty"
+  },
+  {
+    "user": {
+      "uid": "1GnaIiIOFcR5VOE9mQDMxCLVmRQ2",
+      "displayName": "Antonio Villanova",
+      "email": "antonio.villanova@staff.it"
+    },
+    "start": "2023-11-19T12:00:00",
+    "duration": 50,
     "location": "masterOfCeremonyAssistant",
-    "notes": "Assistant to Master of Ceremony (afternoon)"
+    "notes": "Master of ceremony assistant room 9 - 11"
+  },
+  {
+    "user": {
+      "uid": "1GnaIiIOFcR5VOE9mQDMxCLVmRQ2",
+      "displayName": "Antonio Villanova",
+      "email": "antonio.villanova@staff.it"
+    },
+    "start": "2023-11-19T13:20:00",
+    "duration": 70,
+    "location": "lunch",
+    "notes": "Catering room 10 - 12"
   }
 ]

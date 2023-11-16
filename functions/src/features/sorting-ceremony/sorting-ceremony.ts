@@ -1,6 +1,6 @@
 import {getAuth} from "firebase-admin/auth";
 import {logger} from "firebase-functions/v2";
-import {getFirestore} from "firebase-admin/firestore";
+import {getFirestore, QueryDocumentSnapshot} from "firebase-admin/firestore";
 import {sortingHatAlgorithm} from "./sorting-hat-algorithm";
 import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
@@ -9,6 +9,7 @@ export type Member = {
   displayName?: string;
   email?: string;
   photoURL?: string;
+  points: number;
 };
 
 export const sortingCeremony = onCall(
@@ -25,12 +26,40 @@ export const sortingCeremony = onCall(
       .collection("houses")
       .get();
 
-    const house = sortingHatAlgorithm(housesSnapshot.docs);
+    const speakerSnap = await getFirestore()
+      .collection("speakers")
+      .doc(loggedUser.email ?? loggedUser.uid)
+      .get();
+
+    let house: QueryDocumentSnapshot | undefined;
+    if (speakerSnap.exists) {
+      logger.info("User is a speaker");
+      house = housesSnapshot.docs.find(
+        (doc) => doc.id === speakerSnap.data()?.house,
+      );
+    }
+
+    if (!house) {
+      house = sortingHatAlgorithm(housesSnapshot.docs);
+    }
 
     let member: Member = {
-      displayName: loggedUser.displayName,
-      email: loggedUser.email,
+      points: 0,
     };
+
+    if (loggedUser.displayName) {
+      member = {
+        ...member,
+        displayName: loggedUser.displayName,
+      };
+    }
+
+    if (loggedUser.email) {
+      member = {
+        ...member,
+        email: loggedUser.email,
+      };
+    }
 
     if (loggedUser.photoURL) {
       member = {

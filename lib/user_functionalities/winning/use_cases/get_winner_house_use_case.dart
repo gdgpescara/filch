@@ -12,20 +12,14 @@ class GetWinnerHouseUseCase {
 
   Future<HouseDetail> call() {
     return runSafetyFuture(() async {
-      final results = await _firestore
-          .collection('houses')
-          .orderBy('points', descending: true)
-          .limit(1)
-          .get();
+      final results = await _firestore.collection('houses').orderBy('points', descending: true).limit(1).get();
 
       if (results.docs.isEmpty) {
         throw Exception('No winning house found');
       }
 
-      final members = await results.docs.first.reference
-          .collection('members')
-          .orderBy('points', descending: true)
-          .get();
+      final members =
+          await results.docs.first.reference.collection('members').orderBy('points', descending: true).get();
       return HouseDetail.fromJson(
         {
           'id': results.docs.first.id,
