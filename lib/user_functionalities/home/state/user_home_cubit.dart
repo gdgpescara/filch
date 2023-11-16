@@ -16,8 +16,12 @@ class UserHomeCubit extends SafeEmitterCubit<UserHomeState> {
   void checkRankingFreezed() {
     _isRankingFreezedUseCase().actions(
       progress: () => emit(const UserHomeState()),
-      success: (isFreezed) => emit( UserHomeState(isFreezed)),
+      success: (isFreezed) => emit(UserHomeState(isFreezed, isFreezed ? 0 : state.currentView)),
       failure: (_) => emit(const UserHomeState()),
     );
+  }
+
+  void changeView(int index) {
+    emit(UserHomeState(state.isRankingFreezed, index));
   }
 }

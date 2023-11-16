@@ -9,11 +9,22 @@ class NoQuestAssignedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: ElevatedButton(
-        onPressed: context.read<CurrentQuestCubit>().searchForQuest,
-        child: Text(t.active_quest.search_button),
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(20),
+          child: Text(
+            t.active_quest.no_quest_assigned,
+            textAlign: TextAlign.center,
+          ),
+        ),
+        const SizedBox(height: 20),
+        ElevatedButton(
+          onPressed: context.read<CurrentQuestCubit>().searchForQuest,
+          child: Text(t.active_quest.search_button),
+        ),
+      ],
     );
   }
 }

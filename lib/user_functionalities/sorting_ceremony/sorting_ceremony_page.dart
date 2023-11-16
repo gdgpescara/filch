@@ -17,8 +17,8 @@ class SortingCeremonyPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider<SortingCeremonyCubit>(
       create: (context) => injector()..startSortingCeremony(),
-      child: WillPopScope(
-        onWillPop: () async => false,
+      child: PopScope(
+        canPop: false,
         child: Scaffold(
           body: DarkMapContainer(
             child: BlocConsumer<SortingCeremonyCubit, SortingCeremonyState>(
@@ -36,7 +36,7 @@ class SortingCeremonyPage extends StatelessWidget {
                   SortingCeremonyFailure(failure: final failure) => SortingFailure(failure: failure),
                   _ => const SizedBox.shrink(),
                 };
-                return AnimatedSwitcher(duration: const Duration(milliseconds: 300), child: child);
+                return AnimatedSwitcher(duration: const Duration(milliseconds: 1500), child: child);
               },
             ),
           ),

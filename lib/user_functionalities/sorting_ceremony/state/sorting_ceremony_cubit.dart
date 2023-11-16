@@ -19,7 +19,7 @@ class SortingCeremonyCubit extends SafeEmitterCubit<SortingCeremonyState> {
       progress: () => emit(SortingCeremonyLoading()),
       success: (house) async {
         emit(SortingCeremonySuccess(house: house));
-        await Future<void>.delayed(const Duration(seconds: 5));
+        await Future<void>.delayed(const Duration(seconds: 15));
         emit(SortingCeremonyFinish());
       },
       failure: (failure) {

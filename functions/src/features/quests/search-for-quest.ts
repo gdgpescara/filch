@@ -78,15 +78,23 @@ export const searchForQuest = onCall(
         .where("type", "==", QuestTypeEnum.quiz)
         .where(
           Filter.or(
-            Filter.where("parentQuest", "in", userQuestPoints),
-            Filter.where("parentQuest", "==", null)
+            Filter.where("parentQuests", "array-contains-any", userQuestPoints),
+            Filter.where("parentQuests", "==", null)
           )
         )
         .get();
 
       const quizQuests = quizQuestsSnapshot.docs.filter((doc) => {
-        return doc.data().validityStart <= Timestamp.now() &&
-          doc.data().validityEnd > Timestamp.now();
+        const valid = doc.data().validityStart <= Timestamp.now() &&
+          doc.data().validityEnd > Timestamp.now() &&
+          !userQuestPoints.includes(doc.id);
+        const parentQuests = doc.data().parentQuests;
+        if (!parentQuests) {
+          return valid;
+        }
+        return parentQuests.every((value: string) => {
+          return userQuestPoints.includes(value);
+        }) && valid;
       });
 
       logger.info(`Found ${quizQuests.length} quiz quests`);

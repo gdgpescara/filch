@@ -1,0 +1,326 @@
+[
+  {
+    "id": "21JHVhz5CDCsgf4F8z6T",
+    "executionTime": 1,
+    "qrCode": "Fiauyp82F#8!",
+    "question": {
+      "en": "What is the difference between a Sphinx and a Sphinx of Memphis?",
+      "it": "Che differenza c'è tra una Sfinge e una Sfinge di Menfi?"
+    },
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "The Sphinx poses a riddle, the Sphinx of Memphis asks a barrage of questions that you have to answer in reverse",
+          "it": "La Sfinge fa un indovinello, la Sfinge di Menfi fa domande a raffica alle quali devi rispondere al contrario"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "The Sphinx of Memphis poses a riddle, the Sphinx asks a barrage of questions that you have to answer in reverse",
+          "it": "La Sfinge di Menfi fa un indovinello, la Sfinge fa domande a raffica alle quali devi rispondere al contrario"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "The Sphinx strangles you if you give the wrong answer, the Sphinx of Memphis makes you repeat the game until you faint",
+          "it": "La Sfinge ti strangola se dai la risposta sbagliata, la Sfinge di Menfi ti fa ripetere il gioco finché non svieni"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "The Sphinx of Memphis strangles you if you give the wrong answer, the Sphinx makes you repeat the game until you faint",
+          "it": "La Sfinge di Menfi ti strangola se dai la risposta sbagliata, la Sfinge ti fa ripetere il gioco finché non svieni"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "A black and hot brew to keep your attention high you must gulp down, if to the end of the event you want to arrive.",
+      "it": "Un intruglio nero e caldo per mantenere alta l'attenzione devi ingurgitare, se a fine evento vuoi arrivare."
+    },
+    "parentQuests": [
+      "cjo4I5p2nR22kT8jAeqi"
+    ],
+    "validityStart": "2023-11-15T07:00:00.000Z",
+    "type": "quiz",
+    "points": 5
+  },
+  {
+    "id": "Djfc9XDNURCWM63BB7jG",
+    "executionTime": 1,
+    "qrCode": "Fiauyp82F#8!",
+    "question": {
+      "en": "How can you recognize a Sphinx of Memphis?",
+      "it": "Come si riconosce una Sfinge di Menfi?"
+    },
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "It always has red eyes",
+          "it": "Ha sempre gli occhi rossi"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "It always has butterfly wings",
+          "it": "Ha sempre le ali di farfalla"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "It has red eyes and butterfly wings",
+          "it": "Ha gli occhi rossi e le ali di farfalla"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "It wears a funny hat",
+          "it": "Indossa un buffo cappello"
+        },
+        "isCorrect": true
+      }
+    ],
+    "description": {
+      "en": "A black and hot brew to keep your attention high you must gulp down, if to the end of the event you want to arrive.",
+      "it": "Un intruglio nero e caldo per mantenere alta l'attenzione devi ingurgitare, se a fine evento vuoi arrivare."
+    },
+    "parentQuests": [
+      "cjo4I5p2nR22kT8jAeqi"
+    ],
+    "validityStart": "2023-11-15T07:00:00.000Z",
+    "type": "quiz",
+    "points": 5
+  },
+  {
+    "id": "KPcs0C02JwEaMqh5fYhp",
+    "executionTime": 1,
+    "qrCode": "Fiauyp82F#8!",
+    "question": {
+      "en": "Where can we see a Sphinx at work?",
+      "it": "Dove possiamo vedere una Sfinge a lavoro?"
+    },
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "At the Ministry of Magic",
+          "it": "Al Ministero della Magia"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "At Gringott, the wizard bank",
+          "it": "Alla Gringott, la banca dei maghi"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "In front of the Hogwarts dungeons",
+          "it": "Davanti ai sotterranei di Hogwarts"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "At Azkaban, the wizard prison",
+          "it": "Ad Azkaban, la prigione dei maghi"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "A black and hot brew to keep your attention high you must gulp down, if to the end of the event you want to arrive.",
+      "it": "Un intruglio nero e caldo per mantenere alta l'attenzione devi ingurgitare, se a fine evento vuoi arrivare."
+    },
+    "parentQuests": [
+      "cjo4I5p2nR22kT8jAeqi"
+    ],
+    "validityStart": "2023-11-15T07:00:00.000Z",
+    "type": "quiz",
+    "points": 5
+  },
+  {
+    "id": "OvK9CuVh7URLq8Fjke2x",
+    "executionTime": 1,
+    "qrCode": "Fiauyp82F#8!",
+    "question": {
+      "en": "Which other Magical Creature is similar to the Sphinx?",
+      "it": "Quale altra Creatura Magica è assimilabile alla Sfinge?"
+    },
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "The Manticore",
+          "it": "La Manticora"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "The Hippogriff",
+          "it": "L'Ippogrifo"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "The Basilisk",
+          "it": "Il Basilisco"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "The Snaso",
+          "it": "Lo Snaso"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "A black and hot brew to keep your attention high you must gulp down, if to the end of the event you want to arrive.",
+      "it": "Un intruglio nero e caldo per mantenere alta l'attenzione devi ingurgitare, se a fine evento vuoi arrivare."
+    },
+    "parentQuests": [
+      "cjo4I5p2nR22kT8jAeqi"
+    ],
+    "validityStart": "2023-11-15T07:00:00.000Z",
+    "type": "quiz",
+    "points": 5
+  },
+  {
+    "id": "aOsxrFUSaqhyGCaSSgLD",
+    "executionTime": 1,
+    "qrCode": "Fiauyp82F#8!",
+    "question": {
+      "en": "Who was the first to solve the riddle of a Sphinx?",
+      "it": "Chi è che per primo ha risolto l'indovinello di una Sfinge?"
+    },
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Edipo",
+          "it": "Edipo"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Dumbledore",
+          "it": "Silente"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Nicholas Flamel",
+          "it": "Nicholas Flamel"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Harry Potter",
+          "it": "Harry Potter"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "A black and hot brew to keep your attention high you must gulp down, if to the end of the event you want to arrive.",
+      "it": "Un intruglio nero e caldo per mantenere alta l'attenzione devi ingurgitare, se a fine evento vuoi arrivare."
+    },
+    "parentQuests": [
+      "cjo4I5p2nR22kT8jAeqi"
+    ],
+    "validityStart": "2023-11-15T07:00:00.000Z",
+    "type": "quiz",
+    "points": 5
+  },
+  {
+    "id": "hY33jYIaEfqr9fPnidWb",
+    "executionTime": 1,
+    "qrCode": "Fiauyp82F#8!",
+    "question": {
+      "en": "What is a Sphinx?",
+      "it": "Cos'è una Sfinge?"
+    },
+    "validityEnd": "2023-11-19T12:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "A magical creature with the body of a lion, the head of a woman, and wings",
+          "it": "Una Creatura Magica con il corpo di leone, la testa di donna e le ali"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "A magical creature with the body of a cow, the head of a woman, and the tail of a scorpion",
+          "it": "Una Creatura Magica con il corpo di mucca, la testa di donna e la coda di scorpione"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "A magical creature with the body of a lion, the head of a hawk, and the hooves of a goat",
+          "it": "Una Creatura Magica con il corpo di leone, la testa di falco e gli zoccoli di capra"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "A magical creature with the body of a woman, the head of a lion, and wings",
+          "it": "Una Creatura Magica con il corpo di donna, la testa di leone e le ali"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "A black and hot brew to keep your attention high you must gulp down, if to the end of the event you want to arrive.",
+      "it": "Un intruglio nero e caldo per mantenere alta l'attenzione devi ingurgitare, se a fine evento vuoi arrivare."
+    },
+    "parentQuests": [
+      "cjo4I5p2nR22kT8jAeqi"
+    ],
+    "validityStart": "2023-11-15T07:00:00.000Z",
+    "type": "quiz",
+    "points": 5
+  }
+]
