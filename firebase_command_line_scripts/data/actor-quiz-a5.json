@@ -49,13 +49,13 @@
     ],
     "type": "quiz",
     "points": 5,
-    "executionTime": 1,
+    "executionTime": 5,
     "validityEnd": "2023-11-19T12:00:00.000Z",
     "validityStart": "2023-11-15T07:00:00.000Z"
   },
   {
     "id": "Ptm51p3R3lPgcNZ59vHm",
-    "executionTime": 1,
+    "executionTime": 5,
     "qrCode": "q.xpyU#32Q6w",
     "question": {
       "en": "What cannot be missing from the emergency kit of a skilled Potioneer?",
@@ -109,7 +109,7 @@
   },
   {
     "id": "fsfqMNQpIb2osyBXGHRE",
-    "executionTime": 1,
+    "executionTime": 5,
     "qrCode": "q.xpyU#32Q6w",
     "question": {
       "en": "What is the main characteristic of the Amortentia potion?",
@@ -163,7 +163,7 @@
   },
   {
     "id": "j8p0zUoPwFPt5GVY1dGr",
-    "executionTime": 1,
+    "executionTime": 5,
     "qrCode": "q.xpyU#32Q6w",
     "question": {
       "en": "What does the Polyjuice Potion do?",
@@ -217,7 +217,7 @@
   },
   {
     "id": "uolUbCcQATofG4Z8xODQ",
-    "executionTime": 1,
+    "executionTime": 5,
     "qrCode": "q.xpyU#32Q6w",
     "question": {
       "en": "Which of these is NOT an ingredient of the Potion of Confusion?",
@@ -271,7 +271,7 @@
   },
   {
     "id": "xUMW6Sx5vLt2owPZvuiW",
-    "executionTime": 1,
+    "executionTime": 5,
     "qrCode": "q.xpyU#32Q6w",
     "question": {
       "en": "Which of these is an ingredient of the Sleeping Draught?",

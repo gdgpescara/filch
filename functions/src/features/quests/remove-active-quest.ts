@@ -20,6 +20,18 @@ export const removeActiveQuest = onCall(
     if (!activeQuest) {
       return false;
     }
+    // If actor quest check queue
+    if (activeQuest.quest.type === QuestTypeEnum.actor) {
+      const questSnap = await getFirestore()
+        .collection("quests")
+        .doc(activeQuest.quest.id)
+        .get();
+      const quest = questSnap.data();
+      if (quest?.queueCount < quest?.groupSize) {
+        return false;
+      }
+    }
+
     const batch = getFirestore().batch();
     // remove user active quest
     batch.update(getFirestore().collection("users").doc(loggedUser.uid), {

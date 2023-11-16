@@ -46,7 +46,8 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
     );
   }
 
-  void _canRequestForQuest() {
+  Future<void> _canRequestForQuest() async {
+    await Future<void>.delayed(const Duration(seconds: 1));
     _canRequestForQuestUseCase().actions(
       progress: () => emit(const CurrentQuestLoading()),
       success: (canRequest) => canRequest ? emit(const NoQuestAssigned()) : emit(const QuestRequestClosed()),

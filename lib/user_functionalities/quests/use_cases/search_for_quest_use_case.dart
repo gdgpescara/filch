@@ -21,7 +21,7 @@ class SearchForQuestUseCase {
       () async {
         const url = String.fromEnvironment('SEARCH_FOR_QUEST_URL');
         await _functions.httpsCallableFromUrl(url).call<void>();
-        final activeQuest = await _getSignedUserActiveQuestUseCase();
+        final activeQuest = await _getSignedUserActiveQuestUseCase().first;
         if (activeQuest == null) {
           throw NotFoundFailure();
         }

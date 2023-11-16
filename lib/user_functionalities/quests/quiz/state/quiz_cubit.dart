@@ -38,6 +38,10 @@ class QuizCubit extends SafeEmitterCubit<QuizState> {
     );
   }
 
+  void setQuizActive() {
+    emit(const QuizActive());
+  }
+
   void submitAnswer(ActiveQuest activeQuest, List<int> answersIds) {
     _submitAnswerUseCase(activeQuest.quest, answersIds).actions(
       progress: () {

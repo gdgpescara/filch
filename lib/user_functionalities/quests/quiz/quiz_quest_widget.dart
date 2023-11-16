@@ -24,7 +24,9 @@ class QuizQuestWidget extends StatelessWidget {
         builder: (context, currentQuestState) {
           if (currentQuestState == null) return const SizedBox();
           return BlocConsumer<QuizCubit, QuizState>(
-            listenWhen: (previous, current) => current is QuizAnswerState || current is QuizActivationFailure,
+            listenWhen: (previous, current) {
+              return current is QuizAnswerState || current is QuizActivationFailure;
+            },
             listener: (context, state) {
               switch (state) {
                 case QuizAnswerLoading():
@@ -33,7 +35,7 @@ class QuizQuestWidget extends StatelessWidget {
                     message: t.active_quest.quiz.answer.evaluating,
                   );
                   break;
-                case QuizAnswerSent():
+                case QuizAnswerSent(isCorrect: _, points: _, house: _):
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
@@ -47,7 +49,6 @@ class QuizQuestWidget extends StatelessWidget {
                           : Theme.of(context).extension<CustomColors>()?.error,
                     ),
                   );
-                  context.read<CurrentQuestCubit>().loadCurrentQuest();
                   break;
                 case QuizAnswerFailure():
                   Navigator.pop(context);

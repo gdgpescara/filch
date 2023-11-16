@@ -52,7 +52,7 @@ class _ItemWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () => Navigator.of(context).pushNamed(
         AssignmentPage.routeName,
-        arguments: AssignmentPageArgs.points(item.points),
+        arguments: AssignmentPageArgs.quest(points: item.points, quest: item.id),
       ),
       child: AppCard(
         child: Column(

@@ -27,6 +27,18 @@ export const searchForQuest = onCall(
     logger.info("Can search for quiz quest: " + quizQuestEnabled);
     logger.info("Can search for social quest: " + socialQuestEnabled);
 
+    const userPointsSnap = await getFirestore()
+      .collection("users")
+      .doc(loggedUser.uid)
+      .collection("points")
+      .get();
+    const userQuestPoints = userPointsSnap.docs
+      .map((doc) => {
+        return <Points>{...doc.data()};
+      })
+      .filter((value) => value.type == PointsTypeEnum.quest && value.quest)
+      .map((value) => value.quest);
+
     // Search for a quest
     let questFound: ActiveQuest | undefined = undefined;
 
@@ -41,18 +53,27 @@ export const searchForQuest = onCall(
 
       const actorQuests = actorQuestsSnapshot.docs.filter((doc) => {
         return doc.data().validityStart <= Timestamp.now() &&
-          doc.data().validityEnd > Timestamp.now();
+          doc.data().validityEnd > Timestamp.now() &&
+          (!doc.data().queueCount ||
+            doc.data().queueCount < doc.data().maxQueue) &&
+          !userQuestPoints.includes(doc.id);
       });
 
       logger.info(`Found ${actorQuests.length} actor quests`);
 
       if (actorQuests.length > 0) {
-        logger.info("Sarch for actor quest");
-        const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
+        logger.info("Search for actor quest");
+        // const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
+        const quest = actorQuests
+          .reduce((prev, current) => {
+            return prev.data().queueCount > current.data().queueCount ?
+              prev :
+              current;
+          });
         questFound = <ActiveQuest>{
           quest: <Quest>{
-            ...actorQuests[randomIndex].data(),
-            id: actorQuests[randomIndex].id,
+            ...quest.data(),
+            id: quest.id,
           },
           activatedAt: Timestamp.now(),
         };
@@ -62,25 +83,20 @@ export const searchForQuest = onCall(
     // 2. Search if quiz quest if actor quest is not available
     if (!questFound && quizQuestEnabled) {
       logger.info("Searching for quiz quest");
-      const userPointsSnap = await getFirestore()
-        .collection("users")
-        .doc(loggedUser.uid)
-        .collection("points")
-        .get();
-      const userQuestPoints = userPointsSnap.docs
-        .map((doc) => {
-          return <Points>{...doc.data()};
-        })
-        .filter((value) => value.type == PointsTypeEnum.quest && value.quest)
-        .map((value) => value.quest);
       const quizQuestsSnapshot = await getFirestore()
         .collection("quests")
         .where("type", "==", QuestTypeEnum.quiz)
         .where(
-          Filter.or(
-            Filter.where("parentQuests", "array-contains-any", userQuestPoints),
+          userQuestPoints && userQuestPoints.length > 0 ?
+            Filter.or(
+              Filter.where(
+                "parentQuests",
+                "array-contains-any",
+                userQuestPoints
+              ),
+              Filter.where("parentQuests", "==", null)
+            ) :
             Filter.where("parentQuests", "==", null)
-          )
         )
         .get();
 
@@ -156,9 +172,23 @@ export const searchForQuest = onCall(
       await getFirestore()
         .collection("quests")
         .doc(questFound.quest.id)
-        .collection("queue").add({
+        .collection("queue")
+        .doc(loggedUser.uid).set({
           userId: loggedUser.uid,
           queuedAt: Timestamp.now(),
+        });
+      // Update queue count
+      const queueCount = await getFirestore()
+        .collection("quests")
+        .doc(questFound.quest.id)
+        .collection("queue")
+        .count()
+        .get();
+      await getFirestore()
+        .collection("quests")
+        .doc(questFound.quest.id)
+        .update({
+          queueCount: queueCount.data().count,
         });
     }
 
