@@ -5,11 +5,15 @@ import {Points} from "./types/points";
 import {getAuth} from "firebase-admin/auth";
 import {PointsTypeEnum} from "./types/points-type-enum";
 import {ActiveQuest} from "../quests/types/active-quest";
+import {logger} from "firebase-functions/v2";
 
 export const assignPoints = onCall(
   {region: "europe-west3"},
   async (request) => {
     const loggedUser = await getSignedInUser(request);
+
+    logger.info("Assigning points: " + JSON.stringify(request.data));
+
     const assignedPoints = request.data.points;
     const type = request.data.type;
     const questId = request.data.quest;
@@ -23,26 +27,31 @@ export const assignPoints = onCall(
     if (users.length > 1) {
       const houses = users.map((user) => user.customClaims?.["house"]);
       if ([...new Set(houses)].length === 1) {
+        logger.info("Is group with same house members");
         groupMultiplier = 1.25;
       } else {
+        logger.info("Is group with different house members");
         groupMultiplier = 1.5;
       }
     }
 
     const points = <Points>{
       type: type,
-      points: Math.round(assignedPoints * groupMultiplier),
+      points: Math.floor(assignedPoints * groupMultiplier),
       assignedBy: loggedUser.uid,
       assignedAt: Timestamp.now(),
       quest: questId,
     };
+
+    logger.info("Points: " + JSON.stringify(points));
 
     const batch = getFirestore().batch();
     for (const user of users) {
       const isNimbusUser = user.customClaims?.["isNimbusUser"] ?? false;
       let userPoints = {...points};
       if (isNimbusUser) {
-        userPoints = {...points, points: Math.round(points.points * 1.3)};
+        logger.info("Is Nimbus user adding 30% points");
+        userPoints = {...points, points: Math.floor(points.points * 1.3)};
       }
       batch.set(
         getFirestore()
@@ -63,6 +72,7 @@ export const assignPoints = onCall(
         userPoints,
       );
       if (type == PointsTypeEnum.quest) {
+        logger.info("Is quest points removing active quest and queue");
         const docRef = await getFirestore()
           .collection("users")
           .doc(user.uid)

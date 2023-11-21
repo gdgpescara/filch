@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../dependency_injection/dependency_injection.dart';
-import '../../i18n/strings.g.dart';
 import '../widgets/dark_map_container.dart';
 import '../widgets/logo.dart';
 import '../widgets/remove_focus_container.dart';
@@ -51,7 +50,7 @@ class SignInPage extends StatelessWidget {
                     default:
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(t.commons.errors.generic),
+                          content: Text('${failure.code}: ${failure.message}'),
                           backgroundColor: Theme.of(context).colorScheme.error,
                         ),
                       );

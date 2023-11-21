@@ -1,6 +1,6 @@
 import {onCall} from "firebase-functions/v2/https";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
-import {getFirestore} from "firebase-admin/firestore";
+import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {ActiveQuest} from "./types/active-quest";
 import {QuestTypeEnum} from "./types/quest-type-enum";
 
@@ -20,17 +20,6 @@ export const removeActiveQuest = onCall(
     if (!activeQuest) {
       return false;
     }
-    // If actor quest check queue
-    if (activeQuest.quest.type === QuestTypeEnum.actor) {
-      const questSnap = await getFirestore()
-        .collection("quests")
-        .doc(activeQuest.quest.id)
-        .get();
-      const quest = questSnap.data();
-      if (quest?.queueCount < quest?.groupSize) {
-        return false;
-      }
-    }
 
     const batch = getFirestore().batch();
     // remove user active quest
@@ -47,6 +36,19 @@ export const removeActiveQuest = onCall(
           .doc(loggedUser.uid)
       );
     }
+
+    // add quest to removed queue for user
+    batch.set(
+      getFirestore()
+        .collection("users")
+        .doc(loggedUser.uid)
+        .collection("removedQuests")
+        .doc(activeQuest.quest.id),
+      {
+        addedAt: Timestamp.now(),
+      }
+    );
+
     await batch.commit();
 
     return true;
