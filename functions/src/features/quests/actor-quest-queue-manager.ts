@@ -17,7 +17,10 @@ export const actorQueueSentinel = functions
           queueCount: queueCount.data().count,
         });
       } else {
-        await questRef.update({queueCount: queueCount.data().count});
+        await questRef.update({
+          queueCount: queueCount.data().count,
+          requestAccepted: true,
+        });
       }
     }
   });

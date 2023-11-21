@@ -4,6 +4,7 @@ import Timestamp = firestore.Timestamp;
 
 export type Points = {
   assignedBy: string | null;
+  assignedFrom: string | null;
   type: PointsTypeEnum;
   points: number;
   assignedAt: Timestamp;

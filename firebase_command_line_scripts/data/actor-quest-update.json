@@ -1,0 +1,19 @@
+[
+  {
+    "id": "RsqZnSLF2D498DOtbhzF",
+    "description": {
+      "en": "The Professor of Divination is in trouble. If you help her solve her problem you could get a reward from her... Talk to her and find out what’s bothering her!",
+      "it": "La professoressa di Divinazione è in ambasce. Se la aiuterai a risolvere il suo problema potresti ottenere da lei una ricompensa... Parla con lei e scopri cosa la turba!"
+    },
+    "points": 10,
+    "validityStart": "2023-11-18T08:00:00",
+    "validityEnd": "2023-11-18T23:59:00",
+    "executionTime": 30,
+    "type": "actor",
+    "queueTime": 30,
+    "actor": "iycmZP3Ps9YczNo3iC602JFmRP83",
+    "maxQueue": 2,
+    "groupSize": 1,
+    "requestAccepted": true
+  }
+]

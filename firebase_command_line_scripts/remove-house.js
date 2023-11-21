@@ -9,7 +9,7 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-const user = "s3BYUUFiwaZjCo3nbT4MJXH5vgw2";
+const user = "5WmnRpP4Ephx9jHgDt8tNHGOyPr1";
 
 const removeHouse = async () => {
     const users = [];

@@ -1,0 +1,752 @@
+[
+  {
+    "executionTime": 10,
+    "qrCode": "_Dxg:H2cFCsw",
+    "question": {
+      "en": "What is a Sliver in Flutter?",
+      "it": "Cos'è uno Sliver in Flutter?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Magical creatures that get stronger when in a group.",
+          "it": "Creature magiche che diventano più forti quando sono in gruppo."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "A Widget usable inside a Center().",
+          "it": "Un Widget utilizzabile all'interno di un Center()."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "A list of Widgets ordered vertically.",
+          "it": "Una lista di Widget ordinati verticalmente."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "A portion of a scrollable area.",
+          "it": "Una porzione di un'area scorrevole."
+        },
+        "isCorrect": true
+      }
+    ],
+    "description": {
+      "en": "The ghost of Moaning Myrtle you can find. Among the many, near the divination classroom you must go.",
+      "it": "Il fantasma di Mirtilla Malcontenta puoi trovare. Tra i tanti, vicino l'aula di divinazione devi andare."
+    },
+    "validityStart": "2023-11-15T07:00:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "6gny8nWNrSTy",
+    "question": {
+      "en": "How long does a preemtible VM instance last?",
+      "it": "Quanto dura un'istanza VM preemptible?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Max 24h",
+          "it": "Max 24h"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "The lifespan of a cat on the ring road",
+          "it": "La durata di vita di un gatto sulla tangenziale"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Time cannot be determined",
+          "it": "Il tempo non può essere determinato"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "The shortest time possible",
+          "it": "Il tempo più breve possibile"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "Someone says that Fierobecco is hidden and protected by the guardians of the university. Observe it from the porthole.",
+      "it": "Qualcuno dice che Fierobecco sia nascosto e protetto dai guardiani dell'università. Osservalo dall'oblò."
+    },
+    "validityStart": "2023-11-18T18:30:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "ZNeiVtf4gARn",
+    "question": {
+      "en": "What's the second most popular project on GitHub?",
+      "it": "Qual è il secondo progetto più popolare su GitHub?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Android",
+          "it": "Android"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "VsCode",
+          "it": "VsCode"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Kubernetes",
+          "it": "Kubernetes"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Home Assistant",
+          "it": "Home Assistant"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "They spotted Argus Filch's cat on a yellow pipe. Help him get down.",
+      "it": "Hanno avvistato il gatto di Argus Gazza su un tubolare giallo. Aiutalo a scendere."
+    },
+    "validityStart": "2023-11-18T13:30:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "8nzBZ8L9Tu2P",
+    "question": {
+      "en": "What ways are mostly used for deferring a Jetpack Compos-ition state read?",
+      "it": "Quali sono i modi più utilizzati per differire la lettura dello stato di Jetpack Compos-ition?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "by wrapping the state read in curly braces",
+          "it": "avvolgendo la lettura dello stato tra parentesi graffe"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "by wrapping the state read in a lambda function",
+          "it": "avvolgendo la lettura dello stato in una funzione lambda"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "by hoisting the state",
+          "it": "sollevando lo stato"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "by wrapping the state in a new class",
+          "it": "avvolgendo lo stato in una nuova classe"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "For need or necessity, the Room of Requirement will appear. Whether it's summer or winter, you'll find clothes in it.",
+      "it": "Per bisogno o per necessità la porta delle necessità apparirà. Che sia estate o che sia inverno, gli indumenti ci trovi dentro."
+    },
+    "validityStart": "2023-11-19T10:50:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "ab3TE4zJY6g6",
+    "question": {
+      "en": "Which of these sentences about novelty search is false?",
+      "it": "Quale di queste frasi su Novelty Search è falsa?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "gives better performance in deceptive environments",
+          "it": "garantisce migliori prestazioni in ambienti ingannevoli"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "doesn't require an objective function",
+          "it": "non richiede una funzione obiettivo"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Is an evolutionary algorithm",
+          "it": "È un algoritmo evolutivo"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "It is a convergent algorithm",
+          "it": "È un algoritmo convergente"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "If in a magical world you want to go, a magical selfie in the box you must take.",
+      "it": "Se in un mondo magico vuoi andare, un selfie magico nella scatola devi fare."
+    },
+    "validityStart": "2023-11-18T15:40:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "e3V6kLbkiLed",
+    "question": {
+      "en": "Which big techs are mentioned in the case study presented during the talk?",
+      "it": "Quali grandi aziende tech sono menzionate nello studio di caso presentato durante la presentazione?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Google and Microsoft",
+          "it": "Google e Microsoft"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Apple and Google",
+          "it": "Apple e Google"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "IBM and Apple",
+          "it": "IBM e Apple"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "IBM and Microsoft",
+          "it": "IBM e Microsoft"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "If you want to go on a magical journey, take a magical selfie in the box.",
+      "it": "Se vuoi fare un viaggio magico, fai un selfie magico nella scatola."
+    },
+    "validityStart": "2023-11-18T12:50:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "CBQmRw1xiPaavdvvUgAv0m6AObF2",
+    "question": {
+      "en": "Which are the best frameworks to build your second brain according to Michela's personal point of view?",
+      "it": "Quali sono i migliori framework per costruire il tuo secondo cervello secondo il punto di vista personale di Michela?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "C.O.D.E. and R.U.N.",
+          "it": "C.O.D.E. e R.U.N."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Start and C.O.D.E.",
+          "it": "Start e C.O.D.E."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "C.O.D.E. and P.A.R.A.",
+          "it": "C.O.D.E. e P.A.R.A."
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Start and R.U.N.",
+          "it": "Start e R.U.N."
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "What is the 'fourth' element of the magic project management triangle that helps the project manager to balance the other three elements?",
+      "it": "Qual è il 'quarto' elemento del triangolo magico della gestione dei progetti che aiuta il project manager a bilanciare gli altri tre elementi?"
+    },
+    "validityStart": "2023-11-18T16:30:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "Ar0cEsm21FeNNGl4eZnCDv4zeLZ2",
+    "question": {
+      "en": "What is the primary focus of the Codemotion Tech Recruiting Manifesto?",
+      "it": "Qual è il focus principale del Codemotion Tech Recruiting Manifesto?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "To create a new coding language for IT developers.",
+          "it": "Creare un nuovo linguaggio di programmazione per gli sviluppatori IT."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "To provide guidelines for effective communication in tech companies.",
+          "it": "Fornire linee guida per una comunicazione efficace nelle aziende tech."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "To outline strategies for financial growth in IT companies.",
+          "it": "Tracciare strategie per la crescita finanziaria nelle aziende IT."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "To establish a set of practical principles for improving tech recruitment, emphasizing transparency, respect, and innovation.",
+          "it": "Stabilire un insieme di principi pratici per migliorare il reclutamento tech, enfatizzando trasparenza, rispetto e innovazione."
+        },
+        "isCorrect": true
+      }
+    ],
+    "description": {
+      "en": "What is the 'fourth' element of the magic project management triangle that helps the project manager to balance the other three elements?",
+      "it": "Qual è il 'quarto' elemento del triangolo magico della gestione dei progetti che aiuta il project manager a bilanciare gli altri tre elementi?"
+    },
+    "validityStart": "2023-11-18T18:30:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "GOFYIgel13MKePzVVO3jsAXScO42",
+    "question": {
+      "en": "Which of these sentences about novelty search is false?",
+      "it": "Quale di queste frasi su Novelty Search è falsa?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "gives better performance in deceptive environments",
+          "it": "garantisce migliori prestazioni in ambienti ingannevoli"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "doesn't require an objective function",
+          "it": "non richiede una funzione obiettivo"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Is an evolutionary algorithm",
+          "it": "È un algoritmo evolutivo"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "It is a convergent algorithm",
+          "it": "È un algoritmo convergente"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "If in a magical world you want to go, take a magical selfie in the box.",
+      "it": "Se in un mondo magico vuoi andare, fai un selfie magico nella scatola."
+    },
+    "validityStart": "2023-11-19T12:50:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "664o3vmcv4Rpbsi6T86q7vdS7pA3",
+    "question": {
+      "en": "Which types of keys does a WeakMap accept?",
+      "it": "Quali tipi di chiavi accetta una WeakMap?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Objects only",
+          "it": "Solo oggetti"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Objects and strings",
+          "it": "Oggetti e stringhe"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Objects and numbers",
+          "it": "Oggetti e numeri"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Whatever you want",
+          "it": "Quello che vuoi"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "For need or necessity, the Room of Requirement will appear. Whether it's summer or winter, you'll find clothes in it.",
+      "it": "Per bisogno o per necessità la porta delle necessità apparirà. Che sia estate o che sia inverno, gli indumenti ci trovi dentro."
+    },
+    "validityStart": "2023-11-18T12:50:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "ydfY8ZrFbuRthblVXEHuRT5u7Mz1",
+    "question": {
+      "en": "Which language is not supported by Firebase Cloud Functions v2?",
+      "it": "Quale lingua non è supportata da Firebase Cloud Functions v2?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "JavaScript",
+          "it": "JavaScript"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "TypeScript",
+          "it": "TypeScript"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Python",
+          "it": "Python"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Dart",
+          "it": "Dart"
+        },
+        "isCorrect": true
+      }
+    ],
+    "description": {
+      "en": "If you want to go on a magical journey, take a magical selfie in the box.",
+      "it": "Se vuoi fare un viaggio magico, fai un selfie magico nella scatola."
+    },
+    "validityStart": "2023-11-18T15:40:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "19U9EfNOOZZ7VKXe3Wj3a6k4CQ92",
+    "question": {
+      "en": "How long does a preemtible VM instance last?",
+      "it": "Quanto dura un'istanza VM preemptible?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "Time cannot be determined",
+          "it": "Il tempo non può essere determinato"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "The shortest time possible",
+          "it": "Il tempo più breve possibile"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Max 24h",
+          "it": "Massimo 24 ore"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "The lifespan of a cat on the ring road",
+          "it": "La durata di vita di un gatto sulla tangenziale"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "For need or necessity, the Room of Requirement will appear. Whether it's summer or winter, you'll find clothes in it.",
+      "it": "Per bisogno o per necessità la porta delle necessità apparirà. Che sia estate o che sia inverno, gli indumenti ci trovi dentro."
+    },
+    "validityStart": "2023-11-18T18:30:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "B15gwa7RtBqT5nB2QcKTFoyOgPs2",
+    "question": {
+      "en": "What ways are mostly used for deferring a Jetpack Composition state read?",
+      "it": "Quali sono principalmente i modi per differire una lettura di stato di Jetpack Composition?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "by hoisting the state",
+          "it": "sollevando lo stato"
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "by wrapping the state in curly braces",
+          "it": "avvolgendo lo stato tra parentesi graffe"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "by wrapping the state read in a lambda function",
+          "it": "avvolgendo la lettura dello stato in una funzione lambda"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "by wrapping the state in a new class",
+          "it": "avvolgendo lo stato in una nuova classe"
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "Stairs like to change. Remember that! In this case, however, those with the color of the lawn are always the same... not too high, not too low, but in the middle lies virtue.",
+      "it": "Alle scale piace cambiare. Ricordatelo! In questo caso, però, quelle col colore del prato sono sempre le stesse... non troppo in alto, non troppo in basso, ma in medio stat virtus."
+    },
+    "validityStart": "2023-11-19T10:50:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "lSfPa0ik3KYktsQHpW1tAAwdgNg2",
+    "question": {
+      "en": "Which are the best frameworks to build your second brain according to Michela's personal point of view?",
+      "it": "Quali sono i migliori framework per costruire il tuo secondo cervello secondo il punto di vista personale di Michela?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "C.O.D.E. and R.U.N",
+          "it": "C.O.D.E. e R.U.N."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Start and R.U.N.",
+          "it": "Start e R.U.N."
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "C.O.D.E. and P.A.R.A.",
+          "it": "C.O.D.E. e P.A.R.A."
+        },
+        "isCorrect": true
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "Start and C.O.D.E.",
+          "it": "Start e C.O.D.E."
+        },
+        "isCorrect": false
+      }
+    ],
+    "description": {
+      "en": "If you want to go on a magical journey, take a magical selfie in the box.",
+      "it": "Se vuoi fare un viaggio magico, fai un selfie magico nella scatola."
+    },
+    "validityStart": "2023-11-19T12:50:00.000Z",
+    "type": "quiz",
+    "points": 15
+  },
+  {
+    "executionTime": 10,
+    "qrCode": "epW0ZobNIpf3sehfaJeHgpkxF3N2",
+    "question": {
+      "en": "Which big techs are mentioned in the case study presented during the talk?",
+      "it": "Quali grandi aziende tecnologiche sono menzionate nello studio di caso presentato durante la presentazione?"
+    },
+    "validityEnd": "2023-11-19T13:00:00.000Z",
+    "answers": [
+      {
+        "id": 1,
+        "text": {
+          "en": "IBM and Apple",
+          "it": "IBM e Apple"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 2,
+        "text": {
+          "en": "Google and Microsoft",
+          "it": "Google e Microsoft"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 3,
+        "text": {
+          "en": "Apple and Google",
+          "it": "Apple e Google"
+        },
+        "isCorrect": false
+      },
+      {
+        "id": 4,
+        "text": {
+          "en": "IBM and Microsoft",
+          "it": "IBM e Microsoft"
+        },
+        "isCorrect": true
+      }
+    ],
+    "description": {
+      "en": "If you want to go on a magical journey, take a magical selfie in the box.",
+      "it": "Se vuoi fare un viaggio magico, fai un selfie magico nella scatola."
+    },
+    "validityStart": "2023-11-19T12:50:00.000Z",
+    "type": "quiz",
+    "points": 15
+  }
+]

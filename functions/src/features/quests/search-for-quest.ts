@@ -38,6 +38,15 @@ export const searchForQuest = onCall(
       })
       .filter((value) => value.type == PointsTypeEnum.quest && value.quest)
       .map((value) => value.quest);
+    logger.debug("User quest points: " + JSON.stringify(userQuestPoints));
+
+    const removedQuestsSnap = await getFirestore()
+      .collection("users")
+      .doc(loggedUser.uid)
+      .collection("removedQuests")
+      .get();
+    const removedQuests = removedQuestsSnap.docs.map((doc) => doc.id);
+    logger.debug("Removed quests: " + JSON.stringify(removedQuests));
 
     // Search for a quest
     let questFound: ActiveQuest | undefined = undefined;
@@ -56,7 +65,7 @@ export const searchForQuest = onCall(
           doc.data().validityEnd > Timestamp.now() &&
           (!doc.data().queueCount ||
             doc.data().queueCount < doc.data().maxQueue) &&
-          !userQuestPoints.includes(doc.id);
+          !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
       });
 
       logger.info(`Found ${actorQuests.length} actor quests`);
@@ -103,7 +112,7 @@ export const searchForQuest = onCall(
       const quizQuests = quizQuestsSnapshot.docs.filter((doc) => {
         const valid = doc.data().validityStart <= Timestamp.now() &&
           doc.data().validityEnd > Timestamp.now() &&
-          !userQuestPoints.includes(doc.id);
+          !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
         const parentQuests = doc.data().parentQuests;
         if (!parentQuests) {
           return valid;
@@ -116,7 +125,6 @@ export const searchForQuest = onCall(
       logger.info(`Found ${quizQuests.length} quiz quests`);
 
       if (quizQuests.length > 0) {
-        logger.info("Sarch for quiz quest");
         const randomIndex = randomIntFromInterval(0, quizQuests.length - 1);
         questFound = <ActiveQuest>{
           quest: <Quest>{
@@ -138,7 +146,8 @@ export const searchForQuest = onCall(
 
       const socialQuests = socialQuestsSnapshot.docs.filter((doc) => {
         return doc.data().validityStart <= Timestamp.now() &&
-          doc.data().validityEnd > Timestamp.now();
+          doc.data().validityEnd > Timestamp.now() &&
+          !removedQuests.includes(doc.id);
       });
 
       logger.info(`Found ${socialQuests.length} social quests`);

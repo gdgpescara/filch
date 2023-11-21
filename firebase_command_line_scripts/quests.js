@@ -10,7 +10,7 @@ admin.initializeApp({
 const db = admin.firestore();
 
 const uploadQuests = () => {
-    // fs.readFile('data/actor-quiz-quests-a8.json', 'utf8', (err, data) => {
+    // fs.readFile('data/speaker-quiz.json', 'utf8', (err, data) => {
     //     if (err) {
     //         console.error('Error reading the JSON file:', err);
     //         return;
@@ -39,24 +39,17 @@ const uploadQuests = () => {
 ***REMOVED***);
 
     //get quests and save to json
-    db.collection('quests').where('parentQuests', "array-contains-any", [
-        "7Ht3teqLm6gVA2ZnjSqK",
-        "heNxpIIY7QJ29ACGIU2h",
-        "RsqZnSLF2D498DOtbhzF",
-        "cjo4I5p2nR22kT8jAeqi"
-    ]).get().then((snapshot) => {
+    db.collection('quests').where('type', "==", "actor").get().then((snapshot) => {
         const quests = [];
-        snapshot.forEach((doc) => {
-            if (doc.data().parentQuests.length > 1) {
-                quests.push({
-                    id: doc.id,
-                    ...doc.data(),
-                    validityStart: new Date(doc.data().validityStart._seconds * 1000),
-                    validityEnd: new Date(doc.data().validityEnd._seconds * 1000)
-                });
-            }
+        snapshot.docs.filter(value => !value.data().parentQuests).forEach((doc) => {
+            quests.push({
+                id: doc.id,
+                ...doc.data(),
+                validityStart: new Date(doc.data().validityStart._seconds * 1000),
+                validityEnd: new Date(doc.data().validityEnd._seconds * 1000)
+            });
         });
-        fs.writeFile('data/actor-quiz-a8.json', JSON.stringify(quests), (err) => {
+        fs.writeFile('data/actor-quests.json', JSON.stringify(quests), (err) => {
             if (err) throw err;
             console.log('Data written to file');
         });

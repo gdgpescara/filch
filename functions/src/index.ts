@@ -16,6 +16,7 @@ import {
 } from "./features/user/user_manager";
 import {scanHouseMate} from "./features/quests/social_qr_code_quest";
 import {removeActiveQuest} from "./features/quests/remove-active-quest";
+import {removedQuestCron} from "./features/quests/removed-quest-cron";
 
 initializeApp();
 
@@ -33,6 +34,7 @@ exports.removeActiveQuest = removeActiveQuest;
 
 // Cron jobs [Start]
 exports.questQueueCleaner = activeQuestsCleaner;
+exports.removedQuestCron = removedQuestCron;
 // Cron jobs [End]
 
 exports.assignPoints = assignPoints;
