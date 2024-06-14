@@ -2,6 +2,7 @@ name: filch
 sdkPath: .fvm/flutter_sdk
 packages:
   - .
+  - modules/**
 
 ide:
   intellij: true
@@ -15,16 +16,30 @@ command:
       post: melos exec --flutter --concurrency=1 -- "flutter clean" && find . -type f -name "*.iml" -exec rm -f {} \;
 
 scripts:
+  clean:all:
+    run: flutter clean
+    exec:
+      concurrency: 1
+      failFast: true
+  remove:iml:
+    run: find . -type f -name "*.iml" -exec rm -f {} \;
+
   generate:
-    run: melos build_runner:build
+    run: melos generate:i18n --no-select && melos generate:build_runner --no-select
 
-  build_runner:build:
-    run: |
-      melos exec --concurrency=1 --fail-fast --depends-on="build_runner" -- \
-        "dart pub run build_runner build --delete-conflicting-outputs"
+  generate:i18n:
+    run: dart pub run slang
+    exec:
+      failFast: true
+    select-package:
+      depends-on: "slang_build_runner"
 
-  generate:with_selection:
-    run: melos build_runner:build
+  generate:build_runner:
+    run: dart pub run build_runner build --delete-conflicting-outputs
+    exec:
+      concurrency: 1
+      failFast: true
+      orderDependents: true
     select-package:
       depends-on: "build_runner"
 
@@ -32,43 +47,72 @@ scripts:
     run: melos run format --no-select && melos run analyze --no-select
 
   fix:all:
-    run: melos exec --flutter --concurrency=1 -- "dart fix --apply"
+    run: dart fix --apply
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
 
   test:all:
     run: melos run test --no-select
 
   analyze:
-    run: melos exec --flutter --concurrency=1 --fail-fast -- "flutter analyze . --fatal-infos"
+    run: flutter analyze . --fatal-infos
+    exec:
+      concurrency: 1
+      failFast: true
 
   test:
-    run: melos exec --flutter --concurrency=1 --fail-fast -- "flutter test --coverage --reporter expanded"
+    run: flutter test --coverage --reporter expanded
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
     packageFilters:
       dirExists: test
 
   test:update_goldens:
-    run: melos exec --flutter --concurrency=1 --fail-fast --depends-on="golden_toolkit" -- "flutter test --update-goldens --reporter expanded"
+    run: flutter test --update-goldens --reporter expanded
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
+    select-package:
+      depends-on: "golden_toolkit"
 
   format:
-    run: melos exec --flutter --concurrency=1 --fail-fast -- "dart format -o write . --line-length=120"
+    run: dart format -o write . --line-length=120
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
 
   generate:icon_font:
-    run: melos exec --fail-fast -- "/bin/zsh scripts/generate_icon_font.sh"
+    run: /bin/zsh scripts/generate_icon_font.sh
+    exec:
+      failFast: true
 
   test:show_coverage:
-    run: melos exec --fail-fast -- "genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html"
-    description: Generate html coverage and show
+    run: genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html
+    exec:
+      concurrency: 1
+      failFast: true
     packageFilters:
       dirExists: coverage
 
   test:show_coverage:win:
-    run: melos exec --fail-fast -- "perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml -o coverage\html coverage\lcov.info && start coverage\html\index.html"
-    description: Generate html coverage and show
+    run: perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml -o coverage\html coverage\lcov.info && start coverage\html\index.html
+    exec:
+      concurrency: 1
+      failFast: true
     packageFilters:
       dirExists: coverage
 
   test:remove_generated_file_from_coverage:
-    run: melos exec --fail-fast -- "lcov --remove coverage/lcov.info "**/**/*.g.dart" "lib/dependency_injection/*" -o coverage/lcov.info"
-    description: Remove generated file from coverage
+    run: lcov --remove coverage/lcov.info "**/**/*.g.dart" "lib/dependency_injection/*" -o coverage/lcov.info
+    exec:
+      concurrency: 1
+      failFast: true
     packageFilters:
       dirExists: coverage
 
