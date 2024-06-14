@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../../ui.dart';
 
@@ -7,54 +8,58 @@ class ContainersSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Heading(text: 'App Card'),
-        Gap.vertical(Spacing.m),
-        SubHeading(text: 'light'),
-        Gap.vertical(Spacing.s),
-        AppCard(
+        const Heading(text: 'App Card'),
+        const Gap.vertical(Spacing.m),
+        const SubHeading(text: 'light'),
+        const Gap.vertical(Spacing.s),
+        const AppCard(
           child: SizedBox(width: double.infinity, height: 300),
         ),
-        Gap.vertical(Spacing.m),
-        SubHeading(text: 'dark'),
-        Gap.vertical(Spacing.s),
-        AppCard(
+        const Gap.vertical(Spacing.m),
+        const SubHeading(text: 'dark'),
+        const Gap.vertical(Spacing.s),
+        const AppCard(
           brightness: Brightness.dark,
           child: SizedBox(width: double.infinity, height: 300),
         ),
-        Gap.vertical(Spacing.m),
-        SubHeading(text: 'with colored border'),
-        Gap.vertical(Spacing.s),
-        AppCard(
+        const Gap.vertical(Spacing.m),
+        const SubHeading(text: 'with colored border'),
+        const Gap.vertical(Spacing.s),
+        const AppCard(
           borderColor: Colors.red,
           child: SizedBox(width: double.infinity, height: 300),
         ),
-        Gap.vertical(Spacing.l),
-        Heading(text: 'Blur Container'),
-        Gap.vertical(Spacing.m),
-        SubHeading(text: 'light'),
-        Gap.vertical(Spacing.s),
-        BlurContainer(
+        const Gap.vertical(Spacing.l),
+        const Heading(text: 'Blur Container'),
+        const Gap.vertical(Spacing.m),
+        const SubHeading(text: 'light'),
+        const Gap.vertical(Spacing.s),
+        const BlurContainer(
           child: SizedBox(width: double.infinity, height: 300),
         ),
-        Gap.vertical(Spacing.m),
-        SubHeading(text: 'dark'),
-        Gap.vertical(Spacing.s),
-        BlurContainer(
+        const Gap.vertical(Spacing.m),
+        const SubHeading(text: 'dark'),
+        const Gap.vertical(Spacing.s),
+        const BlurContainer(
           brightness: Brightness.dark,
           child: SizedBox(width: double.infinity, height: 300),
         ),
-        Gap.vertical(Spacing.l),
-        Heading(text: 'Remove focus container'),
-        Gap.vertical(Spacing.m),
+        const Gap.vertical(Spacing.l),
+        const Heading(text: 'Remove focus container'),
+        const Gap.vertical(Spacing.m),
         RemoveFocusContainer(
           child: SizedBox(
             width: double.infinity,
             height: 300,
-            child: TextField(),
+            child: Center(
+              child: ReactiveTextField(
+                formControl: FormControl<String>(),
+              ),
+            ),
           ),
         ),
       ],

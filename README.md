@@ -1,6 +1,6 @@
 # filch
 
-DevFest Pescara 2023 app.
+DevFest Pescara app.
 
 ## Getting Started
 

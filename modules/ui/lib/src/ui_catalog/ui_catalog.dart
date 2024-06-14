@@ -6,6 +6,7 @@ import 'sections/containers_section.dart';
 import 'sections/radius_section.dart';
 import 'sections/spacing_section.dart';
 import 'sections/typography_section.dart';
+import 'sections/user_section.dart';
 
 class UiCatalog extends StatelessWidget {
   const UiCatalog({super.key});
@@ -28,6 +29,8 @@ class UiCatalog extends StatelessWidget {
           AppColorsSection(),
           ..._space,
           ContainersSection(),
+          ..._space,
+          UserSection(),
           ..._space,
         ],
       ),
