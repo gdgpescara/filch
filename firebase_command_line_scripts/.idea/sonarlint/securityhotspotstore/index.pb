@@ -47,3 +47,11 @@ D
 users-by-points.json,6/7/676bac15edece0ba05f436e5fc50851eb6558948
 Q
 !gopherpuff-members-by-points.json,7/6/761589192dca851f69cc97bf27487a86c848a32e
+F
+serviceAccountKey.json,9/e/9e09dc4a4da7e0618861631ef92e4b46075343a7
+P
+ data/users-points-for-quest.json,f/8/f81dd4ad4ff3bb2e4fd98749cca59cdc5e1dbcbf
+L
+data/users-social-quest.json,c/6/c65bb3079717dfca90899fade0f8e1d29a5c29d6
+G
+data/sponsor-scans.json,8/d/8d86fa3f522d59f94f20971e0e682578153d0d5c

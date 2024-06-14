@@ -8,13 +8,13 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
+import 'package:i18n/i18n.dart';
 import 'package:loggy/loggy.dart';
 
 import 'application.dart';
-import 'dependency_injection/dependency_injection.config.dart';
-import 'dependency_injection/dependency_injection.dart';
+import 'di/app_di.config.dart';
+import 'di/app_di.dart';
 import 'firebase_options.dart';
-import 'i18n/strings.g.dart';
 
 void main() {
   runZonedGuarded(
@@ -25,7 +25,7 @@ void main() {
       Loggy.initLoggy(
         logPrinter: const PrettyDeveloperPrinter(),
       );
-      injector.init();
+      await injector.init();
       FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
       PlatformDispatcher.instance.onError = (error, stack) {
         FirebaseCrashlytics.instance.recordError(error, stack, fatal: true);

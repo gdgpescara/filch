@@ -1,0 +1,16 @@
+{
+  "sign_in_providers": {
+    "button": "Attendee Sign In",
+    "facebook": "Facebook",
+    "twitter": "Twitter",
+    "google": "Google",
+    "apple": "Apple"
+  },
+  "staff_sign_in": {
+    "button": "Staff Sign In",
+    "email": "Email",
+    "password": "Password",
+    "sign_in": "Sign In",
+    "change_password": "Change Password"
+  }
+}

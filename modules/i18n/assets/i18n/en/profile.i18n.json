@@ -1,0 +1,30 @@
+{
+  "user_info": {
+    "name": {
+      "label": "name: "
+    },
+    "email": {
+      "label": "email: "
+    },
+    "nimbus_ticket": {
+      "label": "nimbus ticket: ",
+      "message": "Wow, you got a nimbus ticket.\nYou’re very lucky, quests will give you more points!"
+    }
+  },
+  "my_points": {
+    "label": "my points: ",
+    "detail_button": {
+      "label": "Show points details"
+    }
+  },
+  "remove_account": {
+    "button": "Remove Account",
+    "dialog": {
+      "title": "Remove Account",
+      "content": "Are you sure you want to remove your account? This action cannot be undone.",
+      "confirm": "Remove Account"
+    },
+    "success": "Your account has been removed.",
+    "error": "An error occurred while removing your account."
+  }
+}

@@ -4,13 +4,12 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:i18n/i18n.dart';
+import 'package:ui/ui.dart';
 
-import 'app_router.dart';
-import 'common_functionalities/splash/splash_page.dart';
-import 'common_functionalities/state/app_cubit.dart';
-import 'dependency_injection/dependency_injection.dart';
-import 'i18n/strings.g.dart';
-import 'theme/app_theme.dart';
+import 'app_state/app_cubit.dart';
+import 'di/app_di.dart';
+
 
 class Application extends StatefulWidget {
   const Application({super.key});
@@ -37,7 +36,7 @@ class _ApplicationState extends State<Application> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
-                  child: Text(t.commons.buttons.ok),
+                  child: Text(t.common.buttons.ok),
                 ),
               ],
             );
@@ -60,7 +59,8 @@ class _ApplicationState extends State<Application> {
       child: BlocListener<AppCubit, AppState>(
         listener: (context, state) {
           if (state is AppUnauthenticated) {
-            Navigator.pushNamedAndRemoveUntil(context, SplashPage.routeName, (route) => false);
+            // todonaviate
+            // Navigator.pushNamedAndRemoveUntil(context, SplashPage.routeName, (route) => false);
           }
         },
         child: MaterialApp(
@@ -72,8 +72,7 @@ class _ApplicationState extends State<Application> {
           debugShowCheckedModeBanner: false,
           supportedLocales: AppLocaleUtils.supportedLocales,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          initialRoute: AppRouter.initialRoute,
-          onGenerateRoute: AppRouter.generateAppRoute,
+          home: const UiCatalog(),
         ),
       ),
     );
