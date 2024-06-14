@@ -9,7 +9,10 @@ class RemoveFocusContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => SystemChannels.textInput.invokeMethod('TextInput.hide'),
+      onTap: () {
+        FocusScope.of(context).unfocus();
+        SystemChannels.textInput.invokeMethod('TextInput.hide');
+      },
       child: child,
     );
   }
