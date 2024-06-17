@@ -10,7 +10,6 @@ import 'package:ui/ui.dart';
 import 'app_state/app_cubit.dart';
 import 'di/app_di.dart';
 
-
 class Application extends StatefulWidget {
   const Application({super.key});
 
@@ -72,7 +71,15 @@ class _ApplicationState extends State<Application> {
           debugShowCheckedModeBanner: false,
           supportedLocales: AppLocaleUtils.supportedLocales,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          home: const UiCatalog(),
+          home: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(Spacing.xl),
+              child: Image.asset(
+                'logo/logo.png',
+                package: 'assets',
+              ),
+            ),
+          ),
         ),
       ),
     );

@@ -6,16 +6,7 @@
     <uses-permission android:name="android.permission.CAMERA"/>
     <uses-permission android:name="com.google.android.gms.permission.AD_ID" tools:node="remove"/>
 
-    <queries>
-        <provider android:authorities="com.facebook.katana.provider.PlatformProvider"/>
-    </queries>
-
     <application android:name="${applicationName}" android:icon="@mipmap/ic_launcher" android:label="DevFest Pescara 2023" android:usesCleartextTraffic="true">
-
-        <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/fb_app_id"/>
-        <meta-data android:name="com.facebook.sdk.ClientToken" android:value="@string/fb_client_token"/>
-
-        <provider android:authorities="${applicationId}.FacebookInitProvider" android:name="com.facebook.internal.FacebookInitProvider" android:exported="false"/>
 
         <activity android:name=".MainActivity" android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode" android:exported="true" android:hardwareAccelerated="true" android:launchMode="singleTop" android:theme="@style/LaunchTheme" android:windowSoftInputMode="adjustResize">
             <!-- Specifies an Android theme to apply to this Activity as soon as
