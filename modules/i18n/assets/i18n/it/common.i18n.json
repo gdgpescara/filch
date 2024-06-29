@@ -10,10 +10,6 @@
   "dialogs": {
     "title": "Ops!"
   },
-  "errors": {
-    "generic": "Si è verificato un errore",
-    "generic_retry": "Si è verificato un errore, riprova più tardi"
-  },
   "duration": {
     "hours": {
       "one": "$n ora",
@@ -27,5 +23,26 @@
       "one": "$n secondo",
       "other": "$n secondi"
     }
+  },
+  "errors": {
+    "generic": "Si è verificato un errore",
+    "generic_retry": "Si è verificato un errore, riprova più tardi"
+  },
+  "time": {
+    "labels": {
+      "year": "Anno",
+      "month": "Mese",
+      "day": "Giorno",
+      "hour": "Ora",
+      "minute": "Minuto",
+      "second": "Secondo",
+      "am": "AM",
+      "pm": "PM"
+    }
+  },
+  "semantics": {
+    "yes": "Sì",
+    "no": "No",
+    "loading": "Caricamento..."
   }
 }

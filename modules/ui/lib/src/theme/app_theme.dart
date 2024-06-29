@@ -1,35 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-part 'color_schemes.dart';
-part 'custom_color.dart';
+part 'extended_color.dart';
 part 'text_theme.dart';
 
-ThemeData lightTheme() {
+final _seedColor = _googleYellow.seed;
+
+ThemeData buildTheme(Brightness brightness) {
   final theme = ThemeData(
     useMaterial3: true,
-    colorScheme: lightColorScheme,
-    extensions: [lightCustomColors],
+    colorScheme: ColorScheme.fromSeed(seedColor: _seedColor, brightness: brightness),
+    extensions: const [_extendedColor],
     inputDecorationTheme: _inputDecorationTheme,
   );
+
   return theme.copyWith(
     appBarTheme: _appBarTheme(theme),
     textTheme: _textTheme(theme.textTheme),
   );
 }
 
-ThemeData darkTheme() {
-  final theme = ThemeData(
-    useMaterial3: true,
-    colorScheme: darkColorScheme,
-    extensions: [darkCustomColors],
-    inputDecorationTheme: _inputDecorationTheme,
-  );
-
-  return theme.copyWith(
-    appBarTheme: _appBarTheme(theme),
-    textTheme: _textTheme(theme.textTheme),
-  );
+extension ThemeDataExtension on BuildContext {
+  ThemeData get theme => Theme.of(this);
+  Brightness get brightness => theme.brightness;
+  TextTheme get textTheme => theme.textTheme;
+  ColorScheme get colorScheme => theme.colorScheme;
+  ExtendedColor get appColors => theme.extension<ExtendedColor>()!;
 }
 
 final _inputDecorationTheme = InputDecorationTheme(
