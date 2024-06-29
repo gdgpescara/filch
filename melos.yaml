@@ -25,7 +25,7 @@ scripts:
     run: find . -type f -name "*.iml" -exec rm -f {} \;
 
   generate:
-    run: melos generate:i18n --no-select && melos generate:build_runner --no-select
+    run: melos generate:i18n --no-select && melos generate:routes --no-select && melos generate:build_runner --no-select
 
   generate:i18n:
     run: dart pub run slang
@@ -42,6 +42,13 @@ scripts:
       orderDependents: true
     select-package:
       depends-on: "build_runner"
+
+  generate:routes:
+    run: dart pub run routefly
+    exec:
+      failFast: true
+    select-package:
+      depends-on: "routefly"
 
   lint:all:
     run: melos run format --no-select && melos run analyze --no-select

@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../ui.dart';
+import 'package:i18n/i18n.dart';
 
 class Logo extends StatelessWidget {
   const Logo({super.key});
@@ -11,21 +9,11 @@ class Logo extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Text(
-          'WASTY',
-          style: GoogleFonts.abel(
-            fontSize: 34,
-            fontWeight: FontWeight.w900,
-            color: Theme.of(context).extension<CustomColors>()?.logodark,
-          ),
-        ),
-        Text(
-          'Your recycling assistant',
-          style: GoogleFonts.kufam(
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-            color: Theme.of(context).extension<CustomColors>()?.logolight,
-          ),
+        Image.asset(
+          'logo/logo.png',
+          package: 'assets',
+          height: 100,
+          semanticLabel: t.devfest2024.semantic.logo,
         ),
       ],
     );

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../ui.dart';
+
 class UserPicture extends StatelessWidget {
   const UserPicture({super.key, this.imageUrl, this.badgeName});
 
@@ -21,7 +23,7 @@ class UserPicture extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(
-                  color: Theme.of(context).colorScheme.onSurface,
+                  color: context.colorScheme.onSurface,
                   width: 2,
                 ),
               ),

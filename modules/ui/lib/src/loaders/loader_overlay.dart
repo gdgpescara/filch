@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 
 import '../../ui.dart';
 
@@ -34,7 +33,7 @@ class LoaderOverlay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (message == null && messageWidget == null) ...[
-              SvgPicture.asset('logo/logo_light.svg', height: 100, package: 'assets'),
+              Image.asset('logo/logo.png', package: 'assets', height: 100),
               const Gap.vertical(Spacing.l),
             ],
             const LoaderAnimation(),
