@@ -1,7 +1,7 @@
 name: filch
 description: DevFest Pescara app.
 publish_to: 'none'
-version: 2.0.0+11
+version: 3.0.0+12
 
 environment:
   sdk: '>=3.1.2 <4.0.0'
@@ -24,18 +24,18 @@ dependencies:
   get_it: ^7.7.0
   injectable: ^2.4.2
   google_fonts: ^6.2.1
-  firebase_core: ^3.1.0
-  firebase_messaging: ^15.0.2
-  cloud_firestore: ^5.0.2
-  cloud_functions: ^5.0.2
-  firebase_crashlytics: ^4.0.1
+  firebase_core: ^3.2.0
+  firebase_messaging: ^15.0.3
+  cloud_firestore: ^5.1.0
+  cloud_functions: ^5.0.3
+  firebase_crashlytics: ^4.0.3
   loggy: ^2.0.3
   flutter_loggy: ^2.0.3
   bloc: ^8.1.4
   flutter_bloc: ^8.1.6
   equatable: ^2.0.5
   routefly: ^2.0.2
-  accessibility_tools: ^2.2.0
+  accessibility_tools: ^2.2.1
   intl: ^0.19.0
 
 dev_dependencies:
