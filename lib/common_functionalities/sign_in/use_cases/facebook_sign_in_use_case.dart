@@ -15,7 +15,7 @@ class FacebookSignInUseCase {
     return runSafetyFuture(
       () async {
         final loginResult = await FacebookAuth.instance.login(permissions: ['email', 'public_profile']);
-        final credential = FacebookAuthProvider.credential(loginResult.accessToken!.token);
+        final credential = FacebookAuthProvider.credential(loginResult.accessToken!.tokenString);
         return _auth.signInWithCredential(credential);
       },
       onException: (e) {

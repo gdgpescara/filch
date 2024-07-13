@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slang/builder/utils/string_extensions.dart';
 
 import '../../../../common_functionalities/widgets/app_card.dart';
 import '../../../../common_functionalities/widgets/loader_animation.dart';
@@ -30,8 +29,8 @@ class SocialQrCodeView extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         state.isCorrect
-                            ? t.active_quest.social.qr_code.correct(n: state.points, house: state.house.capitalize())
-                            : t.active_quest.social.qr_code.incorrect(house: state.house.capitalize()),
+                            ? t.active_quest.social.qr_code.correct(n: state.points, house: state.house)
+                            : t.active_quest.social.qr_code.incorrect(house: state.house),
                       ),
                       backgroundColor: state.isCorrect
                           ? Theme.of(context).extension<CustomColors>()?.success

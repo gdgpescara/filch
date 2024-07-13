@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:slang/builder/utils/string_extensions.dart';
 
 import '../../../common_functionalities/widgets/loader_overlay.dart';
 import '../../../dependency_injection/dependency_injection.dart';
@@ -41,8 +40,8 @@ class QuizQuestWidget extends StatelessWidget {
                     SnackBar(
                       content: Text(
                         state.isCorrect
-                            ? t.active_quest.quiz.answer.correct(n: state.points, house: state.house.capitalize())
-                            : t.active_quest.quiz.answer.incorrect(house: state.house.capitalize()),
+                            ? t.active_quest.quiz.answer.correct(n: state.points, house: state.house)
+                            : t.active_quest.quiz.answer.incorrect(house: state.house),
                       ),
                       backgroundColor: state.isCorrect
                           ? Theme.of(context).extension<CustomColors>()?.success

@@ -1,7 +1,11 @@
 plugins {
     id "com.android.application"
+    // START: FlutterFire Configuration
+    id 'com.google.gms.google-services'
+    // END: FlutterFire Configuration
     id "kotlin-android"
     id "dev.flutter.flutter-gradle-plugin"
+    id "com.google.firebase.crashlytics"
 }
 
 def localProperties = new Properties()
@@ -26,20 +30,22 @@ def keystorePropertiesFile = rootProject.file('.keystore/keystore.properties')
 def keystoreProperties = new Properties()
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
+def compileSdkVersion = localProperties.getProperty('flutter.compileSdkVersion')
+def flutterMinSdkVersion = localProperties.getProperty('flutter.minSdkVersion')
 def flutterNdkVersion = localProperties.getProperty('flutter.ndkVersion')
 
 android {
     namespace "it.gdgpescara.filch"
-    compileSdk 33
+    compileSdk compileSdkVersion.toInteger()
     ndkVersion flutterNdkVersion
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
     sourceSets {
@@ -48,8 +54,8 @@ android {
 
     defaultConfig {
         applicationId "it.gdgpescara.filch"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdkVersion flutterMinSdkVersion.toInteger()
+        targetSdkVersion compileSdkVersion.toInteger()
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
         multiDexEnabled true

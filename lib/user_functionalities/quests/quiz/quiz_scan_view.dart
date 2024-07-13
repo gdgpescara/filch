@@ -49,7 +49,6 @@ class QuizScanView extends StatelessWidget {
           detectionSpeed: DetectionSpeed.noDuplicates,
           formats: [BarcodeFormat.qrCode],
         ),
-        startDelay: true,
         onDetect: (capture) {
           final barcodes = capture.barcodes;
           if (barcodes.isNotEmpty && barcodes.first.rawValue != null) {

@@ -56,7 +56,6 @@ flutter_*.png
 linked_*.ds
 unlinked.ds
 unlinked_spec.ds
-.fvm/flutter_sdk
 pubspec_overrides.yaml
 **/**/pubspec_overrides.yaml
 
@@ -144,3 +143,6 @@ app.*.map.json
 /ios/Secrets.xcconfig
 /functions/.idea/
 /android/app/src/main/res/values/strings.xml
+
+# FVM Version Cache
+.fvm/
