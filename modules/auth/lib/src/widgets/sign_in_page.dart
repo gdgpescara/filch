@@ -37,9 +37,9 @@ class SignInPage extends StatelessWidget {
                             style: Theme.of(context)
                                 .textTheme
                                 .displayMedium
-                                ?.copyWith(color: Theme.of(context).colorScheme.onError),
+                                ?.copyWith(color: context.colorScheme.onError),
                           ),
-                          backgroundColor: Theme.of(context).colorScheme.error,
+                          backgroundColor: context.colorScheme.error,
                           duration: const Duration(seconds: 20),
                           showCloseIcon: true,
                         ),
@@ -49,7 +49,7 @@ class SignInPage extends StatelessWidget {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           content: Text('${failure.code}: ${failure.message}'),
-                          backgroundColor: Theme.of(context).colorScheme.error,
+                          backgroundColor: context.colorScheme.error,
                         ),
                       );
                       break;

@@ -1,16 +1,16 @@
 {
   "sign_in_providers": {
+    "apple": "Apple",
     "button": "Accesso partecipanti",
     "facebook": "Facebook",
-    "twitter": "Twitter",
     "google": "Google",
-    "apple": "Apple"
+    "twitter": "Twitter"
   },
   "staff_sign_in": {
     "button": "Accesso Staff",
+    "change_password": "Cambia Password",
     "email": "Email",
     "password": "Password",
-    "sign_in": "Accedi",
-    "change_password": "Cambia Password"
+    "sign_in": "Accedi"
   }
 }

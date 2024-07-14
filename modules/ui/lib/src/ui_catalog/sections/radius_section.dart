@@ -30,7 +30,7 @@ class RadiusSection extends StatelessWidget {
   Widget _spaceBox(BuildContext context, double radius) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.onSurface),
+        border: Border.all(color: context.colorScheme.onSurface),
         borderRadius: BorderRadius.circular(radius),
       ),
       child: const SizedBox(height: 50, width: double.infinity),

@@ -36,7 +36,7 @@ class SpacingSection extends StatelessWidget {
   Widget _spaceBox(BuildContext context, double spacing) {
     return DecoratedBox(
       decoration: BoxDecoration(
-        border: Border.all(color: Theme.of(context).colorScheme.onSurface),
+        border: Border.all(color: context.colorScheme.onSurface),
       ),
       child: SizedBox(height: spacing, width: double.infinity),
     );

@@ -36,12 +36,40 @@ class CorePackageModule extends _i1.MicroPackageModule {
       instanceName: 'full',
     );
     gh.lazySingleton<_i5.DateFormat>(
+      () => dateFormatModule.dateFormatYear,
+      instanceName: 'year',
+    );
+    gh.lazySingleton<_i5.DateFormat>(
+      () => dateFormatModule.dateFormatHour,
+      instanceName: 'hour',
+    );
+    gh.lazySingleton<_i5.DateFormat>(
+      () => dateFormatModule.dateFormatAmPm,
+      instanceName: 'amPm',
+    );
+    gh.lazySingleton<_i5.DateFormat>(
+      () => dateFormatModule.dateFormatMonth,
+      instanceName: 'month',
+    );
+    gh.lazySingleton<_i5.DateFormat>(
       () => dateFormatModule.dateFormatWeekDay,
       instanceName: 'weekDay',
     );
     gh.lazySingleton<_i5.DateFormat>(
+      () => dateFormatModule.dateFormatDay,
+      instanceName: 'day',
+    );
+    gh.lazySingleton<_i5.DateFormat>(
+      () => dateFormatModule.dateFormatMinute,
+      instanceName: 'minute',
+    );
+    gh.lazySingleton<_i5.DateFormat>(
       () => dateFormatModule.dateFormatDate,
       instanceName: 'onlyDate',
+    );
+    gh.lazySingleton<_i5.DateFormat>(
+      () => dateFormatModule.dateFormatFullReadable,
+      instanceName: 'fullReadable',
     );
   }
 }
