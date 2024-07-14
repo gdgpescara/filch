@@ -10,10 +10,6 @@
   "dialogs": {
     "title": "Ops!"
   },
-  "errors": {
-    "generic": "An unknown error occurred.",
-    "generic_retry": "An unknown error occurred. Please try again."
-  },
   "duration": {
     "hours": {
       "one": "$n hour",
@@ -27,5 +23,26 @@
       "one": "$n second",
       "other": "$n seconds"
     }
+  },
+  "errors": {
+    "generic": "An unknown error occurred.",
+    "generic_retry": "An unknown error occurred. Please try again."
+  },
+  "time": {
+    "labels": {
+      "year": "Year",
+      "month": "Month",
+      "day": "Day",
+      "hour": "Hour",
+      "minute": "Minute",
+      "second": "Second",
+      "am": "AM",
+      "pm": "PM"
+    }
+  },
+  "semantics": {
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading..."
   }
 }

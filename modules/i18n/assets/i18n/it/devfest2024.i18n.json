@@ -1,0 +1,10 @@
+{
+  "semantic": {
+    "logo": "Back to DevFest Pescara 2024"
+  },
+  "delorean_clock": {
+    "destination_time": "ORARIO DI DESTINAZIONE",
+    "present_time": "ORARIO ATTUALE",
+    "last_time_departed": "ULTIMA PARTENZA"
+  }
+}

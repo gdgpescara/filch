@@ -1,14 +1,17 @@
 import 'dart:async';
 
+import 'package:accessibility_tools/accessibility_tools.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
+import 'package:routefly/routefly.dart';
 import 'package:ui/ui.dart';
 
-import 'app_state/app_cubit.dart';
-import 'di/app_di.dart';
+import 'auth_state/auth_cubit.dart';
+import 'routes.g.dart';
 
 class Application extends StatefulWidget {
   const Application({super.key});
@@ -20,6 +23,11 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   final _navigatorKey = GlobalKey<NavigatorState>();
   late StreamSubscription<RemoteMessage> _subscription;
+  final _router = Routefly.routerConfig(
+    initialPath: routePaths.path,
+    routes: routes,
+    routeBuilder: routeBuilder,
+  );
 
   @override
   void initState() {
@@ -53,33 +61,31 @@ class _ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AppCubit>(
-      create: (context) => injector(),
-      child: BlocListener<AppCubit, AppState>(
+    return BlocProvider<AuthCubit>(
+      create: (context) => GetIt.I(),
+      child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
-          if (state is AppUnauthenticated) {
-            // todonaviate
-            // Navigator.pushNamedAndRemoveUntil(context, SplashPage.routeName, (route) => false);
+          if (state is Unauthenticated) {
+            Routefly.replace(routePaths.path);
           }
         },
-        child: MaterialApp(
-          navigatorKey: _navigatorKey,
+        child: MaterialApp.router(
           locale: TranslationProvider.of(context).flutterLocale,
           themeMode: ThemeMode.dark,
-          darkTheme: darkTheme(),
-          theme: lightTheme(),
+          darkTheme: buildTheme(Brightness.dark),
+          theme: buildTheme(Brightness.light),
           debugShowCheckedModeBanner: false,
           supportedLocales: AppLocaleUtils.supportedLocales,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          home: Center(
-            child: Padding(
-              padding: const EdgeInsets.all(Spacing.xl),
-              child: Image.asset(
-                'logo/logo.png',
-                package: 'assets',
-              ),
-            ),
-          ),
+          routerConfig: _router,
+          themeAnimationCurve: Curves.easeInOut,
+          themeAnimationDuration: const Duration(milliseconds: 600),
+          builder: (context, child) {
+            return AccessibilityTools(
+              checkFontOverflows: true,
+              child: child,
+            );
+          },
         ),
       ),
     );

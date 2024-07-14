@@ -25,7 +25,7 @@ scripts:
     run: find . -type f -name "*.iml" -exec rm -f {} \;
 
   generate:
-    run: melos generate:i18n --no-select && melos generate:build_runner --no-select
+    run: melos generate:i18n --no-select && melos generate:routes --no-select && melos generate:build_runner --no-select
 
   generate:i18n:
     run: dart pub run slang
@@ -42,6 +42,13 @@ scripts:
       orderDependents: true
     select-package:
       depends-on: "build_runner"
+
+  generate:routes:
+    run: dart pub run routefly
+    exec:
+      failFast: true
+    select-package:
+      depends-on: "routefly"
 
   lint:all:
     run: melos run format --no-select && melos run analyze --no-select
@@ -118,22 +125,28 @@ scripts:
 
   # build scripts ------------------------------------------------------------------------------
   build:android:aab:
-    run: |
-      melos exec --flutter --concurrency=1 --fail-fast -- \
-        "flutter build appbundle -t lib/main.dart --release --obfuscate --split-debug-info=bundle/debug --dart-define-from-file=.env/remote.json"
+    run: flutter build appbundle -t lib/main.dart --release --obfuscate --split-debug-info=bundle/debug --dart-define-from-file=.env/remote.json
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
     select-package:
       scope: "filch"
 
   build:android:apk:
-    run: |
-      melos exec --flutter --concurrency=1 --fail-fast -- \
-        "flutter build apk -t lib/main.dart --release --obfuscate --split-debug-info=android/debug --dart-define-from-file=.env/remote.json"
+    run: flutter build apk -t lib/main.dart --release --obfuscate --split-debug-info=android/debug --dart-define-from-file=.env/remote.json
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
     select-package:
       scope: "filch"
 
   build:ios:ipa:
-    run: |
-      melos exec --flutter --concurrency=1 --fail-fast -- \
-        "flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json"
+    run: flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
     select-package:
       scope: "filch"

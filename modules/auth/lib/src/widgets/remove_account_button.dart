@@ -7,7 +7,14 @@ import 'package:ui/ui.dart';
 import '../use_cases/remove_account_use_case.dart';
 
 class RemoveAccountButton extends StatelessWidget {
-  const RemoveAccountButton({super.key});
+  const RemoveAccountButton({
+    super.key,
+    required this.onNeedLogin,
+    required this.onAccountRemoved,
+  });
+
+  final VoidCallback onNeedLogin;
+  final VoidCallback onAccountRemoved;
 
   @override
   Widget build(BuildContext context) {
@@ -15,18 +22,27 @@ class RemoveAccountButton extends StatelessWidget {
       onPressed: () => _removeAccount(context),
       child: Text(
         t.profile.remove_account.button,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Theme.of(context).colorScheme.error),
+        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: context.colorScheme.error),
       ),
     );
   }
 
   void _removeAccount(BuildContext context) {
-    showAdaptiveDialog<void>(context: context, builder: (context) => const _RemoveAccountDialog());
+    showAdaptiveDialog<void>(
+      context: context,
+      builder: (context) => _RemoveAccountDialog(
+        onNeedLogin,
+        onAccountRemoved,
+      ),
+    );
   }
 }
 
 class _RemoveAccountDialog extends StatefulWidget {
-  const _RemoveAccountDialog();
+  const _RemoveAccountDialog(this.onNeedLogin, this.onAccountRemoved);
+
+  final VoidCallback onNeedLogin;
+  final VoidCallback onAccountRemoved;
 
   @override
   State<_RemoveAccountDialog> createState() => _RemoveAccountDialogState();
@@ -52,8 +68,7 @@ class _RemoveAccountDialogState extends State<_RemoveAccountDialog> {
   }
 
   Future<void> _removeAccount(BuildContext context) async {
-    // TODOnavigate to login
-    // await Navigator.pushNamed(context, SignInPage.routeName);
+    widget.onNeedLogin();
     await GetIt.I<RemoveAccountUseCase>()().when(
       progress: () => LoaderOverlay.show(context),
       success: (_) => _navigateToSplash(context),
@@ -64,19 +79,29 @@ class _RemoveAccountDialogState extends State<_RemoveAccountDialog> {
   void _navigateToSplash(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(t.profile.remove_account.success),
-        backgroundColor: Theme.of(context).extension<CustomColors>()?.success,
+        content: Text(
+          t.profile.remove_account.success,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: context.appColors.success.brightnessColor(context).onColorContainer,
+              ),
+        ),
+        backgroundColor: context.appColors.success.brightnessColor(context).colorContainer,
       ),
     );
-    // TODOnavigate to splash
-    // Navigator.pushNamedAndRemoveUntil(context, SplashPage.routeName, (route) => false);
+    widget.onAccountRemoved();
   }
 
   void _showError(BuildContext context) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(t.profile.remove_account.error),
-        backgroundColor: Theme.of(context).extension<CustomColors>()?.error,
+        content: Text(
+          t.profile.remove_account.success,
+          style: Theme.of(context)
+              .textTheme
+              .bodyMedium
+              ?.copyWith(color: context.appColors.error.brightnessColor(context).onColorContainer),
+        ),
+        backgroundColor: context.appColors.error.brightnessColor(context).colorContainer,
       ),
     );
   }
