@@ -8,6 +8,8 @@ import 'package:ui/ui.dart';
 import '../../routes.g.dart';
 import 'state/bootstrap_cubit.dart';
 
+part 'state/state_listener.dart';
+
 class AppPage extends StatelessWidget {
   const AppPage({super.key});
 
@@ -16,23 +18,19 @@ class AppPage extends StatelessWidget {
     return BlocProvider<BootstrapCubit>(
       create: (context) => GetIt.I()..init(),
       child: BlocListener<BootstrapCubit, BootstrapState>(
-        listener: (context, state) {
-          if (state is BootstrapDone) {
-            Routefly.navigate(routePaths.countdown);
-          }
-        },
+        listener: _stateListener,
         child: Scaffold(
-          body: Container(
-            alignment: Alignment.center,
-            padding: const EdgeInsets.all(Spacing.xxxl),
+          body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  'logo/logo.png',
-                  height: 100,
-                  semanticLabel: t.devfest2024.semantic.logo,
-                  package: 'assets',
+                Padding(
+                  padding: const EdgeInsets.all(Spacing.xxxl),
+                  child: Image.asset(
+                    'logo/logo.png',
+                    semanticLabel: t.devfest2024.semantic.logo,
+                    package: 'assets',
+                  ),
                 ),
                 const Gap.vertical(Spacing.xxl),
                 const LoaderAnimation(),

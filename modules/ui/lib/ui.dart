@@ -1,4 +1,4 @@
-library ui;
+library;
 
 export 'src/containers/containers.dart';
 export 'src/loaders/loaders.dart';

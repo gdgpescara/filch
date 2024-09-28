@@ -12,6 +12,7 @@ import 'package:ui/ui.dart';
 
 import 'auth_state/auth_cubit.dart';
 import 'routes.g.dart';
+import 'theme_state/theme_cubit.dart';
 
 class Application extends StatefulWidget {
   const Application({super.key});
@@ -61,29 +62,41 @@ class _ApplicationState extends State<Application> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<AuthCubit>(
-      create: (context) => GetIt.I(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthCubit>(
+          create: (context) => GetIt.I(),
+        ),
+        BlocProvider<ThemeCubit>(
+          create: (context) => GetIt.I(),
+        ),
+      ],
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is Unauthenticated) {
-            Routefly.replace(routePaths.path);
+            Routefly.navigate(routePaths.path);
           }
         },
-        child: MaterialApp.router(
-          locale: TranslationProvider.of(context).flutterLocale,
-          themeMode: ThemeMode.dark,
-          darkTheme: buildTheme(Brightness.dark),
-          theme: buildTheme(Brightness.light),
-          debugShowCheckedModeBanner: false,
-          supportedLocales: AppLocaleUtils.supportedLocales,
-          localizationsDelegates: GlobalMaterialLocalizations.delegates,
-          routerConfig: _router,
-          themeAnimationCurve: Curves.easeInOut,
-          themeAnimationDuration: const Duration(milliseconds: 600),
-          builder: (context, child) {
-            return AccessibilityTools(
-              checkFontOverflows: true,
-              child: child,
+        child: BlocBuilder<ThemeCubit, ThemeState>(
+          builder: (context, state) {
+            return MaterialApp.router(
+              locale: TranslationProvider
+                  .of(context)
+                  .flutterLocale,
+              themeMode: ThemeMode.dark,
+              theme: buildTheme(Brightness.dark, state.seedColor),
+              debugShowCheckedModeBanner: false,
+              supportedLocales: AppLocaleUtils.supportedLocales,
+              localizationsDelegates: GlobalMaterialLocalizations.delegates,
+              routerConfig: _router,
+              themeAnimationCurve: Curves.easeInOut,
+              themeAnimationDuration: const Duration(milliseconds: 600),
+              builder: (context, child) {
+                return AccessibilityTools(
+                  checkFontOverflows: true,
+                  child: child,
+                );
+              },
             );
           },
         ),

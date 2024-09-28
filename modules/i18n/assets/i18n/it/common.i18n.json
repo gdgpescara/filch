@@ -44,5 +44,19 @@
     "yes": "Sì",
     "no": "No",
     "loading": "Caricamento..."
+  },
+  "home": {
+    "bottom_nav": {
+      "ranking": "Classifica",
+      "current_quest": "Missione",
+      "profile": "Profilo",
+      "scan": "Scan",
+      "shifts": "Turni"
+    }
+  },
+  "user": {
+    "image": {
+      "semantic": "Immagine utente"
+    }
   }
 }

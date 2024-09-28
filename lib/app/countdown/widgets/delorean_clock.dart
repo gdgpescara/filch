@@ -70,7 +70,7 @@ class DeloreanClock extends StatelessWidget {
               const Gap.vertical(Spacing.s),
               Text(
                 label,
-                style: Theme.of(context).getTextTheme(TextThemeType.themeSpecific).labelSmall,
+                style: context.getTextTheme(TextThemeType.themeSpecific).labelSmall,
               ),
             ],
           ),
@@ -98,7 +98,7 @@ class _AmPmItem extends StatelessWidget {
       children: [
         Text(
           t.common.time.labels.am,
-          style: Theme.of(context).getTextTheme(TextThemeType.themeSpecific).labelSmall,
+          style: context.getTextTheme(TextThemeType.themeSpecific).labelSmall,
         ),
         Icon(
           Icons.circle,
@@ -108,7 +108,7 @@ class _AmPmItem extends StatelessWidget {
         const Gap.vertical(Spacing.s),
         Text(
           t.common.time.labels.pm,
-          style: Theme.of(context).getTextTheme(TextThemeType.themeSpecific).labelSmall,
+          style: context.getTextTheme(TextThemeType.themeSpecific).labelSmall,
         ),
         Icon(
           Icons.circle,
@@ -139,7 +139,7 @@ class _DigitalClockItem extends StatelessWidget {
       children: [
         Text(
           digitalClockPart.label,
-          style: Theme.of(context).getTextTheme(TextThemeType.themeSpecific).labelSmall,
+          style: context.getTextTheme(TextThemeType.themeSpecific).labelSmall,
         ),
         _DigitalText(text: value, color: color),
       ],

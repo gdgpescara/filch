@@ -8,8 +8,18 @@ import 'providers_sign_in.dart';
 import 'sign_in_switcher_button.dart';
 import 'staff_sign_in.dart';
 
+part 'state_listener.dart';
+
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key, required this.signButtonBuilder});
+  const SignInPage({super.key, this.signButtonBuilder = _defaultSignButtonBuilder});
+
+  static Widget _defaultSignButtonBuilder(Widget signInButtons) {
+    return Container(
+      alignment: Alignment.center,
+      padding: const EdgeInsets.all(Spacing.xl),
+      child: signInButtons,
+    );
+  }
 
   final Widget Function(Widget signInButtons) signButtonBuilder;
 
@@ -22,43 +32,7 @@ class SignInPage extends StatelessWidget {
           create: (context) => GetIt.I(),
           child: BlocListener<SignInCubit, SignInState>(
             listenWhen: (previous, current) => current is SignInActionsState,
-            listener: (context, state) {
-              switch (state) {
-                case SignInSuccess():
-                  Navigator.pop(context);
-                  break;
-                case SignInFailure(failure: final failure):
-                  switch (failure.code) {
-                    case 'account-exists-with-different-credential':
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            failure.message,
-                            style: Theme.of(context)
-                                .textTheme
-                                .displayMedium
-                                ?.copyWith(color: context.colorScheme.onError),
-                          ),
-                          backgroundColor: context.colorScheme.error,
-                          duration: const Duration(seconds: 20),
-                          showCloseIcon: true,
-                        ),
-                      );
-                      break;
-                    default:
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('${failure.code}: ${failure.message}'),
-                          backgroundColor: context.colorScheme.error,
-                        ),
-                      );
-                      break;
-                  }
-                  break;
-                default:
-                  break;
-              }
-            },
+            listener: _signInStateListener,
             child: Scaffold(
               extendBody: true,
               extendBodyBehindAppBar: true,

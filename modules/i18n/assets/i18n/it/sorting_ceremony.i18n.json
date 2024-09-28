@@ -1,0 +1,14 @@
+{
+  "assigned": "Sei stato assegnato a $house",
+  "loading": [
+    "Hmm, difficile, molto difficile. Molto meglio di quanto non facesse il Cappello, vuoi dirmi dove vuoi andare?",
+    "Dove dovresti essere? Questo è il posto che ti renderà grande.",
+    "Sì, sì, certo... è la tua voglia che mi dice cosa fare..."
+  ],
+  "assignment(map)": {
+    "pytherin": "In Pytherin potrai trovare la tua forza, o sviluppatore sagace e abile. Qui l'arte della programmazione è regina, e con Python, trasformerai l'idea in realtà.",
+    "kerasdor":"In Kerasdor, o mente curiosa, l'intelligenza artificiale e il deep learning sono il cuore pulsante. Qui, la tua passione per l'innovazione e la scoperta troverà la sua vera casa.",
+    "dashclaw": "Mmmmh, vedo che sei uno pieno di creatività con un occhio per il dettaglio? Allora Dashclaw è la casata per te. Qui, unirai il tuo talento per l'interfaccia utente con la potenza di Dash per creare applicazioni che incantano e ispirano.",
+    "gopherpuff": "In Gopherpuff, la tua determinazione e la tua praticità troveranno terreno fertile. Con lo spirito del linguaggio Go, costruirai sistemi robusti e efficienti, fondamenta solide su cui si innalzeranno grandi progetti."
+  }
+}

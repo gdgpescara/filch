@@ -12,7 +12,7 @@ class Paragraph extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context).getTextTheme(textThemeType).bodyMedium,
+      style: context.getTextTheme(textThemeType).bodyMedium,
     );
   }
 }

@@ -18,11 +18,19 @@ class RemoveAccountButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
-      onPressed: () => _removeAccount(context),
-      child: Text(
-        t.profile.remove_account.button,
-        style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: context.colorScheme.error),
+    return TextButtonTheme(
+      data: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          minimumSize: const Size(double.infinity, kMinInteractiveDimension),
+          foregroundColor: context.colorScheme.errorContainer,
+          textStyle: context.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
+      ),
+      child: TextButton(
+        onPressed: () => _removeAccount(context),
+        child: Text(
+          t.profile.remove_account.button.toUpperCase(),
+        ),
       ),
     );
   }
@@ -81,7 +89,7 @@ class _RemoveAccountDialogState extends State<_RemoveAccountDialog> {
       SnackBar(
         content: Text(
           t.profile.remove_account.success,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+          style: context.textTheme.bodyMedium?.copyWith(
                 color: context.appColors.success.brightnessColor(context).onColorContainer,
               ),
         ),
@@ -96,7 +104,7 @@ class _RemoveAccountDialogState extends State<_RemoveAccountDialog> {
       SnackBar(
         content: Text(
           t.profile.remove_account.success,
-          style: Theme.of(context)
+          style: context
               .textTheme
               .bodyMedium
               ?.copyWith(color: context.appColors.error.brightnessColor(context).onColorContainer),

@@ -1,0 +1,44 @@
+name: user
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.5.3
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../../modules/core
+  ui:
+    path: ../../modules/ui
+  i18n:
+    path: ../../modules/i18n
+  auth:
+    path: ../../modules/auth
+  quests:
+    path: ../../modules/quests
+  get_it: ^7.7.0
+  injectable: ^2.4.4
+  equatable: ^2.0.5
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  qr_flutter: ^4.1.0
+  intl: ^0.19.0
+  firebase_auth: ^5.3.1
+  font_awesome_flutter: ^10.7.0
+  cloud_firestore: ^5.4.3
+  flutter_svg: ^2.0.10+1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.12
+  injectable_generator: ^2.6.2
+
+flutter:
+  uses-material-design: true
+  assets:
+    - packages/assets/images/lines.svg

@@ -4,15 +4,36 @@ sealed class BootstrapState extends Equatable {
   const BootstrapState();
 }
 
-final class BootstrapInitial extends BootstrapState {
-  const BootstrapInitial();
+class BootstrapProcessing extends BootstrapState {
+  const BootstrapProcessing();
 
   @override
   List<Object> get props => [];
 }
 
-final class BootstrapDone extends BootstrapState {
-  const BootstrapDone();
+class UserLoggedOut extends BootstrapState {
+  const UserLoggedOut();
+
+  @override
+  List<Object> get props => [];
+}
+
+class UserNeedSortingCeremony extends BootstrapState {
+  const UserNeedSortingCeremony();
+
+  @override
+  List<Object> get props => [];
+}
+
+class StaffUserLoggedIn extends BootstrapState {
+  const StaffUserLoggedIn();
+
+  @override
+  List<Object> get props => [];
+}
+
+class AppCanRun extends BootstrapState {
+  const AppCanRun();
 
   @override
   List<Object> get props => [];

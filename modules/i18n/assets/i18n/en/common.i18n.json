@@ -44,5 +44,19 @@
     "yes": "Yes",
     "no": "No",
     "loading": "Loading..."
+  },
+  "home": {
+    "bottom_nav": {
+      "ranking": "Ranking",
+      "current_quest": "Quest",
+      "profile": "Profile",
+      "scan": "Scan",
+      "shifts": "Shifts"
+    }
+  },
+  "user": {
+    "image": {
+      "semantic": "User image"
+    }
   }
 }

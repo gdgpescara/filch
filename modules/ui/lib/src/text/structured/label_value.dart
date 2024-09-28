@@ -19,20 +19,20 @@ class LabelValue extends StatelessWidget {
 
   Widget _buildRow(BuildContext context) {
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      // crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
           label,
           textAlign: TextAlign.left,
-          style: Theme.of(context).getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+          style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
-        const Gap.horizontal(Spacing.s),
+        const Gap.horizontal(Spacing.xs),
         Expanded(
           child: SizedBox(
             width: double.infinity,
             child: Text(
               value ?? ' - ',
-              style: Theme.of(context).textTheme.titleMedium,
+              style: context.textTheme.titleMedium,
             ),
           ),
         ),
@@ -48,14 +48,14 @@ class LabelValue extends StatelessWidget {
         Text(
           label,
           textAlign: TextAlign.left,
-          style: Theme.of(context).getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+          style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
-        const Gap.vertical(Spacing.s),
+        // const Gap.vertical(Spacing.xs),
         SizedBox(
           width: double.infinity,
           child: Text(
             value ?? ' - ',
-            style: Theme.of(context).textTheme.titleMedium,
+            style: context.textTheme.titleMedium,
           ),
         ),
       ],
