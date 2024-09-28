@@ -1,0 +1,77 @@
+{
+  "active_quest": {
+    "search_button": "Cerca una missione",
+    "request_closed": "La richiesta di missioni è chiusa. Prova più tardi.",
+    "no_quest_assigned": "Non hai ancora una missione, cosa aspetti a cercarne una e iniziare a guadagnare punti?",
+    "time_remaining": {
+      "hours": {
+        "one": "$n ora rimanente",
+        "other": "$n ore rimanenti"
+      },
+      "minutes": {
+        "one": "$n minuto rimanente",
+        "other": "$n minuti rimanenti"
+      },
+      "seconds": {
+        "one": "$n secondo rimanente",
+        "other": "$n secondi rimanenti"
+      }
+    },
+    "actors": {
+      "hint": "Chiedi alla persona giusta di scansionare il codice QR",
+      "description": {
+        "label": "descrizione:"
+      }
+    },
+    "quiz": {
+      "hint": "Cerca il posto giusto e scansiona il codice QR",
+      "question": {
+        "label": "domanda:"
+      },
+      "answer_option": {
+        "label": "opzioni di risposta:"
+      },
+      "scan_error": "Penso che tu non sia nel posto giusto, riprova",
+      "answer": {
+        "evaluating": "Valutazione della risposta...",
+        "correct": {
+          "one": "Ottimo lavoro! $n punto assegnato",
+          "other": "Ottimo lavoro! $n punti assegnati"
+        },
+        "incorrect": "Oh no! Non vengono assegnati punti"
+      }
+    },
+    "social": {
+      "description": {
+        "label": "descrizione:"
+      },
+      "qr_code": {
+        "correct": {
+          "one": "Ottimo lavoro! $n punto assegnato",
+          "other": "Ottimo lavoro! $n punti assegnati"
+        },
+        "incorrect": "Oh no! Non vengono assegnati punti"
+      }
+    },
+    "give_up": {
+      "button": "Relascio",
+      "title": "Rinuncia alla quest",
+      "content": "Sei sicuro di voler rinunciare alla quest?"
+    }
+  },
+  "ranking": {
+    "title": "Classifica",
+    "points": {
+      "label($n)": {
+        "one": "punto: ",
+        "other": "punti: "
+      }
+    }
+  },
+  "winning": {
+    "points": {
+      "one": "Punto: $n",
+      "other": "Punti: $n"
+    }
+  }
+}

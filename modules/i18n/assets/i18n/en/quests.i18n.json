@@ -1,0 +1,77 @@
+{
+  "active_quest": {
+    "search_button": "Search for a quest",
+    "request_closed": "The quest request is closed. Try later.",
+    "no_quest_assigned": "You don't have a quest yet. What are you waiting for? Look for one and start earning points!",
+    "time_remaining": {
+      "hours": {
+        "one": "$n hour remaining",
+        "other": "$n hours remaining"
+      },
+      "minutes": {
+        "one": "$n minute remaining",
+        "other": "$n minutes remaining"
+      },
+      "seconds": {
+        "one": "$n second remaining",
+        "other": "$n seconds remaining"
+      }
+    },
+    "actors": {
+      "hint": "Ask to the right person to scan the QR code.",
+      "description": {
+        "label": "description:"
+      }
+    },
+    "quiz": {
+      "hint": "Find the right place and scan the QR code.",
+      "question": {
+        "label": "question:"
+      },
+      "answer_option": {
+        "label": "answer options:"
+      },
+      "scan_error": "I think you are not in the right place, try again.",
+      "answer": {
+        "evaluating": "Evaluating answer...",
+        "correct": {
+          "one": "Great work! $n point assigned",
+          "other": "Great work! $n points assigned"
+        },
+        "incorrect": "Oh no! no points assigned"
+      }
+    },
+    "social": {
+      "description": {
+        "label": "description:"
+      },
+      "qr_code": {
+        "correct": {
+          "one": "Great work! $n point assigned",
+          "other": "Great work! $n points assigned"
+        },
+        "incorrect": "Oh no! no points assigned"
+      }
+    },
+    "give_up": {
+      "button": "Relascio",
+      "title": "Give up the quest",
+      "content": "Are you sure you want to give up on the quest?"
+    }
+  },
+  "ranking": {
+    "title": "Ranking",
+    "points": {
+      "label($n)": {
+        "one": "point: ",
+        "other": "points: "
+      }
+    }
+  },
+  "winning": {
+    "points": {
+      "one": "Point: $n",
+      "other": "Points: $n"
+    }
+  }
+}

@@ -1,6 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:i18n/i18n.dart';
-import 'package:rive/rive.dart';
+
+import '../../ui.dart';
 
 class LoaderAnimation extends StatelessWidget {
   const LoaderAnimation({super.key});
@@ -9,13 +10,8 @@ class LoaderAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       label: t.common.semantics.loading,
-      child: const SizedBox(
-        width: double.infinity,
-        height: 50,
-        child: RiveAnimation.asset(
-          'packages/assets/loader_animation.riv',
-          fit: BoxFit.scaleDown,
-        ),
+      child: CupertinoActivityIndicator(
+        color: context.colorScheme.primary,
       ),
     );
   }

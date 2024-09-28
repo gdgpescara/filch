@@ -43,7 +43,7 @@ class LoaderOverlay extends StatelessWidget {
                 child: messageWidget ??
                     Text(
                       message!,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                      style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
                     ),
               ),
           ],

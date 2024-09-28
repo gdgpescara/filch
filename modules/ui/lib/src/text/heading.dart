@@ -12,7 +12,7 @@ class Heading extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context).getTextTheme(textThemeType).titleLarge?.copyWith(fontWeight: FontWeight.w900),
+      style: context.getTextTheme(textThemeType).titleLarge?.copyWith(fontWeight: FontWeight.w900),
     );
   }
 }

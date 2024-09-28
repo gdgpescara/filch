@@ -11,6 +11,22 @@ command:
   bootstrap:
     runPubGetInParallel: false
     usePubspecOverrides: true
+    environment:
+      sdk: ^3.5.3
+      flutter: ">=3.24.0"
+    dependencies:
+      get_it: ^7.7.0
+      cloud_firestore: ^5.4.3
+      cloud_functions: ^5.1.3
+      firebase_auth: ^5.3.1
+      injectable: ^2.4.4
+      equatable: ^2.0.5
+      bloc: ^8.1.4
+      flutter_bloc: ^8.1.6
+    dev_dependencies:
+      flutter_lints: ^5.0.0
+      build_runner: ^2.4.12
+      injectable_generator: ^2.6.2
   clean:
     hooks:
       post: melos exec --flutter --concurrency=1 -- "flutter clean" && find . -type f -name "*.iml" -exec rm -f {} \;
@@ -31,8 +47,9 @@ scripts:
     run: dart pub run slang
     exec:
       failFast: true
-    select-package:
-      depends-on: "slang_build_runner"
+    packageFilters:
+      dependsOn:
+        - slang_build_runner
 
   generate:build_runner:
     run: dart pub run build_runner build --delete-conflicting-outputs
@@ -40,15 +57,17 @@ scripts:
       concurrency: 1
       failFast: true
       orderDependents: true
-    select-package:
-      depends-on: "build_runner"
+    packageFilters:
+      dependsOn:
+        - build_runner
 
   generate:routes:
     run: dart pub run routefly
     exec:
       failFast: true
-    select-package:
-      depends-on: "routefly"
+    packageFilters:
+      dependsOn:
+        - routefly
 
   lint:all:
     run: melos run format --no-select && melos run analyze --no-select
@@ -84,8 +103,9 @@ scripts:
       concurrency: 1
       failFast: true
       flutter: true
-    select-package:
-      depends-on: "golden_toolkit"
+    packageFilters:
+      dependsOn:
+        - golden_toolkit
 
   format:
     run: dart format -o write . --line-length=120
@@ -130,8 +150,9 @@ scripts:
       concurrency: 1
       failFast: true
       flutter: true
-    select-package:
-      scope: "filch"
+    packageFilters:
+      scope:
+        - filch
 
   build:android:apk:
     run: flutter build apk -t lib/main.dart --release --obfuscate --split-debug-info=android/debug --dart-define-from-file=.env/remote.json
@@ -139,8 +160,9 @@ scripts:
       concurrency: 1
       failFast: true
       flutter: true
-    select-package:
-      scope: "filch"
+    packageFilters:
+      scope:
+        - filch
 
   build:ios:ipa:
     run: flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json
@@ -148,5 +170,6 @@ scripts:
       concurrency: 1
       failFast: true
       flutter: true
-    select-package:
-      scope: "filch"
+    packageFilters:
+      scope:
+        - filch

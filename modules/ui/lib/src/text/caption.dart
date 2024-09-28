@@ -12,7 +12,7 @@ class Caption extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: Theme.of(context).getTextTheme(textThemeType).bodySmall?.copyWith(fontWeight: FontWeight.bold),
+      style: context.getTextTheme(textThemeType).bodySmall?.copyWith(fontWeight: FontWeight.bold),
     );
   }
 }

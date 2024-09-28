@@ -1,0 +1,42 @@
+name: quests
+version: 1.0.0
+publish_to: 'none'
+
+environment:
+  sdk: ^3.5.3
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+  i18n:
+    path: ../i18n
+  auth:
+    path: ../auth
+  ui:
+    path: ../ui
+  firebase_auth: ^5.3.1
+  cloud_functions: ^5.1.3
+  get_it: ^7.7.0
+  injectable: ^2.4.4
+  equatable: ^2.0.5
+  json_annotation: ^4.9.0
+  cloud_firestore: ^5.4.3
+  bloc: ^8.1.4
+  flutter_bloc: ^8.1.6
+  qr_flutter: ^4.1.0
+  reactive_forms: ^17.0.1
+  mobile_scanner: ^5.2.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^5.0.0
+  build_runner: ^2.4.12
+  injectable_generator: ^2.6.2
+  json_serializable: ^6.8.0
+
+flutter:
+  uses-material-design: true

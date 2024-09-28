@@ -1,0 +1,54 @@
+{
+  "profile": {
+    "user_info": {
+      "name": {
+        "label": "nome: "
+      },
+      "email": {
+        "label": "email: "
+      },
+      "nimbus_ticket": {
+        "label": "biglietto nimbus: ",
+        "message": "Wow, hai un biglietto nimbus.\nSei molto fortunato, le missioni ti daranno più punti!"
+      }
+    },
+    "my_points": {
+      "label": "i miei punti: ",
+      "detail_button": {
+        "label": "Mostra dettaglio punti"
+      }
+    },
+    "remove_account": {
+      "button": "Rimuovi Account",
+      "dialog": {
+        "title": "Rimuovi Account",
+        "content": "Sei sicuro di voler rimuovere il tuo account? Questa operazione è irreversibile.",
+        "confirm": "Rimuovi Account"
+      },
+      "success": "Il tuo account è stato rimosso con successo.",
+      "error": "Si è verificato un errore durante la rimozione del tuo account, riprova più tardi."
+    }
+  },
+  "my_points_details": {
+    "title": "I miei punti",
+    "points_item_card": {
+      "type": {
+        "label": "tipo: ",
+        "value(map)": {
+          "quest": "Missione",
+          "staff": "Staff"
+        }
+      },
+      "points": {
+        "label($n)": {
+          "one": "punto: ",
+          "other": "punti: "
+        }
+      },
+      "assigned_at": {
+        "label": "assegnati il: "
+      }
+    },
+    "empty": "Non hai ancora punti."
+  }
+}
