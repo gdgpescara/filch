@@ -26,8 +26,9 @@ class QuestRequestClosed extends CurrentQuestState {
 }
 
 class CurrentQuestLoaded extends CurrentQuestState {
-  const CurrentQuestLoaded({required this.activeQuest});
+  const CurrentQuestLoaded({this.user, required this.activeQuest});
 
+  final User? user;
   final ActiveQuest activeQuest;
 
   @override

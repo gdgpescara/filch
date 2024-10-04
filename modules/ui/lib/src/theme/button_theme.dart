@@ -25,3 +25,18 @@ TextButtonThemeData _textButtonThemeData(ColorScheme colorScheme) => TextButtonT
         minimumSize: WidgetStateProperty.all(const Size(kMinInteractiveDimension, kMinInteractiveDimension)),
       ),
     );
+
+OutlinedButtonThemeData _outlinedButtonThemeData(ColorScheme colorScheme) => OutlinedButtonThemeData(
+      style: ButtonStyle(
+        shape: WidgetStateProperty.all(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(RadiusSize.m),
+          ),
+        ),
+        enableFeedback: true,
+        tapTargetSize: MaterialTapTargetSize.padded,
+        side: WidgetStateProperty.all(BorderSide(color: colorScheme.primaryContainer)),
+        textStyle: WidgetStateProperty.all(GoogleFonts.openSans(fontWeight: FontWeight.bold)),
+        minimumSize: WidgetStateProperty.all(const Size(kMinInteractiveDimension, kMinInteractiveDimension)),
+      ),
+    );

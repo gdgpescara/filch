@@ -1,10 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
-import 'package:quests/src/actor/user_qr_code.dart';
 import 'package:ui/ui.dart';
 
 class QuestQrCodeWidget extends StatelessWidget {
-  const QuestQrCodeWidget({super.key});
+  const QuestQrCodeWidget({super.key, this.user});
+
+  final User? user;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +14,7 @@ class QuestQrCodeWidget extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const UserQrCode(),
+          UserQrCode(user: user),
           const SizedBox(height: 10),
           Text(t.quests.active_quest.actors.hint),
         ],

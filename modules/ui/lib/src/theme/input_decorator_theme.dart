@@ -8,11 +8,11 @@ InputDecorationTheme _inputDecorationTheme(ColorScheme colorScheme) => InputDeco
       contentPadding: const EdgeInsets.symmetric(horizontal: Spacing.m, vertical: Spacing.s),
       enabledBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(RadiusSize.m),
-        borderSide: BorderSide(color: colorScheme.secondary),
+        borderSide: BorderSide(color: colorScheme.primaryContainer),
       ),
       focusedBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(RadiusSize.m),
-        borderSide: BorderSide(color: colorScheme.primary),
+        borderSide: BorderSide(color: colorScheme.primary, width: 2),
       ),
       errorBorder: OutlineInputBorder(
         borderRadius: BorderRadius.circular(RadiusSize.m),
@@ -22,10 +22,11 @@ InputDecorationTheme _inputDecorationTheme(ColorScheme colorScheme) => InputDeco
         borderRadius: BorderRadius.circular(RadiusSize.m),
         borderSide: BorderSide(color: _extendedColor.error.seed),
       ),
+      fillColor: colorScheme.surface,
       errorStyle: GoogleFonts.jetBrainsMono(
         color: _extendedColor.error.seed,
       ),
       labelStyle: GoogleFonts.openSans(
-        color: colorScheme.secondary,
+        color: colorScheme.primary,
       ),
     );

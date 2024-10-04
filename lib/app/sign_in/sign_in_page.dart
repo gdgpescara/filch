@@ -2,8 +2,6 @@ import 'package:auth/auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:ui/ui.dart';
 
-import '../../widgets/gradient_background.dart';
-
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});
 
@@ -11,7 +9,7 @@ class SignInPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return auth.SignInPage(
       signButtonBuilder: (signInButtons) {
-        return GradientBackground(
+        return Background(
           child: Padding(
             padding: const EdgeInsets.all(Spacing.xl),
             child: Column(

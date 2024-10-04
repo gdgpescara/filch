@@ -4,13 +4,14 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:quests/quests.dart';
-import 'package:user/src/home/state/home_page_cubit.dart';
-import 'package:user/src/profile/user_profile_page.dart';
+import 'package:ui/ui.dart';
+
+import '../profile/user_profile_page.dart';
+import 'state/home_page_cubit.dart';
 
 class UserHomePage extends StatelessWidget {
   const UserHomePage({
     super.key,
-    required this.backGroundBuilder,
     required this.navigateToSplash,
     required this.navigateToLogin,
     required this.navigateToAllPoints,
@@ -19,7 +20,6 @@ class UserHomePage extends StatelessWidget {
   final VoidCallback navigateToSplash;
   final VoidCallback navigateToLogin;
   final VoidCallback navigateToAllPoints;
-  final Widget Function({required Widget child}) backGroundBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class UserHomePage extends StatelessWidget {
       child: BlocBuilder<HomePageCubit, HomePageState>(
         builder: (context, state) {
           return Scaffold(
-            body: backGroundBuilder(
+            body: Background(
               child: IndexedStack(
                 index: state.currentView,
                 children: [

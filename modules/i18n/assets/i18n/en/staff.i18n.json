@@ -1,0 +1,29 @@
+{
+  "point_assignment": {
+    "free_points": {
+      "label": "Select points to assign: "
+    },
+    "user_quests": {
+      "label": "Select a quest to assign points: "
+    },
+    "page": {
+      "title": "Scan users QR code",
+      "assign_button": "Assign points",
+      "assigning": "Assigning points...",
+      "success": "Points assigned successfully.",
+      "error": "An error occurred while assigning points."
+    }
+  },
+  "shifts": {
+    "title": "Daily Shifts",
+    "me": "Me",
+    "empty": "No shift available"
+  },
+  "home": {
+    "bottom_nav": {
+      "profile": "Profile",
+      "scan": "Scan",
+      "shifts": "Shifts"
+    }
+  }
+}

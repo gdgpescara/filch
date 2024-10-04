@@ -13,23 +13,24 @@ dependencies:
     path: ../i18n
   assets:
     path: ../assets
-  get_it: ^7.7.0
-  injectable: ^2.4.4
+  get_it: ^8.0.0
+  injectable: ^2.5.0
   firebase_auth: ^5.3.1
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1
   reactive_forms: ^17.0.1
-  rive: ^0.13.13
+  rive: ^0.13.14
+  qr_flutter: ^4.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.12
+  build_runner: ^2.4.13
   injectable_generator: ^2.6.2
 
 flutter:
   uses-material-design: true
   assets:
-    - packages/assets/profile_badges/dashclaw.png
     - packages/assets/logo/logo.png
+    - packages/assets/images/background.svg
