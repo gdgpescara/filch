@@ -43,12 +43,9 @@ class UserProfilePage extends StatelessWidget {
               forceMaterialTransparency: embedded,
               elevation: _elevation,
               actions: [
-                Padding(
-                  padding: EdgeInsets.zero,
-                  child: TextButton(
-                    onPressed: context.read<UserProfileCubit>().signOut,
-                    child: Text(t.common.buttons.sign_out.toUpperCase()),
-                  ),
+                TextButton(
+                  onPressed: context.read<UserProfileCubit>().signOut,
+                  child: Text(t.common.buttons.sign_out.toUpperCase()),
                 ),
               ],
             ),
