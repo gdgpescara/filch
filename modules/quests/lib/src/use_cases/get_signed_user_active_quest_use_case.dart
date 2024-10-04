@@ -26,7 +26,7 @@ class GetSignedUserActiveQuestUseCase {
         if (!snapshot.exists || snapshot.data() == null) {
           return null;
         }
-        return ActiveQuest.fromJson(snapshot.data()!['activeQuest']);
+        return ActiveQuest.fromJson(snapshot.data()!['activeQuest'] as Map<String, dynamic>);
       });
     });
   }

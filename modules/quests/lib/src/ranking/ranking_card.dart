@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
-import 'package:quests/src/models/ranking_item.dart';
 import 'package:ui/ui.dart';
+
+import '../models/ranking_item.dart';
 
 class RankingCard extends StatelessWidget {
   const RankingCard({
@@ -19,7 +20,7 @@ class RankingCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return AppCard(
       borderColor: Colors.transparent,
-      padding: EdgeInsets.all(Spacing.m).copyWith(top: Spacing.s),
+      padding: const EdgeInsets.all(Spacing.m).copyWith(top: Spacing.s),
       child: SizedBox(
         width: double.infinity,
         child: Column(
@@ -36,7 +37,7 @@ class RankingCard extends StatelessWidget {
                 children: [
                   TextSpan(
                     text: item.displayName,
-                    style: context.getTextTheme(TextThemeType.normal).titleLarge?.copyWith(
+                    style: context.getTextTheme().titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: _textColor(context),
                         ),

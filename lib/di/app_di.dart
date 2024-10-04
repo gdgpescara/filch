@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:injectable/injectable.dart';
 import 'package:quests/quests.dart';
 import 'package:sorting_ceremony/sorting_ceremony.dart';
+import 'package:staff/staff.dart';
 import 'package:user/user.dart';
 
 @InjectableInit(
@@ -13,6 +14,7 @@ import 'package:user/user.dart';
     ExternalModule(SortingCeremonyPackageModule),
     ExternalModule(QuestsPackageModule),
     ExternalModule(UserPackageModule),
+    ExternalModule(StaffPackageModule),
   ],
 )
 Future<void> initAppInjectorModule() async {}

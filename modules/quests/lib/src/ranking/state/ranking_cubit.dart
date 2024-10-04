@@ -2,12 +2,8 @@ import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
-import 'package:quests/src/models/ranking_item.dart';
-import 'package:quests/src/use_cases/get_ranking_use_case.dart';
-import 'package:quests/src/use_cases/get_your_ranking_use_case.dart';
 
 import '../../../quests.dart';
-import '../../use_cases/get_your_ranking_position_use_case.dart';
 
 part 'ranking_state.dart';
 

@@ -19,8 +19,11 @@ import 'package:quests/src/quiz/state/quiz_cubit.dart' as _i437;
 import 'package:quests/src/ranking/state/ranking_cubit.dart' as _i96;
 import 'package:quests/src/social/qr_code/state/social_qr_code_cubit.dart'
     as _i606;
+import 'package:quests/src/use_cases/assign_points_use_case.dart' as _i615;
 import 'package:quests/src/use_cases/can_request_for_quest_use_case.dart'
     as _i384;
+import 'package:quests/src/use_cases/get_assignable_points_use_case.dart'
+    as _i650;
 import 'package:quests/src/use_cases/get_ranking_use_case.dart' as _i251;
 import 'package:quests/src/use_cases/get_signed_user_active_quest_use_case.dart'
     as _i954;
@@ -72,6 +75,17 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
             ));
     gh.lazySingleton<_i251.GetRankingUseCase>(
         () => _i251.GetRankingUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i650.GetAssignablePointsUseCase>(
+        () => _i650.GetAssignablePointsUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i96.RankingCubit>(() => _i96.RankingCubit(
+          gh<_i662.GetSignedUserUseCase>(),
+          gh<_i177.GetRankingUseCase>(),
+          gh<_i177.GetYourRankingUseCase>(),
+          gh<_i177.GetYourRankingPositionUseCase>(),
+          gh<_i177.IsRankingFreezedUseCase>(),
+        ));
+    gh.lazySingleton<_i615.AssignPointsUseCase>(
+        () => _i615.AssignPointsUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i806.SocialQuestRegistrationUseCase>(() =>
         _i806.SocialQuestRegistrationUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i616.GiveUpQuestUseCase>(
@@ -88,24 +102,18 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
               gh<_i809.FirebaseFunctions>(),
               gh<_i954.GetSignedUserActiveQuestUseCase>(),
             ));
-    gh.factory<_i80.CurrentQuestCubit>(() => _i80.CurrentQuestCubit(
-          gh<_i954.GetSignedUserActiveQuestUseCase>(),
-          gh<_i1056.SearchForQuestUseCase>(),
-          gh<_i384.CanRequestForQuestUseCase>(),
-          gh<_i616.GiveUpQuestUseCase>(),
-        ));
-    gh.factory<_i96.RankingCubit>(() => _i96.RankingCubit(
-          gh<_i662.GetSignedUserUseCase>(),
-          gh<_i251.GetRankingUseCase>(),
-          gh<_i843.GetYourRankingUseCase>(),
-          gh<_i57.GetYourRankingPositionUseCase>(),
-          gh<_i177.IsRankingFreezedUseCase>(),
-        ));
     gh.factory<_i606.SocialQrCodeCubit>(() =>
         _i606.SocialQrCodeCubit(gh<_i806.SocialQuestRegistrationUseCase>()));
     gh.factory<_i437.QuizCubit>(() => _i437.QuizCubit(
           gh<_i25.ValidateQuizQrCodeUseCase>(),
           gh<_i216.SubmitAnswerUseCase>(),
+        ));
+    gh.factory<_i80.CurrentQuestCubit>(() => _i80.CurrentQuestCubit(
+          gh<_i662.GetSignedUserUseCase>(),
+          gh<_i954.GetSignedUserActiveQuestUseCase>(),
+          gh<_i1056.SearchForQuestUseCase>(),
+          gh<_i384.CanRequestForQuestUseCase>(),
+          gh<_i616.GiveUpQuestUseCase>(),
         ));
   }
 }

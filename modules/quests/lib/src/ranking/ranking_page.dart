@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
-import 'package:quests/src/ranking/ranking_card.dart';
-import 'package:quests/src/ranking/ranking_list.dart';
-import 'package:quests/src/ranking/state/ranking_cubit.dart';
-import 'package:quests/src/winner/winning_view.dart';
 import 'package:ui/ui.dart';
+
+import '../winner/winning_view.dart';
+import 'ranking_card.dart';
+import 'ranking_list.dart';
+import 'state/ranking_cubit.dart';
 
 class RankingPage extends StatelessWidget {
   const RankingPage({super.key});

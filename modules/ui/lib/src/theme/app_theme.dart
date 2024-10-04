@@ -50,6 +50,7 @@ ThemeData buildTheme(Brightness brightness, Color seedColor) {
     inputDecorationTheme: _inputDecorationTheme(colorScheme),
     elevatedButtonTheme: _elevatedButtonThemeData(colorScheme),
     textButtonTheme: _textButtonThemeData(colorScheme),
+    outlinedButtonTheme: _outlinedButtonThemeData(colorScheme),
     scaffoldBackgroundColor: Colors.transparent,
   );
 

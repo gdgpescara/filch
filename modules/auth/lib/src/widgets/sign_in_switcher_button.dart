@@ -9,7 +9,7 @@ class SignInSwitcherButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return OutlinedButton(
       onPressed: context.read<SignInCubit>().switchSignIn,
       child: BlocBuilder<SignInCubit, SignInState>(
         buildWhen: (previous, current) => current is! SignInActionsState,

@@ -2,7 +2,7 @@ import 'package:auth/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
 import 'package:injectable/injectable.dart';
-import 'package:quests/src/models/ranking_item.dart';
+import '../models/ranking_item.dart';
 
 @lazySingleton
 class GetYourRankingUseCase {
@@ -19,7 +19,7 @@ class GetYourRankingUseCase {
       yield* _firestore.collection('users').doc(_getSignedUserUseCase()?.uid).snapshots().map(
         (snapshot) {
           if (snapshot.exists) {
-            return RankingItem.fromJson({...snapshot.data()!, "uid": snapshot.id});
+            return RankingItem.fromJson({...snapshot.data()!, 'uid': snapshot.id});
           } else {
             return null;
           }

@@ -1,6 +1,6 @@
+import 'package:auth/auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
-import 'package:auth/auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../quests.dart';

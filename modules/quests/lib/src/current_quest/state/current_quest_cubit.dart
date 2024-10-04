@@ -1,5 +1,7 @@
+import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../models/active_quest.dart';
@@ -13,12 +15,14 @@ part 'current_quest_state.dart';
 @injectable
 class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
   CurrentQuestCubit(
+    this._getSignedUserUseCase,
     this._getSignedUserActiveQuestUseCase,
     this._searchForQuestUseCase,
     this._canRequestForQuestUseCase,
     this._giveUpQuestUseCase,
   ) : super(const CurrentQuestLoading());
 
+  final GetSignedUserUseCase _getSignedUserUseCase;
   final GetSignedUserActiveQuestUseCase _getSignedUserActiveQuestUseCase;
   final SearchForQuestUseCase _searchForQuestUseCase;
   final CanRequestForQuestUseCase _canRequestForQuestUseCase;
@@ -27,7 +31,14 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
   void loadCurrentQuest() {
     _getSignedUserActiveQuestUseCase().when(
       progress: () => emit(const CurrentQuestLoading()),
-      success: (quest) => quest == null ? _canRequestForQuest() : emit(CurrentQuestLoaded(activeQuest: quest)),
+      success: (quest) {
+        if (quest != null) {
+          final user = _getSignedUserUseCase();
+          emit(CurrentQuestLoaded(user: user, activeQuest: quest));
+        } else {
+          _canRequestForQuest();
+        }
+      },
       failure: (_) => emit(const CurrentQuestFailure()),
     );
   }

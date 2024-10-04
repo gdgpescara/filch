@@ -27,7 +27,6 @@ class UserPicture extends StatelessWidget {
                 height: 100,
                 clipBehavior: Clip.antiAlias,
                 decoration: const BoxDecoration(
-                  shape: BoxShape.rectangle,
                   borderRadius: BorderRadius.all(Radius.circular(RadiusSize.m)),
                 ),
                 child: imageUrl != null

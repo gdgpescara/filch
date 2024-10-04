@@ -19,7 +19,7 @@ class ActorQuestWidget extends StatelessWidget {
           children: [
             QuestDescriptionWidget(activeQuest: state.activeQuest),
             const SizedBox(height: 20),
-            const QuestQrCodeWidget(),
+            QuestQrCodeWidget(user: state.user),
           ],
         );
       },

@@ -1,16 +1,12 @@
 import 'package:auth/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
-import 'package:user/src/profile/state/user_profile_cubit.dart';
-import 'package:user/src/profile/user_info.dart';
-import 'package:user/src/profile/user_picture.dart';
-import 'package:user/src/profile/user_qr_code.dart';
 
 import '../points/user_points_card.dart';
+import 'state/user_profile_cubit.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({
@@ -18,14 +14,12 @@ class UserProfilePage extends StatelessWidget {
     required this.navigateToSplash,
     required this.navigateToLogin,
     required this.navigateToAllPoints,
-    this.backGroundBuilder,
     this.embedded = false,
-  }) : assert(embedded || backGroundBuilder != null);
+  });
 
   final VoidCallback navigateToSplash;
   final VoidCallback navigateToLogin;
   final VoidCallback navigateToAllPoints;
-  final Widget Function({required Widget child})? backGroundBuilder;
   final bool embedded;
 
   @override
@@ -50,7 +44,7 @@ class UserProfilePage extends StatelessWidget {
               elevation: _elevation,
               actions: [
                 Padding(
-                  padding: const EdgeInsets.all(0),
+                  padding: EdgeInsets.zero,
                   child: TextButton(
                     onPressed: context.read<UserProfileCubit>().signOut,
                     child: Text(t.common.buttons.sign_out.toUpperCase()),
@@ -69,21 +63,7 @@ class UserProfilePage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: Spacing.xxl),
-                SizedBox(
-                  height: 230,
-                  child: Stack(
-                    children: [
-                      Align(
-                        alignment: Alignment.bottomCenter,
-                        child: SvgPicture.asset('images/lines.svg', package: 'assets'),
-                      ),
-                      const Align(
-                        alignment: Alignment.topCenter,
-                        child: UserQrCode(),
-                      ),
-                    ],
-                  ),
-                ),
+                UserQrCode(user: state.user),
                 const SizedBox(height: Spacing.xxl),
                 UserPointsCard(navigateToAllPoints: navigateToAllPoints),
                 const SizedBox(height: Spacing.xxl),
@@ -98,7 +78,7 @@ class UserProfilePage extends StatelessWidget {
           if (embedded) {
             return body;
           }
-          return backGroundBuilder!(child: body);
+          return Background(child: body);
         },
       ),
     );

@@ -2,7 +2,7 @@ import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import 'package:sorting_ceremony/sorting_ceremony.dart';
+import '../../sorting_ceremony.dart';
 
 
 @lazySingleton

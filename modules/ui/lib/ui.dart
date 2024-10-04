@@ -9,3 +9,4 @@ export 'src/spacing/spacing.dart';
 export 'src/text/text.dart';
 export 'src/theme/app_theme.dart';
 export 'src/ui_catalog/ui_catalog.dart';
+export 'src/user/user.dart';

@@ -1,24 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:ui/ui.dart';
 
-class GradientBackground extends StatelessWidget {
-  const GradientBackground({super.key, required this.child});
+import '../../ui.dart';
+
+class Background extends StatelessWidget {
+  const Background({super.key, required this.child});
 
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    // return DecoratedBox(
-    //   // decoration: BoxDecoration(
-    //   //   gradient: LinearGradient(
-    //   //     colors: [context.colorScheme.surface, context.colorScheme.surfaceBright],
-    //   //     begin: Alignment.bottomRight,
-    //   //     end: Alignment.topLeft,
-    //   //   ),
-    //   // ),
-    //   child: child,
-    // );
     return Material(
       color: context.colorScheme.surface,
       child: Stack(
