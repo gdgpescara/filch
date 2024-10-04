@@ -30,12 +30,9 @@ class StaffProfileView extends StatelessWidget {
               forceMaterialTransparency: true,
               elevation: 0,
               actions: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: TextButton(
-                    onPressed: context.read<StaffProfileCubit>().signOut,
-                    child: Text(t.common.buttons.sign_out.toUpperCase()),
-                  ),
+                TextButton(
+                  onPressed: context.read<StaffProfileCubit>().signOut,
+                  child: Text(t.common.buttons.sign_out.toUpperCase()),
                 ),
               ],
             ),
