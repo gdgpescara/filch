@@ -10,13 +10,15 @@ export type Quest = {
   validityEnd: Date;
   executionTime: number;
   type: QuestTypeEnum;
+  subType: QuestSubTypeEnum | null;
 
-  // Actor quest section
+  // Actor & community quest section
   queueTime: number | null;
   actor: string | null;
   maxQueue: number | null;
   groupSize: number | null;
   requestAccepted: boolean | null;
+  promptFunction: string | null;
 
   // Quiz quest section
   parentQuests: string[] | null;
@@ -25,6 +27,5 @@ export type Quest = {
   answers: Answer[] | null;
 
   // Social quest section
-  subType: QuestSubTypeEnum | null;
   verificationFunction: string | null;
 }

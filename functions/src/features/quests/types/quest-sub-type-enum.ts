@@ -1,3 +1,4 @@
 export enum QuestSubTypeEnum {
-  qrCode = "qrCode"
+  qrCode = "qrCode",
+  prompted = "prompted",
 }

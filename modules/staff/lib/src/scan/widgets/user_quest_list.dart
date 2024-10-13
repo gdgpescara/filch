@@ -25,13 +25,45 @@ class UserQuestList extends StatelessWidget {
               t.staff.point_assignment.user_quests.label,
               style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: Spacing.m),
             Wrap(
-              spacing: 20,
-              runSpacing: 20,
+              spacing: Spacing.l,
+              runSpacing: Spacing.l,
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
-              children: quests.map((item) => _ItemWidget(item, navigateToAssignment)).toList(),
+              children: quests.map(
+                (quest) {
+                  return Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        quest.title[LocaleSettings.currentLocale.languageCode] ?? ' - ',
+                        style: context
+                            .getTextTheme(TextThemeType.monospace)
+                            .titleMedium
+                            ?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: Spacing.m),
+                      Wrap(
+                        spacing: Spacing.l,
+                        runSpacing: Spacing.l,
+                        children: [
+                          ...quest.points.map(
+                            (points) {
+                              return _ItemWidget(
+                                quest.id,
+                                points,
+                                navigateToAssignment,
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  );
+                },
+              ).toList(),
             ),
           ],
         );
@@ -42,28 +74,32 @@ class UserQuestList extends StatelessWidget {
 
 class _ItemWidget extends StatelessWidget {
   const _ItemWidget(
-    this.item,
+    this.questId,
+    this.points,
     this.navigateToAssignment,
   );
 
-  final Quest item;
+  final String questId;
+  final int points;
   final void Function(AssignmentPageArgs) navigateToAssignment;
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => navigateToAssignment(AssignmentPageArgs.quest(points: item.points, quest: item.id)),
-      child: AppCard(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              item.points.toString(),
-              style: context.getTextTheme(TextThemeType.monospace).displaySmall,
-            ),
-            Text(item.description[LocaleSettings.currentLocale.languageCode] ?? ' - '),
-          ],
+    return InkWell(
+      onTap: () => navigateToAssignment(AssignmentPageArgs.quest(points: points, quest: questId)),
+      child: SizedBox(
+        width: MediaQuery.of(context).size.width * 0.4,
+        child: AppCard(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                points.toString(),
+                style: context.getTextTheme(TextThemeType.themeSpecific).displaySmall,
+              ),
+            ],
+          ),
         ),
       ),
     );

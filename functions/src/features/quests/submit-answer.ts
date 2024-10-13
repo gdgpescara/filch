@@ -34,7 +34,6 @@ export const submitAnswer = onCall(
     logger.info("Correct answers: " + correctAnswers);
 
     const isCorrect = correctAnswers.every((e) => answers.includes(e));
-    const house = loggedUser.customClaims?.["house"];
 
     logger.info("Is correct: " + isCorrect);
 
@@ -49,16 +48,6 @@ export const submitAnswer = onCall(
       batch.set(
         getFirestore()
           .collection("users")
-          .doc(loggedUser.uid)
-          .collection("points")
-          .doc(quest.id),
-        archivedPoints,
-      );
-      batch.set(
-        getFirestore()
-          .collection("houses")
-          .doc(house)
-          .collection("members")
           .doc(loggedUser.uid)
           .collection("points")
           .doc(quest.id),

@@ -8,6 +8,8 @@ import {randomIntFromInterval} from "../../shared/utils";
 import {Quest} from "./types/quest";
 import {Points} from "../points/types/points";
 import {PointsTypeEnum} from "../points/types/points-type-enum";
+import {auth} from "firebase-admin";
+import UserRecord = auth.UserRecord;
 
 export const searchForQuest = onCall(
   {region: "europe-west3"},
@@ -19,12 +21,17 @@ export const searchForQuest = onCall(
       .collection("configurations")
       .doc("feature_flags")
       .get();
+
+    const questsOrder = config.data()?.questsOrder ?? [];
     const actorQuestEnabled = config.data()?.actorQuestEnabled ?? false;
     const quizQuestEnabled = config.data()?.quizQuestEnabled ?? false;
+    const communityQuestEnabled = config.data()?.communityQuestEnabled ?? false;
     const socialQuestEnabled = config.data()?.socialQuestEnabled ?? false;
 
+    logger.info("Quests order: " + JSON.stringify(questsOrder));
     logger.info("Can search for actor quest: " + actorQuestEnabled);
     logger.info("Can search for quiz quest: " + quizQuestEnabled);
+    logger.info("Can search for community quest: " + communityQuestEnabled);
     logger.info("Can search for social quest: " + socialQuestEnabled);
 
     const userPointsSnap = await getFirestore()
@@ -51,120 +58,51 @@ export const searchForQuest = onCall(
     // Search for a quest
     let questFound: ActiveQuest | undefined = undefined;
 
-    // 1. Search if actor quest is available
-    if (actorQuestEnabled) {
-      logger.info("Searching for actor quest");
-      const actorQuestsSnapshot = await getFirestore()
-        .collection("quests")
-        .where("type", "==", QuestTypeEnum.actor)
-        .where("requestAccepted", "==", true)
-        .get();
-
-      const actorQuests = actorQuestsSnapshot.docs.filter((doc) => {
-        return doc.data().validityStart <= Timestamp.now() &&
-          doc.data().validityEnd > Timestamp.now() &&
-          (!doc.data().queueCount ||
-            doc.data().queueCount < doc.data().maxQueue) &&
-          !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
-      });
-
-      logger.info(`Found ${actorQuests.length} actor quests`);
-
-      if (actorQuests.length > 0) {
-        logger.info("Search for actor quest");
-        // const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
-        const quest = actorQuests
-          .reduce((prev, current) => {
-            return prev.data().queueCount > current.data().queueCount ?
-              prev :
-              current;
-          });
-        questFound = <ActiveQuest>{
-          quest: <Quest>{
-            ...quest.data(),
-            id: quest.id,
-          },
-          activatedAt: Timestamp.now(),
-        };
+    for (const questType of questsOrder) {
+      if (questFound) {
+        break;
       }
-    }
-
-    // 2. Search if quiz quest if actor quest is not available
-    if (!questFound && quizQuestEnabled) {
-      logger.info("Searching for quiz quest");
-      const quizQuestsSnapshot = await getFirestore()
-        .collection("quests")
-        .where("type", "==", QuestTypeEnum.quiz)
-        .where(
-          userQuestPoints && userQuestPoints.length > 0 ?
-            Filter.or(
-              Filter.where(
-                "parentQuests",
-                "array-contains-any",
-                userQuestPoints
-              ),
-              Filter.where("parentQuests", "==", null)
-            ) :
-            Filter.where("parentQuests", "==", null)
-        )
-        .get();
-
-      const quizQuests = quizQuestsSnapshot.docs.filter((doc) => {
-        const valid = doc.data().validityStart <= Timestamp.now() &&
-          doc.data().validityEnd > Timestamp.now() &&
-          !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
-        const parentQuests = doc.data().parentQuests;
-        if (!parentQuests) {
-          return valid;
+      switch (questType) {
+      case QuestTypeEnum.actor:
+        if (!questFound && actorQuestEnabled) {
+          questFound = await searchForActorQuest(
+            loggedUser,
+            userQuestPoints,
+            removedQuests
+          );
         }
-        return parentQuests.every((value: string) => {
-          return userQuestPoints.includes(value);
-        }) && valid;
-      });
-
-      logger.info(`Found ${quizQuests.length} quiz quests`);
-
-      if (quizQuests.length > 0) {
-        const randomIndex = randomIntFromInterval(0, quizQuests.length - 1);
-        questFound = <ActiveQuest>{
-          quest: <Quest>{
-            ...quizQuests[randomIndex].data(),
-            id: quizQuests[randomIndex].id,
-          },
-          activatedAt: Timestamp.now(),
-        };
+        break;
+      case QuestTypeEnum.quiz:
+        if (!questFound && quizQuestEnabled) {
+          questFound = await searchForQuizQuest(
+            loggedUser,
+            userQuestPoints,
+            removedQuests
+          );
+        }
+        break;
+      case QuestTypeEnum.community:
+        if (!questFound && communityQuestEnabled) {
+          questFound = await searchForCommunityQuest(
+            loggedUser,
+            userQuestPoints,
+            removedQuests
+          );
+        }
+        break;
+      case QuestTypeEnum.social:
+        if (!questFound && socialQuestEnabled) {
+          questFound = await searchForSocialQuest(
+            loggedUser,
+            userQuestPoints,
+            removedQuests
+          );
+        }
+        break;
       }
     }
 
     // 3. Search if social quest if actor quest and quiz quest are not available
-    if (!questFound && socialQuestEnabled) {
-      logger.info("Searching for social quest");
-      const socialQuestsSnapshot = await getFirestore()
-        .collection("quests")
-        .where("type", "==", QuestTypeEnum.social)
-        .get();
-
-      const socialQuests = socialQuestsSnapshot.docs.filter((doc) => {
-        return doc.data().validityStart <= Timestamp.now() &&
-          doc.data().validityEnd > Timestamp.now() &&
-          !removedQuests.includes(doc.id);
-      });
-
-      logger.info(`Found ${socialQuests.length} social quests`);
-
-      if (socialQuests.length > 0) {
-        logger.info("Social quest found");
-        const randomIndex = randomIntFromInterval(0, socialQuests.length - 1);
-        questFound = <ActiveQuest>{
-          quest: <Quest>{
-            ...socialQuests[randomIndex].data(),
-            id: socialQuests[randomIndex].id,
-          },
-          activatedAt: Timestamp.now(),
-        };
-      }
-    }
-
     if (!questFound) {
       throw new HttpsError("not-found", "No quest found");
     }
@@ -203,3 +141,162 @@ export const searchForQuest = onCall(
 
     logger.info(`Finish, quest found is: ${JSON.stringify(questFound)}`);
   });
+
+
+const searchForActorQuest = async (
+  loggedUser: UserRecord,
+  userQuestPoints: (string | null)[],
+  removedQuests: string[]
+): Promise<ActiveQuest | undefined> => {
+  logger.info("Searching for actor quest");
+  const actorQuestsSnapshot = await getFirestore()
+    .collection("quests")
+    .where("type", "==", QuestTypeEnum.actor)
+    .where("requestAccepted", "==", true)
+    .get();
+
+  const actorQuests = actorQuestsSnapshot.docs.filter((doc) => {
+    return doc.data().validityStart <= Timestamp.now() &&
+      doc.data().validityEnd > Timestamp.now() &&
+      (!doc.data().queueCount ||
+        doc.data().queueCount < doc.data().maxQueue) &&
+      !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
+  });
+
+  logger.info(`Found ${actorQuests.length} actor quests`);
+
+  if (actorQuests.length > 0) {
+    logger.info("Search for actor quest");
+    // const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
+    const quest = actorQuests
+      .reduce((prev, current) => {
+        return prev.data().queueCount > current.data().queueCount ?
+          prev :
+          current;
+      });
+    return <ActiveQuest>{
+      quest: <Quest>{
+        ...quest.data(),
+        id: quest.id,
+      },
+      activatedAt: Timestamp.now(),
+    };
+  }
+  return undefined;
+};
+
+const searchForQuizQuest = async (
+  loggedUser: UserRecord,
+  userQuestPoints: (string | null)[],
+  removedQuests: string[]
+): Promise<ActiveQuest | undefined> => {
+  logger.info("Searching for quiz quest");
+  const quizQuestsSnapshot = await getFirestore()
+    .collection("quests")
+    .where("type", "==", QuestTypeEnum.quiz)
+    .where(
+      userQuestPoints && userQuestPoints.length > 0 ?
+        Filter.or(
+          Filter.where(
+            "parentQuests",
+            "array-contains-any",
+            userQuestPoints
+          ),
+          Filter.where("parentQuests", "==", null)
+        ) :
+        Filter.where("parentQuests", "==", null)
+    )
+    .get();
+
+  const quizQuests = quizQuestsSnapshot.docs.filter((doc) => {
+    const valid = doc.data().validityStart <= Timestamp.now() &&
+      doc.data().validityEnd > Timestamp.now() &&
+      !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
+    const parentQuests = doc.data().parentQuests;
+    if (!parentQuests) {
+      return valid;
+    }
+    return parentQuests.every((value: string) => {
+      return userQuestPoints.includes(value);
+    }) && valid;
+  });
+
+  logger.info(`Found ${quizQuests.length} quiz quests`);
+
+  if (quizQuests.length > 0) {
+    const randomIndex = randomIntFromInterval(0, quizQuests.length - 1);
+    return <ActiveQuest>{
+      quest: <Quest>{
+        ...quizQuests[randomIndex].data(),
+        id: quizQuests[randomIndex].id,
+      },
+      activatedAt: Timestamp.now(),
+    };
+  }
+  return undefined;
+};
+
+const searchForCommunityQuest = async (
+  loggedUser: UserRecord,
+  userQuestPoints: (string | null)[],
+  removedQuests: string[]
+): Promise<ActiveQuest | undefined> => {
+  logger.info("Searching for community quest");
+  const communityQuestsSnapshot = await getFirestore()
+    .collection("quests")
+    .where("type", "==", QuestTypeEnum.community)
+    .get();
+
+  const communityQuests = communityQuestsSnapshot.docs.filter((doc) => {
+    return doc.data().validityStart <= Timestamp.now() &&
+      doc.data().validityEnd > Timestamp.now() &&
+      !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
+  });
+
+  logger.info(`Found ${communityQuests.length} community quests`);
+
+  if (communityQuests.length > 0) {
+    const randomIndex = randomIntFromInterval(0, communityQuests.length - 1);
+    return <ActiveQuest>{
+      quest: <Quest>{
+        ...communityQuests[randomIndex].data(),
+        id: communityQuests[randomIndex].id,
+      },
+      activatedAt: Timestamp.now(),
+    };
+  }
+  return undefined;
+};
+
+const searchForSocialQuest = async (
+  loggedUser: UserRecord,
+  userQuestPoints: (string | null)[],
+  removedQuests: string[]
+): Promise<ActiveQuest | undefined> => {
+  logger.info("Searching for social quest");
+  const socialQuestsSnapshot = await getFirestore()
+    .collection("quests")
+    .where("type", "==", QuestTypeEnum.social)
+    .get();
+
+  const socialQuests = socialQuestsSnapshot.docs.filter((doc) => {
+    return doc.data().validityStart <= Timestamp.now() &&
+      doc.data().validityEnd > Timestamp.now() &&
+      !removedQuests.includes(doc.id);
+  });
+
+  logger.info(`Found ${socialQuests.length} social quests`);
+
+  if (socialQuests.length > 0) {
+    logger.info("Social quest found");
+    const randomIndex = randomIntFromInterval(0, socialQuests.length - 1);
+    return <ActiveQuest>{
+      quest: <Quest>{
+        ...socialQuests[randomIndex].data(),
+        id: socialQuests[randomIndex].id,
+      },
+      activatedAt: Timestamp.now(),
+    };
+  }
+  return undefined;
+};

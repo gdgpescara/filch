@@ -16,7 +16,7 @@ class QuestQrCodeWidget extends StatelessWidget {
         children: [
           UserQrCode(user: user),
           const SizedBox(height: 10),
-          Text(t.quests.active_quest.actors.hint),
+          Text(t.quests.active_quest.qr_code.hint),
         ],
       ),
     );

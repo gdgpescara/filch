@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
-import 'package:ui/ui.dart';
+import '../../ui.dart';
 
 class UserPicture extends StatelessWidget {
   const UserPicture({super.key, this.imageUrl, this.badgeImageName});

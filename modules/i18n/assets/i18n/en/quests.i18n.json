@@ -17,8 +17,10 @@
         "other": "$n seconds remaining"
       }
     },
+    "qr_code": {
+      "hint": "Ask to the right person to scan the QR code."
+    },
     "actors": {
-      "hint": "Ask to the right person to scan the QR code.",
       "description": {
         "label": "description:"
       }

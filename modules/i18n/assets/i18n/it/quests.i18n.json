@@ -17,8 +17,10 @@
         "other": "$n secondi rimanenti"
       }
     },
+    "qr_code": {
+      "hint": "Chiedi alla persona giusta di scansionare il codice QR"
+    },
     "actors": {
-      "hint": "Chiedi alla persona giusta di scansionare il codice QR",
       "description": {
         "label": "descrizione:"
       }
@@ -35,8 +37,8 @@
       "answer": {
         "evaluating": "Valutazione della risposta...",
         "correct": {
-          "one": "Ottimo lavoro! $n punto assegnato",
-          "other": "Ottimo lavoro! $n punti assegnati"
+          "one": "Grande Giove! $n punto assegnato",
+          "other": "Grande Giove! $n punti assegnati"
         },
         "incorrect": "Oh no! Non vengono assegnati punti"
       }

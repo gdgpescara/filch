@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quests/quests.dart';
+import 'package:ui/ui.dart';
 
 import '../../../staff.dart';
 import '../state/scan_cubit.dart';
@@ -17,8 +18,6 @@ class AssignablePointsList extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(20),
       children: [
-        FreePointsList(navigateToAssignment),
-        const SizedBox(height: 24),
         BlocSelector<ScanCubit, ScanState, List<Quest>>(
           selector: (state) => state is ScanLoaded ? state.quests : [],
           builder: (context, quests) {
@@ -26,6 +25,8 @@ class AssignablePointsList extends StatelessWidget {
             return UserQuestList(navigateToAssignment);
           },
         ),
+        const SizedBox(height: Spacing.xl),
+        FreePointsList(navigateToAssignment),
       ],
     );
   }

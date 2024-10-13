@@ -1,5 +1,6 @@
 export enum QuestTypeEnum {
   actor = "actor",
   quiz = "quiz",
-  social = "social"
+  social = "social",
+  community = "community",
 }
