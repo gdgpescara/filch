@@ -23,12 +23,12 @@ class FreePointsList extends StatelessWidget {
           children: [
             Text(
               t.staff.point_assignment.free_points.label,
-              style: context.getTextTheme(TextThemeType.monospace).titleMedium,
+              style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 10),
+            const SizedBox(height: Spacing.m),
             Wrap(
-              spacing: 20,
-              runSpacing: 20,
+              spacing: Spacing.l,
+              runSpacing: Spacing.l,
               children: points.map((item) => _ItemWidget(item, navigateToAssignment)).toList(),
             ),
           ],
@@ -46,7 +46,7 @@ class _ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () => navigateToAssignment(AssignmentPageArgs.points(item.points)),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.4,

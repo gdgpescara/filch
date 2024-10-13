@@ -10,3 +10,5 @@ node_modules/
 /lib/
 /firestore-snapshot/
 /serviceAccountKey.json
+/serviceAccountKey23.json
+/data/

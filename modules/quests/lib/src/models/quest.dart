@@ -13,6 +13,7 @@ part 'quest.g.dart';
 class Quest extends Equatable {
   const Quest({
     required this.id,
+    required this.title,
     required this.description,
     required this.points,
     required this.validityStart,
@@ -34,8 +35,9 @@ class Quest extends Equatable {
   factory Quest.fromJson(Map<String, dynamic> json) => _$QuestFromJson(json);
 
   final String id;
+  final Map<String, String> title;
   final Map<String, String> description;
-  final int points;
+  final List<int> points;
   @TimestampDateTimeConverter()
   @JsonKey(includeToJson: false)
   final DateTime validityStart;

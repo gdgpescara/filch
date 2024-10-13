@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
-import 'package:ui/ui.dart';
+import '../../ui.dart';
 
 class UserInfo extends StatelessWidget {
   const UserInfo(this.user, {super.key, this.extra});

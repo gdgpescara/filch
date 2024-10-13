@@ -22,7 +22,7 @@ class SubmitAnswerUseCase {
         });
         return (
           result.data,
-          quest.points,
+          quest.points.first,
         );
       },
       onException: (e) {

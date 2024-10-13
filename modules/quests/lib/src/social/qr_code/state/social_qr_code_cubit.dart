@@ -27,7 +27,7 @@ class SocialQrCodeCubit extends SafeEmitterCubit<SocialQrCodeState> {
       success: (result) async => emit(
         SocialQrCodeSaved(
           result,
-          activeQuest.quest.points,
+          activeQuest.quest.points.first,
         ),
       ),
       failure: (_) => emit(const SocialQrCodeFailure()),

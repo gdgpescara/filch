@@ -1,4 +1,4 @@
-import * as functions from "firebase-functions";
+import * as functions from "firebase-functions/v1";
 import {Quest} from "./types/quest";
 
 export const actorQueueSentinel = functions

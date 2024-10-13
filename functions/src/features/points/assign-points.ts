@@ -22,22 +22,9 @@ export const assignPoints = onCall(
         .map(async (uid: string) => await getAuth().getUser(uid)),
     );
 
-    // Calculate group groupMultiplier
-    let groupMultiplier = 1;
-    if (users.length > 1) {
-      const houses = users.map((user) => user.customClaims?.["house"]);
-      if ([...new Set(houses)].length === 1) {
-        logger.info("Is group with same house members");
-        groupMultiplier = 1.25;
-      } else {
-        logger.info("Is group with different house members");
-        groupMultiplier = 1.5;
-      }
-    }
-
     const points = <Points>{
       type: type,
-      points: Math.floor(assignedPoints * groupMultiplier),
+      points: assignedPoints,
       assignedBy: loggedUser.uid,
       assignedAt: Timestamp.now(),
       quest: questId,
@@ -47,25 +34,10 @@ export const assignPoints = onCall(
 
     const batch = getFirestore().batch();
     for (const user of users) {
-      const isNimbusUser = user.customClaims?.["isNimbusUser"] ?? false;
-      let userPoints = {...points};
-      if (isNimbusUser) {
-        logger.info("Is Nimbus user adding 30% points");
-        userPoints = {...points, points: Math.floor(points.points * 1.3)};
-      }
+      const userPoints = {...points};
       batch.set(
         getFirestore()
           .collection("users")
-          .doc(user.uid)
-          .collection("points")
-          .doc(),
-        userPoints,
-      );
-      batch.set(
-        getFirestore()
-          .collection("houses")
-          .doc(user.customClaims?.["house"])
-          .collection("members")
           .doc(user.uid)
           .collection("points")
           .doc(),

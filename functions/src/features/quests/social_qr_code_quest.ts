@@ -6,16 +6,16 @@ import {PointsTypeEnum} from "../points/types/points-type-enum";
 import {logger} from "firebase-functions/v2";
 import {getAuth} from "firebase-admin/auth";
 
-export type ScanHouseMatePayload = {
+export type ScanOtherAttendeePayload = {
   points: number;
   scannedValue: string;
 }
 
-export const scanHouseMate = onCall(
+export const scanOtherAttendee = onCall(
   {region: "europe-west3"},
   async (request) => {
     const loggedUser = await getSignedInUser(request);
-    const payload = <ScanHouseMatePayload>{...request.data};
+    const payload = <ScanOtherAttendeePayload>{...request.data};
 
     const scannedUser = await getAuth()
       .getUser(JSON.parse(payload.scannedValue).uid);
@@ -31,18 +31,9 @@ export const scanHouseMate = onCall(
       if (userPointSnap.docs.length > 0) {
         throw new Error("You have already scanned this user");
       }
-      const sameHouse = loggedUser.customClaims?.["house"] ===
-        scannedUser.customClaims?.["house"];
-
-      if (!sameHouse) {
-        logger.info("Not same house");
-        return false;
-      }
 
       const points = <Points>{
-        points: loggedUser.customClaims?.["isNimbusUser"] ?? false ?
-          payload.points * 1.3 :
-          payload.points,
+        points: payload.points,
         type: PointsTypeEnum.quest,
         assignedAt: Timestamp.now(),
         assignedFrom: scannedUser.uid,
@@ -57,17 +48,6 @@ export const scanHouseMate = onCall(
           .doc(),
         points,
       );
-      batch.set(
-        getFirestore()
-          .collection("houses")
-          .doc(loggedUser.customClaims?.["house"])
-          .collection("members")
-          .doc(loggedUser.uid)
-          .collection("points")
-          .doc(),
-        points,
-      );
-
       await batch.commit();
       logger.info("Points added");
       return true;
