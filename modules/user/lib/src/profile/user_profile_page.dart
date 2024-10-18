@@ -7,6 +7,7 @@ import 'package:ui/ui.dart';
 
 import '../points/user_points_card.dart';
 import 'state/user_profile_cubit.dart';
+import 't_shirt/user_t_shirt.dart';
 
 class UserProfilePage extends StatelessWidget {
   const UserProfilePage({
@@ -59,6 +60,8 @@ class UserProfilePage extends StatelessWidget {
                     Expanded(child: UserInfo(state.user)),
                   ],
                 ),
+                const SizedBox(height: Spacing.m),
+                const UserTShirt(),
                 const SizedBox(height: Spacing.xxl),
                 UserQrCode(user: state.user),
                 const SizedBox(height: Spacing.xxl),
