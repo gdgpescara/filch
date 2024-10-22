@@ -15,8 +15,8 @@ class AssignablePointsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: const EdgeInsets.all(20),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         BlocSelector<ScanCubit, ScanState, List<Quest>>(
           selector: (state) => state is ScanLoaded ? state.quests : [],

@@ -14,6 +14,15 @@
       "error": "An error occurred while assigning points."
     }
   },
+  "t_shirt_assignment": {
+    "label": "Assign t-shirt to user",
+    "page": {
+      "title": "Scan user QR code",
+      "assigning": "Assigning t-shirt...",
+      "success": "T-shirt assigned successfully.",
+      "error": "An error occurred while assigning t-shirt."
+    }
+  },
   "shifts": {
     "title": "Daily Shifts",
     "me": "Me",
