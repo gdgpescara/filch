@@ -20,6 +20,7 @@ import 'package:quests/src/ranking/state/ranking_cubit.dart' as _i96;
 import 'package:quests/src/social/qr_code/state/social_qr_code_cubit.dart'
     as _i606;
 import 'package:quests/src/use_cases/assign_points_use_case.dart' as _i615;
+import 'package:quests/src/use_cases/assign_t_shirt_use_case.dart' as _i358;
 import 'package:quests/src/use_cases/can_request_for_quest_use_case.dart'
     as _i384;
 import 'package:quests/src/use_cases/get_assignable_points_use_case.dart'
@@ -92,6 +93,8 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
         () => _i616.GiveUpQuestUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i216.SubmitAnswerUseCase>(
         () => _i216.SubmitAnswerUseCase(gh<_i809.FirebaseFunctions>()));
+    gh.lazySingleton<_i358.AssignTShirtUseCase>(
+        () => _i358.AssignTShirtUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i954.GetSignedUserActiveQuestUseCase>(
         () => _i954.GetSignedUserActiveQuestUseCase(
               gh<_i974.FirebaseFirestore>(),
