@@ -17,8 +17,8 @@ class UserTShirt extends StatelessWidget {
         builder: (context, state) => switch (state) {
           UserTShirtLoading() => const Center(child: LoaderAnimation()),
           UserTShirtFailure() => Text(t.common.errors.generic),
-          UserTShirtLoaded(hasUserPickedTShirt: true) => Text('Complimenti, hai già ritirato la tua t-shirt!'),
-          UserTShirtLoaded(hasUserPickedTShirt: false) => Text('Non dimenticare di ritirare la tua t-shirt!'),
+          UserTShirtLoaded(hasUserPickedTShirt: true) => Text(t.user.profile.user_info.t_shirt.picked),
+          UserTShirtLoaded(hasUserPickedTShirt: false) => Text(t.user.profile.user_info.t_shirt.not_picked),
         },
       ),
     );
