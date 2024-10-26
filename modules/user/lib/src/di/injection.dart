@@ -4,6 +4,7 @@ import 'package:injectable/injectable.dart';
   ignoreUnregisteredTypesInPackages: [
     'auth',
     'quests',
+    'cloud_firestore',
   ],
 )
 Future<void> configureDependencies() async {}

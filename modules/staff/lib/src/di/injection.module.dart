@@ -16,6 +16,8 @@ import 'package:staff/src/scan/state/scan_cubit.dart' as _i204;
 import 'package:staff/src/shifts/state/shifts_cubit.dart' as _i1034;
 import 'package:staff/src/shifts/use_cases/get_filtered_shifts_use_case.dart'
     as _i119;
+import 'package:staff/src/t_shirt_assignment/state/t_shirt_assignment_cubit.dart'
+    as _i734;
 
 class StaffPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -35,5 +37,7 @@ class StaffPackageModule extends _i526.MicroPackageModule {
         () => _i156.AssignmentCubit(gh<_i177.AssignPointsUseCase>()));
     gh.factory<_i1034.ShiftsCubit>(
         () => _i1034.ShiftsCubit(gh<_i119.GetFilteredShiftsUseCase>()));
+    gh.factory<_i734.TShirtAssignmentCubit>(
+        () => _i734.TShirtAssignmentCubit(gh<_i177.AssignTShirtUseCase>()));
   }
 }

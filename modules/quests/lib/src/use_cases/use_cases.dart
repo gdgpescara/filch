@@ -1,5 +1,6 @@
 //GENERATED BARREL FILE
 export 'assign_points_use_case.dart';
+export 'assign_t_shirt_use_case.dart';
 export 'can_request_for_quest_use_case.dart';
 export 'get_assignable_points_use_case.dart';
 export 'get_ranking_use_case.dart';

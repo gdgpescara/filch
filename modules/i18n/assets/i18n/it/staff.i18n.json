@@ -14,6 +14,15 @@
       "error": "Si è verificato un errore durante l'assegnazione dei punti, riprova più tardi."
     }
   },
+  "t_shirt_assignment": {
+    "label": "Assegna t-shirt all'utente",
+    "page": {
+      "title": "Scansiona il QR Code dell'utente",
+      "assigning": "Assegnazione della t-shirt...",
+      "success": "La t-shirt è stata assegnata con successo.",
+      "error": "Si è verificato un errore durante l'assegnazione della t-shirt, riprova più tardi."
+    }
+  },
   "shifts": {
     "title": "Turni giornalieri",
     "me": "Io",
