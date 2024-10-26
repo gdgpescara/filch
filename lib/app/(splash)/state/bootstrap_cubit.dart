@@ -19,7 +19,7 @@ class BootstrapCubit extends Cubit<BootstrapState> {
   final UserNeedSortingCeremonyUseCase _needSortingCeremonyUseCase;
 
   Future<void> init() async {
-    await Future<void>.delayed(const Duration(seconds: 4));
+    await Future<void>.delayed(const Duration(seconds: 2));
     if (!_hasSignedUserUseCase()) {
       emit(const UserLoggedOut());
       return;

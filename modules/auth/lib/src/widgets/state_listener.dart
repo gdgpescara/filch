@@ -1,9 +1,9 @@
 part of 'sign_in_page.dart';
 
-BlocWidgetListener<SignInState> get _signInStateListener => (context, state) {
+BlocWidgetListener<SignInState> _signInStateListener(VoidCallback onSignedInNavigateTo) => (context, state) {
       switch (state) {
         case SignInSuccess():
-          Navigator.pop(context);
+          onSignedInNavigateTo();
           break;
         case SignInFailure(failure: final failure):
           switch (failure.code) {

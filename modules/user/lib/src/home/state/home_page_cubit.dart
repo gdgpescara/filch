@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -10,9 +12,16 @@ class HomePageCubit extends SafeEmitterCubit<HomePageState> {
   HomePageCubit(this._isRankingFreezedUseCase) : super(const HomePageState());
 
   final IsRankingFreezedUseCase _isRankingFreezedUseCase;
+  StreamSubscription<void>? _subscription;
+
+  @override
+  Future<void> close() {
+    _subscription?.cancel();
+    return super.close();
+  }
 
   void checkRankingFreezed() {
-    _isRankingFreezedUseCase().when(
+    _subscription = _isRankingFreezedUseCase().when(
       progress: () => emit(const HomePageState()),
       success: (isFreezed) => emit(state.copyWith(isRankingFreezed: isFreezed, currentView: isFreezed ? 0 : 1)),
       failure: (_) => emit(const HomePageState()),

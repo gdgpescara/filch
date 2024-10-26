@@ -1,3 +1,0 @@
-namespaces: true
-input_directory: i18n/assets/i18n
-output_directory: i18n/lib/src/i18n

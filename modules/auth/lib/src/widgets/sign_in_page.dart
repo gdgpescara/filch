@@ -11,17 +11,9 @@ import 'staff_sign_in.dart';
 part 'state_listener.dart';
 
 class SignInPage extends StatelessWidget {
-  const SignInPage({super.key, this.signButtonBuilder = _defaultSignButtonBuilder});
+  const SignInPage({super.key, required this.onSignedInNavigateTo});
 
-  static Widget _defaultSignButtonBuilder(Widget signInButtons) {
-    return Container(
-      alignment: Alignment.center,
-      padding: const EdgeInsets.all(Spacing.xl),
-      child: signInButtons,
-    );
-  }
-
-  final Widget Function(Widget signInButtons) signButtonBuilder;
+  final VoidCallback onSignedInNavigateTo;
 
   @override
   Widget build(BuildContext context) {
@@ -32,27 +24,44 @@ class SignInPage extends StatelessWidget {
           create: (context) => GetIt.I(),
           child: BlocListener<SignInCubit, SignInState>(
             listenWhen: (previous, current) => current is SignInActionsState,
-            listener: _signInStateListener,
+            listener: _signInStateListener(onSignedInNavigateTo),
             child: Scaffold(
               extendBody: true,
               extendBodyBehindAppBar: true,
-              body: signButtonBuilder(
-                BlocBuilder<SignInCubit, SignInState>(
-                  buildWhen: (previous, current) => current is! SignInActionsState,
-                  builder: (context, state) {
-                    Widget child() {
-                      return switch (state) {
-                        SignInWithUserPassword() => const StaffSignIn(),
-                        SignInWithProviders() => const ProvidersSignIn(),
-                        _ => const SizedBox(),
-                      };
-                    }
+              body: Background(
+                child: Padding(
+                  padding: const EdgeInsets.all(Spacing.xl),
+                  child: Column(
+                    children: [
+                      Flexible(
+                        child: Container(
+                          alignment: Alignment.bottomCenter,
+                          height: MediaQuery.of(context).size.height * 0.35,
+                          child: const Logo(),
+                        ),
+                      ),
+                      const SizedBox(height: Spacing.xxl),
+                      Flexible(
+                        child: BlocBuilder<SignInCubit, SignInState>(
+                          buildWhen: (previous, current) => current is! SignInActionsState,
+                          builder: (context, state) {
+                            Widget child() {
+                              return switch (state) {
+                                SignInWithUserPassword() => const StaffSignIn(),
+                                SignInWithProviders() => const ProvidersSignIn(),
+                                _ => const SizedBox(),
+                              };
+                            }
 
-                    return AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 300),
-                      child: child(),
-                    );
-                  },
+                            return AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              child: child(),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               bottomNavigationBar: const SafeArea(

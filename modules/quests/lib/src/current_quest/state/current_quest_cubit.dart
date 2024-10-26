@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
@@ -28,18 +30,30 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
   final CanRequestForQuestUseCase _canRequestForQuestUseCase;
   final GiveUpQuestUseCase _giveUpQuestUseCase;
 
+  final List<StreamSubscription<void>> _subscriptions = [];
+
+  @override
+  Future<void> close() {
+    for (final subscription in _subscriptions) {
+      subscription.cancel();
+    }
+    return super.close();
+  }
+
   void loadCurrentQuest() {
-    _getSignedUserActiveQuestUseCase().when(
-      progress: () => emit(const CurrentQuestLoading()),
-      success: (quest) {
-        if (quest != null) {
-          final user = _getSignedUserUseCase();
-          emit(CurrentQuestLoaded(user: user, activeQuest: quest));
-        } else {
-          _canRequestForQuest();
-        }
-      },
-      failure: (_) => emit(const CurrentQuestFailure()),
+    _subscriptions.add(
+      _getSignedUserActiveQuestUseCase().when(
+        progress: () => emit(const CurrentQuestLoading()),
+        success: (quest) {
+          if (quest != null) {
+            final user = _getSignedUserUseCase();
+            emit(CurrentQuestLoaded(user: user, activeQuest: quest));
+          } else {
+            _canRequestForQuest();
+          }
+        },
+        failure: (_) => emit(const CurrentQuestFailure()),
+      ),
     );
   }
 
@@ -57,10 +71,12 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
 
   Future<void> _canRequestForQuest() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    _canRequestForQuestUseCase().when(
-      progress: () => emit(const CurrentQuestLoading()),
-      success: (canRequest) => canRequest ? emit(const NoQuestAssigned()) : emit(const QuestRequestClosed()),
-      failure: (_) => emit(const CurrentQuestFailure()),
+    _subscriptions.add(
+      _canRequestForQuestUseCase().when(
+        progress: () => emit(const CurrentQuestLoading()),
+        success: (canRequest) => canRequest ? emit(const NoQuestAssigned()) : emit(const QuestRequestClosed()),
+        failure: (_) => emit(const CurrentQuestFailure()),
+      ),
     );
   }
 

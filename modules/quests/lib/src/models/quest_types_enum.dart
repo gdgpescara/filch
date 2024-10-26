@@ -1,5 +1,6 @@
 enum QuestTypeEnum {
   actor,
   quiz,
-  social;
+  social,
+  community;
 }

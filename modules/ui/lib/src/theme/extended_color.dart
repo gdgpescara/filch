@@ -126,6 +126,24 @@ const _error = CustomColor(
   ),
 );
 
+/// app yellow
+const _appYellow = CustomColor(
+  seed: Color(0xFFF4FF61),
+  value: Color(0xFFF4FF61),
+  light: ColorFamily(
+    color: Color(0xFF6E5E00),
+    onColor: Color(0xFFFFFFFF),
+    colorContainer: Color(0xFFE5C61D),
+    onColorContainer: Color(0xFF403600),
+  ),
+  dark: ColorFamily(
+    color: Color(0xFFFFE259),
+    onColor: Color(0xFF393000),
+    colorContainer: Color(0xFFD5B800),
+    onColorContainer: Color(0xFF352C00),
+  ),
+);
+
 const _extendedColor = ExtendedColor(
   googleYellow: _googleYellow,
   googleRed: _googleRed,
@@ -134,6 +152,7 @@ const _extendedColor = ExtendedColor(
   success: _success,
   warning: _warning,
   error: _error,
+  appYellow: _appYellow,
 );
 
 class ExtendedColor extends ThemeExtension<CustomColor> {
@@ -145,6 +164,7 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
     required this.success,
     required this.warning,
     required this.error,
+    required this.appYellow,
   });
 
   final CustomColor googleYellow;
@@ -154,6 +174,7 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
   final CustomColor success;
   final CustomColor warning;
   final CustomColor error;
+  final CustomColor appYellow;
 
   @override
   ThemeExtension<CustomColor> copyWith({
@@ -164,6 +185,7 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
     CustomColor? success,
     CustomColor? warning,
     CustomColor? error,
+    CustomColor? appYellow,
   }) {
     return ExtendedColor(
       googleYellow: googleYellow ?? this.googleYellow,
@@ -173,6 +195,7 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
       success: success ?? this.success,
       warning: warning ?? this.warning,
       error: error ?? this.error,
+      appYellow: appYellow ?? this.appYellow,
     );
   }
 
@@ -189,6 +212,7 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
       success: success.lerp(other.success, t),
       warning: warning.lerp(other.warning, t),
       error: error.lerp(other.error, t),
+      appYellow: appYellow.lerp(other.appYellow, t),
     );
   }
 }

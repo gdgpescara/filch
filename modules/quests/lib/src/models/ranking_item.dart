@@ -10,7 +10,7 @@ class RankingItem extends Equatable {
     required this.displayName,
     this.photoUrl,
     required this.email,
-    required this.points,
+    this.points = 0,
   });
 
   factory RankingItem.fromJson(Map<String, dynamic> json) => _$RankingItemFromJson(json);

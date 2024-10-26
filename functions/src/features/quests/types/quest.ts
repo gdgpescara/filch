@@ -1,10 +1,13 @@
 import {QuestTypeEnum} from "./quest-type-enum";
 import {Answer} from "./answer";
 import {QuestSubTypeEnum} from "./quest-sub-type-enum";
+import {PromptFunctions} from "../prompt-functions";
+import {LocalizedField} from "./localized-field";
 
 export type Quest = {
   id: string;
-  description: { [key: string]: string };
+  title: LocalizedField;
+  description: LocalizedField;
   points: number;
   validityStart: Date;
   validityEnd: Date;
@@ -18,12 +21,12 @@ export type Quest = {
   maxQueue: number | null;
   groupSize: number | null;
   requestAccepted: boolean | null;
-  promptFunction: string | null;
+  promptFunction: PromptFunctions | null;
 
   // Quiz quest section
   parentQuests: string[] | null;
   qrCode: string | null;
-  question: { [key: string]: string } | null;
+  question: LocalizedField | null;
   answers: Answer[] | null;
 
   // Social quest section

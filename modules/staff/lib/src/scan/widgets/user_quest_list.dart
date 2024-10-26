@@ -38,7 +38,7 @@ class UserQuestList extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        quest.title[LocaleSettings.currentLocale.languageCode] ?? ' - ',
+                        quest.title?[LocaleSettings.currentLocale.languageCode] ?? ' - ',
                         style: context
                             .getTextTheme(TextThemeType.monospace)
                             .titleMedium

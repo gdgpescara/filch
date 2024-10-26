@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'error_catcher.dart';
@@ -18,12 +20,13 @@ extension FutureExtension<T> on Future<T> {
 }
 
 extension StreamExtension<T> on Stream<T> {
-  void when({
+  StreamSubscription<T> when({
     VoidCallback? progress,
     SuccessCallback<T>? success,
     FailureCallback? failure,
   }) {
     progress?.call();
     handleError(onErrorHandler(failure)).forEach((value) => success?.call(value));
+    return listen(null);
   }
 }

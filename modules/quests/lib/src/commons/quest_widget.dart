@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:ui/ui.dart';
 
 import '../actor/actor_quest_widget.dart';
-import '../commons/give_up_button.dart';
-import '../commons/time_remaining.dart';
+import '../community/community_quest_widget.dart';
 import '../models/active_quest.dart';
 import '../models/quest_types_enum.dart';
+import '../quiz/quiz_quest_widget.dart';
 import '../social/social_quest_widget.dart';
-import 'quiz_quest_widget.dart';
+import 'give_up_button.dart';
+import 'quest_title_widget.dart';
+import 'time_remaining.dart';
 
 class QuestWidget extends StatelessWidget {
   const QuestWidget(this.activeQuest, {super.key});
@@ -17,6 +20,7 @@ class QuestWidget extends StatelessWidget {
         QuestTypeEnum.actor => const ActorQuestWidget(),
         QuestTypeEnum.quiz => const QuizQuestWidget(),
         QuestTypeEnum.social => const SocialQuestWidget(),
+        QuestTypeEnum.community => const CommunityQuestWidget(),
       };
 
   @override
@@ -24,15 +28,15 @@ class QuestWidget extends StatelessWidget {
     return SafeArea(
       child: Center(
         child: SingleChildScrollView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.symmetric(vertical: Spacing.l, horizontal: Spacing.s),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              if(activeQuest.quest.title != null) QuestTitleWidget(activeQuest.quest.title!),
               TimeRemaining(activeQuest),
-              const SizedBox(height: 20),
               _specificQuestWidget,
-              const SizedBox(height: 20),
+              const SizedBox(height: Spacing.l),
               const GiveUpButton(),
             ],
           ),

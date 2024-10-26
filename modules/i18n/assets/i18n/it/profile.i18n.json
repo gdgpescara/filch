@@ -7,6 +7,12 @@
   },
   "remove_account": {
     "button": "Rimuovi Account",
+    "need_login": {
+      "dialog": {
+        "content": "Questa operazione è sensibile e richiede un'autenticazione recente. Accedi nuovamente e riprova.",
+        "title": "Necessità di un nuovo accesso"
+      }
+    },
     "dialog": {
       "confirm": "Rimuovi Account",
       "content": "Sei sicuro di voler rimuovere il tuo account? Questa operazione è irreversibile.",

@@ -10,11 +10,13 @@ import {
 } from "./features/user/user_manager";
 import {scanOtherAttendee} from "./features/quests/social_qr_code_quest";
 import {removeActiveQuest} from "./features/quests/remove-active-quest";
+import {tShirtPuckUp} from "./features/user/t-shirt-pick-up";
 
 initializeApp();
 
 exports.onUserDeleteSentinel = onUserDeleteSentinel;
 exports.onUserCreateSentinel = onUserCreateSentinel;
+exports.tShirtPickUp = tShirtPuckUp;
 
 exports.actorQueueSentinel = actorQueueSentinel;
 exports.searchForQuest = searchForQuest;

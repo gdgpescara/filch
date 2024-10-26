@@ -22,7 +22,7 @@ void main() {
     () async {
       WidgetsFlutterBinding.ensureInitialized();
       await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-      LocaleSettings.useDeviceLocale();
+      await LocaleSettings.useDeviceLocale();
       Loggy.initLoggy(
         logPrinter: const PrettyDeveloperPrinter(),
       );

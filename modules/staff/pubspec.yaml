@@ -20,7 +20,7 @@ dependencies:
   quests:
     path: ../../modules/quests
 
-  get_it: ^8.0.0
+  get_it: ^8.0.1
   injectable: ^2.5.0
   equatable: ^2.0.5
   bloc: ^8.1.4

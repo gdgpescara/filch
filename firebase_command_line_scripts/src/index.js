@@ -42,7 +42,7 @@ const prompt = new Enquirer.prompts.MultiSelect({
 
 prompt.run()
     .then(answer => {
-        const selectedSteps = (answer == 'all' ? steps : steps.filter(step => answer == step.name)).map(step => step.value);
+        const selectedSteps = (answer.includes('all') ? steps : steps.filter(step => answer.includes(step.name))).map(step => step.value);
         const runStep = async (step) => {
             console.info(`🚀 Running step: ${step.name}...`);
             await step();

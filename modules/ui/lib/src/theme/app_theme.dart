@@ -8,30 +8,29 @@ part 'button_theme.dart';
 part 'extended_color.dart';
 part 'input_decorator_theme.dart';
 part 'text_theme.dart';
+const appColors = _extendedColor;
+const _backgroundSeedColor = Color(0xFF0A0D36);
+const _pinkColor = Color(0xFFE71F80);
+const _orangeColor = Color(0xFFF3932E);
+const _lightBlueColor = Color(0xFF3ABBED);
 
-const backgroundSeedColor = Color(0xFF0A0D36);
-const pinkColor = Color(0xFFE71F80);
-const orangeColor = Color(0xFFF3932E);
-const lightBlueColor = Color(0xFF3ABBED);
-const yellowColor = Color(0xFFF4FF61);
-
-ColorScheme _colorScheme(Brightness brightness, Color seedColor) => ColorScheme.fromSeed(
-      seedColor: seedColor,
+ColorScheme _colorScheme(Brightness brightness, Color? seedColor) => ColorScheme.fromSeed(
+      seedColor: seedColor ?? _pinkColor,
       brightness: brightness,
       dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
     ).copyWith(
-      surface: backgroundSeedColor,
+      surface: _backgroundSeedColor,
       onSurface: const Color(0xFFFFFFFF),
       surfaceBright: const Color(0xFF1A1B2A),
-      primary: pinkColor,
+      primary: _pinkColor,
       onPrimary: const Color(0xFFFFFFFF),
       primaryContainer: const Color(0xFFAC2567),
       onPrimaryContainer: const Color(0xFFFFFFFF),
-      secondary: orangeColor,
+      secondary: _orangeColor,
       onSecondary: const Color(0xFF1A1B2A),
       secondaryContainer: const Color(0xFFE5A23D),
       onSecondaryContainer: const Color(0xFF1A1B2A),
-      tertiary: lightBlueColor,
+      tertiary: _lightBlueColor,
       onTertiary: const Color(0xFF1A1B2A),
       tertiaryContainer: const Color(0xFF2E8BC0),
       onTertiaryContainer: const Color(0xFF1A1B2A),
@@ -41,12 +40,11 @@ ColorScheme _colorScheme(Brightness brightness, Color seedColor) => ColorScheme.
       onErrorContainer: _error._dark.onColorContainer,
     );
 
-ThemeData buildTheme(Brightness brightness, Color seedColor) {
+ThemeData buildTheme(Brightness brightness, {Color? seedColor}) {
   final colorScheme = _colorScheme(brightness, seedColor);
   final theme = ThemeData(
     useMaterial3: true,
     colorScheme: colorScheme,
-    extensions: const [_extendedColor],
     inputDecorationTheme: _inputDecorationTheme(colorScheme),
     elevatedButtonTheme: _elevatedButtonThemeData(colorScheme),
     textButtonTheme: _textButtonThemeData(colorScheme),
@@ -68,8 +66,6 @@ extension ThemeDataExtension on BuildContext {
   TextTheme get textTheme => theme.textTheme;
 
   ColorScheme get colorScheme => theme.colorScheme;
-
-  ExtendedColor get appColors => theme.extension<ExtendedColor>()!;
 
   TextTheme getTextTheme([TextThemeType type = TextThemeType.normal]) => theme.getTextTheme(type);
 }
