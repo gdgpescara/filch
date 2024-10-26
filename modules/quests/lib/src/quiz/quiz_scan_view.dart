@@ -26,6 +26,7 @@ class QuizScanView extends StatelessWidget {
             QuestDescriptionWidget(activeQuest: currentQuestState.activeQuest),
             const SizedBox(height: 20),
             AppCard(
+              style: AppCardStyle.normal,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [

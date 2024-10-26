@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:bloc/bloc.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
@@ -15,8 +17,16 @@ class UserTShirtCubit extends Cubit<UserTShirtState> {
 
   final HasUserPickedTShirtUseCase _hasUserPickedTShirtUseCase;
 
+  StreamSubscription<void>? _subscription;
+
+  @override
+  Future<void> close() {
+    _subscription?.cancel();
+    return super.close();
+  }
+
   void checkTShirt() {
-    _hasUserPickedTShirtUseCase().when(
+    _subscription = _hasUserPickedTShirtUseCase().when(
       progress: () => emit(const UserTShirtLoading()),
       success: (value) => emit(UserTShirtLoaded(hasUserPickedTShirt: value)),
       failure: (_) => emit(const UserTShirtFailure()),

@@ -11,8 +11,8 @@ class QuestQrCodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      style: AppCardStyle.normal,
       padding: const EdgeInsets.symmetric(vertical: Spacing.m),
-      borderColor: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [

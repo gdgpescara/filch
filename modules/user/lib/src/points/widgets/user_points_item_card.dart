@@ -15,6 +15,7 @@ class UserPointsItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      style: AppCardStyle.normal,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
