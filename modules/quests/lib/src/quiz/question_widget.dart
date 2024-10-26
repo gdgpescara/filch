@@ -21,7 +21,7 @@ class QuestionWidget extends StatelessWidget {
             t.quests.active_quest.quiz.question.label,
             style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10, width: double.infinity),
+          const SizedBox(height: Spacing.s, width: double.infinity),
           Text(
             activeQuest.quest.question?[LocaleSettings.currentLocale.languageCode] ?? '',
             style: Theme.of(context).textTheme.bodyLarge,

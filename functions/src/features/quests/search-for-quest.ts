@@ -1,5 +1,5 @@
 import {HttpsError, onCall} from "firebase-functions/v2/https";
-import {Filter, getFirestore, Timestamp} from "firebase-admin/firestore";
+import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
 import {QuestTypeEnum} from "./types/quest-type-enum";
 import {ActiveQuest} from "./types/active-quest";
@@ -222,18 +222,6 @@ const searchForQuizQuest = async (
   const quizQuestsSnapshot = await getFirestore()
     .collection("quests")
     .where("type", "==", QuestTypeEnum.quiz)
-    .where(
-      userQuestPoints && userQuestPoints.length > 0 ?
-        Filter.or(
-          Filter.where(
-            "parentQuests",
-            "array-contains-any",
-            userQuestPoints
-          ),
-          Filter.where("parentQuests", "==", null)
-        ) :
-        Filter.where("parentQuests", "==", null)
-    )
     .get();
 
   const quizQuests = quizQuestsSnapshot.docs.filter((doc) => {

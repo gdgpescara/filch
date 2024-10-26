@@ -1,4 +1,5 @@
 export enum PointsTypeEnum {
   quest = "quest",
-  staff = "staff"
+  staff = "staff",
+  community = "community",
 }

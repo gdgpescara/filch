@@ -8,7 +8,7 @@ export type Quest = {
   id: string;
   title: LocalizedField;
   description: LocalizedField;
-  points: number;
+  points: number[];
   validityStart: Date;
   validityEnd: Date;
   executionTime: number;

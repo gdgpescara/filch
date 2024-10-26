@@ -1,10 +1,13 @@
 import {getFirestore} from "firebase-admin/firestore";
 import * as fs from "fs";
 import {Timestamp as timestamp} from "@google-cloud/firestore";
+import {initFirebaseApp} from "./utilities.js";
+
+initFirebaseApp();
 
 const db = getFirestore();
 
-const collection = 'assignable_points';
+const collection = 'quests';
 
 const docConverter = {
     toFirestore: (data) => {

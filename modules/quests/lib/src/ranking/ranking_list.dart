@@ -11,7 +11,7 @@ class RankingList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<RankingCubit, RankingState>(
-      buildWhen: (previous, current) => current is RankingLoaded,
+      buildWhen: (previous, current) => previous != current && current is RankingLoaded,
       builder: (context, state) {
         state as RankingLoaded;
         return ListView.separated(

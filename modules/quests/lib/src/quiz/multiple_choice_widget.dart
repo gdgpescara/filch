@@ -43,9 +43,8 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               QuestionWidget(activeQuest: state.activeQuest),
-              const SizedBox(height: Spacing.m),
               AppCard(
-                style: AppCardStyle.normal,
+                style: AppCardStyle.caption,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,

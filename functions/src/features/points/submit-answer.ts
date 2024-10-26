@@ -1,10 +1,10 @@
 import {HttpsError, onCall} from "firebase-functions/v2/https";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
-import {Quest} from "./types/quest";
 import {getFirestore, Timestamp} from "firebase-admin/firestore";
-import {Points} from "../points/types/points";
-import {PointsTypeEnum} from "../points/types/points-type-enum";
+import {Points} from "./types/points";
+import {PointsTypeEnum} from "./types/points-type-enum";
 import {logger} from "firebase-functions/v2";
+import {Quest} from "../quests/types/quest";
 
 export const submitAnswer = onCall(
   {region: "europe-west3"},
@@ -39,7 +39,7 @@ export const submitAnswer = onCall(
 
     const archivedPoints = <Points>{
       type: PointsTypeEnum.quest,
-      points: quest.points,
+      points: quest.points[0],
       assignedAt: Timestamp.now(),
     };
 

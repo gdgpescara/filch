@@ -1,8 +1,8 @@
 import {onCall} from "firebase-functions/v2/https";
 import {getSignedInUser} from "../../shared/get_signed_in_user";
 import {getFirestore, Timestamp} from "firebase-admin/firestore";
-import {Points} from "../points/types/points";
-import {PointsTypeEnum} from "../points/types/points-type-enum";
+import {Points} from "./types/points";
+import {PointsTypeEnum} from "./types/points-type-enum";
 import {logger} from "firebase-functions/v2";
 import {getAuth} from "firebase-admin/auth";
 
