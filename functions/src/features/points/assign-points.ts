@@ -22,6 +22,29 @@ export const assignPoints = onCall(
         .map(async (uid: string) => await getAuth().getUser(uid)),
     );
 
+    // If the type is staff or community remove
+    // from users if they have already assigned points.
+    const filteredUsers = [];
+    if (type == PointsTypeEnum.staff || type == PointsTypeEnum.community) {
+      const batch = getFirestore().batch();
+      for (const user of users) {
+        const userPointSnap = await getFirestore()
+          .collection("users")
+          .doc(user.uid)
+          .collection("points")
+          .where("type", "==", type)
+          .get();
+        if (userPointSnap.docs.length > 0) {
+          logger.info("User: " + user.uid + " already has points");
+        } else {
+          filteredUsers.push(user);
+        }
+      }
+      await batch.commit();
+    } else {
+      filteredUsers.push(...users);
+    }
+
     const points = <Points>{
       type: type,
       points: assignedPoints,
@@ -33,7 +56,7 @@ export const assignPoints = onCall(
     logger.info("Points: " + JSON.stringify(points));
 
     const batch = getFirestore().batch();
-    for (const user of users) {
+    for (const user of filteredUsers) {
       const userPoints = {...points};
       batch.set(
         getFirestore()

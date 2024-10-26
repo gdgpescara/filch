@@ -43,8 +43,8 @@ class QuizQuestWidget extends StatelessWidget {
                             : t.quests.active_quest.quiz.answer.incorrect,
                       ),
                       backgroundColor: state.isCorrect
-                          ? Theme.of(context).extension<ExtendedColor>()?.success.seed
-                          : Theme.of(context).extension<ExtendedColor>()?.error.seed,
+                          ? appColors.success.seed
+                          : appColors.error.seed,
                     ),
                   );
                   break;
@@ -53,7 +53,7 @@ class QuizQuestWidget extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(t.common.errors.generic_retry),
-                      backgroundColor: Theme.of(context).extension<ExtendedColor>()?.error.seed,
+                      backgroundColor: appColors.error.seed,
                     ),
                   );
                   break;
@@ -61,7 +61,7 @@ class QuizQuestWidget extends StatelessWidget {
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(t.quests.active_quest.quiz.scan_error),
-                      backgroundColor: Theme.of(context).extension<ExtendedColor>()?.error.seed,
+                      backgroundColor: appColors.error.seed,
                     ),
                   );
                   break;
