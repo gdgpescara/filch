@@ -19,7 +19,7 @@ class RankingCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      borderColor: Colors.transparent,
+      style: AppCardStyle.normal,
       padding: const EdgeInsets.all(Spacing.m).copyWith(top: Spacing.s),
       child: SizedBox(
         width: double.infinity,

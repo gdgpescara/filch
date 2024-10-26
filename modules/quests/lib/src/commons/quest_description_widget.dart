@@ -12,7 +12,7 @@ class QuestDescriptionWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      borderColor: Colors.transparent,
+      style: AppCardStyle.normal,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisSize: MainAxisSize.min,

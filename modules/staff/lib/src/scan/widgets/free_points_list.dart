@@ -51,6 +51,7 @@ class _ItemWidget extends StatelessWidget {
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.4,
         child: AppCard(
+          style: AppCardStyle.bordered,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,

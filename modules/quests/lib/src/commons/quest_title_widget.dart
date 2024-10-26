@@ -11,7 +11,7 @@ class QuestTitleWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      borderColor: Colors.transparent,
+      style: AppCardStyle.normal,
       child: SizedBox(
         width: double.infinity,
         child: Text(

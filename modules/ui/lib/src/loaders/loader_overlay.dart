@@ -41,7 +41,6 @@ class LoaderOverlay extends StatelessWidget {
     return PopScope(
       canPop: false,
       child: BlurContainer(
-        borderColor: Colors.transparent,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

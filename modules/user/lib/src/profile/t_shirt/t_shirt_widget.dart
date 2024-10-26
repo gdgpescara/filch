@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-class QuestPromptWidget extends StatelessWidget {
-  const QuestPromptWidget(this.prompt, {super.key});
+class TShirtWidget extends StatelessWidget {
+  const TShirtWidget(this.message, {super.key, required this.borderColor});
 
-  final Map<String, String> prompt;
+  final String message;
+  final Color borderColor;
 
   @override
   Widget build(BuildContext context) {
     return AppCard(
       style: AppCardStyle.caption,
+      borderColor: borderColor,
       child: SizedBox(
         width: double.infinity,
         child: Text(
-          prompt[LocaleSettings.currentLocale.languageCode] ?? '',
+          message,
           style: context.getTextTheme(TextThemeType.monospace).bodyMedium,
         ),
       ),

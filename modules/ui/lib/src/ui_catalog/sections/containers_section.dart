@@ -17,12 +17,14 @@ class ContainersSection extends StatelessWidget {
         const SubHeading(text: 'light'),
         const Gap.vertical(Spacing.s),
         const AppCard(
+          style: AppCardStyle.normal,
           child: SizedBox(width: double.infinity, height: 300),
         ),
         const Gap.vertical(Spacing.m),
         const SubHeading(text: 'dark'),
         const Gap.vertical(Spacing.s),
         const AppCard(
+          style: AppCardStyle.normal,
           brightness: Brightness.dark,
           child: SizedBox(width: double.infinity, height: 300),
         ),
@@ -30,6 +32,7 @@ class ContainersSection extends StatelessWidget {
         const SubHeading(text: 'with colored border'),
         const Gap.vertical(Spacing.s),
         const AppCard(
+          style: AppCardStyle.normal,
           borderColor: Colors.red,
           child: SizedBox(width: double.infinity, height: 300),
         ),

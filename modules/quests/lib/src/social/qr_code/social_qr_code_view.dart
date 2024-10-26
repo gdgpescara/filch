@@ -50,6 +50,7 @@ class SocialQrCodeView extends StatelessWidget {
             },
             builder: (context, state) {
               return AppCard(
+                style: AppCardStyle.normal,
                 child: switch (state) {
                   SocialQrCodeLoading() => const LoaderAnimation(),
                   _ => SocialQrCodeScan(activeQuest: currentQuestState.activeQuest),

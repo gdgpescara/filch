@@ -35,6 +35,7 @@ class _SingleChoiceWidgetState extends State<SingleChoiceWidget> {
               QuestionWidget(activeQuest: state.activeQuest),
               const SizedBox(height: 20),
               AppCard(
+                style: AppCardStyle.normal,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,

@@ -43,8 +43,9 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
             mainAxisSize: MainAxisSize.min,
             children: [
               QuestionWidget(activeQuest: state.activeQuest),
-              const SizedBox(height: 20),
+              const SizedBox(height: Spacing.m),
               AppCard(
+                style: AppCardStyle.normal,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisSize: MainAxisSize.min,
@@ -56,7 +57,7 @@ class _MultipleChoiceWidgetState extends State<MultipleChoiceWidget> {
                           .bodyMedium
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: 10),
+                    const SizedBox(height: Spacing.s),
                     for (final answer in answers)
                       ReactiveCheckboxListTile(
                         formControlName: '${answer.id}',

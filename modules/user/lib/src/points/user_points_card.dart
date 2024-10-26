@@ -15,7 +15,7 @@ class UserPointsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      borderColor: Colors.transparent,
+      style: AppCardStyle.normal,
       child: BlocProvider<UserPointsCubit>(
         create: (context) => GetIt.I()..loadPoints(),
         child: Column(
