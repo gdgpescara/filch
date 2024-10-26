@@ -11,11 +11,14 @@ part 'active_quest.g.dart';
 class ActiveQuest extends Equatable {
   const ActiveQuest({
     required this.quest,
+    this.prompt,
     required this.activatedAt,
   });
 
   factory ActiveQuest.fromJson(Map<String, dynamic> json) => _$ActiveQuestFromJson(json);
+
   final Quest quest;
+  final Map<String, String>? prompt;
   @TimestampDateTimeConverter()
   final DateTime activatedAt;
 
@@ -29,6 +32,7 @@ class ActiveQuest extends Equatable {
   @override
   List<Object?> get props => [
         quest,
+        prompt,
         activatedAt,
       ];
 }

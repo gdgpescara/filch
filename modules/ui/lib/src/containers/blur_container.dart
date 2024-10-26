@@ -11,19 +11,19 @@ class BlurContainer extends StatelessWidget {
     required this.child,
     this.clipRadius,
     this.brightness = Brightness.light,
-    this.borderColor = pinkColor,
+    this.borderColor,
   });
 
   final Widget child;
   final BorderRadius? clipRadius;
   final Brightness brightness;
-  final Color borderColor;
+  final Color? borderColor;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: OuterShadowDecoration(
-        color: borderColor,
+        color: borderColor ?? context.colorScheme.primary,
         radius: clipRadius ?? BorderRadius.zero,
         blurRadius: 5,
       ),
@@ -34,7 +34,7 @@ class BlurContainer extends StatelessWidget {
           child: Container(
             alignment: Alignment.center,
             decoration: BoxDecoration(
-              border: Border.all(color: borderColor),
+              border: Border.all(color: borderColor ?? context.colorScheme.primary),
               borderRadius: clipRadius ?? BorderRadius.zero,
               color: context.colorScheme.surface.withOpacity(0.7),
             ),

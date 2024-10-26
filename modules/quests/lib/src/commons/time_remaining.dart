@@ -39,6 +39,8 @@ class _TimeRemainingState extends State<TimeRemaining> {
       context.read<CurrentQuestCubit>().timeExpired();
     }
     return AppCard(
+      borderColor: Colors.transparent,
+      padding: EdgeInsets.zero,
       child: Text(
         widget.activeQuest.remainingTime.format(
           hoursFormatter: (n) => t.quests.active_quest.time_remaining.hours(n: n),

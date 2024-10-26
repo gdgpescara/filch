@@ -71,11 +71,11 @@ class RankingCard extends StatelessWidget {
 
   Color _textColor(BuildContext context) {
     if(position == 1) {
-      return yellowColor;
+      return appColors.appYellow.seed;
     }
     if(isUser) {
-      return context.theme.colorScheme.tertiary;
+      return context.colorScheme.tertiary;
     }
-    return context.theme.colorScheme.onSurface;
+    return context.colorScheme.onSurface;
   }
 }

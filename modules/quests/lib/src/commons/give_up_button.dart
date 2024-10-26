@@ -9,7 +9,8 @@ class GiveUpButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return SizedBox(
+      width: double.infinity,
       child: ElevatedButton(
         onPressed: () async {
           final shouldGiveUp = await showAdaptiveDialog<bool>(

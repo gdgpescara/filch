@@ -11,12 +11,17 @@ class QuestQrCodeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      padding: const EdgeInsets.symmetric(vertical: Spacing.m),
+      borderColor: Colors.transparent,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
           UserQrCode(user: user),
           const SizedBox(height: 10),
-          Text(t.quests.active_quest.qr_code.hint),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: Spacing.m),
+            child: Text(t.quests.active_quest.qr_code.hint),
+          ),
         ],
       ),
     );

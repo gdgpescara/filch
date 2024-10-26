@@ -9,6 +9,9 @@ import {Quest} from "./types/quest";
 import {Points} from "../points/types/points";
 import {PointsTypeEnum} from "../points/types/points-type-enum";
 import {auth} from "firebase-admin";
+import {QuestSubTypeEnum} from "./types/quest-sub-type-enum";
+import {promptFunctionsList} from "./prompt-functions";
+import {LocalizedField} from "./types/localized-field";
 import UserRecord = auth.UserRecord;
 
 export const searchForQuest = onCall(
@@ -22,7 +25,12 @@ export const searchForQuest = onCall(
       .doc("feature_flags")
       .get();
 
-    const questsOrder = config.data()?.questsOrder ?? [];
+    const questsOrder = [
+      QuestTypeEnum.actor,
+      QuestTypeEnum.quiz,
+      QuestTypeEnum.community,
+      QuestTypeEnum.social,
+    ];
     const actorQuestEnabled = config.data()?.actorQuestEnabled ?? false;
     const quizQuestEnabled = config.data()?.quizQuestEnabled ?? false;
     const communityQuestEnabled = config.data()?.communityQuestEnabled ?? false;
@@ -168,19 +176,39 @@ const searchForActorQuest = async (
   if (actorQuests.length > 0) {
     logger.info("Search for actor quest");
     // const randomIndex = randomIntFromInterval(0, actorQuests.length - 1);
-    const quest = actorQuests
+    const questSnap = actorQuests
       .reduce((prev, current) => {
         return prev.data().queueCount > current.data().queueCount ?
           prev :
           current;
       });
-    return <ActiveQuest>{
-      quest: <Quest>{
-        ...quest.data(),
-        id: quest.id,
-      },
+    const quest = <Quest>{
+      ...questSnap.data(),
+      id: questSnap.id,
+    };
+
+
+    let prompt: LocalizedField | undefined = undefined;
+
+    if (quest.subType === QuestSubTypeEnum.prompted && quest.promptFunction) {
+      logger.info("Found prompted actor quest, " +
+        "try to get prompt from:" + quest.promptFunction);
+      prompt = await promptFunctionsList[quest.promptFunction]();
+    }
+
+    let activeQuest = <ActiveQuest>{
+      quest: quest,
       activatedAt: Timestamp.now(),
     };
+
+    if (prompt) {
+      activeQuest = <ActiveQuest>{
+        ...activeQuest,
+        prompt: prompt,
+      };
+    }
+
+    return activeQuest;
   }
   return undefined;
 };

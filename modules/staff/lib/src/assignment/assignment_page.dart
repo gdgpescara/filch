@@ -33,7 +33,7 @@ class AssignmentPage extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(t.staff.point_assignment.page.error),
-                  backgroundColor: context.appColors.error.seed,
+                  backgroundColor: appColors.error.seed,
                 ),
               );
               break;
@@ -43,7 +43,7 @@ class AssignmentPage extends StatelessWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(t.staff.point_assignment.page.success),
-                  backgroundColor: context.appColors.success.seed,
+                  backgroundColor: appColors.success.seed,
                 ),
               );
               break;

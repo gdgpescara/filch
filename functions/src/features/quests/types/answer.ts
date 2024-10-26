@@ -1,5 +1,7 @@
+import {LocalizedField} from "./localized-field";
+
 export type Answer = {
   id: number;
-  text: { [key: string]: string };
+  text: LocalizedField;
   isCorrect: boolean;
 }

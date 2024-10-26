@@ -38,79 +38,87 @@ class RemoveAccountButton extends StatelessWidget {
   void _removeAccount(BuildContext context) {
     showAdaptiveDialog<void>(
       context: context,
-      builder: (context) => _RemoveAccountDialog(
-        onNeedLogin,
-        onAccountRemoved,
-      ),
-    );
-  }
-}
-
-class _RemoveAccountDialog extends StatefulWidget {
-  const _RemoveAccountDialog(this.onNeedLogin, this.onAccountRemoved);
-
-  final VoidCallback onNeedLogin;
-  final VoidCallback onAccountRemoved;
-
-  @override
-  State<_RemoveAccountDialog> createState() => _RemoveAccountDialogState();
-}
-
-class _RemoveAccountDialogState extends State<_RemoveAccountDialog> {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text(t.profile.remove_account.dialog.title),
-      content: Text(t.profile.remove_account.dialog.content),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(),
-          child: Text(t.common.buttons.cancel),
-        ),
-        TextButton(
-          onPressed: () => _removeAccount(context),
-          child: Text(t.profile.remove_account.dialog.confirm),
-        ),
-      ],
+      builder: (context) {
+        return AlertDialog(
+          title: Text(t.profile.remove_account.dialog.title),
+          content: Text(t.profile.remove_account.dialog.content),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: Text(t.common.buttons.cancel),
+            ),
+            TextButton(
+              onPressed: () => _confirmAccountRemoval(context),
+              child: Text(t.profile.remove_account.dialog.confirm),
+            ),
+          ],
+        );
+      },
     );
   }
 
-  Future<void> _removeAccount(BuildContext context) async {
-    widget.onNeedLogin();
+  Future<void> _confirmAccountRemoval(BuildContext context) async {
     await GetIt.I<RemoveAccountUseCase>()().when(
       progress: () => LoaderOverlay.show(context),
       success: (_) => _navigateToSplash(context),
-      failure: (e) => _showError(context),
+      failure: (e) => _onError(context, e),
     );
   }
 
   void _navigateToSplash(BuildContext context) {
+    LoaderOverlay.hide(context);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
           t.profile.remove_account.success,
           style: context.textTheme.bodyMedium?.copyWith(
-                color: context.appColors.success.brightnessColor(context).onColorContainer,
-              ),
+            color: appColors.success.brightnessColor(context).onColorContainer,
+          ),
         ),
-        backgroundColor: context.appColors.success.brightnessColor(context).colorContainer,
+        backgroundColor: appColors.success.brightnessColor(context).colorContainer,
       ),
     );
-    widget.onAccountRemoved();
+    Navigator.pop(context);
+    onAccountRemoved();
   }
 
-  void _showError(BuildContext context) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(
-          t.profile.remove_account.success,
-          style: context
-              .textTheme
-              .bodyMedium
-              ?.copyWith(color: context.appColors.error.brightnessColor(context).onColorContainer),
+  Future<void> _onError(BuildContext context, Failure failure) async {
+    LoaderOverlay.hide(context);
+    if (failure.message.contains('firebase_auth/requires-recent-login')) {
+      await showAdaptiveDialog<void>(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: Text(t.profile.remove_account.need_login.dialog.title),
+            content: Text(t.profile.remove_account.need_login.dialog.content),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text(t.common.buttons.cancel),
+              ),
+              TextButton(
+                onPressed: onNeedLogin,
+                child: Text(t.common.buttons.ok),
+              ),
+            ],
+          );
+        },
+      );
+      if(context.mounted) {
+        Navigator.pop(context);
+      }
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(
+            t.profile.remove_account.error,
+            style:
+            context.textTheme.bodyMedium?.copyWith(color: appColors.error.brightnessColor(context).onColorContainer),
+          ),
+          backgroundColor: appColors.error.brightnessColor(context).colorContainer,
         ),
-        backgroundColor: context.appColors.error.brightnessColor(context).colorContainer,
-      ),
-    );
+      );
+      Navigator.pop(context);
+    }
   }
 }

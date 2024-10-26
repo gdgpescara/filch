@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -10,9 +12,16 @@ class UserPointsCubit extends SafeEmitterCubit<UserPointsState> {
   UserPointsCubit(this._getSignedUserPointsUseCase) : super(const UserPointsLoading());
 
   final GetSignedUserPointsUseCase _getSignedUserPointsUseCase;
+  late final StreamSubscription<void> _subscription;
+
+  @override
+  Future<void> close() {
+    _subscription.cancel();
+    return super.close();
+  }
 
   void loadPoints() {
-    _getSignedUserPointsUseCase().when(
+    _subscription = _getSignedUserPointsUseCase().when(
       progress: () => emit(const UserPointsLoading()),
       success: (points) => emit(UserPointsLoaded(points)),
       failure: (_) => emit(const UserPointsFailure()),

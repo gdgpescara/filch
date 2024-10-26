@@ -12,7 +12,6 @@ import 'package:ui/ui.dart';
 
 import 'auth_state/auth_cubit.dart';
 import 'routes.g.dart';
-import 'theme_state/theme_cubit.dart';
 
 class Application extends StatefulWidget {
   const Application({super.key});
@@ -67,9 +66,6 @@ class _ApplicationState extends State<Application> {
         BlocProvider<AuthCubit>(
           create: (context) => GetIt.I(),
         ),
-        BlocProvider<ThemeCubit>(
-          create: (context) => GetIt.I(),
-        ),
       ],
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
@@ -77,26 +73,20 @@ class _ApplicationState extends State<Application> {
             Routefly.navigate(routePaths.path);
           }
         },
-        child: BlocBuilder<ThemeCubit, ThemeState>(
-          builder: (context, state) {
-            return MaterialApp.router(
-              locale: TranslationProvider
-                  .of(context)
-                  .flutterLocale,
-              themeMode: ThemeMode.dark,
-              theme: buildTheme(Brightness.dark, state.seedColor),
-              debugShowCheckedModeBanner: false,
-              supportedLocales: AppLocaleUtils.supportedLocales,
-              localizationsDelegates: GlobalMaterialLocalizations.delegates,
-              routerConfig: _router,
-              themeAnimationCurve: Curves.easeInOut,
-              themeAnimationDuration: const Duration(milliseconds: 600),
-              builder: (context, child) {
-                return AccessibilityTools(
-                  checkFontOverflows: true,
-                  child: child,
-                );
-              },
+        child: MaterialApp.router(
+          locale: TranslationProvider.of(context).flutterLocale,
+          themeMode: ThemeMode.dark,
+          theme: buildTheme(Brightness.dark),
+          debugShowCheckedModeBanner: false,
+          supportedLocales: AppLocaleUtils.supportedLocales,
+          localizationsDelegates: GlobalMaterialLocalizations.delegates,
+          routerConfig: _router,
+          themeAnimationCurve: Curves.easeInOut,
+          themeAnimationDuration: const Duration(milliseconds: 600),
+          builder: (context, child) {
+            return AccessibilityTools(
+              checkFontOverflows: true,
+              child: child,
             );
           },
         ),

@@ -7,6 +7,12 @@
   },
   "remove_account": {
     "button": "Remove Account",
+    "need_login": {
+      "dialog": {
+        "content": "This operation is sensitive and requires recent authentication. Log in again and retry again.",
+        "title": "Need to fresh login"
+      }
+    },
     "dialog": {
       "confirm": "Remove Account",
       "content": "Are you sure you want to remove your account? This action cannot be undone.",

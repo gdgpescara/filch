@@ -32,7 +32,11 @@ class UserQrCode extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.bottomCenter,
-            child: SvgPicture.asset('images/lines.svg', package: 'assets'),
+            child: SvgPicture.asset(
+              'images/lines.svg',
+              package: 'assets',
+              excludeFromSemantics: true,
+            ),
           ),
           Align(
             alignment: Alignment.topCenter,
