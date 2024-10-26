@@ -12,9 +12,11 @@ class StaffHomePage extends StatefulWidget {
     super.key,
     required this.navigateToSplash,
     required this.navigateToAssignment,
+    required this.navigateToTShirtAssignment,
   });
 
   final VoidCallback navigateToSplash;
+  final VoidCallback navigateToTShirtAssignment;
   final void Function(AssignmentPageArgs) navigateToAssignment;
 
   @override
@@ -34,7 +36,10 @@ class _StaffHomePageState extends State<StaffHomePage> {
         child: IndexedStack(
           index: _currentIndex,
           children: [
-            ScanView(navigateToAssignment: widget.navigateToAssignment),
+            ScanView(
+              navigateToAssignment: widget.navigateToAssignment,
+              navigateToTShirtAssignment: widget.navigateToTShirtAssignment,
+            ),
             const ShiftsView(),
             StaffProfileView(navigateToSplash: widget.navigateToSplash),
           ],
