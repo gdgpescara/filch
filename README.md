@@ -50,7 +50,7 @@ melos run generate
 ```bash
 dart run slang
 ```
-## Secrets tath you need
+## Secrets that you need
 
 ### Flutter
 - .env 
@@ -61,3 +61,13 @@ dart run slang
 
 ### iOS
 - Secrets.xcconfig
+
+
+### Firebase Functions
+Filch app uses Firebase Functions to do some server-side logic. To deploy functions you need to have a Firebase project and a Firebase Functions project.
+The functions are located in `functions` folder.
+
+### Seeding and managing Firestore data
+To manage Firestore data there is a project called `firebase_command_line_scripts` that is used to seed data into Firestore.
+This project provide a set of scripts to manage Firestore data.
+read the README.md in the project to know how to use it.
