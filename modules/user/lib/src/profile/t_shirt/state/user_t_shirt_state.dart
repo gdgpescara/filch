@@ -13,13 +13,13 @@ final class UserTShirtLoading extends UserTShirtState {
 
 final class UserTShirtLoaded extends UserTShirtState {
   const UserTShirtLoaded({
-    this.hasUserPickedTShirt = false,
+    this.status = TShirtPickUpState.none,
   });
 
-  final bool hasUserPickedTShirt;
+  final TShirtPickUpState status;
 
   @override
-  List<Object?> get props => [hasUserPickedTShirt];
+  List<Object?> get props => [status];
 }
 
 final class UserTShirtFailure extends UserTShirtState {
