@@ -15,7 +15,7 @@ import 'package:user/src/points/state/user_points_cubit.dart' as _i109;
 import 'package:user/src/profile/state/user_profile_cubit.dart' as _i343;
 import 'package:user/src/profile/t_shirt/state/user_t_shirt_cubit.dart'
     as _i120;
-import 'package:user/src/use_cases/has_user_picked_t_shirt_use_case.dart'
+import 'package:user/src/use_cases/t_shirt_pick_up_state_use_case.dart'
     as _i79;
 
 class UserPackageModule extends _i526.MicroPackageModule {
@@ -30,12 +30,12 @@ class UserPackageModule extends _i526.MicroPackageModule {
         () => _i109.UserPointsCubit(gh<_i177.GetSignedUserPointsUseCase>()));
     gh.factory<_i251.HomePageCubit>(
         () => _i251.HomePageCubit(gh<_i177.IsRankingFreezedUseCase>()));
-    gh.lazySingleton<_i79.HasUserPickedTShirtUseCase>(
-        () => _i79.HasUserPickedTShirtUseCase(
+    gh.lazySingleton<_i79.TShirtPickUpStateUseCase>(
+        () => _i79.TShirtPickUpStateUseCase(
               gh<_i974.FirebaseFirestore>(),
               gh<_i662.GetSignedUserUseCase>(),
             ));
     gh.factory<_i120.UserTShirtCubit>(
-        () => _i120.UserTShirtCubit(gh<_i79.HasUserPickedTShirtUseCase>()));
+        () => _i120.UserTShirtCubit(gh<_i79.TShirtPickUpStateUseCase>()));
   }
 }

@@ -31,6 +31,7 @@ export const onUserCreateSentinel = functions
         photoUrl: user.photoURL,
         createdAt: user.metadata.creationTime,
         tShirtPickup: false,
+        tShirtPickupRequested: false,
         points: 0,
       });
   });
