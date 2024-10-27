@@ -1,0 +1,11 @@
+{
+  "take_picture": {
+    "button": "Scatta una foto",
+    "success": "Foto acquisita con successo."
+  },
+  "upload_picture": {
+    "uploading": "Caricamento della foto...",
+    "success": "Foto caricata con successo.",
+    "error": "Si è verificato un errore durante il caricamento della foto."
+  }
+}

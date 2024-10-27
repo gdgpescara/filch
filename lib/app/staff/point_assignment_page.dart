@@ -7,7 +7,9 @@ Route routeBuilder(BuildContext context, RouteSettings settings) {
   return Routefly.defaultRouteBuilder(
     context,
     settings,
-    PointAssignmentPage(args: settings.arguments! as AssignmentPageArgs,),
+    PointAssignmentPage(
+      args: settings.arguments! as AssignmentPageArgs,
+    ),
   );
 }
 

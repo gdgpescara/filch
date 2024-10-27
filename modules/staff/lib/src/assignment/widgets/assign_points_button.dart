@@ -21,7 +21,7 @@ class AssignPointsButton extends StatelessWidget {
           onPressed: users.isNotEmpty
               ? () => context.read<AssignmentCubit>().assign(
                     points: args.points,
-                    quest: args.quest,
+                    quest: args.questId,
                     type: args.type,
                     users: users.map((e) => (jsonDecode(e) as Map<String, dynamic>)['uid'] as String).toList(),
                   )

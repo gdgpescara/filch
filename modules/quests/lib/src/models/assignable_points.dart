@@ -7,13 +7,13 @@ part 'assignable_points.g.dart';
 class AssignablePoints extends Equatable {
   const AssignablePoints({
     required this.description,
-    this.points,
+    required this.points,
   });
 
   factory AssignablePoints.fromJson(Map<String, dynamic> json) => _$AssignablePointsFromJson(json);
 
   final Map<String, String> description;
-  final int? points;
+  final int points;
 
   @override
   List<Object?> get props => [description, points];

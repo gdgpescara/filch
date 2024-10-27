@@ -5,6 +5,7 @@ import 'package:i18n/i18n.dart';
 import 'package:quests/quests.dart';
 import 'package:ui/ui.dart';
 
+import '../community/take_picture_bottom_sheet.dart';
 import 'state/assignment_cubit.dart';
 import 'widgets/assign_points_button.dart';
 import 'widgets/scanned_items.dart';
@@ -23,13 +24,13 @@ class AssignmentPage extends StatelessWidget {
     return BlocProvider<AssignmentCubit>(
       create: (context) => GetIt.I(),
       child: BlocListener<AssignmentCubit, AssignmentState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           switch (state) {
             case Assigning():
               LoaderOverlay.show(context, message: t.staff.point_assignment.page.assigning);
               break;
             case AssignFailure():
-              Navigator.pop(context);
+              LoaderOverlay.hide(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(t.staff.point_assignment.page.error),
@@ -38,14 +39,21 @@ class AssignmentPage extends StatelessWidget {
               );
               break;
             case Assigned():
+              LoaderOverlay.hide(context);
               Navigator.pop(context);
-              Navigator.pop(context);
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(t.staff.point_assignment.page.success),
-                  backgroundColor: appColors.success.seed,
-                ),
-              );
+              if (args.questType == QuestTypeEnum.community) {
+                await showModalBottomSheet<void>(
+                  context: context,
+                  builder: (context) => const TakePictureBottomSheet(),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text(t.staff.point_assignment.page.success),
+                    backgroundColor: appColors.success.seed,
+                  ),
+                );
+              }
               break;
             default:
               break;
@@ -62,9 +70,9 @@ class AssignmentPage extends StatelessWidget {
             body: const SafeArea(
               child: Column(
                 children: [
-                  SizedBox(height: 24),
+                  SizedBox(height: Spacing.xl),
                   ScannerWidget(),
-                  SizedBox(height: 20),
+                  SizedBox(height: Spacing.l),
                   ScannedItems(),
                 ],
               ),
@@ -83,12 +91,18 @@ class AssignmentPage extends StatelessWidget {
 @immutable
 class AssignmentPageArgs {
   const AssignmentPageArgs.points(this.points)
-      : quest = null,
+      : questId = null,
+        questType = null,
         type = PointsTypeEnum.staff;
 
-  const AssignmentPageArgs.quest({this.quest, this.points}) : type = PointsTypeEnum.quest;
+  const AssignmentPageArgs.quest({
+    this.questId,
+    required this.questType,
+    required this.points,
+  }) : type = PointsTypeEnum.quest;
 
-  final int? points;
-  final String? quest;
+  final int points;
+  final String? questId;
+  final QuestTypeEnum? questType;
   final PointsTypeEnum type;
 }

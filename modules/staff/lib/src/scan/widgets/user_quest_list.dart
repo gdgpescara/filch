@@ -53,6 +53,7 @@ class UserQuestList extends StatelessWidget {
                             (points) {
                               return _ItemWidget(
                                 quest.id,
+                                quest.type,
                                 points,
                                 navigateToAssignment,
                               );
@@ -75,18 +76,20 @@ class UserQuestList extends StatelessWidget {
 class _ItemWidget extends StatelessWidget {
   const _ItemWidget(
     this.questId,
+    this.questType,
     this.points,
     this.navigateToAssignment,
   );
 
   final String questId;
+  final QuestTypeEnum questType;
   final int points;
   final void Function(AssignmentPageArgs) navigateToAssignment;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => navigateToAssignment(AssignmentPageArgs.quest(points: points, quest: questId)),
+      onTap: () => navigateToAssignment(AssignmentPageArgs.quest(points: points, questId: questId, questType: questType)),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.4,
         child: AppCard(

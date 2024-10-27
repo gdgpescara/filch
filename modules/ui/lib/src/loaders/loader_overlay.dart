@@ -54,6 +54,7 @@ class LoaderOverlay extends StatelessWidget {
               const Gap.vertical(Spacing.l),
             ],
             const LoaderAnimation(),
+            const Gap.vertical(Spacing.l),
             if (message != null || messageWidget != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),

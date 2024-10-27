@@ -11,7 +11,8 @@ class CanRequestForQuestUseCase {
     return _getFeatureFlagsUseCase().map((featureFlag) {
       return (featureFlag['actorQuestEnabled'] ?? false) ||
           (featureFlag['quizQuestEnabled'] ?? false) ||
-          (featureFlag['socialQuestEnabled'] ?? false);
+          (featureFlag['socialQuestEnabled'] ?? false) ||
+          (featureFlag['communityQuestEnabled'] ?? false);
     });
   }
 }

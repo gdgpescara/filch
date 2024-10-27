@@ -10,6 +10,7 @@ class CountdownPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: context.colorScheme.surface,
       body: Padding(
         padding: const EdgeInsets.all(Spacing.xl),
         child: Center(

@@ -5,12 +5,15 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i687;
+import 'dart:io' as _i497;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:cloud_functions/cloud_functions.dart' as _i809;
 import 'package:core/src/di/date_format_module.dart' as _i1016;
 import 'package:core/src/di/external_libraries.dart' as _i545;
 import 'package:core/src/use_cases/get_feature_flags_use_case.dart' as _i866;
+import 'package:firebase_storage/firebase_storage.dart' as _i457;
+import 'package:image_picker/image_picker.dart' as _i183;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:intl/intl.dart' as _i602;
 import 'package:package_info_plus/package_info_plus.dart' as _i655;
@@ -34,6 +37,13 @@ class CorePackageModule extends _i526.MicroPackageModule {
         () => externalLibraries.firebaseFunctions);
     gh.lazySingleton<_i974.FirebaseFirestore>(
         () => externalLibraries.firestore);
+    gh.lazySingleton<_i457.Reference>(() => externalLibraries.storageRef);
+    gh.lazySingleton<_i183.ImagePicker>(() => externalLibraries.imagePicker);
+    await gh.factoryAsync<_i497.Directory>(
+      () => externalLibraries.documentDirectory(),
+      instanceName: 'documentDirectory',
+      preResolve: true,
+    );
     gh.lazySingleton<_i602.DateFormat>(
       () => dateFormatModule.dateFormatTime,
       instanceName: 'onlyTime',

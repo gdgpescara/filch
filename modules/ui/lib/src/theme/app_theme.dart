@@ -8,6 +8,8 @@ part 'button_theme.dart';
 part 'extended_color.dart';
 part 'input_decorator_theme.dart';
 part 'text_theme.dart';
+part 'bottom_sheet_theme.dart';
+
 const appColors = _extendedColor;
 const _backgroundSeedColor = Color(0xFF0A0D36);
 const _pinkColor = Color(0xFFE71F80);
@@ -50,6 +52,7 @@ ThemeData buildTheme(Brightness brightness, {Color? seedColor}) {
     textButtonTheme: _textButtonThemeData(colorScheme),
     outlinedButtonTheme: _outlinedButtonThemeData(colorScheme),
     scaffoldBackgroundColor: Colors.transparent,
+    bottomSheetTheme: _bottomSheetTheme(colorScheme),
   );
 
   return theme.copyWith(

@@ -19,6 +19,8 @@ dependencies:
     path: ../../modules/auth
   quests:
     path: ../../modules/quests
+  media_manager:
+    path: ../../modules/media_manager
 
   get_it: ^8.0.1
   injectable: ^2.5.0
