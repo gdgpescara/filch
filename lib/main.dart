@@ -3,6 +3,7 @@ import 'dart:ui';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_app_check/firebase_app_check.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
@@ -49,6 +50,10 @@ void main() {
           const int.fromEnvironment('FIRESTORE_PORT'),
         );
       }
+
+      await FirebaseAppCheck.instance.activate(
+        appleProvider: AppleProvider.appAttest,
+      );
 
       runApp(TranslationProvider(child: const Application()));
     },

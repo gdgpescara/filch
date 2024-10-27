@@ -1,0 +1,11 @@
+{
+  "take_picture": {
+    "button": "Take picture",
+    "success": "Picture taken successfully."
+  },
+  "upload_picture": {
+    "uploading": "Uploading picture...",
+    "success": "Picture uploaded successfully.",
+    "error": "An error occurred while uploading picture."
+  }
+}

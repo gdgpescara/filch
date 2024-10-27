@@ -42,9 +42,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>Camera permission is required for barcode scanning.</string>
+	<string>Camera permission is required for barcode scanning and photo feature available only for staff users.</string>
+	<key>NSMicrophoneUsageDescription</key>
+    <string>Microphone used for photo feature available only for staff users.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs photos access to get QR code from photo library</string>
+	<string>This app needs photos access to get QR code and photo feature from photo library.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 	<key>UIBackgroundModes</key>

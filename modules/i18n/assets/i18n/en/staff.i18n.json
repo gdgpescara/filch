@@ -34,5 +34,9 @@
       "scan": "Scan",
       "shifts": "Shifts"
     }
+  },
+  "take_picture": {
+    "title": "Take a picture",
+    "instructions": "Before taking the photo, for better results, remember to:\n\n• Take the photo using the suggested background.\n• Avoid overlapping the subjects in the photo.\n• Try to take half-body shots."
   }
 }

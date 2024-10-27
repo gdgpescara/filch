@@ -34,5 +34,10 @@
       "scan": "Scan",
       "shifts": "Turni"
     }
+  },
+  "take_picture": {
+    "title": "Scatta una foto",
+    "instructions": "Prima di scattare la foto, per un migliore risultato, ricorda:\n\n• Effettuare la foto usando lo sfondo suggerito.\n• Evitare di sovrapporre i soggetti scattati.\n• Cerca di fare foto a mezzo busto."
   }
+
 }

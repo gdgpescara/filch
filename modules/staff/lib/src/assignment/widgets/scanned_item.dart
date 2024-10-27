@@ -13,7 +13,7 @@ class ScannedItem extends StatelessWidget {
   Widget build(BuildContext context) {
     final data = jsonDecode(value) as Map<String, dynamic>;
     return AppCard(
-      style: AppCardStyle.bordered,
+      style: AppCardStyle.normal,
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,

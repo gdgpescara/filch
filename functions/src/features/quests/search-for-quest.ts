@@ -261,6 +261,7 @@ const searchForCommunityQuest = async (
   const communityQuestsSnapshot = await getFirestore()
     .collection("quests")
     .where("type", "==", QuestTypeEnum.community)
+    .where("requestAccepted", "==", true)
     .get();
 
   const communityQuests = communityQuestsSnapshot.docs.filter((doc) => {

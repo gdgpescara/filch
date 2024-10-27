@@ -89,12 +89,12 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
         () => _i615.AssignPointsUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i806.SocialQuestRegistrationUseCase>(() =>
         _i806.SocialQuestRegistrationUseCase(gh<_i809.FirebaseFunctions>()));
+    gh.lazySingleton<_i358.AssignTShirtUseCase>(
+        () => _i358.AssignTShirtUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i616.GiveUpQuestUseCase>(
         () => _i616.GiveUpQuestUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i216.SubmitAnswerUseCase>(
         () => _i216.SubmitAnswerUseCase(gh<_i809.FirebaseFunctions>()));
-    gh.lazySingleton<_i358.AssignTShirtUseCase>(
-        () => _i358.AssignTShirtUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i954.GetSignedUserActiveQuestUseCase>(
         () => _i954.GetSignedUserActiveQuestUseCase(
               gh<_i974.FirebaseFirestore>(),
