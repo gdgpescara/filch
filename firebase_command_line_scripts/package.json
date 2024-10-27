@@ -2,9 +2,12 @@
   "name": "firebase_command_line_scripts",
   "version": "1.0.0",
   "type": "module",
+  "scripts": {
+    "execute": "node ./src/index.js"
+  },
   "dependencies": {
     "@google-cloud/firestore": "^7.10.0",
     "enquirer": "^2.4.1",
-    "firebase-admin": "^12.6.0"
+    "firebase-admin": "^12.7.0"
   }
 }
