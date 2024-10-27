@@ -3,6 +3,7 @@ To use the functionalities in this directory, follow these steps:
 ### Prerequisites
 - Ensure you have `node` and `npm` installed on your system. 
 - Download and copy the `data` directory to the root of your project.
+- Service account key file for Firebase Admin SDK. You can download this file from the Firebase Console.
 
 ### Data Directory Structure
 
