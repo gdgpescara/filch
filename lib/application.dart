@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:accessibility_tools/accessibility_tools.dart';
+import 'package:auth/auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,7 +22,6 @@ class Application extends StatefulWidget {
 }
 
 class _ApplicationState extends State<Application> {
-  final _navigatorKey = GlobalKey<NavigatorState>();
   late StreamSubscription<RemoteMessage> _subscription;
   final _router = Routefly.routerConfig(
     initialPath: routePaths.path,
@@ -32,23 +32,10 @@ class _ApplicationState extends State<Application> {
   @override
   void initState() {
     super.initState();
+    GetIt.I<UploadFcmTokenUseCase>()();
     _subscription = FirebaseMessaging.onMessage.listen((message) {
-      if (message.notification != null && _navigatorKey.currentContext != null) {
-        showAdaptiveDialog<void>(
-          context: _navigatorKey.currentContext!,
-          builder: (context) {
-            return AlertDialog(
-              title: Text(message.notification!.title ?? ''),
-              content: Text(message.notification!.body ?? ''),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context),
-                  child: Text(t.common.buttons.ok),
-                ),
-              ],
-            );
-          },
-        );
+      if (message.notification != null) {
+        Routefly.pushNavigate(routePaths.notification, arguments: message.notification);
       }
     });
   }

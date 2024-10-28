@@ -58,5 +58,8 @@
     "image": {
       "semantic": "Immagine utente"
     }
+  },
+  "notifications": {
+    "title": "Hai un messaggio dal continuum spazio-temporale."
   }
 }
