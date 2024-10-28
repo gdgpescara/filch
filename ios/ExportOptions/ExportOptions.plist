@@ -11,7 +11,7 @@
     <key>provisioningProfiles</key>
     <dict>
         <key>it.gdgpescara.filch</key>
-        <string>store_provisioning</string>
+        <string>devfest-app-distribution</string>
     </dict>
     <key>signingCertificate</key>
     <string>Apple Distribution</string>
