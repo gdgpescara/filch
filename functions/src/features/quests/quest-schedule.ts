@@ -1,5 +1,3 @@
-// Cron that clean all active quest expired
-
 import {onSchedule} from "firebase-functions/v2/scheduler";
 import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {QuestTypeEnum} from "./types/quest-type-enum";
@@ -8,7 +6,7 @@ import {Quest} from "./types/quest";
 import {ActiveQuest} from "./types/active-quest";
 import {logger} from "firebase-functions/v2";
 
-export const activeQuestsCleaner = onSchedule({
+export const activeQuestsCleanerSchedule = onSchedule({
   schedule: "every 1 minutes",
   timeZone: "Europe/Rome",
   region: "europe-west3",

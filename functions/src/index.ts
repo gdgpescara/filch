@@ -25,8 +25,9 @@ exports.scanOtherAttendee = scanOtherAttendee;
 exports.removeActiveQuest = removeActiveQuest;
 
 // Cron jobs [Start]
-// exports.questQueueCleaner = activeQuestsCleaner;
-// exports.removedQuestCron = removedQuestCron;
+// exports.questQueueCleanerSchedule = activeQuestsCleanerSchedule;
+// exports.removedQuestSchedule = removedQuestSchedule;
+// exports.tShirtNotificationSchedule = tShirtNotificationSchedule;
 // Cron jobs [End]
 
 exports.assignPoints = assignPoints;

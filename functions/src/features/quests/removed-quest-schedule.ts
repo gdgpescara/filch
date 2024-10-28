@@ -1,7 +1,7 @@
 import {onSchedule} from "firebase-functions/v2/scheduler";
 import {getFirestore} from "firebase-admin/firestore";
 
-export const removedQuestCron = onSchedule({
+export const removedQuestSchedule = onSchedule({
   schedule: "every 1 minutes",
   timeZone: "Europe/Rome",
   region: "europe-west3",
