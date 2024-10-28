@@ -34,7 +34,7 @@ void main() {
         return true;
       };
 
-      await FirebaseMessaging.instance.requestPermission();
+      await FirebaseMessaging.instance.requestPermission(provisional: true);
 
       if (const String.fromEnvironment('ENV') == 'local') {
         await FirebaseAuth.instance.useAuthEmulator(

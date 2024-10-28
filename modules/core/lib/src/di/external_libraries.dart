@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:injectable/injectable.dart';
@@ -22,6 +23,9 @@ abstract class ExternalLibraries {
 
   @lazySingleton
   FirebaseFirestore get firestore => FirebaseFirestore.instance;
+
+  @lazySingleton
+  FirebaseMessaging get firebaseMessaging => FirebaseMessaging.instance;
 
   @lazySingleton
   Reference get storageRef => FirebaseStorage.instance.ref();

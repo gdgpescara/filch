@@ -26,7 +26,7 @@ dart pub global activate flutterfire_cli
 ```bash
 flutterfire configure
 ```
-select `devfestpescara-2023` then contnue to generate `firebase_options.dart`.
+select `project` then contnue to generate `firebase_options.dart`.
 
 
 ## How to start development

@@ -3,6 +3,7 @@ import {createAccounts} from "./create-users.js";
 import Enquirer from 'enquirer';
 import {updateQuests} from "./update-quests.js";
 import {deployFirebaseFunctions} from "./deploy-functions.js";
+import {sendTShirtNotification} from "./send-t-shirt-notification.js";
 
 const steps = [
     {
@@ -19,6 +20,11 @@ const steps = [
         name: 'upload-quests',
         message: 'Upload quests',
         value: updateQuests
+    },
+    {
+        name: 'send-t-shirt-notification',
+        message: 'Send t-shirt notification',
+        value: sendTShirtNotification
     },
     {
         name: 'deploy-functions',

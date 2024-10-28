@@ -58,5 +58,8 @@
     "image": {
       "semantic": "User image"
     }
+  },
+  "notifications": {
+    "title": "You have a message from the continuum of space-time."
   }
 }
