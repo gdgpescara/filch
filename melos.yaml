@@ -15,7 +15,7 @@ command:
       sdk: ^3.5.3
       flutter: ">=3.24.0"
     dependencies:
-      get_it: ^8.0.1
+      get_it: ^8.0.2
       injectable: ^2.5.0
       cloud_firestore: ^5.4.4
       cloud_functions: ^5.1.3

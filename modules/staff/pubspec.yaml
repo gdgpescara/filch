@@ -22,7 +22,7 @@ dependencies:
   media_manager:
     path: ../../modules/media_manager
 
-  get_it: ^8.0.1
+  get_it: ^8.0.2
   injectable: ^2.5.0
   equatable: ^2.0.5
   bloc: ^8.1.4

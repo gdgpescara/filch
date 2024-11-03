@@ -168,7 +168,8 @@ const searchForActorQuest = async (
       doc.data().validityEnd > Timestamp.now() &&
       (!doc.data().queueCount ||
         doc.data().queueCount < doc.data().maxQueue) &&
-      !userQuestPoints.includes(doc.id) && !removedQuests.includes(doc.id);
+      userQuestPoints.filter((value) => value === doc.id).length <= 3 &&
+      !removedQuests.includes(doc.id);
   });
 
   logger.info(`Found ${actorQuests.length} actor quests`);
