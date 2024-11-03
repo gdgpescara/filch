@@ -24,13 +24,10 @@ class AppPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(Spacing.xxxl),
-                  child: Image.asset(
-                    'logo/logo.png',
-                    semanticLabel: t.devfest2024.semantic.logo,
-                    package: 'assets',
-                  ),
+                Image.asset(
+                  'logo/logo.png',
+                  semanticLabel: t.devfest2024.semantic.logo,
+                  package: 'assets',
                 ),
                 const Gap.vertical(Spacing.xxl),
                 const LoaderAnimation(),
