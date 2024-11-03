@@ -43,7 +43,12 @@ class UploadQueueExecutorUseCase {
                   progress: () {
                     collection.doc(doc.id).update({'status': 'uploading'});
                   },
-                  success: (_) {
+                  success: (url) {
+                    _firestore.collection('community_partner_images').add({
+                      'uid': user.uid,
+                      'url': url,
+                      'createdAt': DateTime.now().toUtc().toIso8601String(),
+                    });
                     doc.reference.delete();
                     file.delete();
                   },
