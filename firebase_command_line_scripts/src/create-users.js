@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import {getAuth} from "firebase-admin/auth";
+import {getFirestore} from "firebase-admin/firestore";
 
 export const createAccounts = async () => {
     try {
@@ -20,6 +21,9 @@ export const createAccounts = async () => {
                 });
                 console.info(`✅  Successfully created user ${createdUser.uid} with email ${createdUser.email}`);
             } else {
+                await getFirestore().collection('users').doc(fetchedUser.uid).update({
+                    isStaff: true
+                });
                 console.warn(`⏩  User ${fetchedUser.email} already exists`);
             }
         }

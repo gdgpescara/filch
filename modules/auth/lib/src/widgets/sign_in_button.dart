@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i18n/i18n.dart';
+import 'package:ui/ui.dart';
 
 import '../models/providers_enum.dart';
 import '../state/sign_in_cubit.dart';
@@ -16,6 +17,7 @@ class SignInButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: () {
         if (onPressed != null) {
+          LoaderOverlay.show(context);
           return onPressed?.call();
         }
         context.read<SignInCubit>().providerSignIn(provider);

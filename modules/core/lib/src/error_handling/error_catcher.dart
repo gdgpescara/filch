@@ -38,7 +38,7 @@ Stream<T> runSafetyStream<T>(
   // ignore: inference_failure_on_untyped_parameter
   return operation().asBroadcastStream().handleError((e) {
     // ignore: avoid_dynamic_calls
-    logError(e, e, e.stackTrace as StackTrace);
+    logError(e, e, e.stackTrace as StackTrace?);
     if (e is Failure) throw e;
     throw onException?.call(e) ?? Failure.genericFromException(e);
   });

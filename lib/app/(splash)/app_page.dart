@@ -20,6 +20,7 @@ class AppPage extends StatelessWidget {
       child: BlocListener<BootstrapCubit, BootstrapState>(
         listener: _stateListener,
         child: Scaffold(
+          backgroundColor: context.colorScheme.surface,
           body: Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,

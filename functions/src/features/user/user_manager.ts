@@ -1,6 +1,5 @@
 import * as functions from "firebase-functions/v1";
 import {getFirestore} from "firebase-admin/firestore";
-import {logger} from "firebase-functions/v2";
 
 export const onUserDeleteSentinel = functions
   .region("europe-west3")
@@ -22,8 +21,6 @@ export const onUserCreateSentinel = functions
   .auth
   .user()
   .onCreate(async (user) => {
-    logger.info("Providers" + JSON.stringify(user.providerData));
-
     // add user to users collection
     await getFirestore()
       .collection("users")
@@ -33,8 +30,7 @@ export const onUserCreateSentinel = functions
         email: user.email,
         photoUrl: user.photoURL,
         createdAt: user.metadata.creationTime,
-        isStaff: user.providerData
-          .some((provider) => provider.providerId === "password"),
+        isStaff: false,
         tShirtPickup: false,
         tShirtPickupRequested: false,
         fcmToken: null,
