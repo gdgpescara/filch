@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
@@ -23,51 +25,67 @@ class RankingCubit extends SafeEmitterCubit<RankingState> {
   final GetYourRankingPositionUseCase _getYourRankingPositionUseCase;
   final IsRankingFreezedUseCase _isRankingFreezedUseCase;
 
+  final List<StreamSubscription<void>> _subscriptions = [];
+
+  @override
+  Future<void> close() {
+    for (final element in _subscriptions) {
+      element.cancel();
+    }
+    return super.close();
+  }
+
   void init() {
-    _isRankingFreezedUseCase().when(
-      progress: () => emit(const RankingLoading()),
-      failure: (_) => emit(const RankingFailure()),
-      success: (rankingFreezed) {
-        if (rankingFreezed) {
-          emit(const RankingFreezed());
-        } else {
-          loadItems();
-        }
-      },
+    _subscriptions.add(
+      _isRankingFreezedUseCase().when(
+        progress: () => emit(const RankingLoading()),
+        failure: (_) => emit(const RankingFailure()),
+        success: (rankingFreezed) {
+          if (rankingFreezed) {
+            emit(const RankingFreezed());
+          } else {
+            loadItems();
+          }
+        },
+      ),
     );
   }
 
-  Future<void> loadItems() async {
-    _getRankingUseCase().when(
-      progress: () => emit(const RankingLoading()),
-      success: (items) {
-        final user = _getSignedUserUseCase();
-        final userInList = items.any((element) => element.uid == user?.uid);
-        if (!userInList) {
-          loadYourItem();
-        }
-        emit(RankingLoaded(items: items, userUid: user!.uid));
-      },
-      failure: (_) => emit(const RankingFailure()),
+  void loadItems() {
+    _subscriptions.add(
+      _getRankingUseCase().when(
+        progress: () => emit(const RankingLoading()),
+        success: (items) {
+          final user = _getSignedUserUseCase();
+          final userInList = items.any((element) => element.uid == user?.uid);
+          if (!userInList) {
+            loadYourItem();
+          }
+          emit(RankingLoaded(items: items, userUid: user!.uid));
+        },
+        failure: (_) => emit(const RankingFailure()),
+      ),
     );
   }
 
-  Future<void> loadYourItem() async {
-    _getYourRankingUseCase().when(
-      progress: () => emit(const YourRankingLoading()),
-      success: (item) {
-        if (item != null) {
-          _getYourRankingPositionUseCase().listen((position) {
-            if(position == null) {
-              return;
-            }
-            emit(YourRankingLoaded(item: item, position: position));
-          });
-        } else {
-          emit(const YourRankingNotInRanking());
-        }
-      },
-      failure: (_) => emit(const YourRankingFailure()),
+  void loadYourItem() {
+    _subscriptions.add(
+      _getYourRankingUseCase().when(
+        progress: () => emit(const YourRankingLoading()),
+        success: (item) {
+          if (item != null) {
+            _getYourRankingPositionUseCase().listen((position) {
+              if (position == null) {
+                return;
+              }
+              emit(YourRankingLoaded(item: item, position: position));
+            });
+          } else {
+            emit(const YourRankingNotInRanking());
+          }
+        },
+        failure: (_) => emit(const YourRankingFailure()),
+      ),
     );
   }
 }

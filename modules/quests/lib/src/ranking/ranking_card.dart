@@ -10,16 +10,18 @@ class RankingCard extends StatelessWidget {
     required this.item,
     required this.position,
     required this.isUser,
+    this.style = AppCardStyle.normal,
   });
 
   final RankingItem item;
   final int position;
   final bool isUser;
+  final AppCardStyle style;
 
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      style: AppCardStyle.normal,
+      style: style,
       padding: const EdgeInsets.all(Spacing.m).copyWith(top: Spacing.s),
       child: SizedBox(
         width: double.infinity,
@@ -28,6 +30,8 @@ class RankingCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RichText(
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: '$position ',
                 style: context.getTextTheme(TextThemeType.themeSpecific).displaySmall?.copyWith(
@@ -36,7 +40,7 @@ class RankingCard extends StatelessWidget {
                     ),
                 children: [
                   TextSpan(
-                    text: item.displayName,
+                    text: item.displayName ?? item.email,
                     style: context.getTextTheme().titleLarge?.copyWith(
                           fontWeight: FontWeight.bold,
                           color: _textColor(context),
