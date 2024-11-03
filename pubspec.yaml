@@ -1,7 +1,7 @@
 name: filch
 description: DevFest Pescara app.
 publish_to: 'none'
-version: 2.0.0+16
+version: 2.0.0+17
 
 environment:
   sdk: ^3.5.3
@@ -75,4 +75,4 @@ flutter_launcher_icons:
   android: false
   ios: true
   remove_alpha_ios: true
-  image_path: "modules/assets/lib/logo/gdg_logo_small.png"
+  image_path: "modules/assets/lib/logo/gdg_new_logo.jpg"
