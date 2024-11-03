@@ -13,17 +13,19 @@ class RankingList extends StatelessWidget {
     return BlocBuilder<RankingCubit, RankingState>(
       buildWhen: (previous, current) => previous != current && current is RankingLoaded,
       builder: (context, state) {
-        state as RankingLoaded;
-        return ListView.separated(
-          padding: const EdgeInsets.all(Spacing.m),
-          itemCount: state.items.length,
-          separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),
-          itemBuilder: (context, index) => RankingCard(
-            item: state.items[index],
-            position: index + 1,
-            isUser: state.items[index].uid == state.userUid,
-          ),
-        );
+        if(state is RankingLoaded) {
+          return ListView.separated(
+            padding: const EdgeInsets.all(Spacing.m),
+            itemCount: state.items.length,
+            separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),
+            itemBuilder: (context, index) => RankingCard(
+              item: state.items[index],
+              position: index + 1,
+              isUser: state.items[index].uid == state.userUid,
+            ),
+          );
+        }
+        return const SizedBox();
       },
     );
   }
