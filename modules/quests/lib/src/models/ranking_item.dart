@@ -7,7 +7,7 @@ part 'ranking_item.g.dart';
 class RankingItem extends Equatable {
   const RankingItem({
     required this.uid,
-    required this.displayName,
+    this.displayName,
     this.photoUrl,
     required this.email,
     this.points = 0,
@@ -16,7 +16,7 @@ class RankingItem extends Equatable {
   factory RankingItem.fromJson(Map<String, dynamic> json) => _$RankingItemFromJson(json);
 
   final String uid;
-  final String displayName;
+  final String? displayName;
   final String? photoUrl;
   final String email;
   final int points;

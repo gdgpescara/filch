@@ -4,8 +4,7 @@ import {getFirestore} from "firebase-admin/firestore";
 const poolSize = 100;
 
 export const sendTShirtNotification = async () => {
-    try {
-        const usersSnap = await getFirestore()
+    try {const usersSnap = await getFirestore()
             .collection('users')
             .where('tShirtPickupRequested', '==', false)
             .where('tShirtPickup', '==', false)
@@ -50,6 +49,7 @@ export const sendTShirtNotification = async () => {
                 console.error('‼️ An error occurred when sending notification to: ', user.id, ':', error);
             }
         }
+
     } catch (parseError) {
         console.error('‼️ Error parsing the JSON data:', parseError);
     }

@@ -35,14 +35,20 @@ class RankingPage extends StatelessWidget {
           buildWhen: (previous, current) => current is YourRankingState,
           builder: (context, state) {
             return Container(
-              padding: const EdgeInsets.all(Spacing.l),
-              height: 110 + Spacing.l * 2,
+              padding: const EdgeInsets.all(Spacing.s),
+              height: 115 + Spacing.s * 2,
               child: switch (state) {
                 YourRankingLoading() => const LoaderAnimation(),
-                YourRankingLoaded(item: final item, position: final position) => RankingCard(
-                    item: item,
-                    position: position,
-                    isUser: true,
+                YourRankingLoaded(item: final item, position: final position) => DecoratedBox(
+                    decoration: BoxDecoration(
+                      color: context.colorScheme.tertiary.withOpacity(0.2),
+                    ),
+                    child: RankingCard(
+                      item: item,
+                      position: position,
+                      isUser: true,
+                      style: AppCardStyle.caption,
+                    ),
                   ),
                 YourRankingFailure() => Text(t.common.errors.generic_retry),
                 _ => const SizedBox.shrink(),
