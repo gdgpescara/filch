@@ -176,3 +176,49 @@ scripts:
     packageFilters:
       scope:
         - filch
+
+  shorebird:release:android:
+    run: shorebird release android '--' --release --dart-define-from-file=.env/remote.json
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
+    packageFilters:
+      scope:
+        - filch
+
+  shorebird:release:ios:
+    run: shorebird release ios '--' --release --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
+    packageFilters:
+      scope:
+        - filch
+
+  shorebird:release:
+    run: melos shorebird:release:android --no-select && melos shorebird:release:ios --no-select
+
+  shorebird:patch:android:
+    run: shorebird patch android '--' --release --dart-define-from-file=.env/remote.json
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
+    packageFilters:
+      scope:
+        - filch
+
+  shorebird:patch:ios:
+    run: shorebird patch ios '--' --release --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json
+    exec:
+      concurrency: 1
+      failFast: true
+      flutter: true
+    packageFilters:
+      scope:
+        - filch
+
+  shorebird:patch:
+    run: melos shorebird:patch:android --no-select && melos shorebird:patch:ios --no-select

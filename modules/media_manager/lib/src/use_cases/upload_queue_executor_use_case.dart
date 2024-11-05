@@ -43,11 +43,13 @@ class UploadQueueExecutorUseCase {
                   progress: () {
                     collection.doc(doc.id).update({'status': 'uploading'});
                   },
-                  success: (url) {
+                  success: (result) {
+                    // TODO Generify this code, here we have to handle generic image upload and not upload side effect
                     _firestore.collection('community_partner_images').add({
                       'uid': user.uid,
-                      'url': url,
-                      'createdAt': DateTime.now().toUtc().toIso8601String(),
+                      'fullPath': result.$1,
+                      'url': result.$2,
+                      'createdAt': Timestamp.now(),
                     });
                     doc.reference.delete();
                     file.delete();
