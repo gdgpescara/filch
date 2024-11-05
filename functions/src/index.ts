@@ -11,6 +11,8 @@ import {removeActiveQuest} from "./features/quests/remove-active-quest";
 import {tShirtPuckUp} from "./features/user/t-shirt-pick-up";
 import {scanOtherAttendee} from "./features/points/scan-other-attendee";
 import {submitAnswer} from "./features/points/submit-answer";
+import {cutPeople} from "./features/communities/cut-people";
+import {detectEmotions} from "./features/communities/detect-emotions";
 
 initializeApp();
 
@@ -32,3 +34,6 @@ exports.removeActiveQuest = removeActiveQuest;
 
 exports.assignPoints = assignPoints;
 exports.userPointsSentinel = userPointsSentinel;
+
+exports.cutPeople = cutPeople;
+exports.detectEmotions = detectEmotions;
