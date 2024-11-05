@@ -88,6 +88,18 @@ export const assignPoints = onCall(
         );
       }
     }
+    if (type == PointsTypeEnum.quest) {
+      const decodedId = questId.split("-");
+      if (decodedId.length === 3 && decodedId[0] === "actor") {
+        const questTimelineDocRef = await getFirestore()
+          .collection("timelines")
+          .doc(decodedId[1]);
+        const questTimelineDoc = await questTimelineDocRef.get();
+        batch.set(questTimelineDocRef, {
+          count: questTimelineDoc.data()?.count + 1,
+        });
+      }
+    }
     await batch.commit();
 
     return true;
