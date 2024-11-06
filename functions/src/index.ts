@@ -13,6 +13,11 @@ import {scanOtherAttendee} from "./features/points/scan-other-attendee";
 import {submitAnswer} from "./features/points/submit-answer";
 import {cutPeople} from "./features/communities/cut-people";
 import {detectEmotions} from "./features/communities/detect-emotions";
+import {activeQuestsCleanerSchedule} from "./features/quests/quest-schedule";
+import {removedQuestSchedule} from "./features/quests/removed-quest-schedule";
+import {
+  tShirtNotificationSchedule,
+} from "./features/user/t-shirt-notification-schedule";
 
 initializeApp();
 
@@ -27,9 +32,9 @@ exports.scanOtherAttendee = scanOtherAttendee;
 exports.removeActiveQuest = removeActiveQuest;
 
 // Cron jobs [Start]
-// exports.questQueueCleanerSchedule = activeQuestsCleanerSchedule;
-// exports.removedQuestSchedule = removedQuestSchedule;
-// exports.tShirtNotificationSchedule = tShirtNotificationSchedule;
+exports.questQueueCleanerSchedule = activeQuestsCleanerSchedule;
+exports.removedQuestSchedule = removedQuestSchedule;
+exports.tShirtNotificationSchedule = tShirtNotificationSchedule;
 // Cron jobs [End]
 
 exports.assignPoints = assignPoints;

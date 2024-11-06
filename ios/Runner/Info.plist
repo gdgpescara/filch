@@ -44,7 +44,7 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Camera permission is required for barcode scanning and photo feature available only for staff users.</string>
 	<key>NSMicrophoneUsageDescription</key>
-    <string>Microphone used for photo feature available only for staff users.</string>
+	<string>Microphone used for photo feature available only for staff users.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>This app needs photos access to get QR code and photo feature from photo library.</string>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
@@ -62,16 +62,9 @@
 	<false/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
-		<string>UIInterfaceOrientationPortrait</string>
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
-	</array>
-	<key>UISupportedInterfaceOrientations~ipad</key>
-	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationPortraitUpsideDown</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 </dict>
 </plist>
