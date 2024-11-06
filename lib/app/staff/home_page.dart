@@ -11,7 +11,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return StaffHomePage(
       navigateToSplash: () => Routefly.navigate(routePaths.path),
-      navigateToAssignment: (args) => Routefly.pushNavigate(routePaths.staff.pointAssignment, arguments: args),
+      navigateToAssignment: (args) => Routefly.pushNavigate(
+        routePaths.staff.pointAssignment,
+        arguments: args.copyWith(onAssignDone: Routefly.pop<void>),
+      ),
       navigateToTShirtAssignment: () => Routefly.pushNavigate(routePaths.staff.tShirtAssignment),
     );
   }

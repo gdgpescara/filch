@@ -18,6 +18,16 @@ export const initConfigurations = async () => {
             delete doc.id;
             batch.set(docRef, doc, {merge: true});
         });
+
+        // assignable points
+        const assignablePointsData = fs.readFileSync(`data/assignable_points.json`);
+        const assignablePoints = JSON.parse(assignablePointsData);
+        for (const point of assignablePoints) {
+            const docRef = db.collection('assignable_points').doc(point.id);
+            delete point.id;
+            batch.set(docRef, point, {merge: true});
+        }
+
         await batch.commit();
         console.info(`✅  Successfully uploaded ${collection}`);
     } catch (parseError) {

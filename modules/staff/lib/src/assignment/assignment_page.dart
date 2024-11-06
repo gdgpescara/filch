@@ -40,7 +40,7 @@ class AssignmentPage extends StatelessWidget {
               break;
             case Assigned():
               LoaderOverlay.hide(context);
-              Navigator.pop(context);
+              args.onAssignDone?.call(context);
               if (args.questType == QuestTypeEnum.community) {
                 await showModalBottomSheet<void>(
                   context: context,
@@ -77,9 +77,12 @@ class AssignmentPage extends StatelessWidget {
                 ],
               ),
             ),
-            bottomNavigationBar: Padding(
-              padding: const EdgeInsets.all(20),
-              child: AssignPointsButton(args: args),
+            bottomNavigationBar: SafeArea(
+              top: false,
+              child: Padding(
+                padding: const EdgeInsets.all(Spacing.l),
+                child: AssignPointsButton(args: args),
+              ),
             ),
           ),
         ),
@@ -90,7 +93,7 @@ class AssignmentPage extends StatelessWidget {
 
 @immutable
 class AssignmentPageArgs {
-  const AssignmentPageArgs.points(this.points)
+  const AssignmentPageArgs.points(this.points, {this.onAssignDone})
       : questId = null,
         questType = null,
         type = PointsTypeEnum.staff;
@@ -99,10 +102,27 @@ class AssignmentPageArgs {
     this.questId,
     required this.questType,
     required this.points,
+    this.onAssignDone,
   }) : type = PointsTypeEnum.quest;
 
   final int points;
   final String? questId;
   final QuestTypeEnum? questType;
   final PointsTypeEnum type;
+  final ValueChanged<BuildContext>? onAssignDone;
+
+  AssignmentPageArgs copyWith({
+    int? points,
+    String? questId,
+    QuestTypeEnum? questType,
+    PointsTypeEnum? type,
+    ValueChanged<BuildContext>? onAssignDone,
+  }) {
+    return AssignmentPageArgs.quest(
+      points: points ?? this.points,
+      questId: questId ?? this.questId,
+      questType: questType ?? this.questType,
+      onAssignDone: onAssignDone ?? this.onAssignDone,
+    );
+  }
 }

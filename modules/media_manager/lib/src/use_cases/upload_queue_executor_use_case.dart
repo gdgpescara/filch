@@ -24,48 +24,44 @@ class UploadQueueExecutorUseCase {
   StreamSubscription<void>? call() {
     final user = _getSignedUserUseCase();
     if (user != null) {
-      final collection = _firestore
-          .collection('users')
-          .doc(user.uid)
-          .collection('photo_queue');
+      final collection = _firestore.collection('users').doc(user.uid).collection('photo_queue');
 
-     return collection
-          .where('status', isNotEqualTo: 'uploading')
-          .snapshots()
-          .when(
-        success: (snapshot) {
-          for (final doc in snapshot.docs) {
-            final path = doc.data()['path'] as String;
-            if (path.contains(PhotoType.communityQuest.directoryName)) {
-              final file = File(path);
-              if(file.existsSync()){
-                _uploadCommunityQuestPhotoUseCase(file).when(
-                  progress: () {
-                    collection.doc(doc.id).update({'status': 'uploading'});
-                  },
-                  success: (result) {
-                    // TODO Generify this code, here we have to handle generic image upload and not upload side effect
-                    _firestore.collection('community_partner_images').add({
-                      'uid': user.uid,
-                      'fullPath': result.$1,
-                      'url': result.$2,
-                      'createdAt': Timestamp.now(),
-                    });
+      return collection.where('status', isNotEqualTo: 'uploading').snapshots().when(
+            success: (snapshot) {
+              for (final doc in snapshot.docs) {
+                final path = doc.data()['path'] as String;
+                if (path.contains(PhotoType.communityQuest.directoryName)) {
+                  final file = File(path);
+                  if (file.existsSync()) {
+                    _uploadCommunityQuestPhotoUseCase(file).when(
+                      progress: () {
+                        collection.doc(doc.id).update({'status': 'uploading'});
+                      },
+                      success: (result) {
+                        // TODO Generify this code, here we have to handle generic image upload and not upload side effect
+                        _firestore.collection('community_partner_images').add({
+                          'uid': user.uid,
+                          'fullPath': result.$1,
+                          'url': result.$2,
+                          'createdAt': Timestamp.now(),
+                        });
+                        doc.reference.delete();
+                        if (file.existsSync()) {
+                          file.delete();
+                        }
+                      },
+                      failure: (failure) {
+                        collection.doc(doc.id).update({'status': 'failed', 'error': failure.message});
+                      },
+                    );
+                  } else {
                     doc.reference.delete();
-                    file.delete();
-                  },
-                  failure: (failure) {
-                    collection.doc(doc.id).update({'status': 'failed', 'error': failure.message});
-                  },
-                );
-              } else {
-                doc.reference.delete();
+                  }
+                }
               }
-            }
-          }
-        },
-        failure:(e)=> FirebaseCrashlytics.instance.recordError(e, StackTrace.current),
-      );
+            },
+            failure: (e) => FirebaseCrashlytics.instance.recordError(e, StackTrace.current),
+          );
     }
     return null;
   }

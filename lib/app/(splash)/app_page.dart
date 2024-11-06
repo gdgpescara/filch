@@ -29,6 +29,7 @@ class AppPage extends StatelessWidget {
                   'logo/logo.png',
                   semanticLabel: t.devfest2024.semantic.logo,
                   package: 'assets',
+                  width: 250,
                 ),
                 const Gap.vertical(Spacing.xxl),
                 const LoaderAnimation(),
