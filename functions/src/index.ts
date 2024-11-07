@@ -18,6 +18,10 @@ import {removedQuestSchedule} from "./features/quests/removed-quest-schedule";
 import {
   tShirtNotificationSchedule,
 } from "./features/user/t-shirt-notification-schedule";
+// import {fadeFromTime} from "./features/communities/fade-from-time";
+import {getFadeFromTime} from "./features/communities/get-fade-from-time";
+import {getFadeFromTimeTimestamp}
+  from "./features/communities/get-fade-from-time-timestamp";
 
 initializeApp();
 
@@ -42,3 +46,8 @@ exports.userPointsSentinel = userPointsSentinel;
 
 exports.cutPeople = cutPeople;
 exports.detectEmotions = detectEmotions;
+// Cron jobs [Start]
+// exports.fadeFromTime = fadeFromTime;
+// Cron jobs [End]
+exports.getFadeFromTime = getFadeFromTime;
+exports.getFadeFromTimeTimestamp = getFadeFromTimeTimestamp;
