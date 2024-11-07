@@ -21,6 +21,9 @@ dependencies:
   reactive_forms: ^17.0.1
   rive: ^0.13.15
   qr_flutter: ^4.1.0
+  shorebird_code_push: ^1.1.6
+  package_info_plus: ^8.1.1
+  confetti: ^0.8.0
 
 dev_dependencies:
   flutter_test:

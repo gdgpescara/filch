@@ -13,8 +13,8 @@ class RankingList extends StatelessWidget {
     return BlocBuilder<RankingCubit, RankingState>(
       buildWhen: (previous, current) => previous != current && current is RankingLoaded,
       builder: (context, state) {
-        if(state is RankingLoaded) {
-          return ListView.separated(
+        if (state is RankingLoaded) {
+          final list = ListView.separated(
             padding: const EdgeInsets.all(Spacing.m),
             itemCount: state.items.length,
             separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),
@@ -24,6 +24,11 @@ class RankingList extends StatelessWidget {
               isUser: state.items[index].uid == state.userUid,
             ),
           );
+
+          if (state.rankingFreezed) {
+            return ConfettiContainer(child: list);
+          }
+          return list;
         }
         return const SizedBox();
       },

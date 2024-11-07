@@ -1,5 +1,6 @@
 library;
 
+export 'src/app_version.dart';
 export 'src/containers/containers.dart';
 export 'src/loaders/loaders.dart';
 export 'src/logo.dart';

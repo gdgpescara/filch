@@ -9,6 +9,7 @@ import 'package:injectable/injectable.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shorebird_code_push/shorebird_code_push.dart';
 
 @module
 abstract class ExternalLibraries {
@@ -36,4 +37,7 @@ abstract class ExternalLibraries {
   @preResolve
   @Named('documentDirectory')
   Future<Directory> documentDirectory() => getApplicationDocumentsDirectory();
+
+  @lazySingleton
+  ShorebirdCodePush get shorebirdCodePush => ShorebirdCodePush();
 }

@@ -61,5 +61,12 @@
   },
   "notifications": {
     "title": "You have a message from the continuum of space-time."
-  }
+  },
+  "app_version": {
+    "with_patch": "Version $version, patch $patch",
+    "without_patch": "Version $version",
+    "new_patch_available_to_download": "New patch available, waiting while downloading...",
+    "new_patch_ready_to_install": "New patch ready to install, restart the app to apply it."
+  },
+  "thanks": "Thank you for attending the event!, we hope you had a great time."
 }
