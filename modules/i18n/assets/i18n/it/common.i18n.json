@@ -61,5 +61,12 @@
   },
   "notifications": {
     "title": "Hai un messaggio dal continuum spazio-temporale."
-  }
+  },
+  "app_version": {
+    "with_patch": "Versione $version, patch $patch",
+    "without_patch": "Versione $version",
+    "new_patch_available_to_download": "Nuova patch disponibile, attendi il download...",
+    "new_patch_ready_to_install": "Nuova patch pronta per l'installazione, riavvia l'app per applicarla."
+  },
+  "thanks": "Grazie per aver partecipato all'evento! Speriamo di rivederti presto."
 }

@@ -4,13 +4,6 @@ sealed class RankingState extends Equatable {
   const RankingState();
 }
 
-class RankingFreezed extends RankingState {
-  const RankingFreezed();
-
-  @override
-  List<Object?> get props => [];
-}
-
 class RankingLoading extends RankingState {
   const RankingLoading();
 
@@ -19,10 +12,11 @@ class RankingLoading extends RankingState {
 }
 
 class RankingLoaded extends RankingState {
-  const RankingLoaded({required this.items, required this.userUid});
+  const RankingLoaded({required this.items, required this.userUid, required this.rankingFreezed});
 
   final List<RankingItem> items;
   final String userUid;
+  final bool rankingFreezed;
 
   @override
   List<Object?> get props => [items, userUid];

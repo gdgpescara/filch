@@ -24,7 +24,7 @@ class UserHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomePageCubit>(
-      create: (context) => GetIt.I(),
+      create: (context) => GetIt.I()..checkRankingFreezed(),
       child: BlocBuilder<HomePageCubit, HomePageState>(
         builder: (context, state) {
           return Scaffold(

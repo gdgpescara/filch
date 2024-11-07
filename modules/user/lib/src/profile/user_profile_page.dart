@@ -71,6 +71,7 @@ class UserProfilePage extends StatelessWidget {
                   onNeedLogin: navigateToLogin,
                   onAccountRemoved: navigateToSplash,
                 ),
+                const AppVersion(),
               ],
             ),
           );
@@ -90,9 +91,9 @@ class UserProfilePage extends StatelessWidget {
 
   EdgeInsets get _padding {
     const padding = EdgeInsets.all(Spacing.m);
-    if (embedded) {
-      return padding.copyWith(bottom: Spacing.m + kBottomNavigationBarHeight);
-    }
+    // if (embedded) {
+    //   return padding.copyWith(bottom: Spacing.m + kBottomNavigationBarHeight);
+    // }
     return padding;
   }
 }

@@ -19,6 +19,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:intl/intl.dart' as _i602;
 import 'package:package_info_plus/package_info_plus.dart' as _i655;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
+import 'package:shorebird_code_push/shorebird_code_push.dart' as _i624;
 
 class CorePackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -42,6 +43,8 @@ class CorePackageModule extends _i526.MicroPackageModule {
         () => externalLibraries.firebaseMessaging);
     gh.lazySingleton<_i457.Reference>(() => externalLibraries.storageRef);
     gh.lazySingleton<_i183.ImagePicker>(() => externalLibraries.imagePicker);
+    gh.lazySingleton<_i624.ShorebirdCodePush>(
+        () => externalLibraries.shorebirdCodePush);
     await gh.factoryAsync<_i497.Directory>(
       () => externalLibraries.documentDirectory(),
       instanceName: 'documentDirectory',

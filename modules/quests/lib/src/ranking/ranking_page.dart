@@ -4,7 +4,6 @@ import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-import '../winner/winning_view.dart';
 import 'ranking_card.dart';
 import 'ranking_list.dart';
 import 'state/ranking_cubit.dart';
@@ -17,19 +16,20 @@ class RankingPage extends StatelessWidget {
     return BlocProvider<RankingCubit>(
       create: (context) => GetIt.I()..init(),
       child: Scaffold(
-        appBar: AppBar(),
         extendBody: true,
-        body: BlocBuilder<RankingCubit, RankingState>(
-          buildWhen: (previous, current) => current is! YourRankingState,
-          builder: (context, state) {
-            return switch (state) {
-              RankingLoading() => const Center(child: LoaderAnimation()),
-              RankingLoaded() => const RankingList(),
-              RankingFailure() => Center(child: Text(t.common.errors.generic_retry)),
-              RankingFreezed() => const WinningView(),
-              _ => const SizedBox.shrink(),
-            };
-          },
+        body: Padding(
+          padding: const EdgeInsets.only(top: Spacing.xxl),
+          child: BlocBuilder<RankingCubit, RankingState>(
+            buildWhen: (previous, current) => current is! YourRankingState,
+            builder: (context, state) {
+              return switch (state) {
+                RankingLoading() => const Center(child: LoaderAnimation()),
+                RankingLoaded() => const RankingList(),
+                RankingFailure() => Center(child: Text(t.common.errors.generic_retry)),
+                _ => const SizedBox.shrink(),
+              };
+            },
+          ),
         ),
         bottomNavigationBar: BlocBuilder<RankingCubit, RankingState>(
           buildWhen: (previous, current) => current is YourRankingState,
