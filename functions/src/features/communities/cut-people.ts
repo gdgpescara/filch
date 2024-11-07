@@ -76,7 +76,21 @@ async (event) => {
         path: imagePath,
         partner: data.uid,
         status: "created",
+        count: 0,
       });
   }
+
+  const partnerDocRef = await getFirestore()
+    .collection("partners_interactions")
+    .doc(data.uid);
+  let interactionsCount = 0;
+  const partnerDoc = await partnerDocRef.get();
+  if (partnerDoc.exists) {
+    interactionsCount = partnerDoc.data()?.count + 1;
+  }
+  partnerDocRef.update({
+    count: interactionsCount,
+  });
+
   logger.log("Image processed for partner "+data.uid);
 });
