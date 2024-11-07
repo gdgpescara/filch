@@ -7,12 +7,8 @@
       "email": {
         "label": "email: "
       },
-      "nimbus_ticket": {
-        "label": "biglietto nimbus: ",
-        "message": "Wow, hai un biglietto nimbus.\nSei molto fortunato, le missioni ti daranno più punti!"
-      },
       "t_shirt": {
-        "picked": "Complimenti, hai già ritirato la tua t-shirt!",
+        "picked": "Hai ritirato la tua t-shirt!",
         "not_picked": "Non dimenticare di ritirare la tua t-shirt!"
       }
     },
