@@ -12,7 +12,7 @@ export const sendTShirtNotification = async () => {
   try {
     const config = await getFirestore()
       .collection("configurations")
-      .doc("feature_flags")
+      .doc("t-shirt")
       .get();
 
     if (!config.exists) {
