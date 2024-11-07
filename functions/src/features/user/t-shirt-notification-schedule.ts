@@ -1,12 +1,41 @@
 import {onSchedule} from "firebase-functions/v2/scheduler";
 import {logger} from "firebase-functions/v2";
-import {getFirestore} from "firebase-admin/firestore";
+import {getFirestore, Timestamp} from "firebase-admin/firestore";
 import {getMessaging} from "firebase-admin/messaging";
 
-const poolSize = 100;
+type TimeBand = {
+  start: Timestamp;
+  end: Timestamp;
+}
 
 export const sendTShirtNotification = async () => {
   try {
+    const config = await getFirestore()
+      .collection("configurations")
+      .doc("feature_flags")
+      .get();
+
+    if (!config.exists) {
+      logger.error("‼️ Configuration document not found");
+      return;
+    }
+
+    if (!config.get("tShirtPickupEnabled")) {
+      logger.info("🚫 T-shirt pickup notifications are disabled");
+      return;
+    }
+
+    const defaultPoolSize = config.get("defaultPool");
+    const boostPoolSize = config.get("boostPool");
+    const boostTimeBands = config.get("boostTimeBands") as TimeBand[];
+
+    const now = Timestamp.now();
+    const isBoostTime = boostTimeBands.some((band) => {
+      return now >= band.start && now <= band.end;
+    });
+
+    const poolSize = isBoostTime ? boostPoolSize : defaultPoolSize;
+
     const usersSnap = await getFirestore()
       .collection("users")
       .where("tShirtPickupRequested", "==", false)
@@ -61,7 +90,7 @@ export const sendTShirtNotification = async () => {
 };
 
 export const tShirtNotificationSchedule = onSchedule({
-  schedule: "every 1 hours",
+  schedule: "*/10 10-18 9,10 11 *",
   timeZone: "Europe/Rome",
   region: "europe-west3",
 }, async () => {
