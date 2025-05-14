@@ -66,7 +66,7 @@ export const assignPoints = onCall(
           .doc(),
         userPoints,
       );
-      if (type == PointsTypeEnum.quest) {
+      if (type == PointsTypeEnum.quest && questId) {
         logger.info("Is quest points removing active quest and queue");
         const docRef = await getFirestore()
           .collection("users")
@@ -88,7 +88,7 @@ export const assignPoints = onCall(
         );
       }
     }
-    if (type == PointsTypeEnum.quest) {
+    if (type == PointsTypeEnum.quest && questId) {
       const decodedId = questId.split("-");
       if (decodedId.length === 3 && decodedId[0] === "actor") {
         const questTimelineDocRef = await getFirestore()

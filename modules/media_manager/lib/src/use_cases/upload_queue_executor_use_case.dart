@@ -38,7 +38,7 @@ class UploadQueueExecutorUseCase {
                         collection.doc(doc.id).update({'status': 'uploading'});
                       },
                       success: (result) {
-                        // TODO Generify this code, here we have to handle generic image upload and not upload side effect
+                        // TODOGenerify this code, here we have to handle generic image upload and not upload side effect
                         _firestore.collection('community_partner_images').add({
                           'uid': user.uid,
                           'fullPath': result.$1,

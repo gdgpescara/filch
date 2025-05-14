@@ -1,0 +1,4 @@
+namespaces: true
+input_directory: assets/i18n
+output_directory: lib/src/i18n
+lazy: false

@@ -12,18 +12,24 @@ class RankingLoading extends RankingState {
 }
 
 class RankingLoaded extends RankingState {
-  const RankingLoaded({required this.items, required this.userUid, required this.rankingFreezed});
+  const RankingLoaded({
+    required this.items,
+    required this.userUid,
+    required this.rankingFreezed,
+    required this.isUserInRanking,
+  });
 
   final List<RankingItem> items;
   final String userUid;
+  final bool isUserInRanking;
   final bool rankingFreezed;
 
   @override
-  List<Object?> get props => [items, userUid];
+  List<Object?> get props => [items, userUid, rankingFreezed, isUserInRanking];
 }
 
 class RankingFailure extends RankingState {
- const RankingFailure();
+  const RankingFailure();
 
   @override
   List<Object?> get props => [];

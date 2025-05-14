@@ -12,7 +12,9 @@ export const tShirtPuckUp = onCall(
     logger.info("User: " + JSON.stringify(request.data) +
       " request a t-shirt to: " + loggedUser.uid);
 
-    const scannedUser = await getAuth().getUser(request.data);
+    const userUid = JSON.parse(request.data.user).uid;
+
+    const scannedUser = await getAuth().getUser(userUid);
 
     if (scannedUser) {
       // get firestore doc and check if already picked up a t-shirt
@@ -31,5 +33,9 @@ export const tShirtPuckUp = onCall(
         .collection("users")
         .doc(scannedUser.uid)
         .update({tShirtPickup: true});
+
+      return true;
     }
+
+    return false;
   });

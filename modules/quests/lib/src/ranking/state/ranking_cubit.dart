@@ -55,7 +55,7 @@ class RankingCubit extends SafeEmitterCubit<RankingState> {
           if (!userInList) {
             loadYourItem();
           }
-          emit(RankingLoaded(items: items, userUid: user!.uid, rankingFreezed: rankingFreezed));
+          emit(RankingLoaded(items: items, userUid: user!.uid, rankingFreezed: rankingFreezed, isUserInRanking: userInList));
         },
         failure: (_) => emit(const RankingFailure()),
       ),

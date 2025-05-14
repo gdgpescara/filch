@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:routefly/routefly.dart';
 import 'package:staff/staff.dart';
 
 class TShirtAssignmentPage extends StatelessWidget {
@@ -6,6 +7,6 @@ class TShirtAssignmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const TShirtAssignment();
+    return TShirtAssignment(onDone: Routefly.pop<void>,);
   }
 }

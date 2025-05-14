@@ -15,6 +15,7 @@ analyzer:
     - '**/*.g.dart'
     - '**/*.mocks.dart'
     - '**/*.config.dart'
+    - '**/*.route.dart'
     - '**/firebase_options.dart'
 
 linter:

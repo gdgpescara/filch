@@ -24,7 +24,7 @@ export const createAccounts = async () => {
                 await getFirestore().collection('users').doc(fetchedUser.uid).update({
                     isStaff: true
                 });
-                console.warn(`⏩  User ${fetchedUser.email} already exists`);
+                console.warn(`⏩  User ${fetchedUser.uid} - ${fetchedUser.email} already exists`);
             }
         }
     } catch (parseError) {

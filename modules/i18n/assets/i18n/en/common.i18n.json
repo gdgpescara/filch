@@ -66,7 +66,7 @@
     "with_patch": "Version $version, patch $patch",
     "without_patch": "Version $version",
     "new_patch_available_to_download": "New patch available, waiting while downloading...",
-    "new_patch_ready_to_install": "New patch ready to install, restart the app to apply it."
+    "update_error": "Error while updating. Please try again later."
   },
   "thanks": "Thank you for attending the event!, we hope you had a great time."
 }

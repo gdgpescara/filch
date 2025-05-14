@@ -47,7 +47,7 @@ class BlurContainer extends StatelessWidget {
           decoration: BoxDecoration(
             border: border,
             borderRadius: clipRadius ?? BorderRadius.zero,
-            color: context.colorScheme.surface.withOpacity(0.7),
+            color: context.colorScheme.surface.withValues(alpha: .7),
           ),
           child: child,
         ),

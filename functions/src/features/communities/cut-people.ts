@@ -5,16 +5,16 @@ import {logger} from "firebase-functions/v2";
 import * as path from "path";
 import * as crypto from "crypto";
 
-const fetchAsBlob = async (url:string):Promise<Blob> => fetch(url)
+const fetchAsBlob = async (url: string): Promise<Blob> => fetch(url)
   .then((response) => response.blob());
 
 const convertBlobToBase64 =
-  async (blob:Blob):Promise<string> => {
+  async (blob: Blob): Promise<string> => {
     const buffer = Buffer.from(await blob.arrayBuffer());
     return "data:" + blob.type + ";base64," + buffer.toString("base64");
   };
 
-const convertBase64ToBuffer = (base64:string):Buffer => {
+const convertBase64ToBuffer = (base64: string): Buffer => {
   return Buffer.from(base64, "base64");
 };
 
@@ -36,7 +36,7 @@ async (event) => {
   const processed = snapshot.get("processed");
   if (processed == true) {
     logger.info("Document " + event.params.docId +
-    " has already been processed");
+        " has already been processed");
     return;
   }
   const data = snapshot.data();
@@ -47,14 +47,14 @@ async (event) => {
     img: imageBase64,
   };
   const cutResponse =
-    await fetch("https://people-cut-432735089906.europe-west3.run.app/cut", {
-      headers: {
-        "Accept": "application/json",
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(cutRequestBody),
-    });
+      await fetch("https://people-cut-432735089906.europe-west3.run.app/cut", {
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(cutRequestBody),
+      });
   const body = await cutResponse.json();
 
   const metadata = {contentType: "image/png"};
@@ -80,6 +80,10 @@ async (event) => {
       });
   }
 
+  await snapshot.ref.update({
+    processed: true,
+  });
+
   const partnerDocRef = await getFirestore()
     .collection("partners_interactions")
     .doc(data.uid);
@@ -87,10 +91,14 @@ async (event) => {
   const partnerDoc = await partnerDocRef.get();
   if (partnerDoc.exists) {
     interactionsCount = partnerDoc.data()?.count + 1;
+    await partnerDocRef.update({
+      count: interactionsCount,
+    });
+  } else {
+    await partnerDocRef.set({
+      count: 1,
+    });
   }
-  partnerDocRef.update({
-    count: interactionsCount,
-  });
 
-  logger.log("Image processed for partner "+data.uid);
+  logger.log("Image processed for partner " + data.uid);
 });

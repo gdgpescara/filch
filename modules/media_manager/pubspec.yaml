@@ -3,8 +3,8 @@ version: 1.0.0
 publish_to: 'none'
 
 environment:
-  sdk: ^3.5.3
-  flutter: ">=3.24.0"
+  sdk: ^3.7.2
+  flutter: ">=3.29.2"
 
 dependencies:
   flutter:
@@ -18,23 +18,23 @@ dependencies:
   ui:
     path: ../ui
 
-  firebase_crashlytics: ^4.1.3
-  get_it: ^8.0.2
+  firebase_crashlytics: ^4.3.5
+  get_it: ^8.0.3
   injectable: ^2.5.0
-  equatable: ^2.0.5
-  bloc: ^8.1.4
-  flutter_bloc: ^8.1.6
+  equatable: ^2.0.7
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
   image_picker: ^1.1.2
-  firebase_storage: ^12.3.4
-  cloud_firestore: ^5.4.4
+  firebase_storage: ^12.4.5
+  cloud_firestore: ^5.6.7
   path: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
-  build_runner: ^2.4.13
-  injectable_generator: ^2.6.2
+  build_runner: ^2.4.15
+  injectable_generator: ^2.7.0
 
 flutter:
   uses-material-design: true
