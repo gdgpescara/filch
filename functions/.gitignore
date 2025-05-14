@@ -1,12 +1,6 @@
-# Compiled JavaScript files
-lib/**/*.js
-lib/**/*.js.map
+# Python bytecode
+__pycache__/
 
-# TypeScript v1 declaration files
-typings/
-
-# Node.js dependency directory
-node_modules/
-/lib/
-/firestore-snapshot/
-/serviceAccountKey.json
+# Python virtual environment
+venv/
+*.local
