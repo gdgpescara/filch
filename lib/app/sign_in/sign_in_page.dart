@@ -2,8 +2,7 @@ import 'package:auth/auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:routefly/routefly.dart';
 
-import '../../routes.g.dart';
-
+import '../../application.dart';
 
 class SignInPage extends StatelessWidget {
   const SignInPage({super.key});

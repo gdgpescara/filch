@@ -39,5 +39,6 @@ abstract class ExternalLibraries {
   Future<Directory> documentDirectory() => getApplicationDocumentsDirectory();
 
   @lazySingleton
-  ShorebirdCodePush get shorebirdCodePush => ShorebirdCodePush();
+  ShorebirdUpdater get shorebirdUpdater => ShorebirdUpdater();
+  
 }

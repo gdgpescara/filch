@@ -14,42 +14,57 @@ class AppVersion extends StatefulWidget {
 }
 
 class _AppVersionState extends State<AppVersion> {
-  final _shorebirdCodePush = GetIt.I<ShorebirdCodePush>();
+  final _shorebirdUpdater = GetIt.I<ShorebirdUpdater>();
   late String _version;
-  bool _isNewPatchAvailableForDownload = false;
-  bool _isNewPatchReadyToInstall = false;
+  bool _newVersionAvailable = false;
+  bool _updateError = false;
 
   @override
   void initState() {
     super.initState();
     final packageInfo = GetIt.I<PackageInfo>();
-    _shorebirdCodePush.currentPatchNumber().then((patch) {
+    _shorebirdUpdater.readCurrentPatch().then((patch) {
       setState(() {
-        if(patch != null) {
-          _version = t.common.app_version.with_patch(version: packageInfo.version, patch: patch);
+        if (patch != null) {
+          _version = t.common.app_version.with_patch(
+            version: packageInfo.version,
+            patch: patch,
+          );
         } else {
-          _version = t.common.app_version.without_patch(version: packageInfo.version);
+          _version = t.common.app_version.without_patch(
+            version: packageInfo.version,
+          );
         }
       });
     });
     _version = packageInfo.version;
-    _shorebirdCodePush.isNewPatchAvailableForDownload().then((value) {
-      _shorebirdCodePush.downloadUpdateIfAvailable().then((value) {
-        _shorebirdCodePush.isNewPatchReadyToInstall().then((value) {
-          setState(() {
-            _isNewPatchReadyToInstall = value;
-          });
+    _checkForUpdates();
+  }
+
+  Future<void> _checkForUpdates() async {
+    setState(() {
+      _newVersionAvailable = false;
+      _updateError = false;
+    });
+
+    final status = await _shorebirdUpdater.checkForUpdate();
+
+    if (status == UpdateStatus.outdated) {
+      try {
+        setState(() {
+          _newVersionAvailable = true;
         });
-      });
-      setState(() {
-        _isNewPatchAvailableForDownload = value;
-      });
-    });
-    _shorebirdCodePush.isNewPatchReadyToInstall().then((value) {
-      setState(() {
-        _isNewPatchReadyToInstall = value;
-      });
-    });
+        await _shorebirdUpdater.update();
+      } on UpdateException catch (_) {
+        setState(() {
+          _updateError = true;
+        });
+      } finally {
+        setState(() {
+          _newVersionAvailable = false;
+        });
+      }
+    }
   }
 
   @override
@@ -57,23 +72,24 @@ class _AppVersionState extends State<AppVersion> {
     return Row(
       children: [
         Expanded(
-          child: Text(
-            _version,
-            style: context.getTextTheme().bodySmall,
-          ),
+          child: Text(_version, style: context.getTextTheme().bodySmall),
         ),
-        if (_isNewPatchAvailableForDownload)
+        if (_newVersionAvailable)
           Expanded(
             child: Text(
               t.common.app_version.new_patch_available_to_download,
-              style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
+              style: context.getTextTheme().bodySmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
-        if (_isNewPatchReadyToInstall)
+        if (_updateError)
           Expanded(
             child: Text(
-              t.common.app_version.new_patch_ready_to_install,
-              style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
+              t.common.app_version.update_error,
+              style: context.getTextTheme().bodySmall?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
       ],

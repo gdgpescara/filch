@@ -5,7 +5,7 @@ import 'package:i18n/i18n.dart';
 import 'package:routefly/routefly.dart';
 import 'package:ui/ui.dart';
 
-import '../../routes.g.dart';
+import '../../application.dart';
 import 'state/bootstrap_cubit.dart';
 
 part 'state/state_listener.dart';

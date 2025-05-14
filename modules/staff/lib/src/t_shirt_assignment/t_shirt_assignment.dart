@@ -10,7 +10,9 @@ import 'package:ui/ui.dart';
 import 'state/t_shirt_assignment_cubit.dart';
 
 class TShirtAssignment extends StatelessWidget {
-  const TShirtAssignment({super.key});
+  const TShirtAssignment({super.key, required this.onDone});
+
+  final ValueChanged<BuildContext> onDone;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +27,8 @@ class TShirtAssignment extends StatelessWidget {
                 message: t.staff.t_shirt_assignment.page.assigning,
               );
             case TShirtAssignFailure():
-              Navigator.pop(context);
+              LoaderOverlay.hide(context);
+              onDone(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(t.staff.t_shirt_assignment.page.error),
@@ -33,8 +36,8 @@ class TShirtAssignment extends StatelessWidget {
                 ),
               );
             case TShirtAssigned():
-              Navigator.pop(context);
-              Navigator.pop(context);
+              LoaderOverlay.hide(context);
+              onDone(context);
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(t.staff.t_shirt_assignment.page.success),

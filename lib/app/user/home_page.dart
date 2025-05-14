@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:routefly/routefly.dart';
 import 'package:user/user.dart';
 
-import '../../routes.g.dart';
+import '../../application.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});

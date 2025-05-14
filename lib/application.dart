@@ -11,9 +11,12 @@ import 'package:i18n/i18n.dart';
 import 'package:routefly/routefly.dart';
 import 'package:ui/ui.dart';
 
+import 'application.route.dart';
 import 'auth_state/auth_cubit.dart';
-import 'routes.g.dart';
 
+part 'application.g.dart';
+
+@Main('lib/app')
 class Application extends StatefulWidget {
   const Application({super.key});
 
@@ -23,8 +26,8 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> {
   late StreamSubscription<RemoteMessage> _subscription;
+
   final _router = Routefly.routerConfig(
-    initialPath: routePaths.path,
     routes: routes,
     routeBuilder: routeBuilder,
   );
@@ -35,7 +38,10 @@ class _ApplicationState extends State<Application> {
     GetIt.I<UploadFcmTokenUseCase>()();
     _subscription = FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null) {
-        Routefly.pushNavigate(routePaths.notification, arguments: message.notification);
+        Routefly.pushNavigate(
+          routePaths.notification,
+          arguments: message.notification,
+        );
       }
     });
   }
@@ -49,11 +55,7 @@ class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
-        BlocProvider<AuthCubit>(
-          create: (context) => GetIt.I(),
-        ),
-      ],
+      providers: [BlocProvider<AuthCubit>(create: (context) => GetIt.I())],
       child: BlocListener<AuthCubit, AuthState>(
         listener: (context, state) {
           if (state is Unauthenticated) {
@@ -71,10 +73,7 @@ class _ApplicationState extends State<Application> {
           themeAnimationCurve: Curves.easeInOut,
           themeAnimationDuration: const Duration(milliseconds: 600),
           builder: (context, child) {
-            return AccessibilityTools(
-              checkFontOverflows: true,
-              child: child,
-            );
+            return AccessibilityTools(checkFontOverflows: true, child: child);
           },
         ),
       ),

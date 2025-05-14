@@ -15,7 +15,7 @@ class RankingList extends StatelessWidget {
       builder: (context, state) {
         if (state is RankingLoaded) {
           final list = ListView.separated(
-            padding: const EdgeInsets.all(Spacing.m),
+            padding: _padding(state.isUserInRanking),
             itemCount: state.items.length,
             separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),
             itemBuilder: (context, index) => RankingCard(
@@ -33,5 +33,13 @@ class RankingList extends StatelessWidget {
         return const SizedBox();
       },
     );
+  }
+
+  EdgeInsets _padding(bool isUserInRanking) {
+    const padding = EdgeInsets.all(Spacing.m);
+    if (!isUserInRanking) {
+      return padding.copyWith(bottom: Spacing.m + ( 115 + Spacing.s * 2));
+    }
+    return padding;
   }
 }

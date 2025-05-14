@@ -27,7 +27,7 @@ class ShiftPlanner extends StatelessWidget {
       currentTimeAnimation: true,
       style: TimePlannerStyle(
         cellWidth: (MediaQuery.of(context).size.width * .4).toInt(),
-        dividerColor: Theme.of(context).colorScheme.onSurface.withOpacity(.5),
+        dividerColor: Theme.of(context).colorScheme.onSurface.withValues(alpha: .5),
         cellHeight: 100,
       ),
       headers: _headers(context, groupedShiftsByUser),

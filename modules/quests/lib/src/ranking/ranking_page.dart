@@ -41,7 +41,7 @@ class RankingPage extends StatelessWidget {
                 YourRankingLoading() => const LoaderAnimation(),
                 YourRankingLoaded(item: final item, position: final position) => DecoratedBox(
                     decoration: BoxDecoration(
-                      color: context.colorScheme.tertiary.withOpacity(0.2),
+                      color: context.colorScheme.tertiary.withValues(alpha: .2),
                     ),
                     child: RankingCard(
                       item: item,

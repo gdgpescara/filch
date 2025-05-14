@@ -43,8 +43,8 @@ class CorePackageModule extends _i526.MicroPackageModule {
         () => externalLibraries.firebaseMessaging);
     gh.lazySingleton<_i457.Reference>(() => externalLibraries.storageRef);
     gh.lazySingleton<_i183.ImagePicker>(() => externalLibraries.imagePicker);
-    gh.lazySingleton<_i624.ShorebirdCodePush>(
-        () => externalLibraries.shorebirdCodePush);
+    gh.lazySingleton<_i624.ShorebirdUpdater>(
+        () => externalLibraries.shorebirdUpdater);
     await gh.factoryAsync<_i497.Directory>(
       () => externalLibraries.documentDirectory(),
       instanceName: 'documentDirectory',

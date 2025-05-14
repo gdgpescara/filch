@@ -32,14 +32,27 @@ const docConverter = {
 
 const getDocs = async () => {
     try {
-        const snapshot = await db.collection(collection).withConverter(docConverter).get();
-        const docs = snapshot.docs.map(doc => {
-            return {
-                id: doc.id,
-                ...doc.data()
+        const usersSnap = await db.collection('users').where('isStaff', '!=', true).get();
+
+        const users = [];
+
+        for(const snapshot of usersSnap.docs) {
+            const pointsSnap = await db.collection('users').doc(snapshot.id).collection('points').withConverter(docConverter).where('assignedBy', '==', '5pxMUJxU40RQxI4RBqDpe6hGDyu2').get();
+            if(pointsSnap.empty) {
+                continue;
             }
-        });
-        fs.writeFileSync(`data/read/${collection}.json`, JSON.stringify(docs, null, 2));
+            users.push({
+                email: snapshot.get("email"),
+                displayName: snapshot.get("displayName"),
+                points: pointsSnap.docs.map(doc => {
+                    return {
+                        id: doc.id,
+                        ...doc.data()
+                    }
+                })
+            });
+        }
+        fs.writeFileSync(`data/read/pythonPescara.json`, JSON.stringify(users, null, 2));
     } catch (parseError) {
         console.error('Error parsing the JSON data:', parseError);
     }
