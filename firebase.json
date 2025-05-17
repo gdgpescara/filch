@@ -2,7 +2,7 @@
   "functions": [
     {
       "source": "functions-OLD",
-      "codebase": "nodejs_functions",
+      "codebase": "default",
       "ignore": [
         "node_modules",
         ".git",
@@ -16,7 +16,7 @@
     },
     {
       "source": "functions",
-      "codebase": "default",
+      "codebase": "python_functions",
       "ignore": [
         "venv",
         ".git",

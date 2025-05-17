@@ -1,13 +1,19 @@
-# Welcome to Cloud Functions for Firebase for Python!
-# To get started, simply uncomment the below code or create your own.
-# Deploy with `firebase deploy`
+# Load environment variables from .env file
+from features.user.user_manager import on_user_create, on_user_delete
+from features.user.t_shirt_pickup import t_shirt_pickup
+from features.user.t_shirt_notification import t_shirt_notification_schedule
+from features.points.points_manager import user_points_sentinel
+from features.points.assign_points import assign_points
+from dotenv import load_dotenv
+load_dotenv()
 
-from firebase_functions import https_fn
 from firebase_admin import initialize_app
 
+# Initialize Firebase app
 initialize_app()
 
-
-@https_fn.on_request()
-def on_request_example(req: https_fn.Request) -> https_fn.Response:
-    return https_fn.Response("Hello world!")
+# User management functions
+on_user_create_function = on_user_create
+on_user_delete_function = on_user_delete
+t_shirt_pickup_function = t_shirt_pickup
+t_shirt_notification_schedule_function = t_shirt_notification_schedule
