@@ -4,14 +4,13 @@ from pydantic import BaseModel
 from firebase_functions.https_fn import on_call, on_request, Response, Request
 from google.cloud.firestore import SERVER_TIMESTAMP
 from firebase_admin import auth
+
 from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from firestore_client import client as firestore_client
+from shared.get_signed_in_user import get_signed_in_user
 
-
-# TODO Definire questo
-# import {getSignedInUser} from "../../shared/get_signed_in_user";
 
 class ScanOtherAttendeePayload(BaseModel):
     points: int
@@ -27,16 +26,12 @@ def scan_other_attendee(req: Request) -> Response:
     logger.debug(f"Input Payload: {payload}")
 
     payload = ScanOtherAttendeePayload(**payload)
-
-    # TODO DA Definire
-    logged_user = {}
-    # logged_user = get_signed_in_user(req)
+    logged_user = get_signed_in_user(request=req)
 
     scanned_user = auth.get_user(uid=json.loads(payload.scanned_value)["uid"])
     if scanned_user:
         user_uid = scanned_user.uid
-        # TODO Fare check se è dizionario o oggetto
-        logged_uid = logged_user["uid"]
+        logged_uid = logged_user.uid
         user_point_snap = (firestore_client.collection("users")
                            .document(logged_uid)
                            .collection("points")

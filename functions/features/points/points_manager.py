@@ -1,6 +1,7 @@
-import logging
 from firebase_functions import firestore_fn
-from firebase_admin import firestore
+from google.cloud.firestore import Increment
+
+from logger_config import logger
 
 
 @firestore_fn.on_document_written(
@@ -12,30 +13,33 @@ def user_points_sentinel(event: firestore_fn.Event[firestore_fn.DocumentSnapshot
     Function triggered when a points document is written in a user's points subcollection.
     Updates the user's total points.
     """
-    # Get the previous and current points values
-    previous_points = 0
-    if event.data.before and event.data.before.exists:
-        previous_points = event.data.before.get("points") or 0
-    
-    current_points = 0
-    if event.data.after and event.data.after.exists:
-        current_points = event.data.after.get("points") or 0
+
+    current_value = event.data.after
+    prev_value = event.data.before
+    current_value_dict = current_value.to_dict()
+    prev_value_dict = prev_value.to_dict()
+
+    current_points, prev_points = 0, 0
+    if current_value and current_value.exists and current_value_dict:
+        current_points = current_value_dict.get("points", 0)
+    if prev_value and prev_value.exists and prev_value_dict:
+        prev_points = prev_value_dict.get("points", 0)
     
     # If points have changed, update the user's total
-    if previous_points != current_points:
+    if prev_points != current_points:
         # Get a reference to the parent user document
-        user_ref = event.data.after.reference.parent.parent
+        user_ref = current_value.reference.parent.parent
         
         if user_ref:
+            # TODO Chiedere se vale la pena fare accessi per solo debug
             # Get the current user data
             user_snap = user_ref.get()
             user_data = user_snap.to_dict()
-            
-            # Calculate the new total points
+
+            delta = current_points - prev_points
             current_total = user_data.get("points", 0) if user_data else 0
-            new_total = current_total - previous_points + current_points
+            new_total = current_total + delta
+
+            user_ref.update({"points": Increment(delta)})
             
-            # Update the user's points
-            user_ref.update({"points": new_total})
-            
-            logging.info(f"Updated points for user {user_ref.id}: {current_total} -> {new_total}")
+            logger.info(f"Updated points for user {user_ref.id}: {current_total} -> {new_total}")
