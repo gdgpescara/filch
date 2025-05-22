@@ -56,7 +56,7 @@ def assign_points(request: https_fn.CallableRequest) -> bool:
             else:
                 filtered_users.append(user)
                 
-        await batch.commit()
+        batch.commit()
     else:
         # For other point types, include all users
         filtered_users = users

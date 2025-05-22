@@ -1,7 +1,6 @@
 import json
-from flask import jsonify
 from pydantic import BaseModel
-from firebase_functions.https_fn import on_call, on_request, Response, Request
+from firebase_functions.https_fn import on_call, CallableRequest
 from google.cloud.firestore import SERVER_TIMESTAMP
 from firebase_admin import auth
 
@@ -17,12 +16,9 @@ class ScanOtherAttendeePayload(BaseModel):
     scanned_value: str
 
 
-# TODO Sostituire decorator e parametro dopo aver eseguito i test locali
-# @on_call(region="europe-west3")
-# req: https_fn.CallableRequest -> bool
-@on_request(region="europe-west3")
-def scan_other_attendee(req: Request) -> Response:
-    payload = req.get_json()
+@on_call(region="europe-west3")
+def scan_other_attendee(req: CallableRequest) -> bool:
+    payload = req.data
     logger.debug(f"Input Payload: {payload}")
 
     payload = ScanOtherAttendeePayload(**payload)
@@ -54,8 +50,7 @@ def scan_other_attendee(req: Request) -> Response:
         batch.set(doc, points.model_dump())
         batch.commit()
         logger.info("Points added")
-        # TODO Modificare solo con True quando si passa a on_call
-        return jsonify(True)
+        return True
     else:
         logger.info("Scanned user not found")
-        return jsonify(False)
+        return False
