@@ -73,6 +73,7 @@ This project provide a set of scripts to manage Firestore data.
 read the README.md in the project to know how to use it.
 
 ### Endpoint testati
-Questi endpoint sono stati testati nell'emulatore locale facendo uno di Request e non di eventi.
+Questi endpoint sono stati testati nell'emulatore locale.
 
-- scan_other_attendee
+- scan_other_attendee (Utilizzato Request con dati mockati e non Callable)
+- user_points_sentinel (Modificato record direttamente da firestore e verificata la modifica)

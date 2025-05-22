@@ -13,6 +13,7 @@ from features.points.assign_points import assign_points
 initialize_app()
 
 from features.points.scan_other_attendee import scan_other_attendee
+from features.points.points_manager import user_points_sentinel
 
 '''
 # User management functions

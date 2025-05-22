@@ -16,15 +16,14 @@ def user_points_sentinel(event: firestore_fn.Event[firestore_fn.DocumentSnapshot
 
     current_value = event.data.after
     prev_value = event.data.before
-    current_value_dict = current_value.to_dict()
-    prev_value_dict = prev_value.to_dict()
 
     current_points, prev_points = 0, 0
-    if current_value and current_value.exists and current_value_dict:
-        current_points = current_value_dict.get("points", 0)
-    if prev_value and prev_value.exists and prev_value_dict:
-        prev_points = prev_value_dict.get("points", 0)
-    
+    if current_value and current_value.exists:
+        current_points = current_value.to_dict().get("points", 0)
+    if prev_value and prev_value.exists:
+        prev_points = prev_value.to_dict().get("points", 0)
+
+
     # If points have changed, update the user's total
     if prev_points != current_points:
         # Get a reference to the parent user document
