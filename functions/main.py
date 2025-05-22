@@ -14,6 +14,7 @@ initialize_app()
 
 from features.points.scan_other_attendee import scan_other_attendee
 from features.points.points_manager import user_points_sentinel
+from features.points.submit_answer import submit_answer
 
 '''
 # User management functions
