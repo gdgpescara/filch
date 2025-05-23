@@ -9,6 +9,7 @@ from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from firestore_client import client as firestore_client
 from shared.get_signed_in_user import get_signed_in_user
+from shared.env import FIREBASE_REGION
 
 
 class ScanOtherAttendeePayload(BaseModel):
@@ -16,7 +17,7 @@ class ScanOtherAttendeePayload(BaseModel):
     scanned_value: str
 
 
-@on_call(region="europe-west3")
+@on_call(region=FIREBASE_REGION)
 def scan_other_attendee(req: CallableRequest) -> bool:
     payload = req.data
     logger.debug(f"Input Payload: {payload}")

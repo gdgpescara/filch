@@ -2,11 +2,12 @@ from firebase_functions import firestore_fn
 from google.cloud.firestore import Increment
 
 from logger_config import logger
+from shared.env import FIREBASE_REGION
 
 
 @firestore_fn.on_document_written(
     document="users/{uid}/points/{archivedPointsId}",
-    region="europe-west3"
+    region=FIREBASE_REGION
 )
 def user_points_sentinel(event: firestore_fn.Event[firestore_fn.DocumentSnapshot]) -> None:
     """

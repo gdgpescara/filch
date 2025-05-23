@@ -1,18 +1,17 @@
-from firebase_functions.https_fn import on_call, CallableRequest, HttpsError, FunctionsErrorCode, Request, on_request
+from firebase_functions.https_fn import on_call, CallableRequest, HttpsError, FunctionsErrorCode
 from google.cloud.firestore import SERVER_TIMESTAMP
-from flask import jsonify
 
 from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from features.quests.types.quest import Quest
 from features.quests.types.answer import Answer
-from features.quests.types.localized_field import LocalizedField
 from shared.get_signed_in_user import get_signed_in_user
 from firestore_client import client as firestore_client
 from logger_config import logger
+from shared.env import FIREBASE_REGION
 
 
-@on_call(region="europe-west3")
+@on_call(region=FIREBASE_REGION)
 def submit_answer(req: CallableRequest) -> bool:
     logged_user = get_signed_in_user(request=req)
 
