@@ -1,9 +1,11 @@
-import logging
-from firebase_functions import https_fn
+from firebase_functions.https_fn import CallableRequest, HttpsError, FunctionsErrorCode
 from firebase_admin import auth
+from firebase_admin._user_mgt import UserRecord
+
+from logger_config import logger
 
 
-def get_signed_in_user(request: https_fn.CallableRequest):
+def get_signed_in_user(request: CallableRequest) -> UserRecord:
     """
     Function to get the signed-in user from the request.
     
@@ -13,11 +15,10 @@ def get_signed_in_user(request: https_fn.CallableRequest):
     Returns:
         The signed-in user data or an error message.
     """
-    uid = request.auth.uid if request.auth else None
+    uid = getattr(request.auth, "uid", None)
 
     if not uid:
-        logging.error("User is not logged in")
-        raise https_fn.HttpsError(code=https_fn.FunctionsErrorCode.UNAUTHENTICATED,
-                                  message="User is not logged in")
+        logger.error("User is not logged in")
+        raise HttpsError(code=FunctionsErrorCode.UNAUTHENTICATED, message="User is not logged in")
 
-    return auth.get_user(uid)._data
+    return auth.get_user(uid)

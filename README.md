@@ -71,3 +71,10 @@ The functions are located in `functions` folder.
 To manage Firestore data there is a project called `firebase_command_line_scripts` that is used to seed data into Firestore.
 This project provide a set of scripts to manage Firestore data.
 read the README.md in the project to know how to use it.
+
+### Endpoint testati
+Questi endpoint sono stati testati nell'emulatore locale.
+
+- scan_other_attendee (Utilizzato Request con dati mockati e non Callable) -> Da testare deployato
+- submit_answer (Utilizzato Request con dati mockati e non Callable) -> Da testare deployato
+- user_points_sentinel (Modificato record direttamente da firestore e verificata la modifica)
