@@ -4,7 +4,6 @@ from datetime import datetime
 from firebase_functions import scheduler_fn
 from firebase_admin import firestore, messaging
 from google.cloud.firestore_v1.base_query import FieldFilter
-from shared.env import FIREBASE_REGION
 from shared.localization import get_localized_string
 from features.user.types import TShirtConfiguration
 
@@ -100,7 +99,7 @@ async def send_t_shirt_notification() -> None:
 @scheduler_fn.on_schedule(
     schedule="*/10 10-18 8,9 11 *",
     timezone="Europe/Rome",
-    region=FIREBASE_REGION
+    region="europe-west3"
 )
 def t_shirt_notification_schedule(event: scheduler_fn.ScheduledEvent) -> None:
     """

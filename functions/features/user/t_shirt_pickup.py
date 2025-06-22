@@ -2,10 +2,9 @@ import logging
 from firebase_functions import https_fn
 from firebase_admin import firestore
 from shared.get_signed_in_user import get_signed_in_user
-from shared.env import FIREBASE_REGION
 
 
-@https_fn.on_call(region=FIREBASE_REGION)
+@https_fn.on_call(region="europe-west3")
 def t_shirt_pickup(request: https_fn.CallableRequest) -> bool:
     """
     Cloud function to mark a user's t-shirt as picked up.
