@@ -23,9 +23,10 @@ class QuizSubmitButton extends StatelessWidget {
             return SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: form.valid && value != null
-                    ? () => context.read<QuizCubit>().submitAnswer(currentQuestState.activeQuest, value)
-                    : null,
+                onPressed:
+                    form.valid && value != null
+                        ? () => context.read<QuizCubit>().submitAnswer(currentQuestState.activeQuest, value)
+                        : null,
                 child: Text(t.common.buttons.confirm),
               ),
             );

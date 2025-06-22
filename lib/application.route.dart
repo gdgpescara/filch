@@ -18,8 +18,7 @@ Route b0Builder(BuildContext ctx, RouteSettings settings) =>
     Routefly.defaultRouteBuilder(ctx, settings, const a0.CountdownPage());
 Route b1Builder(BuildContext ctx, RouteSettings settings) =>
     Routefly.defaultRouteBuilder(ctx, settings, const a1.SignInPage());
-Route b2Builder(BuildContext context, RouteSettings settings) =>
-    a2.routeBuilder(context, settings);
+Route b2Builder(BuildContext context, RouteSettings settings) => a2.routeBuilder(context, settings);
 Route b3Builder(BuildContext ctx, RouteSettings settings) =>
     Routefly.defaultRouteBuilder(ctx, settings, const a3.AppPage());
 Route b4Builder(BuildContext ctx, RouteSettings settings) =>
@@ -27,13 +26,8 @@ Route b4Builder(BuildContext ctx, RouteSettings settings) =>
 Route b5Builder(BuildContext ctx, RouteSettings settings) =>
     Routefly.defaultRouteBuilder(ctx, settings, const a5.AllPointsPage());
 Route b6Builder(BuildContext ctx, RouteSettings settings) =>
-    Routefly.defaultRouteBuilder(
-      ctx,
-      settings,
-      const a6.TShirtAssignmentPage(),
-    );
-Route b7Builder(BuildContext context, RouteSettings settings) =>
-    a7.routeBuilder(context, settings);
+    Routefly.defaultRouteBuilder(ctx, settings, const a6.TShirtAssignmentPage());
+Route b7Builder(BuildContext context, RouteSettings settings) => a7.routeBuilder(context, settings);
 Route b8Builder(BuildContext ctx, RouteSettings settings) =>
     Routefly.defaultRouteBuilder(ctx, settings, const a8.HomePage());
 Route b9Builder(BuildContext ctx, RouteSettings settings) =>

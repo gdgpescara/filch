@@ -31,40 +31,32 @@ class UserQuestList extends StatelessWidget {
               runSpacing: Spacing.l,
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
-              children: quests.map(
-                (quest) {
-                  return Column(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        quest.title?[LocaleSettings.currentLocale.languageCode] ?? ' - ',
-                        style: context
-                            .getTextTheme(TextThemeType.monospace)
-                            .titleMedium
-                            ?.copyWith(fontWeight: FontWeight.bold),
-                      ),
-                      const SizedBox(height: Spacing.m),
-                      Wrap(
-                        spacing: Spacing.l,
-                        runSpacing: Spacing.l,
-                        children: [
-                          ...quest.points.map(
-                            (points) {
-                              return _ItemWidget(
-                                quest.id,
-                                quest.type,
-                                points,
-                                navigateToAssignment,
-                              );
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  );
-                },
-              ).toList(),
+              children:
+                  quests.map((quest) {
+                    return Column(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          quest.title?[LocaleSettings.currentLocale.languageCode] ?? ' - ',
+                          style: context
+                              .getTextTheme(TextThemeType.monospace)
+                              .titleMedium
+                              ?.copyWith(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(height: Spacing.m),
+                        Wrap(
+                          spacing: Spacing.l,
+                          runSpacing: Spacing.l,
+                          children: [
+                            ...quest.points.map((points) {
+                              return _ItemWidget(quest.id, quest.type, points, navigateToAssignment);
+                            }),
+                          ],
+                        ),
+                      ],
+                    );
+                  }).toList(),
             ),
           ],
         );
@@ -74,12 +66,7 @@ class UserQuestList extends StatelessWidget {
 }
 
 class _ItemWidget extends StatelessWidget {
-  const _ItemWidget(
-    this.questId,
-    this.questType,
-    this.points,
-    this.navigateToAssignment,
-  );
+  const _ItemWidget(this.questId, this.questType, this.points, this.navigateToAssignment);
 
   final String questId;
   final QuestTypeEnum questType;
@@ -89,7 +76,8 @@ class _ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => navigateToAssignment(AssignmentPageArgs.quest(points: points, questId: questId, questType: questType)),
+      onTap:
+          () => navigateToAssignment(AssignmentPageArgs.quest(points: points, questId: questId, questType: questType)),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.4,
         child: AppCard(
@@ -97,12 +85,7 @@ class _ItemWidget extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                points.toString(),
-                style: context.getTextTheme(TextThemeType.themeSpecific).displaySmall,
-              ),
-            ],
+            children: [Text(points.toString(), style: context.getTextTheme(TextThemeType.themeSpecific).displaySmall)],
           ),
         ),
       ),

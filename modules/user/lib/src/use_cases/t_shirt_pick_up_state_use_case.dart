@@ -7,10 +7,7 @@ import '../models/t_shirt_pick_up_state.dart';
 
 @lazySingleton
 class TShirtPickUpStateUseCase {
-  TShirtPickUpStateUseCase(
-    this._firestore,
-    this._getSignedUserUseCase,
-  );
+  TShirtPickUpStateUseCase(this._firestore, this._getSignedUserUseCase);
 
   final FirebaseFirestore _firestore;
   final GetSignedUserUseCase _getSignedUserUseCase;

@@ -16,10 +16,7 @@ class ShiftsView extends StatelessWidget {
       create: (context) => GetIt.I()..init(),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          elevation: 0,
-          title: Text(t.staff.shifts.title),
-        ),
+        appBar: AppBar(elevation: 0, title: Text(t.staff.shifts.title)),
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 20),

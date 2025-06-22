@@ -10,9 +10,6 @@ class Caption extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: context.getTextTheme(textThemeType).bodySmall?.copyWith(fontWeight: FontWeight.bold),
-    );
+    return Text(text, style: context.getTextTheme(textThemeType).bodySmall?.copyWith(fontWeight: FontWeight.bold));
   }
 }

@@ -16,15 +16,20 @@ class UserTShirt extends StatelessWidget {
     return BlocProvider<UserTShirtCubit>(
       create: (context) => GetIt.I()..checkTShirt(),
       child: BlocBuilder<UserTShirtCubit, UserTShirtState>(
-        builder: (context, state) => switch (state) {
-          UserTShirtLoading() => const Center(child: LoaderAnimation()),
-          UserTShirtFailure() => TShirtWidget(t.common.errors.generic, borderColor: appColors.error.seed),
-          UserTShirtLoaded(status: TShirtPickUpState.pickedUp) =>
-            TShirtWidget(t.user.profile.user_info.t_shirt.picked, borderColor: appColors.success.seed),
-          UserTShirtLoaded(status: TShirtPickUpState.requested) =>
-            TShirtWidget(t.user.profile.user_info.t_shirt.not_picked, borderColor: appColors.warning.seed),
-          UserTShirtLoaded(status: TShirtPickUpState.none) => const SizedBox.shrink(),
-        },
+        builder:
+            (context, state) => switch (state) {
+              UserTShirtLoading() => const Center(child: LoaderAnimation()),
+              UserTShirtFailure() => TShirtWidget(t.common.errors.generic, borderColor: appColors.error.seed),
+              UserTShirtLoaded(status: TShirtPickUpState.pickedUp) => TShirtWidget(
+                t.user.profile.user_info.t_shirt.picked,
+                borderColor: appColors.success.seed,
+              ),
+              UserTShirtLoaded(status: TShirtPickUpState.requested) => TShirtWidget(
+                t.user.profile.user_info.t_shirt.not_picked,
+                borderColor: appColors.warning.seed,
+              ),
+              UserTShirtLoaded(status: TShirtPickUpState.none) => const SizedBox.shrink(),
+            },
       ),
     );
   }

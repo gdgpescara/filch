@@ -1,5 +1,1 @@
-enum ProvidersEnum {
-  google,
-  apple,
-  emailPassword;
-}
+enum ProvidersEnum { google, apple, emailPassword }

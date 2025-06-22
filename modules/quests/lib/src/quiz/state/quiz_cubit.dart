@@ -11,10 +11,7 @@ part 'quiz_state.dart';
 
 @injectable
 class QuizCubit extends SafeEmitterCubit<QuizState> {
-  QuizCubit(
-    this._validateQuizQrCodeUseCase,
-    this._submitAnswerUseCase,
-  ) : super(const QuizNeedActivation());
+  QuizCubit(this._validateQuizQrCodeUseCase, this._submitAnswerUseCase) : super(const QuizNeedActivation());
 
   final ValidateQuizQrCodeUseCase _validateQuizQrCodeUseCase;
   final SubmitAnswerUseCase _submitAnswerUseCase;
@@ -30,7 +27,7 @@ class QuizCubit extends SafeEmitterCubit<QuizState> {
           emit(const QuizNeedActivation());
         }
       },
-      failure: (_) {
+      error: (_) {
         emit(const QuizActivationFailure());
         emit(const QuizNeedActivation());
       },
@@ -49,7 +46,7 @@ class QuizCubit extends SafeEmitterCubit<QuizState> {
       success: (result) {
         emit(QuizAnswerSent(isCorrect: result.$1, points: result.$2));
       },
-      failure: (_) {
+      error: (_) {
         emit(const QuizAnswerFailure());
       },
     );

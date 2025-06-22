@@ -1,11 +1,7 @@
 import 'package:flutter/material.dart';
 
 class OuterShadowDecoration extends Decoration {
-  const OuterShadowDecoration({
-    this.color = Colors.black,
-    this.radius = BorderRadius.zero,
-    this.blurRadius = 8,
-  });
+  const OuterShadowDecoration({this.color = Colors.black, this.radius = BorderRadius.zero, this.blurRadius = 8});
 
   final Color color;
   final BorderRadius radius;
@@ -25,20 +21,21 @@ class _OuterShadowBoxPainter extends BoxPainter {
   @override
   void paint(Canvas canvas, Offset offset, ImageConfiguration configuration) {
     final rect = offset & configuration.size!;
-    final paint = Paint()
-      ..color = color
-      ..maskFilter = MaskFilter.blur(BlurStyle.outer, blurRadius);
+    final paint =
+        Paint()
+          ..color = color
+          ..maskFilter = MaskFilter.blur(BlurStyle.outer, blurRadius);
 
-    final path = Path()
-      ..addRRect(
-        RRect.fromRectAndCorners(
-          rect,
-          topLeft: radius.topLeft,
-          topRight: radius.topRight,
-          bottomLeft: radius.bottomLeft,
-          bottomRight: radius.bottomRight,
-        ),
-      );
+    final path =
+        Path()..addRRect(
+          RRect.fromRectAndCorners(
+            rect,
+            topLeft: radius.topLeft,
+            topRight: radius.topRight,
+            bottomLeft: radius.bottomLeft,
+            bottomRight: radius.bottomRight,
+          ),
+        );
     canvas.drawPath(path, paint);
   }
 }

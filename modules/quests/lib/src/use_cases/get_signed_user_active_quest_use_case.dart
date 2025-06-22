@@ -7,10 +7,7 @@ import '../models/active_quest.dart';
 
 @lazySingleton
 class GetSignedUserActiveQuestUseCase {
-  GetSignedUserActiveQuestUseCase(
-    this._firestore,
-    this._auth,
-  );
+  GetSignedUserActiveQuestUseCase(this._firestore, this._auth);
 
   final FirebaseFirestore _firestore;
   final FirebaseAuth _auth;

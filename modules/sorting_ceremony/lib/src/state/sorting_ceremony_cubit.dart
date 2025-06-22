@@ -21,7 +21,7 @@ class SortingCeremonyCubit extends SafeEmitterCubit<SortingCeremonyState> {
         await Future<void>.delayed(const Duration(seconds: 15));
         emit(SortingCeremonyFinish());
       },
-      failure: (failure) {
+      error: (failure) {
         if (failure.code == 'already-exists') {
           emit(SortingCeremonyFinish());
         } else {

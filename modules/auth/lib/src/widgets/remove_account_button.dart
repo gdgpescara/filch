@@ -7,11 +7,7 @@ import 'package:ui/ui.dart';
 import '../use_cases/remove_account_use_case.dart';
 
 class RemoveAccountButton extends StatelessWidget {
-  const RemoveAccountButton({
-    super.key,
-    required this.onNeedLogin,
-    required this.onAccountRemoved,
-  });
+  const RemoveAccountButton({super.key, required this.onNeedLogin, required this.onAccountRemoved});
 
   final VoidCallback onNeedLogin;
   final VoidCallback onAccountRemoved;
@@ -28,9 +24,7 @@ class RemoveAccountButton extends StatelessWidget {
       ),
       child: TextButton(
         onPressed: () => _removeAccount(context),
-        child: Text(
-          t.profile.remove_account.button.toUpperCase(),
-        ),
+        child: Text(t.profile.remove_account.button.toUpperCase()),
       ),
     );
   }
@@ -43,10 +37,7 @@ class RemoveAccountButton extends StatelessWidget {
           title: Text(t.profile.remove_account.dialog.title),
           content: Text(t.profile.remove_account.dialog.content),
           actions: [
-            TextButton(
-              onPressed: () => Navigator.pop(context),
-              child: Text(t.common.buttons.cancel),
-            ),
+            TextButton(onPressed: () => Navigator.pop(context), child: Text(t.common.buttons.cancel)),
             TextButton(
               onPressed: () => _confirmAccountRemoval(context),
               child: Text(t.profile.remove_account.dialog.confirm),
@@ -61,7 +52,7 @@ class RemoveAccountButton extends StatelessWidget {
     await GetIt.I<RemoveAccountUseCase>()().when(
       progress: () => LoaderOverlay.show(context),
       success: (_) => _navigateToSplash(context),
-      failure: (e) => _onError(context, e),
+      error: (e) => _onError(context, e),
     );
   }
 
@@ -82,7 +73,7 @@ class RemoveAccountButton extends StatelessWidget {
     onAccountRemoved();
   }
 
-  Future<void> _onError(BuildContext context, Failure failure) async {
+  Future<void> _onError(BuildContext context, CustomError failure) async {
     LoaderOverlay.hide(context);
     if (failure.message.contains('firebase_auth/requires-recent-login')) {
       await showAdaptiveDialog<void>(
@@ -92,19 +83,13 @@ class RemoveAccountButton extends StatelessWidget {
             title: Text(t.profile.remove_account.need_login.dialog.title),
             content: Text(t.profile.remove_account.need_login.dialog.content),
             actions: [
-              TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: Text(t.common.buttons.cancel),
-              ),
-              TextButton(
-                onPressed: onNeedLogin,
-                child: Text(t.common.buttons.ok),
-              ),
+              TextButton(onPressed: () => Navigator.pop(context), child: Text(t.common.buttons.cancel)),
+              TextButton(onPressed: onNeedLogin, child: Text(t.common.buttons.ok)),
             ],
           );
         },
       );
-      if(context.mounted) {
+      if (context.mounted) {
         Navigator.pop(context);
       }
     } else {
@@ -112,8 +97,9 @@ class RemoveAccountButton extends StatelessWidget {
         SnackBar(
           content: Text(
             t.profile.remove_account.error,
-            style:
-            context.textTheme.bodyMedium?.copyWith(color: appColors.error.brightnessColor(context).onColorContainer),
+            style: context.textTheme.bodyMedium?.copyWith(
+              color: appColors.error.brightnessColor(context).onColorContainer,
+            ),
           ),
           backgroundColor: appColors.error.brightnessColor(context).colorContainer,
         ),

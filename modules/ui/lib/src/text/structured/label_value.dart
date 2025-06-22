@@ -11,7 +11,7 @@ class LabelValue extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return switch(disposition) {
+    return switch (disposition) {
       Disposition.row => _buildRow(context),
       Disposition.column => _buildColumn(context),
     };
@@ -28,13 +28,7 @@ class LabelValue extends StatelessWidget {
         ),
         const Gap.horizontal(Spacing.xs),
         Expanded(
-          child: SizedBox(
-            width: double.infinity,
-            child: Text(
-              value ?? ' - ',
-              style: context.textTheme.titleMedium,
-            ),
-          ),
+          child: SizedBox(width: double.infinity, child: Text(value ?? ' - ', style: context.textTheme.titleMedium)),
         ),
       ],
     );
@@ -51,19 +45,10 @@ class LabelValue extends StatelessWidget {
           style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
         // const Gap.vertical(Spacing.xs),
-        SizedBox(
-          width: double.infinity,
-          child: Text(
-            value ?? ' - ',
-            style: context.textTheme.titleMedium,
-          ),
-        ),
+        SizedBox(width: double.infinity, child: Text(value ?? ' - ', style: context.textTheme.titleMedium)),
       ],
     );
   }
 }
 
-enum Disposition {
-  row,
-  column;
-}
+enum Disposition { row, column }

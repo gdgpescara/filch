@@ -8,11 +8,7 @@ import '../../media_manager.dart';
 import 'state/photo_button_cubit.dart';
 
 class TakePhotoButton extends StatelessWidget {
-  const TakePhotoButton({
-    super.key,
-    required this.onPhotoTaken,
-    required this.photoType,
-  });
+  const TakePhotoButton({super.key, required this.onPhotoTaken, required this.photoType});
 
   final VoidCallback onPhotoTaken;
   final PhotoType photoType;
@@ -28,10 +24,9 @@ class TakePhotoButton extends StatelessWidget {
               SnackBar(
                 content: Text(
                   t.media_manager.take_picture.success,
-                  style: context
-                      .getTextTheme()
-                      .bodyMedium
-                      ?.copyWith(color: appColors.success.brightnessColor(context).onColorContainer),
+                  style: context.getTextTheme().bodyMedium?.copyWith(
+                    color: appColors.success.brightnessColor(context).onColorContainer,
+                  ),
                 ),
                 backgroundColor: appColors.success.seed,
                 duration: const Duration(seconds: 15),

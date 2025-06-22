@@ -6,16 +6,13 @@ import '../../ui.dart';
 bool _isShowing = false;
 
 class LoaderOverlay extends StatelessWidget {
-  const LoaderOverlay._({
-    this.message,
-    this.messageWidget,
-  });
+  const LoaderOverlay._({this.message, this.messageWidget});
 
   final String? message;
   final Widget? messageWidget;
 
   static void show(BuildContext context, {String? message, Widget? messageWidget}) {
-    if(_isShowing) {
+    if (_isShowing) {
       throw Exception('LoaderOverlay is already showing');
     }
     showDialog<void>(
@@ -23,10 +20,7 @@ class LoaderOverlay extends StatelessWidget {
       barrierDismissible: false,
       useSafeArea: false,
       barrierColor: Colors.transparent,
-      builder: (context) => LoaderOverlay._(
-        message: message,
-        messageWidget: messageWidget,
-      ),
+      builder: (context) => LoaderOverlay._(message: message, messageWidget: messageWidget),
     );
     _isShowing = true;
   }
@@ -45,12 +39,7 @@ class LoaderOverlay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (message == null && messageWidget == null) ...[
-              Image.asset(
-                'logo/logo.png',
-                package: 'assets',
-                height: 100,
-                semanticLabel: t.devfest2024.semantic.logo,
-              ),
+              Image.asset('logo/logo.png', package: 'assets', height: 100, semanticLabel: t.devfest2024.semantic.logo),
               const Gap.vertical(Spacing.l),
             ],
             const LoaderAnimation(),
@@ -58,11 +47,9 @@ class LoaderOverlay extends StatelessWidget {
             if (message != null || messageWidget != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: messageWidget ??
-                    Text(
-                      message!,
-                      style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
-                    ),
+                child:
+                    messageWidget ??
+                    Text(message!, style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
               ),
           ],
         ),

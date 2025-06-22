@@ -1,2 +1,2 @@
-//GENERATED BARREL FILE 
-export 'duration_extension.dart'; 
+//GENERATED BARREL FILE
+export 'duration_extension.dart';

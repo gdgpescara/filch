@@ -54,12 +54,7 @@ class UserProfilePage extends StatelessWidget {
               padding: _padding,
               shrinkWrap: true,
               children: [
-                Row(
-                  children: [
-                    UserPicture(imageUrl: state.user?.photoURL),
-                    Expanded(child: UserInfo(state.user)),
-                  ],
-                ),
+                Row(children: [UserPicture(imageUrl: state.user?.photoURL), Expanded(child: UserInfo(state.user))]),
                 const SizedBox(height: Spacing.m),
                 const UserTShirt(),
                 const SizedBox(height: Spacing.xxl),
@@ -67,10 +62,7 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: Spacing.xxl),
                 UserPointsCard(navigateToAllPoints: navigateToAllPoints),
                 const SizedBox(height: Spacing.xxl),
-                RemoveAccountButton(
-                  onNeedLogin: navigateToLogin,
-                  onAccountRemoved: navigateToSplash,
-                ),
+                RemoveAccountButton(onNeedLogin: navigateToLogin, onAccountRemoved: navigateToSplash),
                 const AppVersion(),
               ],
             ),

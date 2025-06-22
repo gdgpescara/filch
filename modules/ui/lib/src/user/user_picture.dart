@@ -26,16 +26,11 @@ class UserPicture extends StatelessWidget {
                 width: 100,
                 height: 100,
                 clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(RadiusSize.m)),
-                ),
-                child: imageUrl != null
-                    ? Image.network(
-                        imageUrl ?? '',
-                        fit: BoxFit.cover,
-                        semanticLabel: t.common.user.image.semantic,
-                      )
-                    : const Icon(Icons.person_rounded, size: 50),
+                decoration: const BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(RadiusSize.m))),
+                child:
+                    imageUrl != null
+                        ? Image.network(imageUrl ?? '', fit: BoxFit.cover, semanticLabel: t.common.user.image.semantic)
+                        : const Icon(Icons.person_rounded, size: 50),
               ),
             ),
             Align(
@@ -44,12 +39,11 @@ class UserPicture extends StatelessWidget {
                 width: 60,
                 height: 60,
                 clipBehavior: Clip.antiAlias,
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                ),
-                child: badgeImageName != null
-                    ? Image.asset('profile_badges/$badgeImageName.png', package: 'assets', fit: BoxFit.contain)
-                    : const SizedBox(),
+                decoration: const BoxDecoration(shape: BoxShape.circle),
+                child:
+                    badgeImageName != null
+                        ? Image.asset('profile_badges/$badgeImageName.png', package: 'assets', fit: BoxFit.contain)
+                        : const SizedBox(),
               ),
             ),
           ],

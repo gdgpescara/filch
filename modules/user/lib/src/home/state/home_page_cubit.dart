@@ -24,7 +24,7 @@ class HomePageCubit extends SafeEmitterCubit<HomePageState> {
     _subscription = _isRankingFreezedUseCase().when(
       progress: () => emit(const HomePageState()),
       success: (isFreezed) => emit(state.copyWith(isRankingFreezed: isFreezed, currentView: isFreezed ? 0 : 1)),
-      failure: (_) => emit(const HomePageState()),
+      error: (_) => emit(const HomePageState()),
     );
   }
 

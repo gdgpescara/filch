@@ -7,11 +7,7 @@ import '../../auth.dart';
 
 @lazySingleton
 class UploadFcmTokenUseCase {
-  UploadFcmTokenUseCase(
-    this._firestore,
-    this._firebaseMessaging,
-    this._getSignedUserUseCase,
-  );
+  UploadFcmTokenUseCase(this._firestore, this._firebaseMessaging, this._getSignedUserUseCase);
 
   final FirebaseMessaging _firebaseMessaging;
   final FirebaseFirestore _firestore;
@@ -22,9 +18,7 @@ class UploadFcmTokenUseCase {
       final token = await _firebaseMessaging.getToken();
       final userUid = _getSignedUserUseCase()?.uid;
       if (token != null && userUid != null) {
-        await _firestore.collection('users').doc(userUid).update({
-          'fcmToken': token,
-        });
+        await _firestore.collection('users').doc(userUid).update({'fcmToken': token});
       }
     });
   }

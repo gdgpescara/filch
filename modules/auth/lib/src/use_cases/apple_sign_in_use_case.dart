@@ -2,6 +2,8 @@ import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
+import '../models/custom_errors.dart';
+
 @lazySingleton
 class AppleSignInUseCase {
   AppleSignInUseCase(this._auth);
@@ -11,16 +13,17 @@ class AppleSignInUseCase {
   Future<UserCredential> call() {
     return runSafetyFuture(
       () {
-        final appleProvider = AppleAuthProvider()
-          ..addScope('email')
-          ..addScope('name');
+        final appleProvider =
+            AppleAuthProvider()
+              ..addScope('email')
+              ..addScope('name');
         return _auth.signInWithProvider(appleProvider);
       },
-      onException: (e) {
+      onError: (e) {
         if (e is FirebaseAuthException) {
-          return Failure(code: e.code, message: e.message ?? '');
+          return FirebaseAuthError(e);
         }
-        return Failure.genericFromException(e);
+        return e;
       },
     );
   }

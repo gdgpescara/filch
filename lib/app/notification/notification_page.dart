@@ -9,9 +9,7 @@ Route routeBuilder(BuildContext context, RouteSettings settings) {
   return Routefly.defaultRouteBuilder(
     context,
     settings,
-    NotificationPage(
-      notification: settings.arguments! as RemoteNotification,
-    ),
+    NotificationPage(notification: settings.arguments! as RemoteNotification),
   );
 }
 
@@ -45,10 +43,7 @@ class NotificationPage extends StatelessWidget {
                 const Gap.vertical(Spacing.l),
                 SizedBox(
                   width: double.infinity,
-                  child: ElevatedButton(
-                    onPressed: () => Routefly.pop<void>(context),
-                    child: Text(t.common.buttons.ok),
-                  ),
+                  child: ElevatedButton(onPressed: () => Routefly.pop<void>(context), child: Text(t.common.buttons.ok)),
                 ),
               ],
             ),

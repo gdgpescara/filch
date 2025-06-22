@@ -38,25 +38,17 @@ class _ConfettiContainerState extends State<ConfettiContainer> {
     final internalRadius = halfWidth / 2.5;
     const degreesPerStep = 360 / numberOfPoints;
     const halfDegreesPerStep = degreesPerStep / 2;
-    final path = Path()
-      ..moveTo(
-        halfWidth + externalRadius * cos(degToRad(-90)),
-        halfWidth + externalRadius * sin(degToRad(-90)),
-      );
+    final path =
+        Path()
+          ..moveTo(halfWidth + externalRadius * cos(degToRad(-90)), halfWidth + externalRadius * sin(degToRad(-90)));
 
     for (var i = 0; i < numberOfPoints; i++) {
       final externalAngle = degToRad(-90 + i * degreesPerStep);
       final internalAngle = degToRad(-90 + i * degreesPerStep + halfDegreesPerStep);
 
       path
-        ..lineTo(
-          halfWidth + externalRadius * cos(externalAngle),
-          halfWidth + externalRadius * sin(externalAngle),
-        )
-        ..lineTo(
-          halfWidth + internalRadius * cos(internalAngle),
-          halfWidth + internalRadius * sin(internalAngle),
-        );
+        ..lineTo(halfWidth + externalRadius * cos(externalAngle), halfWidth + externalRadius * sin(externalAngle))
+        ..lineTo(halfWidth + internalRadius * cos(internalAngle), halfWidth + internalRadius * sin(internalAngle));
     }
 
     path.close();
@@ -68,14 +60,8 @@ class _ConfettiContainerState extends State<ConfettiContainer> {
     return Stack(
       children: [
         widget.child,
-        Align(
-          alignment: Alignment.centerRight,
-          child: _buildConfettiWidget(-0.6 * pi),
-        ),
-        Align(
-          alignment: Alignment.centerLeft,
-          child: _buildConfettiWidget(-0.3 * pi),
-        ),
+        Align(alignment: Alignment.centerRight, child: _buildConfettiWidget(-0.6 * pi)),
+        Align(alignment: Alignment.centerLeft, child: _buildConfettiWidget(-0.3 * pi)),
       ],
     );
   }

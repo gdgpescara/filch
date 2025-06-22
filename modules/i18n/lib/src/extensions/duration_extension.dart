@@ -3,11 +3,7 @@ import '../../i18n.dart';
 typedef IntFormatter = String Function(int num);
 
 extension DurationExtension on Duration {
-  String format({
-    IntFormatter? hoursFormatter,
-    IntFormatter? minutesFormatter,
-    IntFormatter? secondsFormatter,
-  }) {
+  String format({IntFormatter? hoursFormatter, IntFormatter? minutesFormatter, IntFormatter? secondsFormatter}) {
     final hours = inHours;
     final minutes = inMinutes.remainder(60);
     final seconds = inSeconds.remainder(60);

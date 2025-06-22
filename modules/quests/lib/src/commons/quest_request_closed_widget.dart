@@ -6,8 +6,6 @@ class QuestRequestClosedWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(t.quests.active_quest.request_closed),
-    );
+    return Center(child: Text(t.quests.active_quest.request_closed));
   }
 }

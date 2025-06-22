@@ -9,18 +9,10 @@ class GiveUpQuestUseCase {
   final FirebaseFunctions _functions;
 
   Future<bool> call() {
-    return runSafetyFuture(
-      () async {
-        const url = String.fromEnvironment('REMOVE_ACTIVE_QUEST_URL');
-        final result = await _functions.httpsCallableFromUrl(url).call<bool>();
-        return result.data;
-      },
-      onException: (e) {
-        if (e is FirebaseFunctionsException) {
-          return FirebaseFunctionsFailure(e);
-        }
-        return Failure.genericFromException(e);
-      },
-    );
+    return runSafetyFuture(() async {
+      const url = String.fromEnvironment('REMOVE_ACTIVE_QUEST_URL');
+      final result = await _functions.httpsCallableFromUrl(url).call<bool>();
+      return result.data;
+    }, onError: onFirebaseFunctionError);
   }
 }

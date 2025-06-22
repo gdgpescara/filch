@@ -10,9 +10,6 @@ class Paragraph extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: context.getTextTheme(textThemeType).bodyMedium,
-    );
+    return Text(text, style: context.getTextTheme(textThemeType).bodyMedium);
   }
 }

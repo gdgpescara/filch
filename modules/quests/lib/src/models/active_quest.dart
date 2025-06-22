@@ -9,11 +9,7 @@ part 'active_quest.g.dart';
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class ActiveQuest extends Equatable {
-  const ActiveQuest({
-    required this.quest,
-    this.prompt,
-    required this.activatedAt,
-  });
+  const ActiveQuest({required this.quest, this.prompt, required this.activatedAt});
 
   factory ActiveQuest.fromJson(Map<String, dynamic> json) => _$ActiveQuestFromJson(json);
 
@@ -30,9 +26,5 @@ class ActiveQuest extends Equatable {
   Map<String, dynamic> toJson() => _$ActiveQuestToJson(this);
 
   @override
-  List<Object?> get props => [
-        quest,
-        prompt,
-        activatedAt,
-      ];
+  List<Object?> get props => [quest, prompt, activatedAt];
 }

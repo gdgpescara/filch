@@ -26,10 +26,7 @@ class _SortingSuccessState extends State<SortingSuccess> {
                 style: context.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-            if ((snapshot.data ?? 0) >= 2) ...[
-              const SizedBox(height: 20),
-              _houseLogo(),
-            ],
+            if ((snapshot.data ?? 0) >= 2) ...[const SizedBox(height: 20), _houseLogo()],
           ],
         );
         return Padding(

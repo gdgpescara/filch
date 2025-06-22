@@ -51,10 +51,7 @@ class AppColorsSection extends StatelessWidget {
 
   Widget _colorBox(BuildContext context, Color color) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        color: color,
-        borderRadius: BorderRadius.circular(8),
-      ),
+      decoration: BoxDecoration(color: color, borderRadius: BorderRadius.circular(8)),
       child: const SizedBox(height: 50, width: double.infinity),
     );
   }

@@ -8,10 +8,8 @@ part 'staff_profile_state.dart';
 
 @injectable
 class StaffProfileCubit extends SafeEmitterCubit<StaffProfileState> {
-  StaffProfileCubit(
-    GetSignedUserUseCase getSignedUserUseCase,
-    this._signOutUseCase,
-  ) : super(StaffProfileState(user: getSignedUserUseCase()));
+  StaffProfileCubit(GetSignedUserUseCase getSignedUserUseCase, this._signOutUseCase)
+    : super(StaffProfileState(user: getSignedUserUseCase()));
 
   final SignOutUseCase _signOutUseCase;
 

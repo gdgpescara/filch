@@ -7,10 +7,7 @@ import '../../media_manager.dart';
 
 @lazySingleton
 class AddPhotoToUploadQueueUseCase {
-  AddPhotoToUploadQueueUseCase(
-    this._firestore,
-    this._getSignedUserUseCase,
-  );
+  AddPhotoToUploadQueueUseCase(this._firestore, this._getSignedUserUseCase);
 
   final FirebaseFirestore _firestore;
   final GetSignedUserUseCase _getSignedUserUseCase;

@@ -47,7 +47,10 @@ class _TimeRemainingState extends State<TimeRemaining> {
           minutesFormatter: (n) => t.quests.active_quest.time_remaining.minutes(n: n),
           secondsFormatter: (n) => t.quests.active_quest.time_remaining.seconds(n: n),
         ),
-        style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold, fontSize: 18),
+        style: context
+            .getTextTheme(TextThemeType.monospace)
+            .bodyMedium
+            ?.copyWith(fontWeight: FontWeight.bold, fontSize: 18),
         textAlign: TextAlign.right,
       ),
     );

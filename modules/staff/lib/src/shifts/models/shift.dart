@@ -34,12 +34,7 @@ class Shift extends Equatable {
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class FirestoreUser extends Equatable {
-  const FirestoreUser({
-    required this.uid,
-    this.displayName,
-    required this.email,
-    required this.photoUrl,
-  });
+  const FirestoreUser({required this.uid, this.displayName, required this.email, required this.photoUrl});
 
   factory FirestoreUser.fromJson(Map<String, dynamic> json) => _$FirestoreUserFromJson(json);
 
