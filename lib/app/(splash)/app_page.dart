@@ -25,12 +25,7 @@ class AppPage extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset(
-                  'logo/logo.png',
-                  semanticLabel: t.devfest2024.semantic.logo,
-                  package: 'assets',
-                  width: 250,
-                ),
+                Image.asset('logo/logo.png', semanticLabel: t.devfest2024.semantic.logo, package: 'assets', width: 250),
                 const Gap.vertical(Spacing.xxl),
                 const LoaderAnimation(),
               ],

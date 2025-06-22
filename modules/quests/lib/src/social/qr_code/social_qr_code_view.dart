@@ -30,18 +30,13 @@ class SocialQrCodeView extends StatelessWidget {
                             ? t.quests.active_quest.social.qr_code.correct(n: state.points)
                             : t.quests.active_quest.social.qr_code.incorrect,
                       ),
-                      backgroundColor: state.isCorrect
-                          ? appColors.success.seed
-                          : appColors.error.seed,
+                      backgroundColor: state.isCorrect ? appColors.success.seed : appColors.error.seed,
                     ),
                   );
                   break;
                 case SocialQrCodeFailure():
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(t.common.errors.generic_retry),
-                      backgroundColor: appColors.error.seed,
-                    ),
+                    SnackBar(content: Text(t.common.errors.generic_retry), backgroundColor: appColors.error.seed),
                   );
                   break;
                 default:

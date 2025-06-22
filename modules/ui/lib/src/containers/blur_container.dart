@@ -26,7 +26,8 @@ class BlurContainer extends StatelessWidget {
     Widget shadowed(Widget child) {
       return DecoratedBox(
         decoration: OuterShadowDecoration(
-          color: border?.top.color ??
+          color:
+              border?.top.color ??
               border?.left.color ??
               border?.right.color ??
               border?.bottom.color ??
@@ -61,7 +62,4 @@ class BlurContainer extends StatelessWidget {
   }
 }
 
-enum BlurContainerStyle {
-  normal,
-  shadowed;
-}
+enum BlurContainerStyle { normal, shadowed }

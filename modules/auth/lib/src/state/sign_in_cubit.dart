@@ -12,11 +12,8 @@ part 'sign_in_state.dart';
 
 @injectable
 class SignInCubit extends SafeEmitterCubit<SignInState> {
-  SignInCubit(
-    this._userPasswordSignInUseCase,
-    this._googleSignInUseCase,
-    this._appleSignInUseCase,
-  ) : super(SignInWithProviders());
+  SignInCubit(this._userPasswordSignInUseCase, this._googleSignInUseCase, this._appleSignInUseCase)
+    : super(SignInWithProviders());
 
   final UserPasswordSignInUseCase _userPasswordSignInUseCase;
   final GoogleSignInUseCase _googleSignInUseCase;
@@ -27,7 +24,7 @@ class SignInCubit extends SafeEmitterCubit<SignInState> {
       _userPasswordSignInUseCase(formValue['email']! as String, formValue['password']! as String).when(
         progress: () => _emitAction(const SignInLoading(ProvidersEnum.emailPassword)),
         success: (_) => _emitAction(const SignInSuccess()),
-        failure: (e) => _emitAction(SignInFailure(failure: e)),
+        error: (e) => _emitAction(SignInFailure(failure: e)),
       );
     }
   }
@@ -36,15 +33,14 @@ class SignInCubit extends SafeEmitterCubit<SignInState> {
     <ProvidersEnum, VoidCallback>{
       ProvidersEnum.google: _googleSignIn,
       ProvidersEnum.apple: _appleSignIn,
-    }[provider]!
-        .call();
+    }[provider]!.call();
   }
 
   void _googleSignIn() {
     _googleSignInUseCase().when(
       progress: () => _emitAction(const SignInLoading(ProvidersEnum.google)),
       success: (_) => _emitAction(const SignInSuccess()),
-      failure: (e) => _emitAction(SignInFailure(failure: e)),
+      error: (e) => _emitAction(SignInFailure(failure: e)),
     );
   }
 
@@ -52,14 +48,19 @@ class SignInCubit extends SafeEmitterCubit<SignInState> {
     _appleSignInUseCase().when(
       progress: () => _emitAction(const SignInLoading(ProvidersEnum.apple)),
       success: (_) => _emitAction(const SignInSuccess()),
-      failure: (e) => _emitAction(SignInFailure(failure: e)),
+      error: (e) => _emitAction(SignInFailure(failure: e)),
     );
   }
 
   void _emitAction(SignInActionsState action) {
-    final current = state;
-    emit(action);
-    emit(current);
+    if (action is! SignInLoading) {
+      emit(action);
+      if (action is SignInSuccess || action is SignInFailure) {
+        emit(SignInWithProviders());
+      }
+    } else {
+      emit(action);
+    }
   }
 
   void switchSignIn() {

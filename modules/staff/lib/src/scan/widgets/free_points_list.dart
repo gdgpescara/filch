@@ -58,8 +58,10 @@ class _ItemWidget extends StatelessWidget {
             children: [
               Text(
                 item.points.toString(),
-                style:
-                    context.getTextTheme(TextThemeType.monospace).displaySmall?.copyWith(fontWeight: FontWeight.bold),
+                style: context
+                    .getTextTheme(TextThemeType.monospace)
+                    .displaySmall
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
               Text(item.description[LocaleSettings.currentLocale.languageCode] ?? ' - '),
             ],

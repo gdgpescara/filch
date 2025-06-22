@@ -26,16 +26,16 @@ dependencies:
   flutter_bloc: ^9.1.1
   qr_flutter: ^4.1.0
   intl: any
-  firebase_auth: ^5.5.3
+  firebase_auth: ^5.6.0
   font_awesome_flutter: ^10.8.0
-  cloud_firestore: ^5.6.7
-  flutter_svg: ^2.1.0
+  cloud_firestore: ^5.6.9
+  flutter_svg: ^2.2.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-  build_runner: ^2.4.15
+  flutter_lints: ^6.0.0
+  build_runner: ^2.5.3
   injectable_generator: ^2.7.0
 
 flutter:

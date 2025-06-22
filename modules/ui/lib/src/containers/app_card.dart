@@ -22,7 +22,8 @@ class AppCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final radius = this.radius ??
+    final radius =
+        this.radius ??
         switch (style) {
           AppCardStyle.normal => RadiusSize.m,
           AppCardStyle.bordered => RadiusSize.m,
@@ -35,22 +36,15 @@ class AppCard extends StatelessWidget {
         AppCardStyle.normal => null,
         AppCardStyle.bordered => Border.all(color: borderColor ?? context.colorScheme.primaryContainer),
         AppCardStyle.caption => Border(
-            top: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius*.038),
-            left: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius),
-            right: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius*.038),
-            bottom: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius*.038),
-          ),
+          top: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius * .038),
+          left: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius),
+          right: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius * .038),
+          bottom: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius * .038),
+        ),
       },
-      child: Padding(
-        padding: padding,
-        child: child,
-      ),
+      child: Padding(padding: padding, child: child),
     );
   }
 }
 
-enum AppCardStyle {
-  bordered,
-  normal,
-  caption,
-}
+enum AppCardStyle { bordered, normal, caption }

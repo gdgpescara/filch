@@ -5,10 +5,7 @@ part 'assignable_points.g.dart';
 
 @JsonSerializable(createToJson: false)
 class AssignablePoints extends Equatable {
-  const AssignablePoints({
-    required this.description,
-    required this.points,
-  });
+  const AssignablePoints({required this.description, required this.points});
 
   factory AssignablePoints.fromJson(Map<String, dynamic> json) => _$AssignablePointsFromJson(json);
 

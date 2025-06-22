@@ -7,7 +7,7 @@ class SpacingSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  Column(
+    return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
@@ -35,9 +35,7 @@ class SpacingSection extends StatelessWidget {
 
   Widget _spaceBox(BuildContext context, double spacing) {
     return DecoratedBox(
-      decoration: BoxDecoration(
-        border: Border.all(color: context.colorScheme.onSurface),
-      ),
+      decoration: BoxDecoration(border: Border.all(color: context.colorScheme.onSurface)),
       child: SizedBox(height: spacing, width: double.infinity),
     );
   }

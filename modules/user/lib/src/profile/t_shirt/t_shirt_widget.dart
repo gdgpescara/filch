@@ -14,10 +14,7 @@ class TShirtWidget extends StatelessWidget {
       borderColor: borderColor,
       child: SizedBox(
         width: double.infinity,
-        child: Text(
-          message,
-          style: context.getTextTheme(TextThemeType.monospace).bodyMedium,
-        ),
+        child: Text(message, style: context.getTextTheme(TextThemeType.monospace).bodyMedium),
       ),
     );
   }

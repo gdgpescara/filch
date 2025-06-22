@@ -21,16 +21,10 @@ class UserPointsSummary extends StatelessWidget {
             const SizedBox(height: 10),
             SizedBox(
               width: double.infinity,
-              child: Text(
-                '${loadedState.totals}',
-                style: context.getTextTheme(TextThemeType.themeSpecific).titleLarge,
-              ),
+              child: Text('${loadedState.totals}', style: context.getTextTheme(TextThemeType.themeSpecific).titleLarge),
             ),
             const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: navigateToAllPoints,
-              child: Text(t.user.profile.my_points.detail_button.label),
-            ),
+            ElevatedButton(onPressed: navigateToAllPoints, child: Text(t.user.profile.my_points.detail_button.label)),
           ],
         );
       },

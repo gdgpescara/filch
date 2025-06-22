@@ -24,10 +24,7 @@ class SocialQrCodeScan extends StatelessWidget {
           if (barcodes.isNotEmpty &&
               barcodes.first.rawValue != null &&
               activeQuest.quest.verificationFunction != null) {
-            context.read<SocialQrCodeCubit>().onScan(
-                  activeQuest,
-                  barcodes.first.rawValue!,
-                );
+            context.read<SocialQrCodeCubit>().onScan(activeQuest, barcodes.first.rawValue!);
           }
         },
       ),

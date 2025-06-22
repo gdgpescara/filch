@@ -24,7 +24,7 @@ class UserPointsCubit extends SafeEmitterCubit<UserPointsState> {
     _subscription = _getSignedUserPointsUseCase().when(
       progress: () => emit(const UserPointsLoading()),
       success: (points) => emit(UserPointsLoaded(points)),
-      failure: (_) => emit(const UserPointsFailure()),
+      error: (_) => emit(const UserPointsFailure()),
     );
   }
 }

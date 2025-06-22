@@ -22,18 +22,12 @@ class TShirtAssignment extends StatelessWidget {
         listener: (context, state) {
           switch (state) {
             case TShirtAssigning():
-              LoaderOverlay.show(
-                context,
-                message: t.staff.t_shirt_assignment.page.assigning,
-              );
+              LoaderOverlay.show(context, message: t.staff.t_shirt_assignment.page.assigning);
             case TShirtAssignFailure():
               LoaderOverlay.hide(context);
               onDone(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(t.staff.t_shirt_assignment.page.error),
-                  backgroundColor: appColors.error.seed,
-                ),
+                SnackBar(content: Text(t.staff.t_shirt_assignment.page.error), backgroundColor: appColors.error.seed),
               );
             case TShirtAssigned():
               LoaderOverlay.hide(context);
@@ -52,18 +46,13 @@ class TShirtAssignment extends StatelessWidget {
           child: Scaffold(
             extendBodyBehindAppBar: true,
             backgroundColor: Colors.transparent,
-            appBar: AppBar(
-              title: Text(t.staff.t_shirt_assignment.page.title),
-            ),
+            appBar: AppBar(title: Text(t.staff.t_shirt_assignment.page.title)),
             body: Center(
               child: Container(
                 width: MediaQuery.sizeOf(context).width * 0.65,
                 height: MediaQuery.sizeOf(context).width * 0.65,
                 clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(16),
-                  color: Colors.white,
-                ),
+                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.white),
                 child: Builder(
                   builder: (context) {
                     return MobileScanner(
@@ -74,9 +63,7 @@ class TShirtAssignment extends StatelessWidget {
                       onDetect: (barcodes) {
                         final user = barcodes.barcodes.firstOrNull?.rawValue;
                         if (user != null) {
-                          context
-                              .read<TShirtAssignmentCubit>()
-                              .assignTShirt(user);
+                          context.read<TShirtAssignmentCubit>().assignTShirt(user);
                         }
                       },
                     );

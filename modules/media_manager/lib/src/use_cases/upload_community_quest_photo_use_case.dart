@@ -12,7 +12,9 @@ class UploadCommunityQuestPhotoUseCase {
 
   Future<(String, String)> call(File photo) {
     return runSafetyFuture(() async {
-      final photoRef = _storageRef.child('community_quest_photos/${DateTime.now().millisecondsSinceEpoch}_${photo.name}');
+      final photoRef = _storageRef.child(
+        'community_quest_photos/${DateTime.now().millisecondsSinceEpoch}_${photo.name}',
+      );
       final photoData = await photo.readAsBytes();
       final task = await photoRef.putData(photoData);
       return (task.ref.fullPath, await task.ref.getDownloadURL());

@@ -52,7 +52,7 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
             _canRequestForQuest();
           }
         },
-        failure: (_) => emit(const CurrentQuestFailure()),
+        error: (_) => emit(const CurrentQuestFailure()),
       ),
     );
   }
@@ -65,7 +65,7 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
     _giveUpQuestUseCase().when(
       progress: () => emit(const CurrentQuestLoading()),
       success: (_) => emit(const NoQuestAssigned()),
-      failure: (_) => emit(const CurrentQuestFailure()),
+      error: (_) => emit(const CurrentQuestFailure()),
     );
   }
 
@@ -75,7 +75,7 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
       _canRequestForQuestUseCase().when(
         progress: () => emit(const CurrentQuestLoading()),
         success: (canRequest) => canRequest ? emit(const NoQuestAssigned()) : emit(const QuestRequestClosed()),
-        failure: (_) => emit(const CurrentQuestFailure()),
+        error: (_) => emit(const CurrentQuestFailure()),
       ),
     );
   }
@@ -84,7 +84,7 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
     _searchForQuestUseCase().when(
       progress: () => emit(const CurrentQuestLoading()),
       success: (quest) => emit(CurrentQuestLoaded(activeQuest: quest)),
-      failure: (_) => emit(const CurrentQuestFailure()),
+      error: (_) => emit(const CurrentQuestFailure()),
     );
   }
 }

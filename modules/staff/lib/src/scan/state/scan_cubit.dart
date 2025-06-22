@@ -7,10 +7,7 @@ part 'scan_state.dart';
 
 @injectable
 class ScanCubit extends SafeEmitterCubit<ScanState> {
-  ScanCubit(
-    this._getAssignablePointsUseCase,
-    this._getQuestsUseCase,
-  ) : super(const ScanLoading());
+  ScanCubit(this._getAssignablePointsUseCase, this._getQuestsUseCase) : super(const ScanLoading());
 
   final GetAssignablePointsUseCase _getAssignablePointsUseCase;
   final GetSignedUserQuestsUseCase _getQuestsUseCase;
@@ -18,7 +15,7 @@ class ScanCubit extends SafeEmitterCubit<ScanState> {
   void load() {
     _getAssignablePointsUseCase().when(
       progress: () => emit(const ScanLoading()),
-      failure: (_) => emit(const ScanFailure()),
+      error: (_) => emit(const ScanFailure()),
       success: (points) {
         final currentState = state;
         if (currentState is ScanLoaded) {
@@ -31,7 +28,7 @@ class ScanCubit extends SafeEmitterCubit<ScanState> {
 
     _getQuestsUseCase().when(
       progress: () => emit(const ScanLoading()),
-      failure: (_) => emit(const ScanFailure()),
+      error: (_) => emit(const ScanFailure()),
       success: (quests) {
         final currentState = state;
         if (currentState is ScanLoaded) {

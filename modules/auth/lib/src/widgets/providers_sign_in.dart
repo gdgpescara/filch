@@ -12,15 +12,11 @@ class ProvidersSignIn extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      children: ProvidersEnum.values
-          .where((p) => (p != ProvidersEnum.apple || Platform.isIOS) && (p != ProvidersEnum.emailPassword))
-          .map(
-            (e) => Padding(
-              padding: const EdgeInsets.only(bottom: 8),
-              child: SignInButton(provider: e),
-            ),
-          )
-          .toList(),
+      children:
+          ProvidersEnum.values
+              .where((p) => (p != ProvidersEnum.apple || Platform.isIOS) && (p != ProvidersEnum.emailPassword))
+              .map((e) => Padding(padding: const EdgeInsets.only(bottom: 8), child: SignInButton(provider: e)))
+              .toList(),
     );
   }
 }

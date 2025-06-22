@@ -1,4 +1,3 @@
-
 import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
@@ -15,7 +14,7 @@ class AuthCubit extends SafeEmitterCubit<AuthState> {
   void init() {
     _authStateChangesUseCase().when(
       success: (_) => emit(const Authenticated()),
-      failure: (_) => emit(const Unauthenticated()),
+      error: (_) => emit(const Unauthenticated()),
     );
   }
 }

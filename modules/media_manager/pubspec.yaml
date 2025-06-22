@@ -18,22 +18,22 @@ dependencies:
   ui:
     path: ../ui
 
-  firebase_crashlytics: ^4.3.5
+  firebase_crashlytics: ^4.3.7
   get_it: ^8.0.3
   injectable: ^2.5.0
   equatable: ^2.0.7
   bloc: ^9.0.0
   flutter_bloc: ^9.1.1
   image_picker: ^1.1.2
-  firebase_storage: ^12.4.5
-  cloud_firestore: ^5.6.7
+  firebase_storage: ^12.4.7
+  cloud_firestore: ^5.6.9
   path: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^5.0.0
-  build_runner: ^2.4.15
+  flutter_lints: ^6.0.0
+  build_runner: ^2.5.3
   injectable_generator: ^2.7.0
 
 flutter:

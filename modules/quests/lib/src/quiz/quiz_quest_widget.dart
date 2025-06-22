@@ -28,10 +28,7 @@ class QuizQuestWidget extends StatelessWidget {
             listener: (context, state) {
               switch (state) {
                 case QuizAnswerLoading():
-                  LoaderOverlay.show(
-                    context,
-                    message: t.quests.active_quest.quiz.answer.evaluating,
-                  );
+                  LoaderOverlay.show(context, message: t.quests.active_quest.quiz.answer.evaluating);
                   break;
                 case QuizAnswerSent(isCorrect: _, points: _):
                   Navigator.pop(context);
@@ -42,19 +39,14 @@ class QuizQuestWidget extends StatelessWidget {
                             ? t.quests.active_quest.quiz.answer.correct(n: state.points)
                             : t.quests.active_quest.quiz.answer.incorrect,
                       ),
-                      backgroundColor: state.isCorrect
-                          ? appColors.success.seed
-                          : appColors.error.seed,
+                      backgroundColor: state.isCorrect ? appColors.success.seed : appColors.error.seed,
                     ),
                   );
                   break;
                 case QuizAnswerFailure():
                   Navigator.pop(context);
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(t.common.errors.generic_retry),
-                      backgroundColor: appColors.error.seed,
-                    ),
+                    SnackBar(content: Text(t.common.errors.generic_retry), backgroundColor: appColors.error.seed),
                   );
                   break;
                 case QuizActivationFailure():
@@ -73,9 +65,10 @@ class QuizQuestWidget extends StatelessWidget {
             builder: (context, state) {
               return switch (state) {
                 QuizNeedActivation() => const QuizScanView(),
-                QuizActive() => currentQuestState.activeQuest.quest.isMultipleChoice
-                    ? const MultipleChoiceWidget()
-                    : const SingleChoiceWidget(),
+                QuizActive() =>
+                  currentQuestState.activeQuest.quest.isMultipleChoice
+                      ? const MultipleChoiceWidget()
+                      : const SingleChoiceWidget(),
                 _ => const SizedBox(),
               };
             },

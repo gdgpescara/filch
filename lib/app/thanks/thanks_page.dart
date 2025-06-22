@@ -8,9 +8,7 @@ class ThanksPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Text(t.common.thanks, style: context.getTextTheme(TextThemeType.themeSpecific).bodyMedium),
-      ),
+      body: Center(child: Text(t.common.thanks, style: context.getTextTheme(TextThemeType.themeSpecific).bodyMedium)),
     );
   }
 }

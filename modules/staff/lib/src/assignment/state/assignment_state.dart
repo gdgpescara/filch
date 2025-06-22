@@ -8,9 +8,7 @@ sealed class AssignmentState extends Equatable {
 }
 
 class AssignmentInitial extends AssignmentState {
-  const AssignmentInitial([
-    this.scannedUsers = const [],
-  ]);
+  const AssignmentInitial([this.scannedUsers = const []]);
 
   final List<String> scannedUsers;
 

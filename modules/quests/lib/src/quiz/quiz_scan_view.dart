@@ -53,10 +53,7 @@ class QuizScanView extends StatelessWidget {
         onDetect: (capture) {
           final barcodes = capture.barcodes;
           if (barcodes.isNotEmpty && barcodes.first.rawValue != null) {
-            context.read<QuizCubit>().activateQuiz(
-                  currentQuestState.activeQuest.quest,
-                  barcodes.first.rawValue!,
-                );
+            context.read<QuizCubit>().activateQuiz(currentQuestState.activeQuest.quest, barcodes.first.rawValue!);
           }
         },
       ),

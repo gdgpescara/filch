@@ -1,2 +1,2 @@
-//GENERATED BARREL FILE 
-export 'sign_in_cubit.dart'; 
+//GENERATED BARREL FILE
+export 'sign_in_cubit.dart';

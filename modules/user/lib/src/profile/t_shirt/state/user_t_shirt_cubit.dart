@@ -11,9 +11,7 @@ part 'user_t_shirt_state.dart';
 
 @injectable
 class UserTShirtCubit extends SafeEmitterCubit<UserTShirtState> {
-  UserTShirtCubit(
-    this._tShirtPickUpStateUseCase,
-  ) : super(const UserTShirtLoading());
+  UserTShirtCubit(this._tShirtPickUpStateUseCase) : super(const UserTShirtLoading());
 
   final TShirtPickUpStateUseCase _tShirtPickUpStateUseCase;
 
@@ -29,7 +27,7 @@ class UserTShirtCubit extends SafeEmitterCubit<UserTShirtState> {
     _subscription = _tShirtPickUpStateUseCase().when(
       progress: () => emit(const UserTShirtLoading()),
       success: (value) => emit(UserTShirtLoaded(status: value)),
-      failure: (_) => emit(const UserTShirtFailure()),
+      error: (_) => emit(const UserTShirtFailure()),
     );
   }
 }

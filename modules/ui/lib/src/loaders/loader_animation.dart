@@ -10,9 +10,7 @@ class LoaderAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       label: t.common.semantics.loading,
-      child: CupertinoActivityIndicator(
-        color: context.colorScheme.primary,
-      ),
+      child: CupertinoActivityIndicator(color: context.colorScheme.primary),
     );
   }
 }

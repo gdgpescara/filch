@@ -17,11 +17,11 @@ class QuestWidget extends StatelessWidget {
   final ActiveQuest activeQuest;
 
   Widget get _specificQuestWidget => switch (activeQuest.quest.type) {
-        QuestTypeEnum.actor => const ActorQuestWidget(),
-        QuestTypeEnum.quiz => const QuizQuestWidget(),
-        QuestTypeEnum.social => const SocialQuestWidget(),
-        QuestTypeEnum.community => const CommunityQuestWidget(),
-      };
+    QuestTypeEnum.actor => const ActorQuestWidget(),
+    QuestTypeEnum.quiz => const QuizQuestWidget(),
+    QuestTypeEnum.social => const SocialQuestWidget(),
+    QuestTypeEnum.community => const CommunityQuestWidget(),
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +33,7 @@ class QuestWidget extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              if(activeQuest.quest.title != null) QuestTitleWidget(activeQuest.quest.title!),
+              if (activeQuest.quest.title != null) QuestTitleWidget(activeQuest.quest.title!),
               TimeRemaining(activeQuest),
               _specificQuestWidget,
               const SizedBox(height: Spacing.l),

@@ -9,9 +9,7 @@ part 'shifts_state.dart';
 
 @injectable
 class ShiftsCubit extends SafeEmitterCubit<ShiftsState> {
-  ShiftsCubit(
-    this._getFilteredShiftsUseCase,
-  ) : super(const ShiftsLoading());
+  ShiftsCubit(this._getFilteredShiftsUseCase) : super(const ShiftsLoading());
 
   final GetFilteredShiftsUseCase _getFilteredShiftsUseCase;
 
@@ -19,7 +17,7 @@ class ShiftsCubit extends SafeEmitterCubit<ShiftsState> {
     _getFilteredShiftsUseCase().when(
       progress: () => emit(const ShiftsLoading()),
       success: (shifts) => emit(ShiftsLoaded(shifts)),
-      failure: (_) => emit(const ShiftsFailure()),
+      error: (_) => emit(const ShiftsFailure()),
     );
   }
 }

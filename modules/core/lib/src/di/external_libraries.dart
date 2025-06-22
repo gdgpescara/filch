@@ -40,5 +40,4 @@ abstract class ExternalLibraries {
 
   @lazySingleton
   ShorebirdUpdater get shorebirdUpdater => ShorebirdUpdater();
-  
 }

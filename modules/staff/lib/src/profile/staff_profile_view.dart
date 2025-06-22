@@ -39,11 +39,7 @@ class StaffProfileView extends StatelessWidget {
             body: ListView(
               padding: const EdgeInsets.all(20).copyWith(bottom: 20 + kBottomNavigationBarHeight),
               shrinkWrap: true,
-              children: [
-                UserPicture(imageUrl: state.user?.photoURL),
-                const SizedBox(height: 20),
-                UserInfo(state.user),
-              ],
+              children: [UserPicture(imageUrl: state.user?.photoURL), const SizedBox(height: 20), UserInfo(state.user)],
             ),
           );
         },

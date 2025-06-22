@@ -7,7 +7,7 @@ class HasSignedUserUseCase {
 
   final FirebaseAuth _auth;
 
-  bool call() {
-    return _auth.currentUser != null && _auth.currentUser?.getIdToken() != null;
+  Future<bool> call() async {
+    return _auth.currentUser != null && (await _auth.currentUser?.getIdToken()) != null;
   }
 }

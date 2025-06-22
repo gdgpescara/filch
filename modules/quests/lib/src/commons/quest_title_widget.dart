@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-
 class QuestTitleWidget extends StatelessWidget {
   const QuestTitleWidget(this.title, {super.key});
 

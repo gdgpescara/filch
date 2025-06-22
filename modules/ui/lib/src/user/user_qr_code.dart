@@ -17,11 +17,7 @@ class UserQrCode extends StatelessWidget {
     if (user == null) {
       return '';
     }
-    return jsonEncode({
-      'uid': user!.uid,
-      'displayName': user!.displayName,
-      'email': user!.email,
-    });
+    return jsonEncode({'uid': user!.uid, 'displayName': user!.displayName, 'email': user!.email});
   }
 
   @override
@@ -32,11 +28,7 @@ class UserQrCode extends StatelessWidget {
         children: [
           Align(
             alignment: Alignment.bottomCenter,
-            child: SvgPicture.asset(
-              'images/lines.svg',
-              package: 'assets',
-              excludeFromSemantics: true,
-            ),
+            child: SvgPicture.asset('images/lines.svg', package: 'assets', excludeFromSemantics: true),
           ),
           Align(
             alignment: Alignment.topCenter,
@@ -49,10 +41,7 @@ class UserQrCode extends StatelessWidget {
                   dataModuleShape: QrDataModuleShape.square,
                   color: context.colorScheme.onSurface,
                 ),
-                eyeStyle: QrEyeStyle(
-                  color: context.colorScheme.onSurface,
-                  eyeShape: QrEyeShape.square,
-                ),
+                eyeStyle: QrEyeStyle(color: context.colorScheme.onSurface, eyeShape: QrEyeShape.square),
               ),
             ),
           ),

@@ -34,17 +34,17 @@ class RankingCard extends StatelessWidget {
               overflow: TextOverflow.ellipsis,
               text: TextSpan(
                 text: '$position ',
-                style: context.getTextTheme(TextThemeType.themeSpecific).displaySmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: _textColor(context),
-                    ),
+                style: context
+                    .getTextTheme(TextThemeType.themeSpecific)
+                    .displaySmall
+                    ?.copyWith(fontWeight: FontWeight.bold, color: _textColor(context)),
                 children: [
                   TextSpan(
                     text: item.displayName ?? item.email,
                     style: context.getTextTheme().titleLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: _textColor(context),
-                        ),
+                      fontWeight: FontWeight.bold,
+                      color: _textColor(context),
+                    ),
                   ),
                 ],
               ),
@@ -52,9 +52,7 @@ class RankingCard extends StatelessWidget {
             RichText(
               text: TextSpan(
                 text: t.quests.ranking.points.label(n: item.points),
-                style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(
-                      color: _textColor(context),
-                    ),
+                style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(color: _textColor(context)),
                 children: [
                   TextSpan(
                     text: '${item.points}',
@@ -74,10 +72,10 @@ class RankingCard extends StatelessWidget {
   }
 
   Color _textColor(BuildContext context) {
-    if(position == 1) {
+    if (position == 1) {
       return appColors.appYellow.seed;
     }
-    if(isUser) {
+    if (isUser) {
       return context.colorScheme.tertiary;
     }
     return context.colorScheme.onSurface;

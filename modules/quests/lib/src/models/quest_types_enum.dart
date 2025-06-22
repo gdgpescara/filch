@@ -1,6 +1,1 @@
-enum QuestTypeEnum {
-  actor,
-  quiz,
-  social,
-  community;
-}
+enum QuestTypeEnum { actor, quiz, social, community }

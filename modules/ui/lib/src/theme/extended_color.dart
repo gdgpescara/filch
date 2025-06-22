@@ -218,13 +218,9 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
 }
 
 class CustomColor extends ThemeExtension<CustomColor> {
-  const CustomColor({
-    required this.seed,
-    required this.value,
-    required ColorFamily light,
-    required ColorFamily dark,
-  })  : _light = light,
-        _dark = dark;
+  const CustomColor({required this.seed, required this.value, required ColorFamily light, required ColorFamily dark})
+    : _light = light,
+      _dark = dark;
 
   final Color seed;
   final Color value;
@@ -234,12 +230,7 @@ class CustomColor extends ThemeExtension<CustomColor> {
   ColorFamily brightnessColor(BuildContext context) => context.brightness == Brightness.light ? _light : _dark;
 
   @override
-  ThemeExtension<CustomColor> copyWith({
-    Color? seed,
-    Color? value,
-    ColorFamily? light,
-    ColorFamily? dark,
-  }) {
+  ThemeExtension<CustomColor> copyWith({Color? seed, Color? value, ColorFamily? light, ColorFamily? dark}) {
     return CustomColor(
       seed: seed ?? this.seed,
       value: value ?? this.value,
@@ -276,12 +267,7 @@ class ColorFamily extends ThemeExtension<ColorFamily> {
   final Color onColorContainer;
 
   @override
-  ThemeExtension<ColorFamily> copyWith({
-    Color? color,
-    Color? onColor,
-    Color? colorContainer,
-    Color? onColorContainer,
-  }) {
+  ThemeExtension<ColorFamily> copyWith({Color? color, Color? onColor, Color? colorContainer, Color? onColorContainer}) {
     return ColorFamily(
       color: color ?? this.color,
       onColor: onColor ?? this.onColor,

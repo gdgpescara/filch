@@ -36,7 +36,7 @@ class BootstrapCubit extends Cubit<BootstrapState> {
 
   Future<void> init() async {
     await Future<void>.delayed(const Duration(seconds: 1));
-    if (!_hasSignedUserUseCase()) {
+    if (!await _hasSignedUserUseCase()) {
       await _subscription?.cancel();
       emit(const UserLoggedOut());
       return;
@@ -64,7 +64,7 @@ class BootstrapCubit extends Cubit<BootstrapState> {
         }
         emit(const AppCanRun());
       },
-      failure: (_) => emit(const AppCanRun()),
+      error: (_) => emit(const AppCanRun()),
     );
   }
 }

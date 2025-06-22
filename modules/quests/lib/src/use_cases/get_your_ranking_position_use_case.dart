@@ -5,24 +5,19 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class GetYourRankingPositionUseCase {
-  GetYourRankingPositionUseCase(
-    this._firestore,
-    this._getSignedUserUseCase,
-  );
+  GetYourRankingPositionUseCase(this._firestore, this._getSignedUserUseCase);
 
   final FirebaseFirestore _firestore;
   final GetSignedUserUseCase _getSignedUserUseCase;
 
   Stream<int?> call() {
     return runSafetyStream(() async* {
-      yield* _firestore.collection('users').orderBy('points', descending: true).snapshots().map(
-        (snapshot) {
-          final docs = snapshot.docs;
-          final user = _getSignedUserUseCase();
-          final userIndex = docs.indexWhere((doc) => doc.id == user?.uid);
-          return userIndex == -1 ? null : userIndex + 1;
-        },
-      );
+      yield* _firestore.collection('users').orderBy('points', descending: true).snapshots().map((snapshot) {
+        final docs = snapshot.docs;
+        final user = _getSignedUserUseCase();
+        final userIndex = docs.indexWhere((doc) => doc.id == user?.uid);
+        return userIndex == -1 ? null : userIndex + 1;
+      });
     });
   }
 }

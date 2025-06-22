@@ -12,10 +12,7 @@ import 'widgets/scanned_items.dart';
 import 'widgets/scanner_widget.dart';
 
 class AssignmentPage extends StatelessWidget {
-  const AssignmentPage({
-    super.key,
-    required this.args,
-  });
+  const AssignmentPage({super.key, required this.args});
 
   final AssignmentPageArgs args;
 
@@ -32,10 +29,7 @@ class AssignmentPage extends StatelessWidget {
             case AssignFailure():
               LoaderOverlay.hide(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(t.staff.point_assignment.page.error),
-                  backgroundColor: appColors.error.seed,
-                ),
+                SnackBar(content: Text(t.staff.point_assignment.page.error), backgroundColor: appColors.error.seed),
               );
               break;
             case Assigned():
@@ -64,25 +58,15 @@ class AssignmentPage extends StatelessWidget {
             backgroundColor: Colors.transparent,
             extendBodyBehindAppBar: true,
             extendBody: true,
-            appBar: AppBar(
-              title: Text(t.staff.point_assignment.page.title),
-            ),
+            appBar: AppBar(title: Text(t.staff.point_assignment.page.title)),
             body: const SafeArea(
               child: Column(
-                children: [
-                  SizedBox(height: Spacing.xl),
-                  ScannerWidget(),
-                  SizedBox(height: Spacing.l),
-                  ScannedItems(),
-                ],
+                children: [SizedBox(height: Spacing.xl), ScannerWidget(), SizedBox(height: Spacing.l), ScannedItems()],
               ),
             ),
             bottomNavigationBar: SafeArea(
               top: false,
-              child: Padding(
-                padding: const EdgeInsets.all(Spacing.l),
-                child: AssignPointsButton(args: args),
-              ),
+              child: Padding(padding: const EdgeInsets.all(Spacing.l), child: AssignPointsButton(args: args)),
             ),
           ),
         ),
@@ -94,16 +78,12 @@ class AssignmentPage extends StatelessWidget {
 @immutable
 class AssignmentPageArgs {
   const AssignmentPageArgs.points(this.points, {this.onAssignDone})
-      : questId = null,
-        questType = null,
-        type = PointsTypeEnum.staff;
+    : questId = null,
+      questType = null,
+      type = PointsTypeEnum.staff;
 
-  const AssignmentPageArgs.quest({
-    this.questId,
-    required this.questType,
-    required this.points,
-    this.onAssignDone,
-  }) : type = PointsTypeEnum.quest;
+  const AssignmentPageArgs.quest({this.questId, required this.questType, required this.points, this.onAssignDone})
+    : type = PointsTypeEnum.quest;
 
   final int points;
   final String? questId;

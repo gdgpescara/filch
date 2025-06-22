@@ -37,15 +37,16 @@ class SignInButton extends StatelessWidget {
   }
 
   Widget get _providerLoading => BlocSelector<SignInCubit, SignInState, bool>(
-        selector: (state) => state is SignInLoading && state.provider == provider,
-        builder: (context, showLoader) {
-          return showLoader
-              ? const SizedBox(width: 10, height: 10, child: CircularProgressIndicator())
-              : const SizedBox.shrink();
-        },
-      );
+    selector: (state) => state is SignInLoading && state.provider == provider,
+    builder: (context, showLoader) {
+      return showLoader
+          ? const SizedBox(width: 10, height: 10, child: CircularProgressIndicator())
+          : const SizedBox.shrink();
+    },
+  );
 
-  String get _providerName => {
+  String get _providerName =>
+      {
         ProvidersEnum.google: t.auth.sign_in_providers.google,
         ProvidersEnum.apple: t.auth.sign_in_providers.apple,
         ProvidersEnum.emailPassword: t.auth.staff_sign_in.sign_in,

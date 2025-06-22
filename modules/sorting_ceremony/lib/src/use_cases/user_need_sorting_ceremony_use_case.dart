@@ -4,19 +4,15 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 import '../../sorting_ceremony.dart';
 
-
 @lazySingleton
 class UserNeedSortingCeremonyUseCase {
-  UserNeedSortingCeremonyUseCase(
-    this._auth,
-    this._signOutUseCase,
-  );
+  UserNeedSortingCeremonyUseCase(this._auth, this._signOutUseCase);
 
   final FirebaseAuth _auth;
   final SignOutUseCase _signOutUseCase;
 
   Future<bool> call() async {
-    if(!sortingCeremonyEnabled) {
+    if (!sortingCeremonyEnabled) {
       return false;
     }
     return runSafetyFuture(
@@ -24,9 +20,9 @@ class UserNeedSortingCeremonyUseCase {
         final idToken = await _auth.currentUser!.getIdTokenResult(true);
         return !(idToken.claims?.containsKey('team') ?? true);
       },
-      onException: (e) {
+      onError: (e) {
         _signOutUseCase();
-        return Failure.genericFromException(e);
+        return e;
       },
     );
   }

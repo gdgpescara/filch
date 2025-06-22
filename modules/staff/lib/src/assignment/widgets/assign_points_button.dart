@@ -18,14 +18,15 @@ class AssignPointsButton extends StatelessWidget {
       selector: (state) => state is AssignmentInitial ? state.scannedUsers : [],
       builder: (context, users) {
         return ElevatedButton(
-          onPressed: users.isNotEmpty
-              ? () => context.read<AssignmentCubit>().assign(
+          onPressed:
+              users.isNotEmpty
+                  ? () => context.read<AssignmentCubit>().assign(
                     points: args.points,
                     quest: args.questId,
                     type: args.type,
                     users: users.map((e) => (jsonDecode(e) as Map<String, dynamic>)['uid'] as String).toList(),
                   )
-              : null,
+                  : null,
           child: Text(t.staff.point_assignment.page.assign_button),
         );
       },

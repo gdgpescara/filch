@@ -1,4 +1,4 @@
-//GENERATED BARREL FILE 
+//GENERATED BARREL FILE
 export 'apple_sign_in_use_case.dart';
 export 'auth_state_changes_use_case.dart';
 export 'get_signed_user_use_case.dart';

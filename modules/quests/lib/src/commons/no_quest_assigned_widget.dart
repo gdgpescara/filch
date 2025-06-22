@@ -14,10 +14,7 @@ class NoQuestAssignedWidget extends StatelessWidget {
       children: [
         Padding(
           padding: const EdgeInsets.all(20),
-          child: Text(
-            t.quests.active_quest.no_quest_assigned,
-            textAlign: TextAlign.center,
-          ),
+          child: Text(t.quests.active_quest.no_quest_assigned, textAlign: TextAlign.center),
         ),
         const SizedBox(height: 20),
         ElevatedButton(

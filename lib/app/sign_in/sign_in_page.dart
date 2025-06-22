@@ -9,8 +9,6 @@ class SignInPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return auth.SignInPage(
-      onSignedInNavigateTo: () => Routefly.navigate(routePaths.path),
-    );
+    return auth.SignInPage(onSignedInNavigateTo: () => Routefly.navigate(routePaths.path));
   }
 }

@@ -26,14 +26,9 @@ class _AppVersionState extends State<AppVersion> {
     _shorebirdUpdater.readCurrentPatch().then((patch) {
       setState(() {
         if (patch != null) {
-          _version = t.common.app_version.with_patch(
-            version: packageInfo.version,
-            patch: patch,
-          );
+          _version = t.common.app_version.with_patch(version: packageInfo.version, patch: patch);
         } else {
-          _version = t.common.app_version.without_patch(
-            version: packageInfo.version,
-          );
+          _version = t.common.app_version.without_patch(version: packageInfo.version);
         }
       });
     });
@@ -71,25 +66,19 @@ class _AppVersionState extends State<AppVersion> {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Expanded(
-          child: Text(_version, style: context.getTextTheme().bodySmall),
-        ),
+        Expanded(child: Text(_version, style: context.getTextTheme().bodySmall)),
         if (_newVersionAvailable)
           Expanded(
             child: Text(
               t.common.app_version.new_patch_available_to_download,
-              style: context.getTextTheme().bodySmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
         if (_updateError)
           Expanded(
             child: Text(
               t.common.app_version.update_error,
-              style: context.getTextTheme().bodySmall?.copyWith(
-                fontWeight: FontWeight.bold,
-              ),
+              style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
             ),
           ),
       ],

@@ -12,9 +12,7 @@ final class UserTShirtLoading extends UserTShirtState {
 }
 
 final class UserTShirtLoaded extends UserTShirtState {
-  const UserTShirtLoaded({
-    this.status = TShirtPickUpState.none,
-  });
+  const UserTShirtLoaded({this.status = TShirtPickUpState.none});
 
   final TShirtPickUpState status;
 
