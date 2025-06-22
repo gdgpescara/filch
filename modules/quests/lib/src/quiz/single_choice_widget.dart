@@ -41,7 +41,10 @@ class _SingleChoiceWidgetState extends State<SingleChoiceWidget> {
                   children: [
                     Text(
                       t.quests.active_quest.quiz.answer_option.label,
-                      style:context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: context
+                          .getTextTheme(TextThemeType.monospace)
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
                     for (final answer in answers)

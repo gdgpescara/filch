@@ -9,12 +9,7 @@ class Logo extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          'logo/logo.png',
-          package: 'assets',
-          height: 100,
-          semanticLabel: t.devfest2024.semantic.logo,
-        ),
+        Image.asset('logo/logo.png', package: 'assets', height: 100, semanticLabel: t.devfest2024.semantic.logo),
       ],
     );
   }

@@ -14,10 +14,7 @@ class ScannerWidget extends StatelessWidget {
       width: MediaQuery.sizeOf(context).width * 0.65,
       height: MediaQuery.sizeOf(context).width * 0.65,
       clipBehavior: Clip.hardEdge,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(16),
-        color: Colors.white,
-      ),
+      decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.white),
       child: MobileScanner(
         controller: MobileScannerController(
           detectionSpeed: DetectionSpeed.noDuplicates,

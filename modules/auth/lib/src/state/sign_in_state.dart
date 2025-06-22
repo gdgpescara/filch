@@ -16,9 +16,6 @@ class SignInWithUserPassword extends SignInState {
 
 sealed class SignInActionsState extends SignInState {
   const SignInActionsState();
-
-  @override
-  List<Object> get props => [];
 }
 
 class SignInLoading extends SignInActionsState {
@@ -27,21 +24,21 @@ class SignInLoading extends SignInActionsState {
   final ProvidersEnum? provider;
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [provider];
 }
 
 class SignInSuccess extends SignInActionsState {
   const SignInSuccess();
 
   @override
-  List<Object> get props => [];
+  List<Object?> get props => [];
 }
 
 class SignInFailure extends SignInActionsState {
   const SignInFailure({required this.failure});
 
-  final Failure failure;
+  final CustomError failure;
 
   @override
-  List<Object> get props => [failure];
+  List<Object?> get props => [failure];
 }

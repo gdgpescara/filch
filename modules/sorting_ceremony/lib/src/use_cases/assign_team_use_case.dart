@@ -4,25 +4,15 @@ import 'package:injectable/injectable.dart';
 
 @lazySingleton
 class AssignTeamUseCase {
-  AssignTeamUseCase(
-    this._functions,
-  );
+  AssignTeamUseCase(this._functions);
 
   final FirebaseFunctions _functions;
 
   Future<String> call() async {
-    return runSafetyFuture(
-      () async {
-        const url = String.fromEnvironment('SORTING_CEREMONY_URL');
-        final result = await _functions.httpsCallableFromUrl(url).call<String>();
-        return result.data;
-      },
-      onException: (e) {
-        if (e is FirebaseFunctionsException) {
-          return FirebaseFunctionsFailure(e);
-        }
-        return Failure.genericFromException(e);
-      },
-    );
+    return runSafetyFuture(() async {
+      const url = String.fromEnvironment('SORTING_CEREMONY_URL');
+      final result = await _functions.httpsCallableFromUrl(url).call<String>();
+      return result.data;
+    }, onError: onFirebaseFunctionError);
   }
 }

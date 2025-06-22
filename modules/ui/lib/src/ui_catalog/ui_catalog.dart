@@ -34,9 +34,5 @@ class UiCatalog extends StatelessWidget {
     );
   }
 
-  static const List<Widget> _space = [
-      Gap.vertical(Spacing.l),
-      Divider(),
-      Gap.vertical(Spacing.l),
-    ];
+  static const List<Widget> _space = [Gap.vertical(Spacing.l), Divider(), Gap.vertical(Spacing.l)];
 }

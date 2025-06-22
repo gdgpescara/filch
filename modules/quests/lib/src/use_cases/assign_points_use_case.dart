@@ -16,23 +16,15 @@ class AssignPointsUseCase {
     required PointsTypeEnum pointsType,
     String? quest,
   }) {
-    return runSafetyFuture(
-      () async {
-        const url = String.fromEnvironment('ASSIGN_POINTS_URL');
-        final result = await _functions.httpsCallableFromUrl(url).call<bool>({
-          'points': points,
-          'users': users,
-          'quest': quest,
-          'type': pointsType.name,
-        });
-        return result.data;
-      },
-      onException: (e) {
-        if (e is FirebaseFunctionsException) {
-          return FirebaseFunctionsFailure(e);
-        }
-        return Failure.genericFromException(e);
-      },
-    );
+    return runSafetyFuture(() async {
+      const url = String.fromEnvironment('ASSIGN_POINTS_URL');
+      final result = await _functions.httpsCallableFromUrl(url).call<bool>({
+        'points': points,
+        'users': users,
+        'quest': quest,
+        'type': pointsType.name,
+      });
+      return result.data;
+    }, onError: onFirebaseFunctionError);
   }
 }

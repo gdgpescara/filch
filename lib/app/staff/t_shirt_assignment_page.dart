@@ -7,6 +7,6 @@ class TShirtAssignmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TShirtAssignment(onDone: Routefly.pop<void>,);
+    return TShirtAssignment(onDone: Routefly.pop<void>);
   }
 }

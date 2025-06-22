@@ -36,14 +36,8 @@ class _GiveUpDialog extends StatelessWidget {
       title: Text(t.quests.active_quest.give_up.title),
       content: Text(t.quests.active_quest.give_up.content),
       actions: [
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(false),
-          child: Text(t.common.buttons.cancel),
-        ),
-        TextButton(
-          onPressed: () => Navigator.of(context).pop(true),
-          child: Text(t.common.buttons.confirm),
-        ),
+        TextButton(onPressed: () => Navigator.of(context).pop(false), child: Text(t.common.buttons.cancel)),
+        TextButton(onPressed: () => Navigator.of(context).pop(true), child: Text(t.common.buttons.confirm)),
       ],
     );
   }

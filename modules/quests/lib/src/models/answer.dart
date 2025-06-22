@@ -5,11 +5,7 @@ part 'answer.g.dart';
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class Answer extends Equatable {
-  const Answer({
-    required this.id,
-    required this.text,
-    required this.isCorrect,
-  });
+  const Answer({required this.id, required this.text, required this.isCorrect});
 
   factory Answer.fromJson(Map<String, dynamic> json) => _$AnswerFromJson(json);
 

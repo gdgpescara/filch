@@ -5,11 +5,7 @@ import 'package:path/path.dart';
 
 @lazySingleton
 class MoveFileUseCase {
-  Future<String> call({
-    required String srcPath,
-    required String destDir,
-    String? fileName,
-  }) async {
+  Future<String> call({required String srcPath, required String destDir, String? fileName}) async {
     final dir = Directory(destDir);
     final appStorageDir = !dir.existsSync() ? await dir.create() : dir;
     final srcFile = File(srcPath);

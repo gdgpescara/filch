@@ -27,10 +27,7 @@ class Application extends StatefulWidget {
 class _ApplicationState extends State<Application> {
   late StreamSubscription<RemoteMessage> _subscription;
 
-  final _router = Routefly.routerConfig(
-    routes: routes,
-    routeBuilder: routeBuilder,
-  );
+  final _router = Routefly.routerConfig(routes: routes, routeBuilder: routeBuilder);
 
   @override
   void initState() {
@@ -38,10 +35,7 @@ class _ApplicationState extends State<Application> {
     GetIt.I<UploadFcmTokenUseCase>()();
     _subscription = FirebaseMessaging.onMessage.listen((message) {
       if (message.notification != null) {
-        Routefly.pushNavigate(
-          routePaths.notification,
-          arguments: message.notification,
-        );
+        Routefly.pushNavigate(routePaths.notification, arguments: message.notification);
       }
     });
   }

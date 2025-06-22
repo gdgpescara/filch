@@ -18,11 +18,12 @@ class RankingList extends StatelessWidget {
             padding: _padding(state.isUserInRanking),
             itemCount: state.items.length,
             separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),
-            itemBuilder: (context, index) => RankingCard(
-              item: state.items[index],
-              position: index + 1,
-              isUser: state.items[index].uid == state.userUid,
-            ),
+            itemBuilder:
+                (context, index) => RankingCard(
+                  item: state.items[index],
+                  position: index + 1,
+                  isUser: state.items[index].uid == state.userUid,
+                ),
           );
 
           if (state.rankingFreezed) {
@@ -38,7 +39,7 @@ class RankingList extends StatelessWidget {
   EdgeInsets _padding(bool isUserInRanking) {
     const padding = EdgeInsets.all(Spacing.m);
     if (!isUserInRanking) {
-      return padding.copyWith(bottom: Spacing.m + ( 115 + Spacing.s * 2));
+      return padding.copyWith(bottom: Spacing.m + (115 + Spacing.s * 2));
     }
     return padding;
   }

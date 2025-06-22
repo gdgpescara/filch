@@ -6,14 +6,10 @@ TextTheme _themeSpecificTextTheme(TextTheme textTheme) => GoogleFonts.orbitronTe
 
 TextTheme _monospaceTextTheme(TextTheme textTheme) => GoogleFonts.jetBrainsMonoTextTheme(textTheme);
 
-enum TextThemeType {
-  normal,
-  themeSpecific,
-  monospace,
-}
+enum TextThemeType { normal, themeSpecific, monospace }
 
 extension GetTextTheme on ThemeData {
-  TextTheme getTextTheme([TextThemeType type = TextThemeType.normal]) => switch(type) {
+  TextTheme getTextTheme([TextThemeType type = TextThemeType.normal]) => switch (type) {
     TextThemeType.themeSpecific => _themeSpecificTextTheme(textTheme),
     TextThemeType.monospace => _monospaceTextTheme(textTheme),
     TextThemeType.normal => _textTheme(textTheme),

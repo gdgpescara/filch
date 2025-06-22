@@ -40,16 +40,9 @@ class RankingPage extends StatelessWidget {
               child: switch (state) {
                 YourRankingLoading() => const LoaderAnimation(),
                 YourRankingLoaded(item: final item, position: final position) => DecoratedBox(
-                    decoration: BoxDecoration(
-                      color: context.colorScheme.tertiary.withValues(alpha: .2),
-                    ),
-                    child: RankingCard(
-                      item: item,
-                      position: position,
-                      isUser: true,
-                      style: AppCardStyle.caption,
-                    ),
-                  ),
+                  decoration: BoxDecoration(color: context.colorScheme.tertiary.withValues(alpha: .2)),
+                  child: RankingCard(item: item, position: position, isUser: true, style: AppCardStyle.caption),
+                ),
                 YourRankingFailure() => Text(t.common.errors.generic_retry),
                 _ => const SizedBox.shrink(),
               },

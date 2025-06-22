@@ -18,7 +18,7 @@ class PhotoButtonCubit extends Cubit<PhotoButtonState> {
     this._takePhotoUseCase,
     this._moveFileUseCase,
     this._addPhotoToUploadQueueUseCase,
-      @Named('documentDirectory') this._documentDirectory,
+    @Named('documentDirectory') this._documentDirectory,
   ) : super(const PhotoButtonInitial());
 
   final Directory _documentDirectory;
@@ -37,7 +37,7 @@ class PhotoButtonCubit extends Cubit<PhotoButtonState> {
           emit(const PhotoButtonInitial());
         }
       },
-      failure: (_) => emit(const PhotoButtonInitial()),
+      error: (_) => emit(const PhotoButtonInitial()),
     );
   }
 

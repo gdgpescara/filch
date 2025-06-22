@@ -16,10 +16,7 @@ class ContainersSection extends StatelessWidget {
         const Gap.vertical(Spacing.m),
         const SubHeading(text: 'light'),
         const Gap.vertical(Spacing.s),
-        const AppCard(
-          style: AppCardStyle.normal,
-          child: SizedBox(width: double.infinity, height: 300),
-        ),
+        const AppCard(style: AppCardStyle.normal, child: SizedBox(width: double.infinity, height: 300)),
         const Gap.vertical(Spacing.m),
         const SubHeading(text: 'dark'),
         const Gap.vertical(Spacing.s),
@@ -41,16 +38,11 @@ class ContainersSection extends StatelessWidget {
         const Gap.vertical(Spacing.m),
         const SubHeading(text: 'light'),
         const Gap.vertical(Spacing.s),
-        const BlurContainer(
-          child: SizedBox(width: double.infinity, height: 300),
-        ),
+        const BlurContainer(child: SizedBox(width: double.infinity, height: 300)),
         const Gap.vertical(Spacing.m),
         const SubHeading(text: 'dark'),
         const Gap.vertical(Spacing.s),
-        const BlurContainer(
-          brightness: Brightness.dark,
-          child: SizedBox(width: double.infinity, height: 300),
-        ),
+        const BlurContainer(brightness: Brightness.dark, child: SizedBox(width: double.infinity, height: 300)),
         const Gap.vertical(Spacing.l),
         const Heading(text: 'Remove focus container'),
         const Gap.vertical(Spacing.m),
@@ -58,11 +50,7 @@ class ContainersSection extends StatelessWidget {
           child: SizedBox(
             width: double.infinity,
             height: 300,
-            child: Center(
-              child: ReactiveTextField(
-                formControl: FormControl<String>(),
-              ),
-            ),
+            child: Center(child: ReactiveTextField(formControl: FormControl<String>())),
           ),
         ),
       ],

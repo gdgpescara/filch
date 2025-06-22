@@ -1,7 +1,6 @@
 include: package:flutter_lints/flutter.yaml
 
 analyzer:
-
   language:
     strict-casts: true
     strict-inference: true
@@ -12,11 +11,11 @@ analyzer:
     missing_return: error
 
   exclude:
-    - '**/*.g.dart'
-    - '**/*.mocks.dart'
-    - '**/*.config.dart'
-    - '**/*.route.dart'
-    - '**/firebase_options.dart'
+    - "**/*.g.dart"
+    - "**/*.mocks.dart"
+    - "**/*.config.dart"
+    - "**/*.route.dart"
+    - "**/firebase_options.dart"
 
 linter:
   rules:

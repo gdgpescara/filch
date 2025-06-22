@@ -1,5 +1,1 @@
-enum TShirtPickUpState {
-  none,
-  requested,
-  pickedUp;
-}
+enum TShirtPickUpState { none, requested, pickedUp }

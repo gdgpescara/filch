@@ -9,12 +9,7 @@ part 'points.g.dart';
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class Points extends Equatable {
-  const Points({
-    required this.type,
-    required this.points,
-    required this.assignedBy,
-    required this.assignedAt,
-  });
+  const Points({required this.type, required this.points, required this.assignedBy, required this.assignedAt});
 
   factory Points.fromJson(Map<String, dynamic> json) => _$PointsFromJson(json);
 
@@ -28,10 +23,5 @@ class Points extends Equatable {
   Map<String, dynamic> toJson() => _$PointsToJson(this);
 
   @override
-  List<Object?> get props => [
-        type,
-        points,
-        assignedBy,
-        assignedAt,
-      ];
+  List<Object?> get props => [type, points, assignedBy, assignedAt];
 }

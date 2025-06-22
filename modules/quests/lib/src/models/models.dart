@@ -1,4 +1,4 @@
-//GENERATED BARREL FILE 
+//GENERATED BARREL FILE
 export 'active_quest.dart';
 export 'answer.dart';
 export 'assignable_points.dart';

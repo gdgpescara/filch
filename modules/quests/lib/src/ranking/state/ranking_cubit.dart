@@ -39,7 +39,7 @@ class RankingCubit extends SafeEmitterCubit<RankingState> {
     _subscriptions.add(
       _isRankingFreezedUseCase().when(
         progress: () => emit(const RankingLoading()),
-        failure: (_) => emit(const RankingFailure()),
+        error: (_) => emit(const RankingFailure()),
         success: loadItems,
       ),
     );
@@ -55,9 +55,16 @@ class RankingCubit extends SafeEmitterCubit<RankingState> {
           if (!userInList) {
             loadYourItem();
           }
-          emit(RankingLoaded(items: items, userUid: user!.uid, rankingFreezed: rankingFreezed, isUserInRanking: userInList));
+          emit(
+            RankingLoaded(
+              items: items,
+              userUid: user!.uid,
+              rankingFreezed: rankingFreezed,
+              isUserInRanking: userInList,
+            ),
+          );
         },
-        failure: (_) => emit(const RankingFailure()),
+        error: (_) => emit(const RankingFailure()),
       ),
     );
   }
@@ -78,7 +85,7 @@ class RankingCubit extends SafeEmitterCubit<RankingState> {
             emit(const YourRankingNotInRanking());
           }
         },
-        failure: (_) => emit(const YourRankingFailure()),
+        error: (_) => emit(const YourRankingFailure()),
       ),
     );
   }

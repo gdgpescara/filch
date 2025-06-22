@@ -16,16 +16,10 @@ class UserInfo extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (user?.displayName != null && user?.displayName != '') ...[
-          LabelValue(
-            label: t.profile.user_info.name.label,
-            value: user?.displayName,
-          ),
+          LabelValue(label: t.profile.user_info.name.label, value: user?.displayName),
           const SizedBox(height: Spacing.m),
         ],
-        LabelValue(
-          label: t.profile.user_info.email.label,
-          value: user?.email,
-        ),
+        LabelValue(label: t.profile.user_info.email.label, value: user?.email),
         extra ?? const SizedBox.shrink(),
       ],
     );

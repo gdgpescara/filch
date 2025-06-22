@@ -4,7 +4,6 @@ import 'package:path/path.dart' as p;
 
 import '../../core.dart';
 
-
 extension $File on File {
   String get sizeInMb => FileUnitOfMeasure.megabyte.convert(lengthSync()).toStringWholeNumber;
 

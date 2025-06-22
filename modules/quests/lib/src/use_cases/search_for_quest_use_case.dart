@@ -7,31 +7,20 @@ import 'get_signed_user_active_quest_use_case.dart';
 
 @lazySingleton
 class SearchForQuestUseCase {
-  SearchForQuestUseCase(
-    this._functions,
-    this._getSignedUserActiveQuestUseCase,
-  );
+  SearchForQuestUseCase(this._functions, this._getSignedUserActiveQuestUseCase);
 
   final FirebaseFunctions _functions;
   final GetSignedUserActiveQuestUseCase _getSignedUserActiveQuestUseCase;
 
   Future<ActiveQuest> call() {
-    return runSafetyFuture(
-      () async {
-        const url = String.fromEnvironment('SEARCH_FOR_QUEST_URL');
-        await _functions.httpsCallableFromUrl(url).call<void>();
-        final activeQuest = await _getSignedUserActiveQuestUseCase().first;
-        if (activeQuest == null) {
-          throw NotFoundFailure();
-        }
-        return activeQuest;
-      },
-      onException: (e) {
-        if (e is FirebaseFunctionsException) {
-          return FirebaseFunctionsFailure(e);
-        }
-        return Failure.genericFromException(e);
-      },
-    );
+    return runSafetyFuture(() async {
+      const url = String.fromEnvironment('SEARCH_FOR_QUEST_URL');
+      await _functions.httpsCallableFromUrl(url).call<void>();
+      final activeQuest = await _getSignedUserActiveQuestUseCase().first;
+      if (activeQuest == null) {
+        throw NotFoundError();
+      }
+      return activeQuest;
+    }, onError: onFirebaseFunctionError);
   }
 }

@@ -16,12 +16,8 @@ class StaffSignIn extends StatefulWidget {
 
 class _StaffSignInState extends State<StaffSignIn> {
   final _form = FormGroup({
-    'email': FormControl<String>(
-      validators: [Validators.required, Validators.email],
-    ),
-    'password': FormControl<String>(
-      validators: [Validators.required, Validators.minLength(6)],
-    ),
+    'email': FormControl<String>(validators: [Validators.required, Validators.email]),
+    'password': FormControl<String>(validators: [Validators.required, Validators.minLength(6)]),
   });
 
   @override
@@ -34,9 +30,7 @@ class _StaffSignInState extends State<StaffSignIn> {
           children: [
             ReactiveTextField<String>(
               formControlName: 'email',
-              decoration: InputDecoration(
-                labelText: t.auth.staff_sign_in.email,
-              ),
+              decoration: InputDecoration(labelText: t.auth.staff_sign_in.email),
               keyboardType: TextInputType.emailAddress,
               autofillHints: const [AutofillHints.username],
             ),
@@ -44,9 +38,7 @@ class _StaffSignInState extends State<StaffSignIn> {
             ReactiveTextField<String>(
               formControlName: 'password',
               obscureText: true,
-              decoration: InputDecoration(
-                labelText: t.auth.staff_sign_in.password,
-              ),
+              decoration: InputDecoration(labelText: t.auth.staff_sign_in.password),
               keyboardType: TextInputType.visiblePassword,
               autofillHints: const [AutofillHints.password],
             ),

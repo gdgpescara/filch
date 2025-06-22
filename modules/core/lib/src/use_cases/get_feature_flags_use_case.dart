@@ -1,7 +1,6 @@
+import 'package:catch_and_flow/catch_and_flow.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:injectable/injectable.dart';
-
-import '../error_handling/error_catcher.dart';
 
 @lazySingleton
 class GetFeatureFlagsUseCase {

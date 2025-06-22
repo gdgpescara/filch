@@ -53,10 +53,7 @@ class SignInPage extends StatelessWidget {
                               };
                             }
 
-                            return AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: child(),
-                            );
+                            return AnimatedSwitcher(duration: const Duration(milliseconds: 300), child: child());
                           },
                         ),
                       ),
@@ -66,10 +63,7 @@ class SignInPage extends StatelessWidget {
               ),
               bottomNavigationBar: const SafeArea(
                 top: false,
-                child: Padding(
-                  padding: EdgeInsets.all(20),
-                  child: SignInSwitcherButton(),
-                ),
+                child: Padding(padding: EdgeInsets.all(20), child: SignInSwitcherButton()),
               ),
             ),
           ),

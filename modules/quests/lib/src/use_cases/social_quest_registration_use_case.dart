@@ -9,17 +9,9 @@ class SocialQuestRegistrationUseCase {
   final FirebaseFunctions _functions;
 
   Future<bool> call({required Map<String, dynamic> payload, required String functionUrl}) {
-    return runSafetyFuture(
-      () async {
-        final result = await _functions.httpsCallableFromUrl(functionUrl).call<bool>(payload);
-        return result.data;
-      },
-      onException: (e) {
-        if (e is FirebaseFunctionsException) {
-          return FirebaseFunctionsFailure(e);
-        }
-        return Failure.genericFromException(e);
-      },
-    );
+    return runSafetyFuture(() async {
+      final result = await _functions.httpsCallableFromUrl(functionUrl).call<bool>(payload);
+      return result.data;
+    }, onError: onFirebaseFunctionError);
   }
 }

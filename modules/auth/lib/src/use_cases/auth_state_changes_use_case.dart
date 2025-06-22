@@ -2,6 +2,8 @@ import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
+import '../models/custom_errors.dart';
+
 @lazySingleton
 class AuthStateChangesUseCase {
   AuthStateChangesUseCase(this._auth);
@@ -12,7 +14,7 @@ class AuthStateChangesUseCase {
     return runSafetyStream(() {
       return _auth.authStateChanges().map((user) {
         if (user == null) {
-          throw Failure(message: 'Unauthenticated');
+          throw UserUnauthenticatedError();
         }
         return user;
       });

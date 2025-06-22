@@ -7,11 +7,7 @@ class UserProfileState extends Equatable {
   final String? house;
   final bool isNimbusUser;
 
-  UserProfileState copyWith({
-    User? user,
-    String? house,
-    bool? isNimbusUser,
-  }) {
+  UserProfileState copyWith({User? user, String? house, bool? isNimbusUser}) {
     return UserProfileState(
       user: user ?? this.user,
       house: house ?? this.house,

@@ -5,13 +5,7 @@ part 'ranking_item.g.dart';
 
 @JsonSerializable(explicitToJson: true, includeIfNull: false)
 class RankingItem extends Equatable {
-  const RankingItem({
-    required this.uid,
-    this.displayName,
-    this.photoUrl,
-    required this.email,
-    this.points = 0,
-  });
+  const RankingItem({required this.uid, this.displayName, this.photoUrl, required this.email, this.points = 0});
 
   factory RankingItem.fromJson(Map<String, dynamic> json) => _$RankingItemFromJson(json);
 

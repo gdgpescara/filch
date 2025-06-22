@@ -17,12 +17,7 @@ class ScannedItem extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          LabelValue(
-            label: t.user.profile.user_info.name.label,
-            value: data['displayName'] as String?,
-          ),
-        ],
+        children: [LabelValue(label: t.user.profile.user_info.name.label, value: data['displayName'] as String?)],
       ),
     );
   }

@@ -44,10 +44,7 @@ class QuizAnswerLoading extends QuizAnswerState {
 }
 
 class QuizAnswerSent extends QuizAnswerState {
-  const QuizAnswerSent({
-    required this.isCorrect,
-    required this.points,
-  });
+  const QuizAnswerSent({required this.isCorrect, required this.points});
 
   final bool isCorrect;
 

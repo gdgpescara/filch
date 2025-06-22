@@ -6,9 +6,7 @@ import '../models/shift.dart';
 
 @lazySingleton
 class GetFilteredShiftsUseCase {
-  GetFilteredShiftsUseCase(
-    this._firestore,
-  );
+  GetFilteredShiftsUseCase(this._firestore);
 
   final FirebaseFirestore _firestore;
 

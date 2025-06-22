@@ -24,10 +24,7 @@ class TakePictureBottomSheet extends StatelessWidget {
               const SizedBox(height: Spacing.m, width: double.infinity),
               Text(t.staff.take_picture.instructions, style: context.getTextTheme().bodyMedium),
               const SizedBox(height: Spacing.xl),
-              TakePhotoButton(
-                onPhotoTaken: () => Navigator.pop(context),
-                photoType: PhotoType.communityQuest,
-              ),
+              TakePhotoButton(onPhotoTaken: () => Navigator.pop(context), photoType: PhotoType.communityQuest),
               const SizedBox(height: Spacing.xl),
             ],
           ),

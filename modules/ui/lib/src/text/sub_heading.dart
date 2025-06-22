@@ -10,9 +10,6 @@ class SubHeading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: context.getTextTheme(textThemeType).titleMedium?.copyWith(fontWeight: FontWeight.w600),
-    );
+    return Text(text, style: context.getTextTheme(textThemeType).titleMedium?.copyWith(fontWeight: FontWeight.w600));
   }
 }

@@ -7,10 +7,7 @@ import '../../quests.dart';
 
 @lazySingleton
 class GetSignedUserPointsUseCase {
-  GetSignedUserPointsUseCase(
-    this._firestore,
-    this._getSignedUserUseCase,
-  );
+  GetSignedUserPointsUseCase(this._firestore, this._getSignedUserUseCase);
 
   final FirebaseFirestore _firestore;
   final GetSignedUserUseCase _getSignedUserUseCase;
@@ -23,9 +20,7 @@ class GetSignedUserPointsUseCase {
           .collection('points')
           .orderBy('assignedAt', descending: true)
           .snapshots()
-          .map(
-            (snapshot) => snapshot.docs.map((doc) => Points.fromJson(doc.data())).toList(),
-          );
+          .map((snapshot) => snapshot.docs.map((doc) => Points.fromJson(doc.data())).toList());
     });
   }
 }

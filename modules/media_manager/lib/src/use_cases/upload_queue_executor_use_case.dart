@@ -11,11 +11,7 @@ import '../../media_manager.dart';
 
 @lazySingleton
 class UploadQueueExecutorUseCase {
-  UploadQueueExecutorUseCase(
-    this._firestore,
-    this._getSignedUserUseCase,
-    this._uploadCommunityQuestPhotoUseCase,
-  );
+  UploadQueueExecutorUseCase(this._firestore, this._getSignedUserUseCase, this._uploadCommunityQuestPhotoUseCase);
 
   final FirebaseFirestore _firestore;
   final GetSignedUserUseCase _getSignedUserUseCase;
@@ -26,7 +22,10 @@ class UploadQueueExecutorUseCase {
     if (user != null) {
       final collection = _firestore.collection('users').doc(user.uid).collection('photo_queue');
 
-      return collection.where('status', isNotEqualTo: 'uploading').snapshots().when(
+      return collection
+          .where('status', isNotEqualTo: 'uploading')
+          .snapshots()
+          .when(
             success: (snapshot) {
               for (final doc in snapshot.docs) {
                 final path = doc.data()['path'] as String;
@@ -50,7 +49,7 @@ class UploadQueueExecutorUseCase {
                           file.delete();
                         }
                       },
-                      failure: (failure) {
+                      error: (failure) {
                         collection.doc(doc.id).update({'status': 'failed', 'error': failure.message});
                       },
                     );
@@ -60,7 +59,7 @@ class UploadQueueExecutorUseCase {
                 }
               }
             },
-            failure: (e) => FirebaseCrashlytics.instance.recordError(e, StackTrace.current),
+            error: (e) => FirebaseCrashlytics.instance.recordError(e, StackTrace.current),
           );
     }
     return null;

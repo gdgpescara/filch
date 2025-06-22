@@ -1,4 +1,1 @@
-enum PointsTypeEnum {
-  quest,
-  staff;
-}
+enum PointsTypeEnum { quest, staff }

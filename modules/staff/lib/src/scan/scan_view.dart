@@ -10,11 +10,7 @@ import 'widgets/assign_t_shirt.dart';
 import 'widgets/assignable_points_list.dart';
 
 class ScanView extends StatelessWidget {
-  const ScanView({
-    super.key,
-    required this.navigateToAssignment,
-    required this.navigateToTShirtAssignment,
-  });
+  const ScanView({super.key, required this.navigateToAssignment, required this.navigateToTShirtAssignment});
 
   final void Function(AssignmentPageArgs) navigateToAssignment;
   final VoidCallback navigateToTShirtAssignment;

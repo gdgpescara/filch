@@ -20,7 +20,7 @@ class ActorQuestWidget extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             QuestDescriptionWidget(activeQuest: state.activeQuest),
-            if(state.activeQuest.prompt != null) QuestPromptWidget(state.activeQuest.prompt!),
+            if (state.activeQuest.prompt != null) QuestPromptWidget(state.activeQuest.prompt!),
             const SizedBox(height: Spacing.l),
             QuestQrCodeWidget(user: state.user),
           ],
