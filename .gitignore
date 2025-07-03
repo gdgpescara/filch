@@ -46,3 +46,11 @@ serviceAccountKey*.json
 # Environment & Configuration
 .env/
 .crashlytics/
+android/local.properties
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
+ios/Flutter/flutter_export_environment.sh
+ios/Flutter/Generated.xcconfig
+ios/Flutter/ephemeral/flutter_lldb_helper.py
+ios/Flutter/ephemeral/flutter_lldbinit
+ios/Runner/GeneratedPluginRegistrant.h
+ios/Runner/GeneratedPluginRegistrant.m
