@@ -1,0 +1,41 @@
+name: auth
+publish_to: 'none'
+version: 1.0.0
+
+environment:
+  sdk: ^3.8.1
+  flutter: ">=3.32.5"
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  core:
+    path: ../core
+  ui:
+    path: ../ui
+  i18n:
+    path: ../i18n
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+  equatable: ^2.0.7
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
+  firebase_auth: ^5.6.1
+  firebase_messaging: ^15.2.8
+  cloud_firestore: ^5.6.10
+  google_sign_in: ^7.1.0
+  reactive_forms: ^18.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  bloc_test: ^10.0.0
+  mockito: ^5.4.6
+  flutter_lints: ^6.0.0
+  build_runner: ^2.5.4
+  injectable_generator: ^2.7.0
+
+flutter:
+  uses-material-design: true
