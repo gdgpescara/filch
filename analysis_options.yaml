@@ -1,5 +1,10 @@
 include: package:flutter_lints/flutter.yaml
 
+dart_code_metrics:
+  metrics:
+    maximum-nesting-level: 5
+    source-lines-of-code: 50
+
 analyzer:
   language:
     strict-casts: true

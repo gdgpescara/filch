@@ -1,0 +1,42 @@
+name: core
+publish_to: "none"
+version: 1.0.0
+
+environment:
+  sdk: ^3.8.1
+  flutter: ">=3.32.5"
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  get_it: ^8.0.3
+  injectable: ^2.5.0
+  json_annotation: ^4.9.0
+  cloud_firestore: ^5.6.10
+  cloud_functions: ^5.6.0
+  firebase_storage: ^12.4.8
+  firebase_messaging: ^15.2.8
+  equatable: ^2.0.7
+  shared_preferences: ^2.5.3
+  loggy: ^2.0.3
+  package_info_plus: ^8.3.0
+  bloc: ^9.0.0
+  intl: any
+  path_provider: ^2.1.5
+  image_picker: ^1.1.2
+  path: any
+  shorebird_code_push: ^2.0.4
+  catch_and_flow: ^1.0.6
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.5.4
+  json_serializable: ^6.9.5
+  injectable_generator: ^2.7.0
+
+flutter:
+  uses-material-design: true
