@@ -213,7 +213,7 @@ Upload state enumeration:
 - **GenerateVideoThumbnailUseCase** - Generate video thumbnail
 - **ExtractMediaMetadataUseCase** - Extract file metadata
 
-### Cloud Storage
+### Cloud Storage Operations
 
 - **UploadMediaUseCase** - Upload media to cloud storage
 - **DownloadMediaUseCase** - Download media from cloud
@@ -310,7 +310,7 @@ VideoPlayer(
 )
 ```
 
-### UploadProgress
+### UploadProgressWidget
 
 Upload progress indicator.
 
@@ -319,6 +319,7 @@ UploadProgressWidget(
   progress: uploadProgress,
   fileName: 'image.jpg',
   onCancel: () => cancelUpload(),
+)
 )
 ```
 
@@ -377,7 +378,7 @@ class UploadConfig {
 
 ### Storage Structure
 
-```
+```text
 storage/
 ├── images/
 │   ├── users/{userId}/

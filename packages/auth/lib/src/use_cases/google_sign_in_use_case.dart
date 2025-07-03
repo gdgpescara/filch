@@ -7,20 +7,34 @@ import '../models/custom_errors.dart';
 
 @lazySingleton
 class GoogleSignInUseCase {
-  GoogleSignInUseCase(this._auth);
+  GoogleSignInUseCase(this._auth, this._googleSignIn);
 
   final FirebaseAuth _auth;
+  final GoogleSignIn _googleSignIn;
 
   Future<UserCredential> call() async {
     return runSafetyFuture(
       () async {
-        final googleUser = await GoogleSignIn(scopes: ['profile']).signIn();
+        var googleUser = await _googleSignIn.attemptLightweightAuthentication();
+
+        if (googleUser == null && _googleSignIn.supportsAuthenticate()) {
+          googleUser = await _googleSignIn.authenticate(scopeHint: ['profile']);
+        }
+
         if (googleUser == null) {
           throw UserUnauthenticatedError();
         }
-        final googleAuth = await googleUser.authentication;
+
+        final googleAuth = googleUser.authentication;
+        final authClient = googleUser.authorizationClient;
+        final authorization = await authClient.authorizationForScopes(['profile']);
+
+        if (authorization == null) {
+          throw UserUnauthenticatedError();
+        }
+
         final credential = GoogleAuthProvider.credential(
-          accessToken: googleAuth.accessToken,
+          accessToken: authorization.accessToken,
           idToken: googleAuth.idToken,
         );
         return _auth.signInWithCredential(credential);
