@@ -20,15 +20,15 @@ dependencies:
   ui:
     path: ../ui
 
-  firebase_crashlytics: ^4.3.9
+  firebase_crashlytics: ^4.3.10
   get_it: ^8.0.3
   injectable: ^2.5.0
   equatable: ^2.0.7
   bloc: ^9.0.0
   flutter_bloc: ^9.1.1
   image_picker: ^1.1.2
-  firebase_storage: ^12.4.9
-  cloud_firestore: ^5.6.11
+  firebase_storage: ^12.4.10
+  cloud_firestore: ^5.6.12
   path: any
 
 dev_dependencies:
