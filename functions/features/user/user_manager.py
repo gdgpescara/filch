@@ -3,12 +3,11 @@ from typing import Optional
 from firebase_functions import auth_fn, firestore_fn
 from firebase_admin import firestore
 from datetime import datetime
-from shared.env import FIREBASE_REGION
 from features.user.types.user import User
 from typing import Optional
 
 
-@auth_fn.on_user_deleted(region=FIREBASE_REGION)
+@auth_fn.on_user_deleted(region="europe-west3")
 def on_user_delete(event: auth_fn.AuthBlockingEvent) -> None:
     """
     Function triggered when a user is deleted from Firebase Auth.
@@ -29,7 +28,7 @@ def on_user_delete(event: auth_fn.AuthBlockingEvent) -> None:
     logging.info(f"Deleted user {user.uid} from Firestore")
 
 
-@auth_fn.on_user_created(region=FIREBASE_REGION)
+@auth_fn.on_user_created(region="europe-west3")
 def on_user_create(event: auth_fn.AuthBlockingEvent) -> None:
     """
     Function triggered when a new user is created in Firebase Auth.

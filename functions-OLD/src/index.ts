@@ -20,9 +20,9 @@ import {
 
 initializeApp();
 
-exports.onUserDeleteSentinel = onUserDeleteSentinel;
-exports.onUserCreateSentinel = onUserCreateSentinel;
-exports.tShirtPickUp = tShirtPuckUp;
+// exports.onUserDeleteSentinel = onUserDeleteSentinel;
+// exports.onUserCreateSentinel = onUserCreateSentinel;
+// exports.tShirtPickUp = tShirtPuckUp;
 
 exports.actorQueueSentinel = actorQueueSentinel;
 exports.searchForQuest = searchForQuest;

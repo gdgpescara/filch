@@ -7,7 +7,6 @@ from features.user.t_shirt_notification import t_shirt_notification_schedule
 from features.points.points_manager import user_points_sentinel
 '''
 
-# Initialize Firebase app
 initialize_app()
 
 from features.points.scan_other_attendee import scan_other_attendee
