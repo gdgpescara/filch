@@ -1,4 +1,4 @@
-import logging
+from logger_config import logger
 from firebase_functions.https_fn import on_call, CallableRequest, on_request, Request
 from firebase_admin import auth
 from google.cloud.firestore import SERVER_TIMESTAMP, Increment
@@ -15,7 +15,7 @@ from firestore_client import client as firestore_client
 @on_call(region=FIREBASE_REGION)
 def assign_points(request: CallableRequest) -> bool:
     logged_user = get_signed_in_user(request)
-    logging.info(f"Assigning points: {request.data}")
+    logger.info(f"Assigning points: {request.data}")
     assigned_points = request.data.get("points")
     point_type = request.data.get("type")
     quest_id = request.data.get("quest", None)
@@ -23,7 +23,7 @@ def assign_points(request: CallableRequest) -> bool:
     users = [auth.get_user(uid) for uid in user_ids]
     filtered_users = []
 
-    if point_type == PointsTypeEnum.STAFF or point_type == PointsTypeEnum.COMMUNITY:
+    if point_type == PointsTypeEnum.staff or point_type == PointsTypeEnum.community:
         batch = firestore_client.batch()
 
         for user in users:
@@ -36,7 +36,7 @@ def assign_points(request: CallableRequest) -> bool:
             )
 
             if user_points_snap:
-                logging.info(f"User: {user.uid} already has points")
+                logger.info(f"User: {user.uid} already has points")
             else:
                 filtered_users.append(user)
 
@@ -48,7 +48,7 @@ def assign_points(request: CallableRequest) -> bool:
                     assigned_at=SERVER_TIMESTAMP, quest=quest_id,
                     assigned_by=logged_user.uid)
 
-    logging.info(f"Points: {points}")
+    logger.info(f"Points: {points}")
 
     batch = firestore_client.batch()
 
@@ -61,8 +61,8 @@ def assign_points(request: CallableRequest) -> bool:
         )
         batch.set(user_points_ref, points.model_dump())
 
-        if point_type == PointsTypeEnum.QUEST and quest_id:
-            logging.info("Is quest points removing active quest and queue")
+        if point_type == PointsTypeEnum.quest and quest_id:
+            logger.info("Is quest points removing active quest and queue")
 
             # Get the user document
             doc_ref = firestore_client.collection("users").document(user.uid)
@@ -84,7 +84,7 @@ def assign_points(request: CallableRequest) -> bool:
             batch.delete(queue_ref)
 
     # Handle actor quest timeline update
-    if point_type == PointsTypeEnum.QUEST and quest_id:
+    if point_type == PointsTypeEnum.quest and quest_id:
         decoded_id = quest_id.split("-")
         if len(decoded_id) == 3 and decoded_id[0] == "actor":
             timeline_ref = firestore_client.collection("timelines").document(decoded_id[1])

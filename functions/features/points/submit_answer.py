@@ -47,7 +47,7 @@ def submit_answer(req: CallableRequest) -> bool:
     is_correct = all(e in answers for e in correct_answers)
     logger.info(f"Is correct: {is_correct}")
 
-    archived_points = Points(type=PointsTypeEnum.QUEST, points=quest.points[0],
+    archived_points = Points(type=PointsTypeEnum.quest, points=quest.points[0],
                              assigned_at=SERVER_TIMESTAMP)
 
     batch = firestore_client.batch()

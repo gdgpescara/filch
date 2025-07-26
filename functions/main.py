@@ -13,6 +13,7 @@ from features.points.scan_other_attendee import scan_other_attendee
 from features.points.points_manager import user_points_sentinel
 from features.points.submit_answer import submit_answer
 from features.points.assign_points import assign_points
+from features.sessions.fetch_from_sessionize import fetch_sessions
 
 '''
 # User management functions
