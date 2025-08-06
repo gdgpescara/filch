@@ -54,3 +54,5 @@ ios/Flutter/ephemeral/flutter_lldb_helper.py
 ios/Flutter/ephemeral/flutter_lldbinit
 ios/Runner/GeneratedPluginRegistrant.h
 ios/Runner/GeneratedPluginRegistrant.m
+
+keys/

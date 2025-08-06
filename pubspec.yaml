@@ -250,3 +250,5 @@ melos:
 
     shorebird:patch:
       run: melos shorebird:patch:android --no-select && melos shorebird:patch:ios --no-select
+dependencies:
+  google_fonts: ^6.2.1
