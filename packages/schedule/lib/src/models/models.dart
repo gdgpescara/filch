@@ -1,5 +1,7 @@
+export 'grouped_sessions.dart';
 export 'language.dart';
 export 'level.dart';
+export 'room.dart';
 export 'session.dart';
 export 'session_format.dart';
 export 'speaker.dart';

@@ -94,7 +94,8 @@ class Room extends Equatable {
 
 ### Schedule Management
 
-- **GetScheduleUseCase** - Get complete event schedule
+- **GetGroupedSessionsUseCase** - Get all sessions grouped by day and time
+- **GetSessionByIdUseCase** - Get specific session by ID with real-time updates
 - **GetSessionsByDayUseCase** - Get sessions for specific day
 - **GetSessionsByRoomUseCase** - Get sessions for specific room
 - **GetSessionsByTypeUseCase** - Get sessions by type
@@ -389,13 +390,22 @@ The package supports deep linking for:
 ```dart
 import 'package:schedule/schedule.dart';
 
-// Get schedule
-final scheduleUseCase = GetIt.instance<GetScheduleUseCase>();
-final result = await scheduleUseCase(NoParams());
-result.fold(
-  (error) => print('Error: ${error.message}'),
-  (schedule) => print('Sessions: ${schedule.length}'),
-);
+// Get all sessions grouped by day and time
+final groupedSessionsUseCase = GetIt.instance<GetGroupedSessionsUseCase>();
+groupedSessionsUseCase().listen((groupedSessions) {
+  print('Sessions by day: ${groupedSessions.sessionsByDay.keys.length}');
+});
+
+// Get specific session by ID with real-time updates
+final getSessionByIdUseCase = GetIt.instance<GetSessionByIdUseCase>();
+getSessionByIdUseCase('session_123').listen((session) {
+  if (session != null) {
+    print('Session found: ${session.title}');
+    print('Status: ${session.isCurrentlyRunning ? "Running" : "Not running"}');
+  } else {
+    print('Session not found or invalid data');
+  }
+});
 
 // Bookmark session
 final bookmarkUseCase = GetIt.instance<BookmarkSessionUseCase>();

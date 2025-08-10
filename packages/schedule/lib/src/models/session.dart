@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 import 'language.dart';
 import 'level.dart';
+import 'room.dart';
 import 'session_format.dart';
 import 'speaker.dart';
 import 'track.dart';
@@ -19,7 +20,6 @@ class Session extends Equatable {
     required this.startsAt,
     required this.endsAt,
     required this.speakers,
-    required this.roomId,
     required this.room,
     required this.sessionFormat,
     required this.tracks,
@@ -51,11 +51,8 @@ class Session extends Equatable {
   /// List of speakers for this session
   final List<Speaker> speakers;
 
-  /// Unique identifier for the room
-  final int roomId;
-
-  /// Name of the room where the session takes place
-  final String room;
+  /// Room where the session takes place
+  final Room room;
 
   /// Format/type of the session
   final SessionFormat sessionFormat;
@@ -77,8 +74,7 @@ class Session extends Equatable {
     DateTime? startsAt,
     DateTime? endsAt,
     List<Speaker>? speakers,
-    int? roomId,
-    String? room,
+    Room? room,
     SessionFormat? sessionFormat,
     List<Track>? tracks,
     Level? level,
@@ -91,7 +87,6 @@ class Session extends Equatable {
       startsAt: startsAt ?? this.startsAt,
       endsAt: endsAt ?? this.endsAt,
       speakers: speakers ?? this.speakers,
-      roomId: roomId ?? this.roomId,
       room: room ?? this.room,
       sessionFormat: sessionFormat ?? this.sessionFormat,
       tracks: tracks ?? this.tracks,
@@ -127,7 +122,6 @@ class Session extends Equatable {
         startsAt,
         endsAt,
         speakers,
-        roomId,
         room,
         sessionFormat,
         tracks,
