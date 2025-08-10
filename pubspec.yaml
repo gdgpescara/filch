@@ -1,5 +1,5 @@
 name: filch_workspace
-publish_to: 'none'
+publish_to: "none"
 
 environment:
   sdk: ^3.8.1
@@ -19,7 +19,10 @@ workspace:
   - packages/user
 
 dev_dependencies:
-    melos: ^7.0.0-dev.9
+  melos: ^7.0.0-dev.9
+
+dependency_overrides:
+  meta: ^1.7.0
 
 melos:
   name: filch
@@ -35,28 +38,6 @@ melos:
       environment:
         sdk: ^3.8.1
         flutter: ">=3.32.5"
-
-      dependencies:
-          get_it: ^8.0.3
-          injectable: ^2.5.0
-          firebase_core: ^3.15.1
-          firebase_messaging: ^15.2.9
-          cloud_firestore: ^5.6.11
-          cloud_functions: ^5.6.1
-          firebase_auth: ^5.6.2
-          firebase_crashlytics: ^4.3.9
-          firebase_storage: ^12.4.9
-          bloc: ^9.0.0
-          flutter_bloc: ^9.1.1
-          equatable: ^2.0.7
-          json_annotation: ^4.9.0
-          reactive_forms: ^18.1.1
-
-      dev_dependencies:
-        flutter_lints: ^6.0.0
-        build_runner: ^2.5.4
-        injectable_generator: ^2.7.0
-        json_serializable: ^6.9.5
 
     clean:
       hooks:

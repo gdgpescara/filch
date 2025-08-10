@@ -11,32 +11,32 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  get_it: ^8.0.3
+  get_it: ^8.2.0
   injectable: ^2.5.0
   json_annotation: ^4.9.0
-  cloud_firestore: ^5.6.11
-  cloud_functions: ^5.6.1
-  firebase_storage: ^12.4.9
-  firebase_messaging: ^15.2.9
+  cloud_firestore: ^6.0.0
+  cloud_functions: ^6.0.0
+  firebase_storage: ^13.0.0
+  firebase_messaging: ^16.0.0
   equatable: ^2.0.7
   shared_preferences: ^2.5.3
   loggy: ^2.0.3
   package_info_plus: ^8.3.0
   bloc: ^9.0.0
-  intl: any
   path_provider: ^2.1.5
   image_picker: ^1.1.2
-  path: any
   shorebird_code_push: ^2.0.4
   catch_and_flow: ^1.0.6
+  path: any
+  intl: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  build_runner: ^2.5.4
-  json_serializable: ^6.9.5
-  injectable_generator: ^2.7.0
+  build_runner: ^2.6.1
+  json_serializable: ^6.10.0
+  injectable_generator: ^2.8.1
 
 flutter:
   uses-material-design: true
