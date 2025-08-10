@@ -11,11 +11,15 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
+  cloud_firestore: ^6.0.0
+  equatable: ^2.0.7
   injectable: ^2.5.1
+  json_annotation: ^4.9.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   build_runner: ^2.6.1
   injectable_generator: ^2.8.1
+  json_serializable: ^6.8.0
   flutter_lints: ^6.0.0
