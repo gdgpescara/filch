@@ -1,7 +1,7 @@
 from firestore_client import client as firestore_client
 from firebase_functions.https_fn import on_request, HttpsError, FunctionsErrorCode
 from typing import List
-from features.sessions.types.session import Session, NamedEntity, SessionSpeaker
+from features.speakers.types.speaker import Speaker, Social
 from shared.get_signed_in_user import verify_firebase_auth
 from shared.env import SESSIONIZE_EVENT_ID, FIREBASE_REGION
 from logger_config import logger
@@ -11,82 +11,56 @@ from flask import jsonify, Request
 base_url = f"https://sessionize.com/api/v2/{SESSIONIZE_EVENT_ID}/view/"
 
 
-def transform_sessions(raw_data: list) -> List[Session]:
-    category_handlers = {
-        "Session format": lambda items: ("sessionFormat", NamedEntity(id=items[0]["id"], name=items[0]["name"])),
-        "Track": lambda items: ("tracks", [NamedEntity(id=item["id"], name=item["name"]) for item in items]),
-        "Level": lambda items: ("level", NamedEntity(id=items[0]["id"], name=items[0]["name"])),
-        "Language": lambda items: ("language", NamedEntity(id=items[0]["id"], name=items[0]["name"]))
-    }
-
+def transform_speakers(raw_data: list) -> List[Speaker]:
     result = []
-    for group in raw_data:
-        for session in group.get("sessions", []):
-            pp_session = {
-                "id": session.get("id"),
-                "title": session.get("title"),
-                "description": session.get("description"),
-                "startsAt": session.get("startsAt"),
-                "endsAt": session.get("endsAt"),
-                "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name")) for s in session.get("speakers", [])],
-                "roomId": session.get("roomId"),
-                "room": session.get("room"),
-                "sessionFormat": None,
-                "tracks": None,
-                "level": None,
-                "language": None
-            }
-
-            for category in session.get("categories", []):
-                name = category.get("name", None)
-                items = category.get("categoryItems", [])
-                if len(items) == 0 or name is None:
-                    continue
-
-                if name not in category_handlers:
-                    logger.warning(f"Unknown Category '{name}' found in session '{session.get('id')}'. Skipping.")
-                    continue
-
-                key, value = category_handlers[name](items)
-                pp_session[key] = value
-            try:
-                result.append(Session(**pp_session))
-            except Exception as e:
-                logger.exception(f"Error During Session Managing: {e}.")
-                logger.info(f"Related Info Are {json.dumps(session, indent=2, ensure_ascii=False, default=str)}")
+    for speaker in raw_data:
+        pp_speaker = {
+            "id": speaker.get("id"),
+            "firstName": speaker.get("firstName"),
+            "lastName": speaker.get("lastName"),
+            "bio": speaker.get("bio"),
+            "profilePicture": speaker.get("profilePicture"),
+            "tagLine": speaker.get("tagLine"),
+            "links": [Social(title=s.get("title"), url=s.get("url")) for s in speaker.get("links", [])],
+        }
+        try:
+            result.append(Speaker(**pp_speaker))
+        except Exception as e:
+            logger.exception(f"Error During Speaker Managing: {e}.")
+            logger.info(f"Related Info Are {json.dumps(pp_speaker, indent=2, ensure_ascii=False, default=str)}")
     return result
 
 
-def upload_sessions_to_firestore(sessions: List[Session], collection_name: str = "session") -> None:
+def upload_speakers_to_firestore(speakers: List[Speaker], collection_name: str = "speaker") -> None:
     try:
         batch = firestore_client.batch()
-        for session in sessions:
+        for session in speakers:
             doc_ref = firestore_client.collection(collection_name).document(session.id)
             session_dict = session.model_dump()
             batch.set(doc_ref, session_dict)
 
         batch.commit()
-        logger.info(f"Uploaded {len(sessions)} sessions to Firestore.")
+        logger.info(f"Uploaded {len(speakers)} sessions to Firestore.")
     except Exception as e:
         raise e
 
 
 @on_request(region=FIREBASE_REGION)
-def fetch_sessions(request: Request) -> bool:
+def fetch_speakers(request: Request) -> bool:
     # user_info = verify_firebase_auth(request=request)
     # logger.info(f"Logged User Info: {user_info}")
     if SESSIONIZE_EVENT_ID is None:
         logger.error("Event ID not provided")
     else:
-        url = base_url + "Sessions"
-        logger.info(f"Downloading Sessions From: {url}")
+        url = base_url + "Speakers"
+        logger.info(f"Downloading Speakers From: {url}")
         try:
             response = requests.get(url, timeout=10)
             if response.status_code == 200:
                 logger.info("Speakers JSON Fetched")
                 try:
                     raw_data = response.json()
-                    upload_sessions_to_firestore(sessions=transform_sessions(raw_data=raw_data))
+                    upload_speakers_to_firestore(speakers=transform_speakers(raw_data=raw_data))
                 except json.JSONDecodeError:
                     logger.exception("Error During Decoding Response")
                     logger.info(f"Given Data Are: {raw_data}")
@@ -123,11 +97,3 @@ def fetch_sessions(request: Request) -> bool:
             )
 
     return jsonify(True)
-
-@on_request(region=FIREBASE_REGION)
-def fetch_speakers(request: Request) -> bool:
-    if SESSIONIZE_EVENT_ID is None:
-        logger.error("Event ID not provided")
-    else:
-        url = base_url + "Speakers"
-        logger.info(f"Downloading Speakers From: {url}")

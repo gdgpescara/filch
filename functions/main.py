@@ -14,6 +14,7 @@ from features.points.points_manager import user_points_sentinel
 from features.points.submit_answer import submit_answer
 from features.points.assign_points import assign_points
 from features.sessions.fetch_from_sessionize import fetch_sessions
+from features.speakers.fetch_from_sessionize import fetch_speakers
 
 '''
 # User management functions
