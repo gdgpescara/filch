@@ -1,5 +1,5 @@
-firebase_functions~=0.4.2
-firebase_admin~=6.8.0
-python-dotenv~=1.1.0
-pydantic==2.11.4
+firebase_functions~=0.4.3
+firebase_admin~=7.1.0
+python-dotenv~=1.1.1
+pydantic==2.11.7
 loguru==0.7.3

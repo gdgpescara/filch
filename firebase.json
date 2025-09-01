@@ -23,6 +23,9 @@
         "firebase-debug.log",
         "firebase-debug.*.log",
         "*.local"
+      ],
+      "predeploy": [
+        "cd \"$RESOURCE_DIR\" && source venv/bin/activate && python3.13 -m pip install -r requirements.txt"
       ]
     }
   ],
