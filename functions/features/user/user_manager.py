@@ -1,6 +1,6 @@
 import logging
 from typing import Optional
-from firebase_functions import auth_fn, firestore_fn
+from firebase_functions import auth_fn
 from firebase_admin import firestore
 from datetime import datetime
 from features.user.types.user import User

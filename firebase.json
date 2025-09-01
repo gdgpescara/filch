@@ -1,8 +1,8 @@
 {
   "functions": [
     {
-      "source": "functions-OLD",
-      "codebase": "default",
+      "source": "node-functions",
+      "codebase": "nodejs_functions",
       "ignore": [
         "node_modules",
         ".git",
@@ -16,13 +16,16 @@
     },
     {
       "source": "functions",
-      "codebase": "python_functions",
+      "codebase": "default",
       "ignore": [
         "venv",
         ".git",
         "firebase-debug.log",
         "firebase-debug.*.log",
         "*.local"
+      ],
+      "predeploy": [
+        "cd \"$RESOURCE_DIR\" && source venv/bin/activate && python3.13 -m pip install -r requirements.txt"
       ]
     }
   ],
@@ -47,35 +50,9 @@
     }
   },
   "firestore": {
+    "database": "(default)",
+    "location": "eur3",
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
-  },
-  "flutter": {
-    "platforms": {
-      "android": {
-        "default": {
-          "projectId": "devfestpescara2024",
-          "appId": "1:432735089906:android:c6ab5c0799fd4364788c6b",
-          "fileOutput": "android/app/google-services.json"
-        }
-      },
-      "ios": {
-        "default": {
-          "projectId": "devfestpescara2024",
-          "appId": "1:432735089906:ios:b3509c786b8ebb34788c6b",
-          "uploadDebugSymbols": true,
-          "fileOutput": "ios/Runner/GoogleService-Info.plist"
-        }
-      },
-      "dart": {
-        "lib/firebase_options.dart": {
-          "projectId": "devfestpescara2024",
-          "configurations": {
-            "android": "1:432735089906:android:c6ab5c0799fd4364788c6b",
-            "ios": "1:432735089906:ios:b3509c786b8ebb34788c6b"
-          }
-        }
-      }
-    }
   }
 }

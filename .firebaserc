@@ -1,5 +1,7 @@
 {
   "projects": {
-    "default": "devfestpescara2024"
-  }
+    "default": "devfestpescara2025"
+  },
+  "targets": {},
+  "etags": {}
 }

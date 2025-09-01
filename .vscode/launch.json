@@ -1,0 +1,43 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "local",
+      "request": "launch",
+      "type": "dart",
+      "program": "packages/app/lib/main.dart",
+      "args": [
+        "--dart-define-from-file=.env/local.json"
+      ]
+    },
+    {
+      "name": "local (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "program": "packages/app/lib/main.dart",
+      "flutterMode": "release",
+      "args": [
+        "--dart-define-from-file=.env/local.json"
+      ]
+    },
+    {
+      "name": "remote",
+      "request": "launch",
+      "type": "dart",
+      "program": "packages/app/lib/main.dart",
+      "args": [
+        "--dart-define-from-file=.env/remote.json"
+      ]
+    },
+    {
+      "name": "remote (release mode)",
+      "request": "launch",
+      "type": "dart",
+      "program": "packages/app/lib/main.dart",
+      "flutterMode": "release",
+      "args": [
+        "--dart-define-from-file=.env/remote.json"
+      ]
+    }
+  ]
+}
