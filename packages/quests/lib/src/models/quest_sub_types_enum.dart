@@ -1,0 +1,1 @@
+enum QuestSubTypeEnum { qrCode, prompted }

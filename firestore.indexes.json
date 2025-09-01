@@ -1,4 +1,99 @@
 {
-  "indexes": [],
+  "indexes": [
+    {
+      "collectionGroup": "cut_images",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "joy",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "partner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "count",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "cut_images",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "joy",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "partner",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "status",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "count",
+          "order": "DESCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "timelines",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "count",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "name",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "isStaff",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "tShirtPickup",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "tShirtPickupRequested",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "fcmToken",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "users",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "points",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "isStaff",
+          "order": "DESCENDING"
+        }
+      ]
+    }
+  ],
   "fieldOverrides": []
 }
