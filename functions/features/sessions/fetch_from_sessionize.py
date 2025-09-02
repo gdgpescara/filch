@@ -123,11 +123,3 @@ def fetch_sessions(request: Request) -> bool:
             )
 
     return jsonify(True)
-
-@on_request(region=FIREBASE_REGION)
-def fetch_speakers(request: Request) -> bool:
-    if SESSIONIZE_EVENT_ID is None:
-        logger.error("Event ID not provided")
-    else:
-        url = base_url + "Speakers"
-        logger.info(f"Downloading Speakers From: {url}")
