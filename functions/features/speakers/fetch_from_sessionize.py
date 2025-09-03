@@ -30,7 +30,7 @@ def transform_speakers(raw_data: list) -> List[Speaker]:
     return result
 
 
-def upload_speakers_to_firestore(speakers: List[Speaker], collection_name: str = "speaker") -> None:
+def upload_speakers_to_firestore(speakers: List[Speaker], collection_name: str = "speakers") -> None:
     try:
         batch = firestore_client.batch()
         for session in speakers:

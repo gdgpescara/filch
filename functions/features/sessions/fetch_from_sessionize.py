@@ -15,23 +15,36 @@ def transform_sessions(raw_data: list) -> List[Session]:
         "Session format": lambda items: ("sessionFormat", NamedEntity(id=items[0]["id"], name=items[0]["name"])),
         "Track": lambda items: ("tracks", [NamedEntity(id=item["id"], name=item["name"]) for item in items]),
         "Level": lambda items: ("level", NamedEntity(id=items[0]["id"], name=items[0]["name"])),
-        "Language": lambda items: ("language", NamedEntity(id=items[0]["id"], name=items[0]["name"]))
+        "Language": lambda items: ("language", NamedEntity(id=items[0]["id"], name=items[0]["name"])),
+        "Tags": lambda items: ("tags", [NamedEntity(id=item["id"], name=item["name"]) for item in items])
     }
 
     result = []
     for group in raw_data:
         for session in group.get("sessions", []):
+            title = session.get("title", "")
+            description = session.get("description", "")
+            roomId = session.get("roomId")
+            room = session.get("room")
+            startsAt = session.get("startsAt")
+            endsAt = session.get("endsAt")
+
+            if roomId is None or room is None or startsAt is None or endsAt is None:
+                logger.info(f"Missing session information for session '{session.get('id')}'. Skipping.")
+                continue
+
             pp_session = {
                 "id": session.get("id"),
-                "title": session.get("title"),
-                "description": session.get("description"),
-                "startsAt": session.get("startsAt"),
-                "endsAt": session.get("endsAt"),
+                "title": title,
+                "description": description,
+                "startsAt": startsAt,
+                "endsAt": endsAt,
                 "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name")) for s in session.get("speakers", [])],
-                "roomId": session.get("roomId"),
-                "room": session.get("room"),
+                "roomId": roomId,
+                "room": room,
                 "sessionFormat": None,
-                "tracks": None,
+                "tracks": [],
+                "tags": [],
                 "level": None,
                 "language": None
             }
@@ -51,12 +64,12 @@ def transform_sessions(raw_data: list) -> List[Session]:
             try:
                 result.append(Session(**pp_session))
             except Exception as e:
-                logger.exception(f"Error During Session Managing: {e}.")
-                logger.info(f"Related Info Are {json.dumps(session, indent=2, ensure_ascii=False, default=str)}")
+                logger.exception(f"Error During Session: {session.get('id')} Managing: {e}.")
+                # logger.info(f"Related Info Are {json.dumps(session, indent=2, ensure_ascii=False, default=str)}")
     return result
 
 
-def upload_sessions_to_firestore(sessions: List[Session], collection_name: str = "session") -> None:
+def upload_sessions_to_firestore(sessions: List[Session], collection_name: str = "sessions") -> None:
     try:
         batch = firestore_client.batch()
         for session in sessions:
@@ -72,14 +85,12 @@ def upload_sessions_to_firestore(sessions: List[Session], collection_name: str =
 
 @on_request(region=FIREBASE_REGION)
 def fetch_sessions(request: Request) -> bool:
-    # user_info = verify_firebase_auth(request=request)
-    # logger.info(f"Logged User Info: {user_info}")
     url = f"https://sessionize.com/api/v2/{get_event_id(request)}/view/" + "Sessions"
     logger.info(f"Downloading Sessions From: {url}")
     try:
         response = requests.get(url, timeout=10)
         if response.status_code == 200:
-            logger.info("Speakers JSON Fetched")
+            logger.info("Sessions JSON Fetched")
             try:
                 raw_data = response.json()
                 upload_sessions_to_firestore(sessions=transform_sessions(raw_data=raw_data))
