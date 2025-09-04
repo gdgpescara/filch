@@ -29,7 +29,7 @@ class ScheduleCubit extends Cubit<ScheduleState> {
       emit(const ScheduleLoading());
 
       // Start listening to sessions
-      _sessionsSubscription?.cancel();
+      await _sessionsSubscription?.cancel();
       _sessionsSubscription = _getGroupedSessionsUseCase().listen(
         (groupedSessions) async {
           // Load bookmark status for all sessions
@@ -45,10 +45,12 @@ class ScheduleCubit extends Cubit<ScheduleState> {
             }
           }
 
-          emit(ScheduleLoaded(
-            sessionsByDay: groupedSessions.sessionsByDay,
-            bookmarkedSessions: Set.from(_bookmarkedSessions),
-          ));
+          emit(
+            ScheduleLoaded(
+              sessionsByDay: groupedSessions.sessionsByDay,
+              bookmarkedSessions: Set.from(_bookmarkedSessions),
+            ),
+          );
         },
         onError: (Object error) {
           emit(ScheduleError(message: error.toString()));

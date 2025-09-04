@@ -25,8 +25,7 @@ class GroupedSessions extends Equatable {
 
   /// Gets all available days sorted chronologically
   List<DateTime> get availableDays {
-    final days = sessionsByDay.keys.toList()
-    ..sort();
+    final days = sessionsByDay.keys.toList()..sort();
     return days;
   }
 
@@ -39,9 +38,8 @@ class GroupedSessions extends Equatable {
   List<DateTime> getStartTimesForDay(DateTime day) {
     final dayTimetable = sessionsByDay[day];
     if (dayTimetable == null) return [];
-    
-    final startTimes = dayTimetable.keys.toList()
-    ..sort();
+
+    final startTimes = dayTimetable.keys.toList()..sort();
     return startTimes;
   }
 

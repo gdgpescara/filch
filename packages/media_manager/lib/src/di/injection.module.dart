@@ -27,7 +27,10 @@ class MediaManagerPackageModule extends _i526.MicroPackageModule {
     gh.lazySingleton<_i989.MoveFileUseCase>(() => _i989.MoveFileUseCase());
     gh.lazySingleton<_i709.TakePhotoUseCase>(() => _i709.TakePhotoUseCase(gh<_i183.ImagePicker>()));
     gh.lazySingleton<_i5.AddPhotoToUploadQueueUseCase>(
-      () => _i5.AddPhotoToUploadQueueUseCase(gh<_i974.FirebaseFirestore>(), gh<_i662.GetSignedUserUseCase>()),
+      () => _i5.AddPhotoToUploadQueueUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i662.GetSignedUserUseCase>(),
+      ),
     );
     gh.lazySingleton<_i60.UploadCommunityQuestPhotoUseCase>(
       () => _i60.UploadCommunityQuestPhotoUseCase(gh<_i457.Reference>()),

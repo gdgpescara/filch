@@ -1,12 +1,8 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import 'language.dart';
-import 'level.dart';
-import 'room.dart';
-import 'session_format.dart';
+import 'named_entity.dart';
 import 'speaker.dart';
-import 'track.dart';
 
 part 'session.g.dart';
 
@@ -23,6 +19,7 @@ class Session extends Equatable {
     required this.room,
     required this.sessionFormat,
     required this.tracks,
+    required this.tags,
     required this.level,
     required this.language,
   });
@@ -60,6 +57,9 @@ class Session extends Equatable {
   /// List of tracks/categories this session belongs to
   final List<Track> tracks;
 
+  /// List of tags for this session
+  final List<Track> tags;
+
   /// Difficulty level of the session
   final Level level;
 
@@ -77,6 +77,7 @@ class Session extends Equatable {
     Room? room,
     SessionFormat? sessionFormat,
     List<Track>? tracks,
+    List<Track>? tags,
     Level? level,
     Language? language,
   }) {
@@ -90,6 +91,7 @@ class Session extends Equatable {
       room: room ?? this.room,
       sessionFormat: sessionFormat ?? this.sessionFormat,
       tracks: tracks ?? this.tracks,
+      tags: tags ?? this.tags,
       level: level ?? this.level,
       language: language ?? this.language,
     );
@@ -116,16 +118,17 @@ class Session extends Equatable {
 
   @override
   List<Object?> get props => [
-        id,
-        title,
-        description,
-        startsAt,
-        endsAt,
-        speakers,
-        room,
-        sessionFormat,
-        tracks,
-        level,
-        language,
-      ];
+    id,
+    title,
+    description,
+    startsAt,
+    endsAt,
+    speakers,
+    room,
+    sessionFormat,
+    tracks,
+    tags,
+    level,
+    language,
+  ];
 }

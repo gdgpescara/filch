@@ -1,13 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:schedule/src/models/grouped_sessions.dart';
-import 'package:schedule/src/models/language.dart';
-import 'package:schedule/src/models/level.dart';
-import 'package:schedule/src/models/room.dart';
+import 'package:schedule/src/models/named_entity.dart';
 import 'package:schedule/src/models/session.dart';
-import 'package:schedule/src/models/session_format.dart';
 import 'package:schedule/src/models/speaker.dart';
 import 'package:schedule/src/models/speaker_link.dart';
-import 'package:schedule/src/models/track.dart';
 
 void main() {
   group('Room Model', () {
@@ -92,7 +88,11 @@ void main() {
 
     test('should support copyWith functionality', () {
       const originalLink = SpeakerLink(title: 'Twitter', url: 'https://twitter.com/sessionizecom', linkType: 'Twitter');
-      final copiedLink = originalLink.copyWith(title: 'LinkedIn', url: 'https://linkedin.com/in/test', linkType: 'LinkedIn');
+      final copiedLink = originalLink.copyWith(
+        title: 'LinkedIn',
+        url: 'https://linkedin.com/in/test',
+        linkType: 'LinkedIn',
+      );
 
       expect(copiedLink.title, 'LinkedIn');
       expect(copiedLink.url, 'https://linkedin.com/in/test');
@@ -158,8 +158,8 @@ void main() {
       expect(speaker.tagLine, 'Professional public speaker');
       expect(speaker.profilePicture, 'https://sessionize.com/image/test.jpg');
       expect(speaker.links, hasLength(2));
-      expect(speaker.links.first.title, 'Twitter');
-      expect(speaker.links.last.title, 'LinkedIn');
+      expect(speaker.links?.first.title, 'Twitter');
+      expect(speaker.links?.last.title, 'LinkedIn');
     });
 
     test('should convert Speaker to JSON', () {
@@ -173,6 +173,37 @@ void main() {
       expect(json['profilePicture'], 'https://sessionize.com/image/test.jpg');
       expect(json['links'], isA<List<dynamic>>());
       expect(json['links'], hasLength(2));
+    });
+
+    test('should handle nullable fields correctly', () {
+      const speaker = Speaker(
+        id: 'test-id',
+        fullName: 'Test Speaker',
+        profilePicture: 'https://example.com/pic.jpg',
+      );
+
+      expect(speaker.bio, isNull);
+      expect(speaker.tagLine, isNull);
+      expect(speaker.links, isNull);
+      expect(speaker.id, 'test-id');
+      expect(speaker.fullName, 'Test Speaker');
+      expect(speaker.profilePicture, 'https://example.com/pic.jpg');
+    });
+
+    test('should convert Speaker with null fields to JSON correctly', () {
+      const speaker = Speaker(
+        id: 'test-id',
+        fullName: 'Test Speaker',
+        profilePicture: 'https://example.com/pic.jpg',
+      );
+
+      final json = speaker.toJson();
+      expect(json['id'], 'test-id');
+      expect(json['fullName'], 'Test Speaker');
+      expect(json['bio'], isNull);
+      expect(json['tagLine'], isNull);
+      expect(json['profilePicture'], 'https://example.com/pic.jpg');
+      expect(json['links'], isNull);
     });
 
     test('should support copyWith functionality', () {
@@ -221,7 +252,35 @@ void main() {
 
     test('should have correct props for Equatable', () {
       final speaker = Speaker.fromJson(speakerJson);
-      expect(speaker.props, [speaker.id, speaker.fullName, speaker.bio, speaker.tagLine, speaker.profilePicture, speaker.links]);
+      expect(speaker.props, [
+        speaker.id,
+        speaker.fullName,
+        speaker.bio,
+        speaker.tagLine,
+        speaker.profilePicture,
+        speaker.links,
+      ]);
+    });
+
+    test('should safely access nullable links', () {
+      const speakerWithNullLinks = Speaker(
+        id: 'test-id',
+        fullName: 'Test Speaker',
+        profilePicture: 'https://example.com/pic.jpg',
+      );
+
+      const speakerWithEmptyLinks = Speaker(
+        id: 'test-id',
+        fullName: 'Test Speaker',
+        profilePicture: 'https://example.com/pic.jpg',
+        links: <SpeakerLink>[],
+      );
+
+      // Test safe access to links
+      expect(speakerWithNullLinks.links?.length, isNull);
+      expect(speakerWithNullLinks.links?.isEmpty, isNull);
+      expect(speakerWithEmptyLinks.links?.length, 0);
+      expect(speakerWithEmptyLinks.links?.isEmpty, true);
     });
   });
 
@@ -482,10 +541,11 @@ void main() {
         description: 'Description 1',
         startsAt: time1,
         endsAt: time1.add(const Duration(hours: 1)),
-        speakers: [],
+        speakers: const [],
         room: const Room(id: 1, name: 'Room A'),
         sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
-        tracks: [],
+        tracks: const [],
+        tags: const [],
         level: const Level(id: 1, name: 'Beginner'),
         language: const Language(id: 1, name: 'English'),
       );
@@ -496,10 +556,11 @@ void main() {
         description: 'Description 2',
         startsAt: time2,
         endsAt: time2.add(const Duration(hours: 1)),
-        speakers: [],
+        speakers: const [],
         room: const Room(id: 2, name: 'Room B'),
         sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
-        tracks: [],
+        tracks: const [],
+        tags: const [],
         level: const Level(id: 1, name: 'Beginner'),
         language: const Language(id: 1, name: 'English'),
       );
@@ -510,10 +571,11 @@ void main() {
         description: 'Description 3',
         startsAt: time3,
         endsAt: time3.add(const Duration(hours: 1)),
-        speakers: [],
+        speakers: const [],
         room: const Room(id: 1, name: 'Room A'),
         sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
-        tracks: [],
+        tracks: const [],
+        tags: const [],
         level: const Level(id: 1, name: 'Beginner'),
         language: const Language(id: 1, name: 'English'),
       );
@@ -615,7 +677,7 @@ void main() {
     test('should handle equality correctly', () {
       final groupedSessions1 = GroupedSessions(sessionsByDay: sampleSessionsByDay);
       final groupedSessions2 = GroupedSessions(sessionsByDay: sampleSessionsByDay);
-      final groupedSessions3 = GroupedSessions(sessionsByDay: {});
+      const groupedSessions3 = GroupedSessions(sessionsByDay: {});
 
       expect(groupedSessions1, equals(groupedSessions2));
       expect(groupedSessions1, isNot(equals(groupedSessions3)));
@@ -687,8 +749,8 @@ void main() {
       expect(json['title'], "Aiden's Keynote");
       expect(json['startsAt'], '2023-09-16T09:00:00.000Z');
       expect(json['endsAt'], '2023-09-16T10:00:00.000Z');
-      expect(json['room']['id'], 215);
-      expect(json['room']['name'], 'Green Room');
+      expect((json['room'] as Map<String, dynamic>)['id'], 215);
+      expect((json['room'] as Map<String, dynamic>)['name'], 'Green Room');
     });
 
     test('should calculate session duration correctly', () {
@@ -731,11 +793,11 @@ void main() {
 
     test('should support copyWith with all parameters', () {
       final originalSession = Session.fromJson(sampleJson);
-      final newRoom = const Room(id: 220, name: 'Blue Room');
-      final newFormat = const SessionFormat(id: 2222, name: 'Workshop');
+      const newRoom = Room(id: 220, name: 'Blue Room');
+      const newFormat = SessionFormat(id: 2222, name: 'Workshop');
       final newTracks = [const Track(id: 20001, name: 'Design')];
-      final newLevel = const Level(id: 2222, name: 'Advanced');
-      final newLanguage = const Language(id: 2222, name: 'English');
+      const newLevel = Level(id: 2222, name: 'Advanced');
+      const newLanguage = Language(id: 2222, name: 'English');
       final newSpeakers = <Speaker>[];
 
       final copiedSession = originalSession.copyWith(

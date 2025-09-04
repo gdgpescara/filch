@@ -11,31 +11,27 @@ class GetSessionByIdUseCase {
   final FirebaseFirestore _firestore;
 
   /// Retrieves a session by its ID
-  /// 
+  ///
   /// Returns a [Stream<Session?>] that emits the session data when found,
   /// or null if the session doesn't exist.
   /// The stream will update automatically if the session data changes.
   Stream<Session?> call(String sessionId) {
     return runSafetyStream(() {
-      return _firestore
-          .collection('session')
-          .doc(sessionId)
-          .snapshots()
-          .map((snapshot) {
-            if (!snapshot.exists || snapshot.data() == null) {
-              return null;
-            }
+      return _firestore.collection('session').doc(sessionId).snapshots().map((snapshot) {
+        if (!snapshot.exists || snapshot.data() == null) {
+          return null;
+        }
 
-            try {
-              return Session.fromJson({
-                'id': snapshot.id,
-                ...snapshot.data()!,
-              });
-            } catch (e) {
-              // Return null if the session data is invalid
-              return null;
-            }
+        try {
+          return Session.fromJson({
+            'id': snapshot.id,
+            ...snapshot.data()!,
           });
+        } catch (e) {
+          // Return null if the session data is invalid
+          return null;
+        }
+      });
     });
   }
 }

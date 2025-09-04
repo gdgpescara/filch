@@ -10,10 +10,10 @@ class Speaker extends Equatable {
   const Speaker({
     required this.id,
     required this.fullName,
-    required this.bio,
-    required this.tagLine,
+    this.bio,
+    this.tagLine,
     required this.profilePicture,
-    required this.links,
+    this.links,
   });
 
   /// Creates a [Speaker] from a JSON map
@@ -29,16 +29,16 @@ class Speaker extends Equatable {
   final String fullName;
 
   /// Biography of the speaker
-  final String bio;
+  final String? bio;
 
   /// Professional tagline or title of the speaker
-  final String tagLine;
+  final String? tagLine;
 
   /// URL to the speaker's profile picture
   final String profilePicture;
 
   /// List of social media and web links for the speaker
-  final List<SpeakerLink> links;
+  final List<SpeakerLink>? links;
 
   /// Creates a copy of this [Speaker] with the given fields replaced
   Speaker copyWith({

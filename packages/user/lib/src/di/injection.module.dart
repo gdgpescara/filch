@@ -21,12 +21,18 @@ class UserPackageModule extends _i526.MicroPackageModule {
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.factory<_i343.UserProfileCubit>(
-      () => _i343.UserProfileCubit(gh<_i662.GetSignedUserUseCase>(), gh<_i662.SignOutUseCase>()),
+      () => _i343.UserProfileCubit(
+        gh<_i662.GetSignedUserUseCase>(),
+        gh<_i662.SignOutUseCase>(),
+      ),
     );
     gh.factory<_i109.UserPointsCubit>(() => _i109.UserPointsCubit(gh<_i177.GetSignedUserPointsUseCase>()));
     gh.factory<_i251.HomePageCubit>(() => _i251.HomePageCubit(gh<_i177.IsRankingFreezedUseCase>()));
     gh.lazySingleton<_i899.TShirtPickUpStateUseCase>(
-      () => _i899.TShirtPickUpStateUseCase(gh<_i974.FirebaseFirestore>(), gh<_i662.GetSignedUserUseCase>()),
+      () => _i899.TShirtPickUpStateUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i662.GetSignedUserUseCase>(),
+      ),
     );
     gh.factory<_i120.UserTShirtCubit>(() => _i120.UserTShirtCubit(gh<_i899.TShirtPickUpStateUseCase>()));
   }

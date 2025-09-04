@@ -34,12 +34,10 @@ class SessionCard extends StatelessWidget {
                     ? NetworkImage(session.speakers.first.profilePicture)
                     : null,
                 backgroundColor: Colors.grey[300],
-                child: session.speakers.isEmpty
-                    ? const Icon(Icons.person, color: Colors.grey)
-                    : null,
+                child: session.speakers.isEmpty ? const Icon(Icons.person, color: Colors.grey) : null,
               ),
               const SizedBox(width: 16),
-              
+
               // Session details
               Expanded(
                 child: Column(
@@ -56,7 +54,7 @@ class SessionCard extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                     ),
                     const SizedBox(height: 4),
-                    
+
                     // Room and duration
                     Text(
                       '${session.room.name} • ${session.duration.inMinutes} min',
@@ -66,7 +64,7 @@ class SessionCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    
+
                     // Speaker name
                     if (session.speakers.isNotEmpty)
                       Text(
@@ -79,7 +77,7 @@ class SessionCard extends StatelessWidget {
                   ],
                 ),
               ),
-              
+
               // Favorite button
               IconButton(
                 onPressed: onFavoriteToggle,

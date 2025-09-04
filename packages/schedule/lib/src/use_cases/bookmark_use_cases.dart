@@ -3,7 +3,7 @@ import 'package:injectable/injectable.dart';
 /// Parameters for toggling session bookmark
 class ToggleBookmarkParams {
   const ToggleBookmarkParams({required this.sessionId});
-  
+
   final String sessionId;
 }
 
@@ -11,7 +11,7 @@ class ToggleBookmarkParams {
 @lazySingleton
 class ToggleSessionBookmarkUseCase {
   const ToggleSessionBookmarkUseCase();
-  
+
   Future<void> call(ToggleBookmarkParams params) async {
     // TODO: Implement actual bookmark logic with repository
     // For now, we'll simulate the operation
@@ -23,7 +23,7 @@ class ToggleSessionBookmarkUseCase {
 @lazySingleton
 class IsSessionBookmarkedUseCase {
   const IsSessionBookmarkedUseCase();
-  
+
   Future<bool> call(String sessionId) async {
     // TODO: Implement actual bookmark check with repository
     // For now, we'll simulate the check and return false

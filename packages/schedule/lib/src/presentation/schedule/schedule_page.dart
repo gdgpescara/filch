@@ -15,8 +15,7 @@ class SchedulePage extends StatefulWidget {
   State<SchedulePage> createState() => _SchedulePageState();
 }
 
-class _SchedulePageState extends State<SchedulePage>
-    with TickerProviderStateMixin {
+class _SchedulePageState extends State<SchedulePage> with TickerProviderStateMixin {
   late TabController _tabController;
   final List<String> _dayTabs = ['Day 1', 'Day 2', 'Day 3'];
 
@@ -137,10 +136,10 @@ class _SchedulePageState extends State<SchedulePage>
 
   List<Widget> _buildScheduleForDays(ScheduleLoaded state) {
     final sortedDays = state.sessionsByDay.keys.toList()..sort();
-    
+
     // If we have fewer days than tabs, fill with empty widgets
     final widgets = <Widget>[];
-    for (int i = 0; i < _dayTabs.length; i++) {
+    for (var i = 0; i < _dayTabs.length; i++) {
       if (i < sortedDays.length) {
         widgets.add(_buildDaySchedule(sortedDays[i], state));
       } else {
@@ -164,7 +163,7 @@ class _SchedulePageState extends State<SchedulePage>
       itemBuilder: (context, index) {
         final timeSlot = sortedTimes[index];
         final sessions = sessionsByTime[timeSlot] ?? [];
-        
+
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -180,17 +179,17 @@ class _SchedulePageState extends State<SchedulePage>
                 ),
               ),
             ),
-            
+
             // Sessions for this time slot
-            ...sessions.map((session) => SessionCard(
-              session: session,
-              isFavorite: state.bookmarkedSessions.contains(session.id),
-              onTap: () => _openSessionDetail(session),
-              onFavoriteToggle: () => context
-                  .read<ScheduleCubit>()
-                  .toggleFavorite(session.id),
-            )),
-            
+            ...sessions.map(
+              (session) => SessionCard(
+                session: session,
+                isFavorite: state.bookmarkedSessions.contains(session.id),
+                onTap: () => _openSessionDetail(session),
+                onFavoriteToggle: () => context.read<ScheduleCubit>().toggleFavorite(session.id),
+              ),
+            ),
+
             const SizedBox(height: 16),
           ],
         );
@@ -222,7 +221,6 @@ class _SchedulePageState extends State<SchedulePage>
   }
 
   void _openSessionDetail(Session session) {
-    // TODO: Navigate to session detail page
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text('Opening session: ${session.title}'),

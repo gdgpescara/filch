@@ -73,20 +73,19 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 1);
-            final date = DateTime(2023, 9, 16);
-            expect(groupedSessions.sessionsByDay.containsKey(date), true);
-            final daySchedule = groupedSessions.getSessionsForDay(date);
-            expect(daySchedule!.length, 1);
-            final sessions = groupedSessions.getSessionsForDayAndTime(
-              date, 
-              DateTime.parse('2023-09-16T09:00:00Z')
-            );
-            expect(sessions.length, 1);
-            expect(sessions.first.title, 'Morning Session');
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 1);
+              final date = DateTime(2023, 9, 16);
+              expect(groupedSessions.sessionsByDay.containsKey(date), true);
+              final daySchedule = groupedSessions.getSessionsForDay(date);
+              expect(daySchedule!.length, 1);
+              final sessions = groupedSessions.getSessionsForDayAndTime(date, DateTime.parse('2023-09-16T09:00:00Z'));
+              expect(sessions.length, 1);
+              expect(sessions.first.title, 'Morning Session');
+              return true;
+            }),
+          ),
         );
       });
     });
@@ -99,8 +98,6 @@ void main() {
           title: 'Morning Session 1',
           startsAt: '2023-09-16T09:00:00Z',
           endsAt: '2023-09-16T10:00:00Z',
-          roomId: 1,
-          roomName: 'Room A',
         );
 
         final session2Data = createSessionData(
@@ -117,8 +114,6 @@ void main() {
           title: 'Afternoon Session',
           startsAt: '2023-09-16T14:00:00Z',
           endsAt: '2023-09-16T15:00:00Z',
-          roomId: 1,
-          roomName: 'Room A',
         );
 
         await fakeFirestore.collection('session').doc('session1').set(session1Data);
@@ -131,32 +126,34 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 1); // One day
-            
-            // Check morning sessions (same start time)
-            final morningDay = DateTime(2023, 9, 16);
-            expect(groupedSessions.sessionsByDay.containsKey(morningDay), true);
-            
-            // Check we have 2 different time slots on this day
-            final daySchedule = groupedSessions.getSessionsForDay(morningDay);
-            expect(daySchedule!.length, 2); // 2 different start times
-            
-            final morningTime = DateTime.parse('2023-09-16T09:00:00Z');
-            final morningSessions = groupedSessions.getSessionsForDayAndTime(morningDay, morningTime);
-            expect(morningSessions.length, 2);
-            
-            final morningTitles = morningSessions.map((session) => session.title).toList();
-            expect(morningTitles, containsAll(['Morning Session 1', 'Morning Session 2']));
-            
-            // Check afternoon session
-            final afternoonTime = DateTime.parse('2023-09-16T14:00:00Z');
-            final afternoonSessions = groupedSessions.getSessionsForDayAndTime(morningDay, afternoonTime);
-            expect(afternoonSessions.length, 1);
-            expect(afternoonSessions.first.title, 'Afternoon Session');
-            
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 1); // One day
+
+              // Check morning sessions (same start time)
+              final morningDay = DateTime(2023, 9, 16);
+              expect(groupedSessions.sessionsByDay.containsKey(morningDay), true);
+
+              // Check we have 2 different time slots on this day
+              final daySchedule = groupedSessions.getSessionsForDay(morningDay);
+              expect(daySchedule!.length, 2); // 2 different start times
+
+              final morningTime = DateTime.parse('2023-09-16T09:00:00Z');
+              final morningSessions = groupedSessions.getSessionsForDayAndTime(morningDay, morningTime);
+              expect(morningSessions.length, 2);
+
+              final morningTitles = morningSessions.map((session) => session.title).toList();
+              expect(morningTitles, containsAll(['Morning Session 1', 'Morning Session 2']));
+
+              // Check afternoon session
+              final afternoonTime = DateTime.parse('2023-09-16T14:00:00Z');
+              final afternoonSessions = groupedSessions.getSessionsForDayAndTime(morningDay, afternoonTime);
+              expect(afternoonSessions.length, 1);
+              expect(afternoonSessions.first.title, 'Afternoon Session');
+
+              return true;
+            }),
+          ),
         );
       });
 
@@ -185,29 +182,31 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 2);
-            
-            final day1 = DateTime(2023, 9, 16);
-            final day2 = DateTime(2023, 9, 17);
-            
-            expect(groupedSessions.sessionsByDay.containsKey(day1), true);
-            expect(groupedSessions.sessionsByDay.containsKey(day2), true);
-            
-            final day1Sessions = groupedSessions.getSessionsForDayAndTime(
-              day1, 
-              DateTime.parse('2023-09-16T09:00:00Z')
-            );
-            expect(day1Sessions.first.title, 'Day 1 Session');
-            
-            final day2Sessions = groupedSessions.getSessionsForDayAndTime(
-              day2, 
-              DateTime.parse('2023-09-17T09:00:00Z')
-            );
-            expect(day2Sessions.first.title, 'Day 2 Session');
-            
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 2);
+
+              final day1 = DateTime(2023, 9, 16);
+              final day2 = DateTime(2023, 9, 17);
+
+              expect(groupedSessions.sessionsByDay.containsKey(day1), true);
+              expect(groupedSessions.sessionsByDay.containsKey(day2), true);
+
+              final day1Sessions = groupedSessions.getSessionsForDayAndTime(
+                day1,
+                DateTime.parse('2023-09-16T09:00:00Z'),
+              );
+              expect(day1Sessions.first.title, 'Day 1 Session');
+
+              final day2Sessions = groupedSessions.getSessionsForDayAndTime(
+                day2,
+                DateTime.parse('2023-09-17T09:00:00Z'),
+              );
+              expect(day2Sessions.first.title, 'Day 2 Session');
+
+              return true;
+            }),
+          ),
         );
       });
 
@@ -218,8 +217,6 @@ void main() {
           title: 'Session in Room A',
           startsAt: '2023-09-16T09:00:00Z',
           endsAt: '2023-09-16T10:00:00Z',
-          roomId: 1,
-          roomName: 'Room A',
         );
 
         final sessionB = createSessionData(
@@ -251,23 +248,22 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 1);
-            
-            final day = DateTime(2023, 9, 16);
-            final sessions = groupedSessions.getSessionsForDayAndTime(
-              day,
-              DateTime.parse('2023-09-16T09:00:00Z')
-            );
-            expect(sessions.length, 3);
-            
-            // Should be sorted by room name
-            expect(sessions[0].room.name, 'Room A');
-            expect(sessions[1].room.name, 'Room B');
-            expect(sessions[2].room.name, 'Room C');
-            
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 1);
+
+              final day = DateTime(2023, 9, 16);
+              final sessions = groupedSessions.getSessionsForDayAndTime(day, DateTime.parse('2023-09-16T09:00:00Z'));
+              expect(sessions.length, 3);
+
+              // Should be sorted by room name
+              expect(sessions[0].room.name, 'Room A');
+              expect(sessions[1].room.name, 'Room B');
+              expect(sessions[2].room.name, 'Room C');
+
+              return true;
+            }),
+          ),
         );
       });
     });
@@ -290,20 +286,22 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 1);
-            final day = DateTime(2023, 9, 16);
-            final sessions = groupedSessions.getSessionsForDayAndTime(
-              day,
-              DateTime.parse('2023-09-16T09:00:00.000Z')
-            );
-            expect(sessions.length, 1);
-            final session = sessions.first;
-            expect(session.title, 'Session with milliseconds');
-            expect(session.startsAt.hour, 9);
-            expect(session.startsAt.minute, 0);
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 1);
+              final day = DateTime(2023, 9, 16);
+              final sessions = groupedSessions.getSessionsForDayAndTime(
+                day,
+                DateTime.parse('2023-09-16T09:00:00.000Z'),
+              );
+              expect(sessions.length, 1);
+              final session = sessions.first;
+              expect(session.title, 'Session with milliseconds');
+              expect(session.startsAt.hour, 9);
+              expect(session.startsAt.minute, 0);
+              return true;
+            }),
+          ),
         );
       });
     });
@@ -331,19 +329,18 @@ void main() {
         // Assert - Should only include valid sessions
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            // Should only have the valid session, invalid one should be filtered out
-            expect(groupedSessions.sessionsByDay.length, 1);
-            final day = DateTime(2023, 9, 16);
-            final sessions = groupedSessions.getSessionsForDayAndTime(
-              day,
-              DateTime.parse('2023-09-16T09:00:00Z')
-            );
-            expect(sessions.length, 1);
-            final session = sessions.first;
-            expect(session.title, 'Valid Session');
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              // Should only have the valid session, invalid one should be filtered out
+              expect(groupedSessions.sessionsByDay.length, 1);
+              final day = DateTime(2023, 9, 16);
+              final sessions = groupedSessions.getSessionsForDayAndTime(day, DateTime.parse('2023-09-16T09:00:00Z'));
+              expect(sessions.length, 1);
+              final session = sessions.first;
+              expect(session.title, 'Valid Session');
+              return true;
+            }),
+          ),
         );
       });
     });
@@ -353,7 +350,7 @@ void main() {
         // Arrange
         final completer = Completer<void>();
         final results = <GroupedSessions>[];
-        
+
         final subscription = useCase.call().listen((data) {
           results.add(data);
           if (results.length == 2) {
@@ -380,12 +377,9 @@ void main() {
         expect(results.length, 2);
         expect(results[0].sessionsByDay.isEmpty, true); // Initially empty
         expect(results[1].sessionsByDay.length, 1); // After adding session
-        
+
         final day = DateTime(2023, 9, 16);
-        final sessions = results[1].getSessionsForDayAndTime(
-          day, 
-          DateTime.parse('2023-09-16T09:00:00Z')
-        );
+        final sessions = results[1].getSessionsForDayAndTime(day, DateTime.parse('2023-09-16T09:00:00Z'));
         expect(sessions.first.title, 'New Session');
 
         await subscription.cancel();
@@ -403,7 +397,7 @@ void main() {
 
         final completer = Completer<void>();
         final results = <GroupedSessions>[];
-        
+
         final subscription = useCase.call().listen((data) {
           results.add(data);
           if (results.length == 2) {
@@ -428,13 +422,13 @@ void main() {
 
         // Assert
         expect(results.length, 2);
-        
+
         final day = DateTime(2023, 9, 16);
         final startTime = DateTime.parse('2023-09-16T09:00:00Z');
-        
+
         final originalSessions = results[0].getSessionsForDayAndTime(day, startTime);
         expect(originalSessions.first.title, 'Original Title');
-        
+
         final updatedSessions = results[1].getSessionsForDayAndTime(day, startTime);
         expect(updatedSessions.first.title, 'Updated Title');
 
@@ -453,7 +447,7 @@ void main() {
 
         final completer = Completer<void>();
         final results = <GroupedSessions>[];
-        
+
         final subscription = useCase.call().listen((data) {
           results.add(data);
           if (results.length == 2) {
@@ -505,21 +499,20 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 1);
-            final day = DateTime(2023, 9, 16);
-            final sessions = groupedSessions.getSessionsForDayAndTime(
-              day,
-              DateTime.parse('2023-09-16T09:00:00Z')
-            );
-            expect(sessions.length, 2);
-            
-            // Both should be grouped together despite different durations
-            final titles = sessions.map((s) => s.title).toList();
-            expect(titles, containsAll(['Short Session', 'Long Session']));
-            
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 1);
+              final day = DateTime(2023, 9, 16);
+              final sessions = groupedSessions.getSessionsForDayAndTime(day, DateTime.parse('2023-09-16T09:00:00Z'));
+              expect(sessions.length, 2);
+
+              // Both should be grouped together despite different durations
+              final titles = sessions.map((s) => s.title).toList();
+              expect(titles, containsAll(['Short Session', 'Long Session']));
+
+              return true;
+            }),
+          ),
         );
       });
 
@@ -540,19 +533,18 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 1);
-            final day = DateTime(2023, 9, 16);
-            final sessions = groupedSessions.getSessionsForDayAndTime(
-              day,
-              DateTime.parse('2023-09-16T00:00:00Z')
-            );
-            expect(sessions.length, 1);
-            final session = sessions.first;
-            expect(session.title, 'Midnight Session');
-            expect(session.startsAt.hour, 0);
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 1);
+              final day = DateTime(2023, 9, 16);
+              final sessions = groupedSessions.getSessionsForDayAndTime(day, DateTime.parse('2023-09-16T00:00:00Z'));
+              expect(sessions.length, 1);
+              final session = sessions.first;
+              expect(session.title, 'Midnight Session');
+              expect(session.startsAt.hour, 0);
+              return true;
+            }),
+          ),
         );
       });
 
@@ -573,21 +565,20 @@ void main() {
         // Assert
         await expectLater(
           result,
-          emits(predicate<GroupedSessions>((groupedSessions) {
-            expect(groupedSessions.sessionsByDay.length, 1);
-            final day = DateTime(2023, 9, 16);
-            final sessions = groupedSessions.getSessionsForDayAndTime(
-              day,
-              DateTime.parse('2023-09-16T23:00:00Z')
-            );
-            expect(sessions.length, 1);
-            final session = sessions.first;
-            expect(session.title, 'Spanning Session');
-            // Should be grouped by start time
-            expect(session.startsAt.day, 16);
-            expect(session.endsAt.day, 17);
-            return true;
-          })),
+          emits(
+            predicate<GroupedSessions>((groupedSessions) {
+              expect(groupedSessions.sessionsByDay.length, 1);
+              final day = DateTime(2023, 9, 16);
+              final sessions = groupedSessions.getSessionsForDayAndTime(day, DateTime.parse('2023-09-16T23:00:00Z'));
+              expect(sessions.length, 1);
+              final session = sessions.first;
+              expect(session.title, 'Spanning Session');
+              // Should be grouped by start time
+              expect(session.startsAt.day, 16);
+              expect(session.endsAt.day, 17);
+              return true;
+            }),
+          ),
         );
       });
     });

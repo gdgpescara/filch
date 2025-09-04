@@ -1,13 +1,9 @@
 import 'package:fake_cloud_firestore/fake_cloud_firestore.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:schedule/src/models/language.dart';
-import 'package:schedule/src/models/level.dart';
-import 'package:schedule/src/models/room.dart';
+import 'package:schedule/src/models/named_entity.dart';
 import 'package:schedule/src/models/session.dart';
-import 'package:schedule/src/models/session_format.dart';
 import 'package:schedule/src/models/speaker.dart';
 import 'package:schedule/src/models/speaker_link.dart';
-import 'package:schedule/src/models/track.dart';
 import 'package:schedule/src/use_cases/get_session_by_id_use_case.dart';
 
 void main() {
@@ -16,7 +12,7 @@ void main() {
     late GetSessionByIdUseCase useCase;
 
     const sessionId = 'session123';
-    
+
     final sessionData = {
       'title': 'Flutter Development',
       'description': 'Learn Flutter development',
@@ -30,12 +26,12 @@ void main() {
           'tagLine': 'Senior Developer',
           'profilePicture': 'https://example.com/pic.jpg',
           'links': <Map<String, dynamic>>[],
-        }
+        },
       ],
       'room': {'id': 1, 'name': 'Main Hall'},
       'sessionFormat': {'id': 1, 'name': 'Talk'},
       'tracks': [
-        {'id': 1, 'name': 'Mobile Development'}
+        {'id': 1, 'name': 'Mobile Development'},
       ],
       'level': {'id': 1, 'name': 'Beginner'},
       'language': {'id': 1, 'name': 'English'},
@@ -55,11 +51,12 @@ void main() {
           tagLine: 'Senior Developer',
           profilePicture: 'https://example.com/pic.jpg',
           links: <SpeakerLink>[],
-        )
+        ),
       ],
       room: const Room(id: 1, name: 'Main Hall'),
       sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
       tracks: const [Track(id: 1, name: 'Mobile Development')],
+      tags: const <Track>[],
       level: const Level(id: 1, name: 'Beginner'),
       language: const Language(id: 1, name: 'English'),
     );
@@ -71,10 +68,7 @@ void main() {
 
     test('should return session when document exists', () async {
       // Arrange
-      await fakeFirestore
-          .collection('session')
-          .doc(sessionId)
-          .set(sessionData);
+      await fakeFirestore.collection('session').doc(sessionId).set(sessionData);
 
       // Act
       final result = useCase.call(sessionId);
@@ -99,10 +93,7 @@ void main() {
 
     test('should return null when document data is invalid', () async {
       // Arrange - set invalid data
-      await fakeFirestore
-          .collection('session')
-          .doc(sessionId)
-          .set({'invalid': 'data'});
+      await fakeFirestore.collection('session').doc(sessionId).set({'invalid': 'data'});
 
       // Act
       final result = useCase.call(sessionId);
@@ -116,16 +107,10 @@ void main() {
 
     test('should return updated session when document is modified', () async {
       // Arrange - Create initial session
-      await fakeFirestore
-          .collection('session')
-          .doc(sessionId)
-          .set(sessionData);
+      await fakeFirestore.collection('session').doc(sessionId).set(sessionData);
 
       // Modify the data before testing
-      await fakeFirestore
-          .collection('session')
-          .doc(sessionId)
-          .update({'title': 'Updated Flutter Development'});
+      await fakeFirestore.collection('session').doc(sessionId).update({'title': 'Updated Flutter Development'});
 
       // Act
       final result = useCase.call(sessionId);
@@ -134,7 +119,7 @@ void main() {
       final expectedUpdatedSession = expectedSession.copyWith(
         title: 'Updated Flutter Development',
       );
-      
+
       await expectLater(
         result,
         emits(expectedUpdatedSession),

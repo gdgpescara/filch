@@ -30,7 +30,10 @@ class AuthPackageModule extends _i526.MicroPackageModule {
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) async {
     final externalLibraries = _$ExternalLibraries();
-    await gh.factoryAsync<_i116.GoogleSignIn>(() => externalLibraries.googleSignIn, preResolve: true);
+    await gh.factoryAsync<_i116.GoogleSignIn>(
+      () => externalLibraries.googleSignIn,
+      preResolve: true,
+    );
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalLibraries.firebaseAuth);
     gh.lazySingleton<_i972.RemoveAccountUseCase>(() => _i972.RemoveAccountUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i499.HasSignedUserUseCase>(() => _i499.HasSignedUserUseCase(gh<_i59.FirebaseAuth>()));
@@ -41,7 +44,10 @@ class AuthPackageModule extends _i526.MicroPackageModule {
     gh.lazySingleton<_i608.UserPasswordSignInUseCase>(() => _i608.UserPasswordSignInUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i184.AuthStateChangesUseCase>(() => _i184.AuthStateChangesUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i395.GoogleSignInUseCase>(
-      () => _i395.GoogleSignInUseCase(gh<_i59.FirebaseAuth>(), gh<_i116.GoogleSignIn>()),
+      () => _i395.GoogleSignInUseCase(
+        gh<_i59.FirebaseAuth>(),
+        gh<_i116.GoogleSignIn>(),
+      ),
     );
     gh.factory<_i299.SignInCubit>(
       () => _i299.SignInCubit(
