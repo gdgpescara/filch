@@ -4,6 +4,7 @@
 .flutter-plugins
 .flutter-plugins-dependencies
 .buildlog/
+build/
 
 # Firebase
 firebase-debug.log

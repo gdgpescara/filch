@@ -3,7 +3,7 @@ publish_to: 'none'
 version: 1.0.0
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.9.0
   flutter: ">=3.32.5"
 
 resolution: workspace
@@ -17,9 +17,9 @@ dependencies:
     path: ../../packages/assets
   get_it: ^8.2.0
   injectable: ^2.5.1
-  firebase_auth: ^6.0.0
+  firebase_auth: ^6.0.2
   google_fonts: ^6.3.0
-  flutter_svg: ^2.2.0
+  flutter_svg: ^2.2.1
   reactive_forms: ^18.1.1
   rive: ^0.13.20
   qr_flutter: ^4.1.0
@@ -31,7 +31,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  build_runner: ^2.6.1
+  build_runner: ^2.7.0
   injectable_generator: ^2.8.1
 
 flutter:

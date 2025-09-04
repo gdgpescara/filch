@@ -19,10 +19,7 @@ workspace:
   - packages/user
 
 dev_dependencies:
-  melos: ^7.0.0-dev.9
-
-dependency_overrides:
-  meta: ^1.7.0
+  melos: ^7.1.0
 
 melos:
   name: filch
@@ -36,8 +33,33 @@ melos:
       runPubGetInParallel: false
       usePubspecOverrides: true
       environment:
-        sdk: ^3.8.1
+        sdk: ^3.9.0
         flutter: ">=3.32.5"
+
+      dependencies:
+          get_it: ^8.2.0
+          injectable: ^2.5.1
+          firebase_core: ^4.1.0
+          firebase_messaging: ^16.0.1
+          cloud_firestore: ^6.0.1
+          cloud_functions: ^6.0.1
+          firebase_auth: ^6.0.2
+          firebase_crashlytics: ^5.0.1
+          firebase_storage: ^13.0.1
+          bloc: ^9.0.0
+          flutter_bloc: ^9.1.1
+          equatable: ^2.0.7
+          json_annotation: ^4.9.0
+          reactive_forms: ^18.1.1
+          slang: ^4.7.3
+          font_awesome_flutter: ^10.10.0
+          flutter_svg: ^2.2.1
+
+      dev_dependencies:
+        flutter_lints: ^6.0.0
+        build_runner: ^2.7.0
+        injectable_generator: ^2.8.1
+        json_serializable: ^6.11.0
 
     clean:
       hooks:
