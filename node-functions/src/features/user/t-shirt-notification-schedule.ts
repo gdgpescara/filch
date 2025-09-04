@@ -65,7 +65,6 @@ export const sendTShirtNotification = async () => {
       const message = {
         notification: {
           title: "Hey, it's time to pick up your t-shirt!",
-          // eslint-disable-next-line max-len
           body: "Got to the gadget desk and ask to the staff for your t-shirt. Enjoy it!",
         },
         token: user.fcmToken,

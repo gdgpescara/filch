@@ -6,8 +6,10 @@
     "execute": "node ./src/index.js"
   },
   "dependencies": {
-    "@google-cloud/firestore": "^7.11.2",
+    "@google-cloud/firestore": "^7.11.3",
     "enquirer": "^2.4.1",
-    "firebase-admin": "^13.4.0"
+    "firebase": "^12.2.1",
+    "firebase-admin": "^13.5.0",
+    "google-auth-library": "^10.3.0"
   }
 }

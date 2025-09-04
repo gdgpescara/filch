@@ -57,3 +57,4 @@ ios/Runner/GeneratedPluginRegistrant.h
 ios/Runner/GeneratedPluginRegistrant.m
 
 keys/
+serviceAccountKey*

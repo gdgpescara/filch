@@ -1,11 +1,14 @@
-import * as functions from "firebase-functions/v1";
-import {Quest} from "./types/quest";
+import { Quest } from "./types/quest";
+import { onDocumentWritten } from "firebase-functions/v2/firestore";
 
-export const actorQueueSentinel = functions
-  .region("europe-west3")
-  .firestore
-  .document("quests/{questId}/queue/{userId}")
-  .onWrite(async (change) => {
+export const actorQueueSentinel = onDocumentWritten(
+  {
+    document: "quests/{questId}/queue/{userId}",
+    region: "europe-west3",
+  },
+  async (event) => {
+    const change = event.data;
+    if (!change) return;
     const queueCount = await change.after.ref.parent.count().get();
     const questRef = change.after.ref.parent.parent;
     if (questRef) {
