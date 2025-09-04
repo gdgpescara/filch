@@ -1,13 +1,8 @@
-from firestore_client import client as firestore_client
-from firebase_functions.https_fn import on_request, HttpsError, FunctionsErrorCode
+from firebase_functions.https_fn import HttpsError, FunctionsErrorCode
 from typing import List
 from features.sessions.types.session import Session, NamedEntity, SessionSpeaker
-from shared.get_signed_in_user import verify_firebase_auth
-from shared.env import FIREBASE_REGION
-from shared.event_id import get_event_id
 from logger_config import logger
 import json, requests
-from flask import jsonify, Request
 
 
 def transform_sessions(raw_data: list) -> List[Session]:
@@ -39,7 +34,7 @@ def transform_sessions(raw_data: list) -> List[Session]:
                 "description": description,
                 "startsAt": startsAt,
                 "endsAt": endsAt,
-                "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name")) for s in session.get("speakers", [])],
+                "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name"), profilePicture=None) for s in session.get("speakers", [])],
                 "roomId": roomId,
                 "room": room,
                 "sessionFormat": None,
@@ -69,23 +64,8 @@ def transform_sessions(raw_data: list) -> List[Session]:
     return result
 
 
-def upload_sessions_to_firestore(sessions: List[Session], collection_name: str = "sessions") -> None:
-    try:
-        batch = firestore_client.batch()
-        for session in sessions:
-            doc_ref = firestore_client.collection(collection_name).document(session.id)
-            session_dict = session.model_dump()
-            batch.set(doc_ref, session_dict)
-
-        batch.commit()
-        logger.info(f"Uploaded {len(sessions)} sessions to Firestore.")
-    except Exception as e:
-        raise e
-
-
-@on_request(region=FIREBASE_REGION)
-def fetch_sessions(request: Request) -> bool:
-    url = f"https://sessionize.com/api/v2/{get_event_id(request)}/view/" + "Sessions"
+def fetch_sessions(event_id: str) -> List[Session]:
+    url = f"https://sessionize.com/api/v2/{event_id}/view/" + "Sessions"
     logger.info(f"Downloading Sessions From: {url}")
     try:
         response = requests.get(url, timeout=10)
@@ -93,7 +73,7 @@ def fetch_sessions(request: Request) -> bool:
             logger.info("Sessions JSON Fetched")
             try:
                 raw_data = response.json()
-                upload_sessions_to_firestore(sessions=transform_sessions(raw_data=raw_data))
+                return transform_sessions(raw_data=raw_data)
             except json.JSONDecodeError:
                 logger.exception("Error During Decoding Response")
                 logger.info(f"Given Data Are: {raw_data}")
@@ -128,5 +108,3 @@ def fetch_sessions(request: Request) -> bool:
             code=FunctionsErrorCode.UNAVAILABLE,
             message="Network error contacting Sessionize"
         )
-
-    return jsonify(True)

@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 
 
 class Social(BaseModel):
@@ -12,6 +12,6 @@ class Speaker(BaseModel):
     firstName: str
     lastName: str
     bio: str
-    profilePicture: str
+    profilePicture: Optional[str]
     links: List[Social]
     tagLine: str
