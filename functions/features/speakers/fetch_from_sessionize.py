@@ -1,13 +1,8 @@
-from firestore_client import client as firestore_client
-from firebase_functions.https_fn import on_request, HttpsError, FunctionsErrorCode
+from firebase_functions.https_fn import HttpsError, FunctionsErrorCode
 from typing import List
 from features.speakers.types.speaker import Speaker, Social
-from shared.get_signed_in_user import verify_firebase_auth
-from shared.env import FIREBASE_REGION
-from shared.event_id import get_event_id
 from logger_config import logger
 import json, requests
-from flask import jsonify, Request
 
 
 def transform_speakers(raw_data: list) -> List[Speaker]:
@@ -18,7 +13,7 @@ def transform_speakers(raw_data: list) -> List[Speaker]:
             "firstName": speaker.get("firstName"),
             "lastName": speaker.get("lastName"),
             "bio": speaker.get("bio"),
-            "profilePicture": speaker.get("profilePicture"),
+            "profilePicture": speaker.get("profilePicture", None),
             "tagLine": speaker.get("tagLine"),
             "links": [Social(title=s.get("title"), url=s.get("url")) for s in speaker.get("links", [])],
         }
@@ -30,25 +25,8 @@ def transform_speakers(raw_data: list) -> List[Speaker]:
     return result
 
 
-def upload_speakers_to_firestore(speakers: List[Speaker], collection_name: str = "speakers") -> None:
-    try:
-        batch = firestore_client.batch()
-        for session in speakers:
-            doc_ref = firestore_client.collection(collection_name).document(session.id)
-            session_dict = session.model_dump()
-            batch.set(doc_ref, session_dict)
-
-        batch.commit()
-        logger.info(f"Uploaded {len(speakers)} sessions to Firestore.")
-    except Exception as e:
-        raise e
-
-
-@on_request(region=FIREBASE_REGION)
-def fetch_speakers(request: Request) -> bool:
-    # user_info = verify_firebase_auth(request=request)
-    # logger.info(f"Logged User Info: {user_info}")
-    url = f"https://sessionize.com/api/v2/{get_event_id(request)}/view/" + "Speakers"
+def fetch_speakers(event_id: str) -> List[Speaker]:
+    url = f"https://sessionize.com/api/v2/{event_id}/view/" + "Speakers"
     logger.info(f"Downloading Speakers From: {url}")
     try:
         response = requests.get(url, timeout=10)
@@ -56,7 +34,7 @@ def fetch_speakers(request: Request) -> bool:
             logger.info("Speakers JSON Fetched")
             try:
                 raw_data = response.json()
-                upload_speakers_to_firestore(speakers=transform_speakers(raw_data=raw_data))
+                return transform_speakers(raw_data=raw_data)
             except json.JSONDecodeError:
                 logger.exception("Error During Decoding Response")
                 logger.info(f"Given Data Are: {raw_data}")
@@ -91,5 +69,3 @@ def fetch_speakers(request: Request) -> bool:
             code=FunctionsErrorCode.UNAVAILABLE,
             message="Network error contacting Sessionize"
         )
-
-    return jsonify(True)
