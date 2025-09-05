@@ -22,7 +22,7 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'package:shorebird_code_push/shorebird_code_push.dart' as _i624;
 
 class CorePackageModule extends _i526.MicroPackageModule {
-  // initializes the registration of main-scope dependencies inside of GetIt
+// initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) async {
     final externalLibraries = _$ExternalLibraries();
@@ -35,12 +35,16 @@ class CorePackageModule extends _i526.MicroPackageModule {
       () => externalLibraries.prefs(),
       preResolve: true,
     );
-    gh.lazySingleton<_i809.FirebaseFunctions>(() => externalLibraries.firebaseFunctions);
-    gh.lazySingleton<_i974.FirebaseFirestore>(() => externalLibraries.firestore);
-    gh.lazySingleton<_i892.FirebaseMessaging>(() => externalLibraries.firebaseMessaging);
+    gh.lazySingleton<_i809.FirebaseFunctions>(
+        () => externalLibraries.firebaseFunctions);
+    gh.lazySingleton<_i974.FirebaseFirestore>(
+        () => externalLibraries.firestore);
+    gh.lazySingleton<_i892.FirebaseMessaging>(
+        () => externalLibraries.firebaseMessaging);
     gh.lazySingleton<_i457.Reference>(() => externalLibraries.storageRef);
     gh.lazySingleton<_i183.ImagePicker>(() => externalLibraries.imagePicker);
-    gh.lazySingleton<_i624.ShorebirdUpdater>(() => externalLibraries.shorebirdUpdater);
+    gh.lazySingleton<_i624.ShorebirdUpdater>(
+        () => externalLibraries.shorebirdUpdater);
     await gh.factoryAsync<_i497.Directory>(
       () => externalLibraries.documentDirectory(),
       instanceName: 'documentDirectory',
@@ -90,7 +94,8 @@ class CorePackageModule extends _i526.MicroPackageModule {
       () => dateFormatModule.dateFormatFullReadable,
       instanceName: 'fullReadable',
     );
-    gh.lazySingleton<_i866.GetFeatureFlagsUseCase>(() => _i866.GetFeatureFlagsUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i866.GetFeatureFlagsUseCase>(
+        () => _i866.GetFeatureFlagsUseCase(gh<_i974.FirebaseFirestore>()));
   }
 }
 

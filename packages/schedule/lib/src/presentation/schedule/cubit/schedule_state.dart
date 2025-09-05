@@ -1,6 +1,6 @@
 import 'package:equatable/equatable.dart';
 
-import '../../../models/session.dart';
+import '../../../models/grouped_sessions.dart';
 
 /// Base class for all schedule states
 abstract class ScheduleState extends Equatable {
@@ -23,23 +23,19 @@ class ScheduleLoading extends ScheduleState {
 /// State when schedule has been loaded successfully
 class ScheduleLoaded extends ScheduleState {
   const ScheduleLoaded({
-    required this.sessionsByDay,
-    required this.bookmarkedSessions,
+    required this.groupedSessions,
   });
 
-  final Map<DateTime, Map<DateTime, List<Session>>> sessionsByDay;
-  final Set<String> bookmarkedSessions;
+  final GroupedSessions groupedSessions;
 
   @override
-  List<Object?> get props => [sessionsByDay, bookmarkedSessions];
+  List<Object?> get props => [groupedSessions];
 
   ScheduleLoaded copyWith({
-    Map<DateTime, Map<DateTime, List<Session>>>? sessionsByDay,
-    Set<String>? bookmarkedSessions,
+    GroupedSessions? groupedSessions,
   }) {
     return ScheduleLoaded(
-      sessionsByDay: sessionsByDay ?? this.sessionsByDay,
-      bookmarkedSessions: bookmarkedSessions ?? this.bookmarkedSessions,
+      groupedSessions: groupedSessions ?? this.groupedSessions,
     );
   }
 }

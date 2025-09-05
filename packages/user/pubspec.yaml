@@ -21,6 +21,8 @@ dependencies:
     path: ../auth
   quests:
     path: ../quests
+  schedule:
+    path: ../schedule
   get_it: ^8.2.0
   injectable: ^2.5.1
   equatable: ^2.0.7

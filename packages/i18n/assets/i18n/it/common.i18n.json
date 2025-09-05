@@ -51,7 +51,8 @@
       "current_quest": "Missione",
       "profile": "Profilo",
       "scan": "Scan",
-      "shifts": "Turni"
+      "shifts": "Turni",
+      "sessions": "Sessioni"
     }
   },
   "user": {

@@ -15,7 +15,6 @@ class GetGroupedSessionsUseCase {
   Stream<GroupedSessions> call() {
     return runSafetyStream(() {
       return _firestore.collection('sessions').snapshots().map((snapshot) {
-        // Parse all sessions from Firestore documents
         final sessions = snapshot.docs
             .map((doc) {
               try {
@@ -31,7 +30,6 @@ class GetGroupedSessionsUseCase {
             .whereType<Session>()
             .toList();
 
-        // Group sessions by day and then by start time
         final sessionsByDay = sessions
             .groupListsBy(
               (session) => DateTime(

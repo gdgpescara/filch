@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:quests/quests.dart';
+import 'package:schedule/schedule.dart';
 import 'package:ui/ui.dart';
 
 import '../profile/user_profile_page.dart';
@@ -34,6 +35,9 @@ class UserHomePage extends StatelessWidget {
                 children: [
                   const RankingPage(),
                   if (!state.isRankingFreezed) const CurrentQuestPage(),
+                  const SchedulePage(
+                    embedded: true,
+                  ),
                   UserProfilePage(
                     navigateToSplash: navigateToSplash,
                     navigateToLogin: navigateToLogin,
@@ -61,6 +65,12 @@ class UserHomePage extends StatelessWidget {
                     tooltip: t.common.home.bottom_nav.current_quest,
                     label: t.common.home.bottom_nav.current_quest,
                   ),
+                BottomNavigationBarItem(
+                  icon: const Icon(FontAwesomeIcons.calendar),
+                  activeIcon: const Icon(FontAwesomeIcons.solidCalendar),
+                  tooltip: t.common.home.bottom_nav.sessions,
+                  label: t.common.home.bottom_nav.sessions,
+                ),
                 BottomNavigationBarItem(
                   icon: const Icon(FontAwesomeIcons.user),
                   activeIcon: const Icon(FontAwesomeIcons.solidUser),

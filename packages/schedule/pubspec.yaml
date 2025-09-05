@@ -14,6 +14,10 @@ dependencies:
 
   core:
     path: ../core
+  ui:
+    path: ../ui
+  i18n:
+    path: ../i18n
 
   cloud_firestore: ^6.0.1
   equatable: ^2.0.7

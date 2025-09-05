@@ -56,19 +56,19 @@ const _googleGreen = CustomColor(
 
 /// google blue
 const _googleBlue = CustomColor(
-  seed: Color(0xff4285f4),
-  value: Color(0xff008de1),
+  seed: Color(0xff3089ff),
+  value: Color(0xff3089ff),
   light: ColorFamily(
-    color: Color(0xff005388),
-    onColor: Color(0xffffffff),
-    colorContainer: Color(0xff0079c2),
-    onColorContainer: Color(0xffffffff),
+    color: Color(0xff1e5ba8),
+    onColor: Color(0xfffcfbff),
+    colorContainer: Color(0xff5ba2ff),
+    onColorContainer: Color(0xff060404),
   ),
   dark: ColorFamily(
-    color: Color(0xff9acbff),
-    onColor: Color(0xff003355),
-    colorContainer: Color(0xff0079c2),
-    onColorContainer: Color(0xffffffff),
+    color: Color(0xff7db4ff),
+    onColor: Color(0xff060404),
+    colorContainer: Color(0xff2470d9),
+    onColorContainer: Color(0xfffcfbff),
   ),
 );
 

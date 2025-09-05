@@ -11,7 +11,7 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  slang: ^4.7.3
+  slang: ^4.8.1
   slang_flutter: ^4.8.0
 
 dev_dependencies:
