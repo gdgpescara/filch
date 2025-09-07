@@ -10,14 +10,14 @@ void main() {
     const roomJson = {'id': 215, 'name': 'Green Room'};
 
     test('should create Room from JSON', () {
-      final room = Room.fromJson(roomJson);
+      final room = NamedEntity.fromJson(roomJson);
 
       expect(room.id, 215);
       expect(room.name, 'Green Room');
     });
 
     test('should convert Room to JSON', () {
-      const room = Room(id: 215, name: 'Green Room');
+      const room = NamedEntity(id: 215, name: 'Green Room');
       final json = room.toJson();
 
       expect(json['id'], 215);
@@ -25,7 +25,7 @@ void main() {
     });
 
     test('should support copyWith functionality', () {
-      const originalRoom = Room(id: 215, name: 'Green Room');
+      const originalRoom = NamedEntity(id: 215, name: 'Green Room');
       final copiedRoom = originalRoom.copyWith(id: 216, name: 'Blue Room');
 
       expect(copiedRoom.id, 216);
@@ -35,7 +35,7 @@ void main() {
     });
 
     test('should support copyWith with partial updates', () {
-      const originalRoom = Room(id: 215, name: 'Green Room');
+      const originalRoom = NamedEntity(id: 215, name: 'Green Room');
       final copiedRoom = originalRoom.copyWith(name: 'Blue Room');
 
       expect(copiedRoom.id, 215); // unchanged
@@ -43,7 +43,7 @@ void main() {
     });
 
     test('should return same instance with copyWith when no parameters provided', () {
-      const originalRoom = Room(id: 215, name: 'Green Room');
+      const originalRoom = NamedEntity(id: 215, name: 'Green Room');
       final copiedRoom = originalRoom.copyWith();
 
       expect(copiedRoom.id, 215);
@@ -52,16 +52,16 @@ void main() {
     });
 
     test('should handle equality correctly', () {
-      const room1 = Room(id: 215, name: 'Green Room');
-      const room2 = Room(id: 215, name: 'Green Room');
-      const room3 = Room(id: 216, name: 'Blue Room');
+      const room1 = NamedEntity(id: 215, name: 'Green Room');
+      const room2 = NamedEntity(id: 215, name: 'Green Room');
+      const room3 = NamedEntity(id: 216, name: 'Blue Room');
 
       expect(room1, equals(room2));
       expect(room1, isNot(equals(room3)));
     });
 
     test('should have correct props for Equatable', () {
-      const room = Room(id: 215, name: 'Green Room');
+      const room = NamedEntity(id: 215, name: 'Green Room');
       expect(room.props, [215, 'Green Room']);
     });
   });
@@ -139,7 +139,7 @@ void main() {
   group('Speaker Model', () {
     const speakerJson = {
       'id': '00000000-0000-0000-0000-000000000004',
-      'fullName': 'Aiden Test',
+      'name': 'Aiden Test',
       'bio': 'Pop culture fanatic. Friend of animals everywhere.',
       'tagLine': 'Professional public speaker',
       'profilePicture': 'https://sessionize.com/image/test.jpg',
@@ -153,7 +153,7 @@ void main() {
       final speaker = Speaker.fromJson(speakerJson);
 
       expect(speaker.id, '00000000-0000-0000-0000-000000000004');
-      expect(speaker.fullName, 'Aiden Test');
+      expect(speaker.name, 'Aiden Test');
       expect(speaker.bio, 'Pop culture fanatic. Friend of animals everywhere.');
       expect(speaker.tagLine, 'Professional public speaker');
       expect(speaker.profilePicture, 'https://sessionize.com/image/test.jpg');
@@ -167,7 +167,7 @@ void main() {
       final json = speaker.toJson();
 
       expect(json['id'], '00000000-0000-0000-0000-000000000004');
-      expect(json['fullName'], 'Aiden Test');
+      expect(json['name'], 'Aiden Test');
       expect(json['bio'], 'Pop culture fanatic. Friend of animals everywhere.');
       expect(json['tagLine'], 'Professional public speaker');
       expect(json['profilePicture'], 'https://sessionize.com/image/test.jpg');
@@ -178,7 +178,7 @@ void main() {
     test('should handle nullable fields correctly', () {
       const speaker = Speaker(
         id: 'test-id',
-        fullName: 'Test Speaker',
+        name: 'Test Speaker',
         profilePicture: 'https://example.com/pic.jpg',
       );
 
@@ -186,20 +186,20 @@ void main() {
       expect(speaker.tagLine, isNull);
       expect(speaker.links, isNull);
       expect(speaker.id, 'test-id');
-      expect(speaker.fullName, 'Test Speaker');
+      expect(speaker.name, 'Test Speaker');
       expect(speaker.profilePicture, 'https://example.com/pic.jpg');
     });
 
     test('should convert Speaker with null fields to JSON correctly', () {
       const speaker = Speaker(
         id: 'test-id',
-        fullName: 'Test Speaker',
+        name: 'Test Speaker',
         profilePicture: 'https://example.com/pic.jpg',
       );
 
       final json = speaker.toJson();
       expect(json['id'], 'test-id');
-      expect(json['fullName'], 'Test Speaker');
+      expect(json['name'], 'Test Speaker');
       expect(json['bio'], isNull);
       expect(json['tagLine'], isNull);
       expect(json['profilePicture'], 'https://example.com/pic.jpg');
@@ -208,9 +208,9 @@ void main() {
 
     test('should support copyWith functionality', () {
       final originalSpeaker = Speaker.fromJson(speakerJson);
-      final copiedSpeaker = originalSpeaker.copyWith(fullName: 'Updated Name', bio: 'Updated bio');
+      final copiedSpeaker = originalSpeaker.copyWith(name: 'Updated Name', bio: 'Updated bio');
 
-      expect(copiedSpeaker.fullName, 'Updated Name');
+      expect(copiedSpeaker.name, 'Updated Name');
       expect(copiedSpeaker.bio, 'Updated bio');
       expect(copiedSpeaker.id, originalSpeaker.id); // unchanged
       expect(copiedSpeaker.tagLine, originalSpeaker.tagLine); // unchanged
@@ -218,9 +218,9 @@ void main() {
 
     test('should support copyWith with partial updates', () {
       final originalSpeaker = Speaker.fromJson(speakerJson);
-      final copiedSpeaker = originalSpeaker.copyWith(fullName: 'Updated Name');
+      final copiedSpeaker = originalSpeaker.copyWith(name: 'Updated Name');
 
-      expect(copiedSpeaker.fullName, 'Updated Name');
+      expect(copiedSpeaker.name, 'Updated Name');
       expect(copiedSpeaker.bio, originalSpeaker.bio); // unchanged
       expect(copiedSpeaker.id, originalSpeaker.id); // unchanged
       expect(copiedSpeaker.tagLine, originalSpeaker.tagLine); // unchanged
@@ -233,7 +233,7 @@ void main() {
       final copiedSpeaker = originalSpeaker.copyWith();
 
       expect(copiedSpeaker.id, originalSpeaker.id);
-      expect(copiedSpeaker.fullName, originalSpeaker.fullName);
+      expect(copiedSpeaker.name, originalSpeaker.name);
       expect(copiedSpeaker.bio, originalSpeaker.bio);
       expect(copiedSpeaker.tagLine, originalSpeaker.tagLine);
       expect(copiedSpeaker.profilePicture, originalSpeaker.profilePicture);
@@ -244,7 +244,7 @@ void main() {
     test('should handle equality correctly', () {
       final speaker1 = Speaker.fromJson(speakerJson);
       final speaker2 = Speaker.fromJson(speakerJson);
-      final speaker3 = speaker1.copyWith(fullName: 'Different Name');
+      final speaker3 = speaker1.copyWith(name: 'Different Name');
 
       expect(speaker1, equals(speaker2));
       expect(speaker1, isNot(equals(speaker3)));
@@ -254,7 +254,7 @@ void main() {
       final speaker = Speaker.fromJson(speakerJson);
       expect(speaker.props, [
         speaker.id,
-        speaker.fullName,
+        speaker.name,
         speaker.bio,
         speaker.tagLine,
         speaker.profilePicture,
@@ -265,13 +265,13 @@ void main() {
     test('should safely access nullable links', () {
       const speakerWithNullLinks = Speaker(
         id: 'test-id',
-        fullName: 'Test Speaker',
+        name: 'Test Speaker',
         profilePicture: 'https://example.com/pic.jpg',
       );
 
       const speakerWithEmptyLinks = Speaker(
         id: 'test-id',
-        fullName: 'Test Speaker',
+        name: 'Test Speaker',
         profilePicture: 'https://example.com/pic.jpg',
         links: <SpeakerLink>[],
       );
@@ -288,14 +288,14 @@ void main() {
     const sessionFormatJson = {'id': 1111, 'name': 'Session'};
 
     test('should create SessionFormat from JSON', () {
-      final format = SessionFormat.fromJson(sessionFormatJson);
+      final format = NamedEntity.fromJson(sessionFormatJson);
 
       expect(format.id, 1111);
       expect(format.name, 'Session');
     });
 
     test('should convert SessionFormat to JSON', () {
-      const format = SessionFormat(id: 1111, name: 'Session');
+      const format = NamedEntity(id: 1111, name: 'Session');
       final json = format.toJson();
 
       expect(json['id'], 1111);
@@ -303,7 +303,7 @@ void main() {
     });
 
     test('should support copyWith functionality', () {
-      const originalFormat = SessionFormat(id: 1111, name: 'Session');
+      const originalFormat = NamedEntity(id: 1111, name: 'Session');
       final copiedFormat = originalFormat.copyWith(id: 2222, name: 'Workshop');
 
       expect(copiedFormat.id, 2222);
@@ -313,7 +313,7 @@ void main() {
     });
 
     test('should support copyWith with partial updates', () {
-      const originalFormat = SessionFormat(id: 1111, name: 'Session');
+      const originalFormat = NamedEntity(id: 1111, name: 'Session');
       final copiedFormat = originalFormat.copyWith(name: 'Workshop');
 
       expect(copiedFormat.id, 1111);
@@ -321,7 +321,7 @@ void main() {
     });
 
     test('should return same instance with copyWith when no parameters provided', () {
-      const originalFormat = SessionFormat(id: 1111, name: 'Session');
+      const originalFormat = NamedEntity(id: 1111, name: 'Session');
       final copiedFormat = originalFormat.copyWith();
 
       expect(copiedFormat.id, 1111);
@@ -330,16 +330,16 @@ void main() {
     });
 
     test('should handle equality correctly', () {
-      const format1 = SessionFormat(id: 1111, name: 'Session');
-      const format2 = SessionFormat(id: 1111, name: 'Session');
-      const format3 = SessionFormat(id: 2222, name: 'Workshop');
+      const format1 = NamedEntity(id: 1111, name: 'Session');
+      const format2 = NamedEntity(id: 1111, name: 'Session');
+      const format3 = NamedEntity(id: 2222, name: 'Workshop');
 
       expect(format1, equals(format2));
       expect(format1, isNot(equals(format3)));
     });
 
     test('should have correct props for Equatable', () {
-      const format = SessionFormat(id: 1111, name: 'Session');
+      const format = NamedEntity(id: 1111, name: 'Session');
       expect(format.props, [1111, 'Session']);
     });
   });
@@ -348,14 +348,14 @@ void main() {
     const trackJson = {'id': 10663, 'name': 'Technical'};
 
     test('should create Track from JSON', () {
-      final track = Track.fromJson(trackJson);
+      final track = NamedEntity.fromJson(trackJson);
 
       expect(track.id, 10663);
       expect(track.name, 'Technical');
     });
 
     test('should convert Track to JSON', () {
-      const track = Track(id: 10663, name: 'Technical');
+      const track = NamedEntity(id: 10663, name: 'Technical');
       final json = track.toJson();
 
       expect(json['id'], 10663);
@@ -363,7 +363,7 @@ void main() {
     });
 
     test('should support copyWith functionality', () {
-      const originalTrack = Track(id: 10663, name: 'Technical');
+      const originalTrack = NamedEntity(id: 10663, name: 'Technical');
       final copiedTrack = originalTrack.copyWith(id: 10664, name: 'Design');
 
       expect(copiedTrack.id, 10664);
@@ -373,7 +373,7 @@ void main() {
     });
 
     test('should support copyWith with partial updates', () {
-      const originalTrack = Track(id: 10663, name: 'Technical');
+      const originalTrack = NamedEntity(id: 10663, name: 'Technical');
       final copiedTrack = originalTrack.copyWith(name: 'Design');
 
       expect(copiedTrack.id, 10663);
@@ -381,7 +381,7 @@ void main() {
     });
 
     test('should return same instance with copyWith when no parameters provided', () {
-      const originalTrack = Track(id: 10663, name: 'Technical');
+      const originalTrack = NamedEntity(id: 10663, name: 'Technical');
       final copiedTrack = originalTrack.copyWith();
 
       expect(copiedTrack.id, 10663);
@@ -390,16 +390,16 @@ void main() {
     });
 
     test('should handle equality correctly', () {
-      const track1 = Track(id: 10663, name: 'Technical');
-      const track2 = Track(id: 10663, name: 'Technical');
-      const track3 = Track(id: 10664, name: 'Design');
+      const track1 = NamedEntity(id: 10663, name: 'Technical');
+      const track2 = NamedEntity(id: 10663, name: 'Technical');
+      const track3 = NamedEntity(id: 10664, name: 'Design');
 
       expect(track1, equals(track2));
       expect(track1, isNot(equals(track3)));
     });
 
     test('should have correct props for Equatable', () {
-      const track = Track(id: 10663, name: 'Technical');
+      const track = NamedEntity(id: 10663, name: 'Technical');
       expect(track.props, [10663, 'Technical']);
     });
   });
@@ -408,14 +408,14 @@ void main() {
     const levelJson = {'id': 1111, 'name': 'Intermediate'};
 
     test('should create Level from JSON', () {
-      final level = Level.fromJson(levelJson);
+      final level = NamedEntity.fromJson(levelJson);
 
       expect(level.id, 1111);
       expect(level.name, 'Intermediate');
     });
 
     test('should convert Level to JSON', () {
-      const level = Level(id: 1111, name: 'Intermediate');
+      const level = NamedEntity(id: 1111, name: 'Intermediate');
       final json = level.toJson();
 
       expect(json['id'], 1111);
@@ -423,7 +423,7 @@ void main() {
     });
 
     test('should support copyWith functionality', () {
-      const originalLevel = Level(id: 1111, name: 'Intermediate');
+      const originalLevel = NamedEntity(id: 1111, name: 'Intermediate');
       final copiedLevel = originalLevel.copyWith(id: 2222, name: 'Advanced');
 
       expect(copiedLevel.id, 2222);
@@ -433,7 +433,7 @@ void main() {
     });
 
     test('should support copyWith with partial updates', () {
-      const originalLevel = Level(id: 1111, name: 'Intermediate');
+      const originalLevel = NamedEntity(id: 1111, name: 'Intermediate');
       final copiedLevel = originalLevel.copyWith(name: 'Advanced');
 
       expect(copiedLevel.id, 1111);
@@ -441,7 +441,7 @@ void main() {
     });
 
     test('should return same instance with copyWith when no parameters provided', () {
-      const originalLevel = Level(id: 1111, name: 'Intermediate');
+      const originalLevel = NamedEntity(id: 1111, name: 'Intermediate');
       final copiedLevel = originalLevel.copyWith();
 
       expect(copiedLevel.id, 1111);
@@ -450,16 +450,16 @@ void main() {
     });
 
     test('should handle equality correctly', () {
-      const level1 = Level(id: 1111, name: 'Intermediate');
-      const level2 = Level(id: 1111, name: 'Intermediate');
-      const level3 = Level(id: 2222, name: 'Advanced');
+      const level1 = NamedEntity(id: 1111, name: 'Intermediate');
+      const level2 = NamedEntity(id: 1111, name: 'Intermediate');
+      const level3 = NamedEntity(id: 2222, name: 'Advanced');
 
       expect(level1, equals(level2));
       expect(level1, isNot(equals(level3)));
     });
 
     test('should have correct props for Equatable', () {
-      const level = Level(id: 1111, name: 'Intermediate');
+      const level = NamedEntity(id: 1111, name: 'Intermediate');
       expect(level.props, [1111, 'Intermediate']);
     });
   });
@@ -468,14 +468,14 @@ void main() {
     const languageJson = {'id': 1111, 'name': 'Italian'};
 
     test('should create Language from JSON', () {
-      final language = Language.fromJson(languageJson);
+      final language = NamedEntity.fromJson(languageJson);
 
       expect(language.id, 1111);
       expect(language.name, 'Italian');
     });
 
     test('should convert Language to JSON', () {
-      const language = Language(id: 1111, name: 'Italian');
+      const language = NamedEntity(id: 1111, name: 'Italian');
       final json = language.toJson();
 
       expect(json['id'], 1111);
@@ -483,7 +483,7 @@ void main() {
     });
 
     test('should support copyWith functionality', () {
-      const originalLanguage = Language(id: 1111, name: 'Italian');
+      const originalLanguage = NamedEntity(id: 1111, name: 'Italian');
       final copiedLanguage = originalLanguage.copyWith(id: 2222, name: 'English');
 
       expect(copiedLanguage.id, 2222);
@@ -493,7 +493,7 @@ void main() {
     });
 
     test('should support copyWith with partial updates', () {
-      const originalLanguage = Language(id: 1111, name: 'Italian');
+      const originalLanguage = NamedEntity(id: 1111, name: 'Italian');
       final copiedLanguage = originalLanguage.copyWith(name: 'English');
 
       expect(copiedLanguage.id, 1111);
@@ -501,7 +501,7 @@ void main() {
     });
 
     test('should return same instance with copyWith when no parameters provided', () {
-      const originalLanguage = Language(id: 1111, name: 'Italian');
+      const originalLanguage = NamedEntity(id: 1111, name: 'Italian');
       final copiedLanguage = originalLanguage.copyWith();
 
       expect(copiedLanguage.id, 1111);
@@ -510,22 +510,22 @@ void main() {
     });
 
     test('should handle equality correctly', () {
-      const language1 = Language(id: 1111, name: 'Italian');
-      const language2 = Language(id: 1111, name: 'Italian');
-      const language3 = Language(id: 2222, name: 'English');
+      const language1 = NamedEntity(id: 1111, name: 'Italian');
+      const language2 = NamedEntity(id: 1111, name: 'Italian');
+      const language3 = NamedEntity(id: 2222, name: 'English');
 
       expect(language1, equals(language2));
       expect(language1, isNot(equals(language3)));
     });
 
     test('should have correct props for Equatable', () {
-      const language = Language(id: 1111, name: 'Italian');
+      const language = NamedEntity(id: 1111, name: 'Italian');
       expect(language.props, [1111, 'Italian']);
     });
   });
 
   group('GroupedSessions Model', () {
-    late Map<DateTime, Map<DateTime, List<Session>>> sampleSessionsByDay;
+    late Map<DateTime, Map<String, List<Session>>> sampleSessionsByDay;
     late GroupedSessions groupedSessions;
 
     setUp(() {
@@ -542,12 +542,12 @@ void main() {
         startsAt: time1,
         endsAt: time1.add(const Duration(hours: 1)),
         speakers: const [],
-        room: const Room(id: 1, name: 'Room A'),
-        sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
+        room: const NamedEntity(id: 1, name: 'Room A'),
+        sessionFormat: const NamedEntity(id: 1, name: 'Talk'),
         tracks: const [],
         tags: const [],
-        level: const Level(id: 1, name: 'Beginner'),
-        language: const Language(id: 1, name: 'English'),
+        level: const NamedEntity(id: 1, name: 'Beginner'),
+        language: const NamedEntity(id: 1, name: 'English'),
       );
 
       final session2 = Session(
@@ -557,12 +557,12 @@ void main() {
         startsAt: time2,
         endsAt: time2.add(const Duration(hours: 1)),
         speakers: const [],
-        room: const Room(id: 2, name: 'Room B'),
-        sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
+        room: const NamedEntity(id: 2, name: 'Room B'),
+        sessionFormat: const NamedEntity(id: 1, name: 'Talk'),
         tracks: const [],
         tags: const [],
-        level: const Level(id: 1, name: 'Beginner'),
-        language: const Language(id: 1, name: 'English'),
+        level: const NamedEntity(id: 1, name: 'Beginner'),
+        language: const NamedEntity(id: 1, name: 'English'),
       );
 
       final session3 = Session(
@@ -572,21 +572,21 @@ void main() {
         startsAt: time3,
         endsAt: time3.add(const Duration(hours: 1)),
         speakers: const [],
-        room: const Room(id: 1, name: 'Room A'),
-        sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
+        room: const NamedEntity(id: 1, name: 'Room A'),
+        sessionFormat: const NamedEntity(id: 1, name: 'Talk'),
         tracks: const [],
         tags: const [],
-        level: const Level(id: 1, name: 'Beginner'),
-        language: const Language(id: 1, name: 'English'),
+        level: const NamedEntity(id: 1, name: 'Beginner'),
+        language: const NamedEntity(id: 1, name: 'English'),
       );
 
       sampleSessionsByDay = {
         day1: {
-          time1: [session1],
-          time2: [session2],
+          'Room A': [session1],
+          'Room B': [session2],
         },
         day2: {
-          time3: [session3],
+          'Room A': [session3],
         },
       };
 
@@ -609,7 +609,9 @@ void main() {
       final sessionsForDay = groupedSessions.getSessionsForDay(day1);
 
       expect(sessionsForDay, isNotNull);
-      expect(sessionsForDay!.length, 2); // 2 time slots
+      expect(sessionsForDay!.length, 2); // 2 rooms
+      expect(sessionsForDay.containsKey('Room A'), true);
+      expect(sessionsForDay.containsKey('Room B'), true);
     });
 
     test('should return null for non-existent day', () {
@@ -635,33 +637,48 @@ void main() {
       expect(startTimes, isEmpty);
     });
 
-    test('should get sessions for specific day and time', () {
+    test('should get sessions for specific day and room', () {
       final day1 = DateTime(2023, 9, 16);
-      final time1 = DateTime.parse('2023-09-16T09:00:00Z');
-      final sessions = groupedSessions.getSessionsForDayAndTime(day1, time1);
+      const roomA = NamedEntity(id: 1, name: 'Room A');
+      final sessions = groupedSessions.getSessionsForDayAndRoom(day1, roomA);
 
       expect(sessions, hasLength(1));
       expect(sessions.first.title, 'Session 1');
     });
 
-    test('should return empty list for non-existent day and time', () {
+    test('should return empty list for non-existent day and room', () {
       final nonExistentDay = DateTime(2023, 9, 18);
-      final time = DateTime.parse('2023-09-18T09:00:00Z');
-      final sessions = groupedSessions.getSessionsForDayAndTime(nonExistentDay, time);
+      const roomA = NamedEntity(id: 1, name: 'Room A');
+      final sessions = groupedSessions.getSessionsForDayAndRoom(nonExistentDay, roomA);
 
       expect(sessions, isEmpty);
     });
 
-    test('should return empty list for existing day but non-existent time', () {
+    test('should return empty list for existing day but non-existent room', () {
       final day1 = DateTime(2023, 9, 16);
-      final nonExistentTime = DateTime.parse('2023-09-16T16:00:00Z');
-      final sessions = groupedSessions.getSessionsForDayAndTime(day1, nonExistentTime);
+      const nonExistentRoom = NamedEntity(id: 99, name: 'Room Z');
+      final sessions = groupedSessions.getSessionsForDayAndRoom(day1, nonExistentRoom);
 
       expect(sessions, isEmpty);
+    });
+
+    test('should get all rooms for a specific day', () {
+      final day1 = DateTime(2023, 9, 16);
+      final rooms = groupedSessions.getRoomsForDay(day1);
+
+      expect(rooms, hasLength(2));
+      expect(rooms.map((r) => r.name), containsAll(['Room A', 'Room B']));
+    });
+
+    test('should return empty set for non-existent day rooms', () {
+      final nonExistentDay = DateTime(2023, 9, 18);
+      final rooms = groupedSessions.getRoomsForDay(nonExistentDay);
+
+      expect(rooms, isEmpty);
     });
 
     test('should support copyWith functionality', () {
-      final newSessionsByDay = <DateTime, Map<DateTime, List<Session>>>{};
+      final newSessionsByDay = <DateTime, Map<String, List<Session>>>{};
       final copiedGroupedSessions = groupedSessions.copyWith(sessionsByDay: newSessionsByDay);
 
       expect(copiedGroupedSessions.sessionsByDay, newSessionsByDay);
@@ -711,7 +728,7 @@ void main() {
       'speakers': [
         {
           'id': '00000000-0000-0000-0000-000000000004',
-          'fullName': 'Aiden Test',
+          'name': 'Aiden Test',
           'bio': 'Pop culture fanatic.',
           'tagLine': 'Professional public speaker',
           'profilePicture': 'https://sessionize.com/image/test.jpg',
@@ -725,6 +742,7 @@ void main() {
       'tracks': [
         {'id': 10663, 'name': 'Technical'},
       ],
+      'tags': <Map<String, dynamic>>[],
       'level': {'id': 1111, 'name': 'Intermediate'},
       'language': {'id': 1111, 'name': 'Italian'},
     };
@@ -793,11 +811,11 @@ void main() {
 
     test('should support copyWith with all parameters', () {
       final originalSession = Session.fromJson(sampleJson);
-      const newRoom = Room(id: 220, name: 'Blue Room');
-      const newFormat = SessionFormat(id: 2222, name: 'Workshop');
-      final newTracks = [const Track(id: 20001, name: 'Design')];
-      const newLevel = Level(id: 2222, name: 'Advanced');
-      const newLanguage = Language(id: 2222, name: 'English');
+      const newRoom = NamedEntity(id: 220, name: 'Blue Room');
+      const newFormat = NamedEntity(id: 2222, name: 'Workshop');
+      final newTracks = [const NamedEntity(id: 20001, name: 'Design')];
+      const newLevel = NamedEntity(id: 2222, name: 'Advanced');
+      const newLanguage = NamedEntity(id: 2222, name: 'English');
       final newSpeakers = <Speaker>[];
 
       final copiedSession = originalSession.copyWith(
@@ -857,6 +875,7 @@ void main() {
         session.room,
         session.sessionFormat,
         session.tracks,
+        session.tags,
         session.level,
         session.language,
       ]);

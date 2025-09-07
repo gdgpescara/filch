@@ -1,5 +1,6 @@
 //GENERATED BARREL FILE
 export 'app_card.dart';
+export 'app_chip.dart';
 export 'background.dart';
 export 'blur_container.dart';
 export 'confetti_container.dart';

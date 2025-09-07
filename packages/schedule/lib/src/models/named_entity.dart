@@ -38,10 +38,3 @@ class NamedEntity extends Equatable {
   @override
   List<Object?> get props => [id, name];
 }
-
-// Type aliases for backward compatibility and better readability
-typedef Track = NamedEntity;
-typedef Room = NamedEntity;
-typedef SessionFormat = NamedEntity;
-typedef Level = NamedEntity;
-typedef Language = NamedEntity;

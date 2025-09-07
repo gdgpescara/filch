@@ -25,6 +25,8 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_bloc: ^9.1.1
   get_it: ^8.2.0
+  cached_network_image: ^3.4.1
+  font_awesome_flutter: ^10.10.0
   collection: any
   intl: any
 

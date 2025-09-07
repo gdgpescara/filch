@@ -14,7 +14,7 @@ class GetGroupedSessionsUseCase {
 
   Stream<GroupedSessions> call() {
     return runSafetyStream(() {
-      return _firestore.collection('sessions').snapshots().map((snapshot) {
+      return _firestore.collection('sessions').orderBy('startsAt', descending: false).snapshots().map((snapshot) {
         final sessions = snapshot.docs
             .map((doc) {
               try {
@@ -23,13 +23,13 @@ class GetGroupedSessionsUseCase {
                   ...doc.data(),
                 });
               } catch (e) {
-                // Skip invalid sessions
                 return null;
               }
             })
             .whereType<Session>()
             .toList();
 
+        // Group by day first
         final sessionsByDay = sessions
             .groupListsBy(
               (session) => DateTime(
@@ -38,19 +38,11 @@ class GetGroupedSessionsUseCase {
                 session.startsAt.day,
               ),
             )
-            .map(
-              (day, sessionsForDay) => MapEntry(
-                day,
-                sessionsForDay
-                    .groupListsBy((session) => session.startsAt)
-                    .map(
-                      (startTime, sessionsAtTime) => MapEntry(
-                        startTime,
-                        sessionsAtTime..sort((a, b) => a.room.name.compareTo(b.room.name)),
-                      ),
-                    ),
-              ),
-            );
+            .map((day, sessions) {
+              // Then group by room name within each day
+              final sessionsByRoomName = sessions.groupListsBy((session) => session.room.name);
+              return MapEntry(day, sessionsByRoomName);
+            });
 
         return GroupedSessions(sessionsByDay: sessionsByDay);
       });

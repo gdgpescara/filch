@@ -49,22 +49,22 @@ class Session extends Equatable {
   final List<Speaker> speakers;
 
   /// Room where the session takes place
-  final Room room;
+  final NamedEntity room;
 
   /// Format/type of the session
-  final SessionFormat sessionFormat;
+  final NamedEntity sessionFormat;
 
   /// List of tracks/categories this session belongs to
-  final List<Track> tracks;
+  final List<NamedEntity> tracks;
 
   /// List of tags for this session
-  final List<Track> tags;
+  final List<NamedEntity> tags;
 
   /// Difficulty level of the session
-  final Level level;
+  final NamedEntity level;
 
   /// Language of the session
-  final Language language;
+  final NamedEntity language;
 
   /// Creates a copy of this [Session] with the given fields replaced
   Session copyWith({
@@ -74,12 +74,12 @@ class Session extends Equatable {
     DateTime? startsAt,
     DateTime? endsAt,
     List<Speaker>? speakers,
-    Room? room,
-    SessionFormat? sessionFormat,
-    List<Track>? tracks,
-    List<Track>? tags,
-    Level? level,
-    Language? language,
+    NamedEntity? room,
+    NamedEntity? sessionFormat,
+    List<NamedEntity>? tracks,
+    List<NamedEntity>? tags,
+    NamedEntity? level,
+    NamedEntity? language,
   }) {
     return Session(
       id: id ?? this.id,

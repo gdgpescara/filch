@@ -37,6 +37,7 @@ void main() {
         },
         'sessionFormat': {'id': 1, 'name': 'Talk'},
         'tracks': <Map<String, dynamic>>[],
+        'tags': <Map<String, dynamic>>[],
         'level': {'id': 1, 'name': 'Beginner'},
         'language': {'id': 1, 'name': 'English'},
       };
@@ -65,7 +66,7 @@ void main() {
           endsAt: '2023-09-16T10:00:00Z',
         );
 
-        await fakeFirestore.collection('session').doc('session1').set(sessionData);
+        await fakeFirestore.collection('sessions').doc('session1').set(sessionData);
 
         // Act
         final result = useCase.call();
@@ -116,9 +117,9 @@ void main() {
           endsAt: '2023-09-16T15:00:00Z',
         );
 
-        await fakeFirestore.collection('session').doc('session1').set(session1Data);
-        await fakeFirestore.collection('session').doc('session2').set(session2Data);
-        await fakeFirestore.collection('session').doc('session3').set(session3Data);
+        await fakeFirestore.collection('sessions').doc('session1').set(session1Data);
+        await fakeFirestore.collection('sessions').doc('session2').set(session2Data);
+        await fakeFirestore.collection('sessions').doc('session3').set(session3Data);
 
         // Act
         final result = useCase.call();
@@ -173,8 +174,8 @@ void main() {
           endsAt: '2023-09-17T10:00:00Z',
         );
 
-        await fakeFirestore.collection('session').doc('session1').set(day1Session);
-        await fakeFirestore.collection('session').doc('session2').set(day2Session);
+        await fakeFirestore.collection('sessions').doc('session1').set(day1Session);
+        await fakeFirestore.collection('sessions').doc('session2').set(day2Session);
 
         // Act
         final result = useCase.call();
@@ -238,9 +239,9 @@ void main() {
         );
 
         // Add in reverse order to test sorting
-        await fakeFirestore.collection('session').doc('session3').set(sessionC);
-        await fakeFirestore.collection('session').doc('session2').set(sessionB);
-        await fakeFirestore.collection('session').doc('session1').set(sessionA);
+        await fakeFirestore.collection('sessions').doc('session3').set(sessionC);
+        await fakeFirestore.collection('sessions').doc('session2').set(sessionB);
+        await fakeFirestore.collection('sessions').doc('session1').set(sessionA);
 
         // Act
         final result = useCase.call();
@@ -278,7 +279,7 @@ void main() {
           endsAt: '2023-09-16T10:00:00.000Z',
         );
 
-        await fakeFirestore.collection('session').doc('session1').set(sessionData);
+        await fakeFirestore.collection('sessions').doc('session1').set(sessionData);
 
         // Act
         final result = useCase.call();
@@ -309,7 +310,7 @@ void main() {
     group('when firestore returns invalid data', () {
       test('should handle sessions with missing required fields gracefully', () async {
         // Arrange - Add invalid session data directly to fake firestore
-        await fakeFirestore.collection('session').doc('invalid').set({
+        await fakeFirestore.collection('sessions').doc('invalid').set({
           'title': 'Invalid Session',
           // Missing required fields like startsAt, endsAt, etc.
         });
@@ -321,7 +322,7 @@ void main() {
           startsAt: '2023-09-16T09:00:00Z',
           endsAt: '2023-09-16T10:00:00Z',
         );
-        await fakeFirestore.collection('session').doc('valid').set(validSession);
+        await fakeFirestore.collection('sessions').doc('valid').set(validSession);
 
         // Act
         final result = useCase.call();
@@ -368,7 +369,7 @@ void main() {
           startsAt: '2023-09-16T09:00:00Z',
           endsAt: '2023-09-16T10:00:00Z',
         );
-        await fakeFirestore.collection('session').doc('session1').set(sessionData);
+        await fakeFirestore.collection('sessions').doc('session1').set(sessionData);
 
         // Wait for both emissions
         await completer.future.timeout(const Duration(seconds: 5));
@@ -393,7 +394,7 @@ void main() {
           startsAt: '2023-09-16T09:00:00Z',
           endsAt: '2023-09-16T10:00:00Z',
         );
-        await fakeFirestore.collection('session').doc('session1').set(initialData);
+        await fakeFirestore.collection('sessions').doc('session1').set(initialData);
 
         final completer = Completer<void>();
         final results = <GroupedSessions>[];
@@ -415,7 +416,7 @@ void main() {
           startsAt: '2023-09-16T09:00:00Z',
           endsAt: '2023-09-16T10:00:00Z',
         );
-        await fakeFirestore.collection('session').doc('session1').set(updatedData);
+        await fakeFirestore.collection('sessions').doc('session1').set(updatedData);
 
         // Wait for update
         await completer.future.timeout(const Duration(seconds: 5));
@@ -443,7 +444,7 @@ void main() {
           startsAt: '2023-09-16T09:00:00Z',
           endsAt: '2023-09-16T10:00:00Z',
         );
-        await fakeFirestore.collection('session').doc('session1').set(sessionData);
+        await fakeFirestore.collection('sessions').doc('session1').set(sessionData);
 
         final completer = Completer<void>();
         final results = <GroupedSessions>[];
@@ -459,7 +460,7 @@ void main() {
         await Future<void>.delayed(const Duration(milliseconds: 10));
 
         // Delete the session
-        await fakeFirestore.collection('session').doc('session1').delete();
+        await fakeFirestore.collection('sessions').doc('session1').delete();
 
         // Wait for deletion
         await completer.future.timeout(const Duration(seconds: 5));
@@ -490,8 +491,8 @@ void main() {
           endsAt: '2023-09-16T11:00:00Z', // 2 hours
         );
 
-        await fakeFirestore.collection('session').doc('short').set(shortSession);
-        await fakeFirestore.collection('session').doc('long').set(longSession);
+        await fakeFirestore.collection('sessions').doc('short').set(shortSession);
+        await fakeFirestore.collection('sessions').doc('long').set(longSession);
 
         // Act
         final result = useCase.call();
@@ -525,7 +526,7 @@ void main() {
           endsAt: '2023-09-16T01:00:00Z',
         );
 
-        await fakeFirestore.collection('session').doc('midnight').set(midnightSession);
+        await fakeFirestore.collection('sessions').doc('midnight').set(midnightSession);
 
         // Act
         final result = useCase.call();
@@ -557,7 +558,7 @@ void main() {
           endsAt: '2023-09-17T01:00:00Z', // Ends next day
         );
 
-        await fakeFirestore.collection('session').doc('spanning').set(spanningSession);
+        await fakeFirestore.collection('sessions').doc('spanning').set(spanningSession);
 
         // Act
         final result = useCase.call();

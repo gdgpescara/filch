@@ -9,7 +9,7 @@ part 'speaker.g.dart';
 class Speaker extends Equatable {
   const Speaker({
     required this.id,
-    required this.fullName,
+    required this.name,
     this.bio,
     this.tagLine,
     required this.profilePicture,
@@ -26,7 +26,7 @@ class Speaker extends Equatable {
   final String id;
 
   /// Full name of the speaker
-  final String fullName;
+  final String name;
 
   /// Biography of the speaker
   final String? bio;
@@ -43,7 +43,7 @@ class Speaker extends Equatable {
   /// Creates a copy of this [Speaker] with the given fields replaced
   Speaker copyWith({
     String? id,
-    String? fullName,
+    String? name,
     String? bio,
     String? tagLine,
     String? profilePicture,
@@ -51,7 +51,7 @@ class Speaker extends Equatable {
   }) {
     return Speaker(
       id: id ?? this.id,
-      fullName: fullName ?? this.fullName,
+      name: name ?? this.name,
       bio: bio ?? this.bio,
       tagLine: tagLine ?? this.tagLine,
       profilePicture: profilePicture ?? this.profilePicture,
@@ -60,5 +60,5 @@ class Speaker extends Equatable {
   }
 
   @override
-  List<Object?> get props => [id, fullName, bio, tagLine, profilePicture, links];
+  List<Object?> get props => [id, name, bio, tagLine, profilePicture, links];
 }

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:i18n/i18n.dart';
+import 'package:schedule/schedule.dart';
 import 'package:ui/ui.dart';
 
 import '../../staff.dart';
@@ -36,6 +38,7 @@ class _StaffHomePageState extends State<StaffHomePage> {
         child: IndexedStack(
           index: _currentIndex,
           children: [
+            const SchedulePage(embedded: true),
             ScanView(
               navigateToAssignment: widget.navigateToAssignment,
               navigateToTShirtAssignment: widget.navigateToTShirtAssignment,
@@ -45,27 +48,32 @@ class _StaffHomePageState extends State<StaffHomePage> {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.transparent,
-        enableFeedback: true,
-        currentIndex: _currentIndex,
-        onTap: (index) => setState(() => _currentIndex = index),
-        items: [
-          BottomNavigationBarItem(
+        selectedIndex: _currentIndex,
+        onDestinationSelected: (index) => setState(() => _currentIndex = index),
+        destinations: [
+          NavigationDestination(
+            icon: const Icon(FontAwesomeIcons.calendar),
+            selectedIcon: const Icon(FontAwesomeIcons.solidCalendar),
+            tooltip: t.common.home.bottom_nav.sessions,
+            label: t.common.home.bottom_nav.sessions,
+          ),
+          NavigationDestination(
             icon: const Icon(Icons.qr_code_scanner_outlined),
-            activeIcon: const Icon(Icons.qr_code_scanner_rounded),
+            selectedIcon: const Icon(Icons.qr_code_scanner_rounded),
             tooltip: t.staff.home.bottom_nav.scan,
             label: t.staff.home.bottom_nav.scan,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.access_time_rounded),
-            activeIcon: const Icon(Icons.access_time_filled_rounded),
+            selectedIcon: const Icon(Icons.access_time_filled_rounded),
             tooltip: t.staff.home.bottom_nav.shifts,
             label: t.staff.home.bottom_nav.shifts,
           ),
-          BottomNavigationBarItem(
+          NavigationDestination(
             icon: const Icon(Icons.person_outline_rounded),
-            activeIcon: const Icon(Icons.person_rounded),
+            selectedIcon: const Icon(Icons.person_rounded),
             tooltip: t.staff.home.bottom_nav.profile,
             label: t.staff.home.bottom_nav.profile,
           ),

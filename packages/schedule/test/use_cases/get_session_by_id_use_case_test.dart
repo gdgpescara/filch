@@ -21,7 +21,7 @@ void main() {
       'speakers': [
         {
           'id': 'speaker1',
-          'fullName': 'John Doe',
+          'name': 'John Doe',
           'bio': 'Flutter expert',
           'tagLine': 'Senior Developer',
           'profilePicture': 'https://example.com/pic.jpg',
@@ -33,6 +33,7 @@ void main() {
       'tracks': [
         {'id': 1, 'name': 'Mobile Development'},
       ],
+      'tags': <Map<String, dynamic>>[],
       'level': {'id': 1, 'name': 'Beginner'},
       'language': {'id': 1, 'name': 'English'},
     };
@@ -46,19 +47,19 @@ void main() {
       speakers: const [
         Speaker(
           id: 'speaker1',
-          fullName: 'John Doe',
+          name: 'John Doe',
           bio: 'Flutter expert',
           tagLine: 'Senior Developer',
           profilePicture: 'https://example.com/pic.jpg',
           links: <SpeakerLink>[],
         ),
       ],
-      room: const Room(id: 1, name: 'Main Hall'),
-      sessionFormat: const SessionFormat(id: 1, name: 'Talk'),
-      tracks: const [Track(id: 1, name: 'Mobile Development')],
-      tags: const <Track>[],
-      level: const Level(id: 1, name: 'Beginner'),
-      language: const Language(id: 1, name: 'English'),
+      room: const NamedEntity(id: 1, name: 'Main Hall'),
+      sessionFormat: const NamedEntity(id: 1, name: 'Talk'),
+      tracks: const [NamedEntity(id: 1, name: 'Mobile Development')],
+      tags: const <NamedEntity>[],
+      level: const NamedEntity(id: 1, name: 'Beginner'),
+      language: const NamedEntity(id: 1, name: 'English'),
     );
 
     setUp(() {
@@ -68,7 +69,7 @@ void main() {
 
     test('should return session when document exists', () async {
       // Arrange
-      await fakeFirestore.collection('session').doc(sessionId).set(sessionData);
+      await fakeFirestore.collection('sessions').doc(sessionId).set(sessionData);
 
       // Act
       final result = useCase.call(sessionId);
@@ -93,7 +94,7 @@ void main() {
 
     test('should return null when document data is invalid', () async {
       // Arrange - set invalid data
-      await fakeFirestore.collection('session').doc(sessionId).set({'invalid': 'data'});
+      await fakeFirestore.collection('sessions').doc(sessionId).set({'invalid': 'data'});
 
       // Act
       final result = useCase.call(sessionId);
@@ -107,10 +108,10 @@ void main() {
 
     test('should return updated session when document is modified', () async {
       // Arrange - Create initial session
-      await fakeFirestore.collection('session').doc(sessionId).set(sessionData);
+      await fakeFirestore.collection('sessions').doc(sessionId).set(sessionData);
 
       // Modify the data before testing
-      await fakeFirestore.collection('session').doc(sessionId).update({'title': 'Updated Flutter Development'});
+      await fakeFirestore.collection('sessions').doc(sessionId).update({'title': 'Updated Flutter Development'});
 
       // Act
       final result = useCase.call(sessionId);

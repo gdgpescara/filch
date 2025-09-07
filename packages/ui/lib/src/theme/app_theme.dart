@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../ui.dart';
 
 part 'app_bar_theme.dart';
-part 'bottom_navigation_bar_theme.dart';
+part 'navigation_bar_theme.dart';
 part 'bottom_sheet_theme.dart';
 part 'button_theme.dart';
 part 'extended_color.dart';
@@ -55,7 +55,7 @@ ThemeData buildTheme(Brightness brightness, {Color? seedColor}) {
     outlinedButtonTheme: _outlinedButtonThemeData(colorScheme),
     scaffoldBackgroundColor: Colors.transparent,
     bottomSheetTheme: _bottomSheetTheme(colorScheme),
-    bottomNavigationBarTheme: _bottomNavigationBarTheme(colorScheme),
+    navigationBarTheme: _navigationBarTheme(colorScheme),
   );
 
   return theme.copyWith(appBarTheme: _appBarTheme(theme), textTheme: _textTheme(theme.textTheme));

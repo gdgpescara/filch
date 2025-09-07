@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:core/core.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../models/grouped_sessions.dart';
@@ -9,7 +8,7 @@ import '../../../use_cases/get_grouped_sessions_use_case.dart';
 import 'schedule_state.dart';
 
 @injectable
-class ScheduleCubit extends Cubit<ScheduleState> {
+class ScheduleCubit extends SafeEmitterCubit<ScheduleState> {
   ScheduleCubit(
     this._getGroupedSessionsUseCase,
   ) : super(const ScheduleInitial());
@@ -17,7 +16,7 @@ class ScheduleCubit extends Cubit<ScheduleState> {
   final GetGroupedSessionsUseCase _getGroupedSessionsUseCase;
 
   StreamSubscription<GroupedSessions>? _sessionsSubscription;
-  
+
   void init() {
     _sessionsSubscription?.cancel();
     _sessionsSubscription = _getGroupedSessionsUseCase().when(

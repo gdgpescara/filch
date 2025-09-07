@@ -17,7 +17,7 @@ class GetSessionByIdUseCase {
   /// The stream will update automatically if the session data changes.
   Stream<Session?> call(String sessionId) {
     return runSafetyStream(() {
-      return _firestore.collection('session').doc(sessionId).snapshots().map((snapshot) {
+      return _firestore.collection('sessions').doc(sessionId).snapshots().map((snapshot) {
         if (!snapshot.exists || snapshot.data() == null) {
           return null;
         }
