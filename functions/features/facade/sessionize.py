@@ -50,7 +50,7 @@ def fetch_from_sessionize(request: Request) -> bool:
     # logger.info(f"Logged User Info: {user_info}")
     event_id = get_event_id(request)
     speakers = fetch_speakers(event_id=event_id)
-    upload_to_sessionize(data=speakers, collection_name="speaker")
+    upload_to_sessionize(data=speakers, collection_name="speakers")
     sessions = fetch_sessions(event_id=event_id)
     for session in sessions:
         for session_speaker in session.speakers:
@@ -58,5 +58,5 @@ def fetch_from_sessionize(request: Request) -> bool:
                 if session_speaker.id == speaker.id:
                     session_speaker.profilePicture = speaker.profilePicture
                     break
-    upload_to_sessionize(data=sessions, collection_name="session")
+    upload_to_sessionize(data=sessions, collection_name="sessions")
     return jsonify(True)

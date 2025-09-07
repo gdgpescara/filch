@@ -12,7 +12,6 @@ class SessionSpeaker(BaseModel):
     name: str
     profilePicture: Optional[str]
 
-
 class Session(BaseModel):
     id: str
     title: str
@@ -20,9 +19,9 @@ class Session(BaseModel):
     startsAt: str
     endsAt: str
     speakers: List[SessionSpeaker]
-    roomId: int
-    room: str
+    room: NamedEntity
     sessionFormat: NamedEntity
     tracks: List[NamedEntity]
+    tags: List[NamedEntity]
     level: NamedEntity
     language: NamedEntity

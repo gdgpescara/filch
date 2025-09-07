@@ -58,3 +58,4 @@ ios/Runner/GeneratedPluginRegistrant.m
 
 keys/
 serviceAccountKey*
+**/coverage/
