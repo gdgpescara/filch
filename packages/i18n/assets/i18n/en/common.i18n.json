@@ -51,7 +51,8 @@
       "current_quest": "Quest",
       "profile": "Profile",
       "scan": "Scan",
-      "shifts": "Shifts"
+      "shifts": "Shifts",
+      "sessions": "Sessions"
     }
   },
   "user": {

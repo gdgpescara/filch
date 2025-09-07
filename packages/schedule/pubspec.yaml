@@ -3,7 +3,7 @@ version: 1.0.0
 publish_to: none
 
 environment:
-  sdk: ^3.8.1
+  sdk: ^3.9.0
   flutter: ">=3.32.5"
 
 resolution: workspace
@@ -12,7 +12,33 @@ dependencies:
   flutter:
     sdk: flutter
 
+  core:
+    path: ../core
+  ui:
+    path: ../ui
+  i18n:
+    path: ../i18n
+
+  cloud_firestore: ^6.0.1
+  equatable: ^2.0.7
+  injectable: ^2.5.1
+  json_annotation: ^4.9.0
+  flutter_bloc: ^9.1.1
+  get_it: ^8.2.0
+  cached_network_image: ^3.4.1
+  font_awesome_flutter: ^10.10.0
+  collection: any
+  intl: any
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  build_runner: ^2.7.0
+  injectable_generator: ^2.8.1
+  json_serializable: ^6.11.0
   flutter_lints: ^6.0.0
+  mockito: ^5.5.0
+  fake_cloud_firestore: ^4.0.0
+
+flutter:
+  uses-material-design: true

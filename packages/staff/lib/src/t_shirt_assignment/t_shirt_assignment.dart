@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
-// ignore: depend_on_referenced_packages
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:ui/ui.dart';
 

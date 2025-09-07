@@ -10,11 +10,10 @@ class GetFeatureFlagsUseCase {
 
   Stream<Map<String, bool>> call() {
     return runSafetyStream(() {
-      return _firestore
-          .collection('configurations')
-          .doc('feature_flags')
-          .snapshots()
-          .map((event) => event.data()!.map((key, value) => MapEntry(key, value as bool)));
+      return _firestore.collection('configurations').doc('feature_flags').snapshots().map((event) {
+        final data = event.data() ?? {};
+        return data.map((key, value) => MapEntry(key, value as bool));
+      });
     });
   }
 }

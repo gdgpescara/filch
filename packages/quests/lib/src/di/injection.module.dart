@@ -46,16 +46,28 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
       () => _i384.CanRequestForQuestUseCase(gh<_i494.GetFeatureFlagsUseCase>()),
     );
     gh.lazySingleton<_i814.GetSignedUserQuestsUseCase>(
-      () => _i814.GetSignedUserQuestsUseCase(gh<_i974.FirebaseFirestore>(), gh<_i662.GetSignedUserUseCase>()),
+      () => _i814.GetSignedUserQuestsUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i662.GetSignedUserUseCase>(),
+      ),
     );
     gh.lazySingleton<_i35.GetSignedUserPointsUseCase>(
-      () => _i35.GetSignedUserPointsUseCase(gh<_i974.FirebaseFirestore>(), gh<_i662.GetSignedUserUseCase>()),
+      () => _i35.GetSignedUserPointsUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i662.GetSignedUserUseCase>(),
+      ),
     );
     gh.lazySingleton<_i57.GetYourRankingPositionUseCase>(
-      () => _i57.GetYourRankingPositionUseCase(gh<_i974.FirebaseFirestore>(), gh<_i662.GetSignedUserUseCase>()),
+      () => _i57.GetYourRankingPositionUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i662.GetSignedUserUseCase>(),
+      ),
     );
     gh.lazySingleton<_i843.GetYourRankingUseCase>(
-      () => _i843.GetYourRankingUseCase(gh<_i974.FirebaseFirestore>(), gh<_i662.GetSignedUserUseCase>()),
+      () => _i843.GetYourRankingUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i662.GetSignedUserUseCase>(),
+      ),
     );
     gh.lazySingleton<_i251.GetRankingUseCase>(() => _i251.GetRankingUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i650.GetAssignablePointsUseCase>(
@@ -78,14 +90,23 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
     gh.lazySingleton<_i616.GiveUpQuestUseCase>(() => _i616.GiveUpQuestUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i216.SubmitAnswerUseCase>(() => _i216.SubmitAnswerUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i954.GetSignedUserActiveQuestUseCase>(
-      () => _i954.GetSignedUserActiveQuestUseCase(gh<_i974.FirebaseFirestore>(), gh<_i59.FirebaseAuth>()),
+      () => _i954.GetSignedUserActiveQuestUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i59.FirebaseAuth>(),
+      ),
     );
     gh.lazySingleton<_i1056.SearchForQuestUseCase>(
-      () => _i1056.SearchForQuestUseCase(gh<_i809.FirebaseFunctions>(), gh<_i954.GetSignedUserActiveQuestUseCase>()),
+      () => _i1056.SearchForQuestUseCase(
+        gh<_i809.FirebaseFunctions>(),
+        gh<_i954.GetSignedUserActiveQuestUseCase>(),
+      ),
     );
     gh.factory<_i606.SocialQrCodeCubit>(() => _i606.SocialQrCodeCubit(gh<_i806.SocialQuestRegistrationUseCase>()));
     gh.factory<_i437.QuizCubit>(
-      () => _i437.QuizCubit(gh<_i25.ValidateQuizQrCodeUseCase>(), gh<_i216.SubmitAnswerUseCase>()),
+      () => _i437.QuizCubit(
+        gh<_i25.ValidateQuizQrCodeUseCase>(),
+        gh<_i216.SubmitAnswerUseCase>(),
+      ),
     );
     gh.factory<_i80.CurrentQuestCubit>(
       () => _i80.CurrentQuestCubit(

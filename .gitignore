@@ -4,6 +4,7 @@
 .flutter-plugins
 .flutter-plugins-dependencies
 .buildlog/
+build/
 
 # Firebase
 firebase-debug.log
@@ -54,3 +55,7 @@ ios/Flutter/ephemeral/flutter_lldb_helper.py
 ios/Flutter/ephemeral/flutter_lldbinit
 ios/Runner/GeneratedPluginRegistrant.h
 ios/Runner/GeneratedPluginRegistrant.m
+
+keys/
+serviceAccountKey*
+**/coverage/

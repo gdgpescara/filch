@@ -22,10 +22,16 @@ class StaffPackageModule extends _i526.MicroPackageModule {
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.factory<_i757.StaffProfileCubit>(
-      () => _i757.StaffProfileCubit(gh<_i662.GetSignedUserUseCase>(), gh<_i662.SignOutUseCase>()),
+      () => _i757.StaffProfileCubit(
+        gh<_i662.GetSignedUserUseCase>(),
+        gh<_i662.SignOutUseCase>(),
+      ),
     );
     gh.factory<_i204.ScanCubit>(
-      () => _i204.ScanCubit(gh<_i177.GetAssignablePointsUseCase>(), gh<_i177.GetSignedUserQuestsUseCase>()),
+      () => _i204.ScanCubit(
+        gh<_i177.GetAssignablePointsUseCase>(),
+        gh<_i177.GetSignedUserQuestsUseCase>(),
+      ),
     );
     gh.lazySingleton<_i119.GetFilteredShiftsUseCase>(
       () => _i119.GetFilteredShiftsUseCase(gh<_i974.FirebaseFirestore>()),

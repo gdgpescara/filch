@@ -1,6 +1,6 @@
 part of 'app_theme.dart';
 
-TextTheme _textTheme(TextTheme textTheme) => GoogleFonts.openSansTextTheme(textTheme);
+TextTheme _textTheme(TextTheme textTheme) => GoogleFonts.poppinsTextTheme(textTheme);
 
 TextTheme _themeSpecificTextTheme(TextTheme textTheme) => GoogleFonts.orbitronTextTheme(textTheme);
 

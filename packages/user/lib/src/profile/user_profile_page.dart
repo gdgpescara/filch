@@ -87,10 +87,6 @@ class UserProfilePage extends StatelessWidget {
   double? get _elevation => embedded ? 0 : null;
 
   EdgeInsets get _padding {
-    const padding = EdgeInsets.all(Spacing.m);
-    // if (embedded) {
-    //   return padding.copyWith(bottom: Spacing.m + kBottomNavigationBarHeight);
-    // }
-    return padding;
+    return const EdgeInsets.all(Spacing.m);
   }
 }

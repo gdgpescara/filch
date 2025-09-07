@@ -27,8 +27,14 @@ class CorePackageModule extends _i526.MicroPackageModule {
   _i687.FutureOr<void> init(_i526.GetItHelper gh) async {
     final externalLibraries = _$ExternalLibraries();
     final dateFormatModule = _$DateFormatModule();
-    await gh.factoryAsync<_i655.PackageInfo>(() => externalLibraries.packageInfo(), preResolve: true);
-    await gh.factoryAsync<_i460.SharedPreferences>(() => externalLibraries.prefs(), preResolve: true);
+    await gh.factoryAsync<_i655.PackageInfo>(
+      () => externalLibraries.packageInfo(),
+      preResolve: true,
+    );
+    await gh.factoryAsync<_i460.SharedPreferences>(
+      () => externalLibraries.prefs(),
+      preResolve: true,
+    );
     gh.lazySingleton<_i809.FirebaseFunctions>(() => externalLibraries.firebaseFunctions);
     gh.lazySingleton<_i974.FirebaseFirestore>(() => externalLibraries.firestore);
     gh.lazySingleton<_i892.FirebaseMessaging>(() => externalLibraries.firebaseMessaging);
@@ -40,17 +46,50 @@ class CorePackageModule extends _i526.MicroPackageModule {
       instanceName: 'documentDirectory',
       preResolve: true,
     );
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatTime, instanceName: 'onlyTime');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatFull, instanceName: 'full');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatYear, instanceName: 'year');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatHour, instanceName: 'hour');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatAmPm, instanceName: 'amPm');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatMonth, instanceName: 'month');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatWeekDay, instanceName: 'weekDay');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatDay, instanceName: 'day');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatMinute, instanceName: 'minute');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatDate, instanceName: 'onlyDate');
-    gh.lazySingleton<_i602.DateFormat>(() => dateFormatModule.dateFormatFullReadable, instanceName: 'fullReadable');
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatTime,
+      instanceName: 'onlyTime',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatFull,
+      instanceName: 'full',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatYear,
+      instanceName: 'year',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatHour,
+      instanceName: 'hour',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatAmPm,
+      instanceName: 'amPm',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatMonth,
+      instanceName: 'month',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatWeekDay,
+      instanceName: 'weekDay',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatDay,
+      instanceName: 'day',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatMinute,
+      instanceName: 'minute',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatDate,
+      instanceName: 'onlyDate',
+    );
+    gh.lazySingleton<_i602.DateFormat>(
+      () => dateFormatModule.dateFormatFullReadable,
+      instanceName: 'fullReadable',
+    );
     gh.lazySingleton<_i866.GetFeatureFlagsUseCase>(() => _i866.GetFeatureFlagsUseCase(gh<_i974.FirebaseFirestore>()));
   }
 }

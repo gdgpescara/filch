@@ -2,6 +2,7 @@
   "functions": [
     {
       "source": "node-functions",
+      "runtime": "nodejs20",
       "codebase": "nodejs_functions",
       "ignore": [
         "node_modules",
@@ -16,6 +17,7 @@
     },
     {
       "source": "functions",
+      "runtime": "python313",
       "codebase": "default",
       "ignore": [
         "venv",
@@ -23,6 +25,9 @@
         "firebase-debug.log",
         "firebase-debug.*.log",
         "*.local"
+      ],
+      "predeploy": [
+        "cd \"$RESOURCE_DIR\" && source venv/bin/activate && python3.13 -m pip install -r requirements.txt"
       ]
     }
   ],

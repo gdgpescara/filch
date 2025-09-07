@@ -1,10 +1,5 @@
 include: package:flutter_lints/flutter.yaml
 
-dart_code_metrics:
-  metrics:
-    maximum-nesting-level: 5
-    source-lines-of-code: 50
-
 analyzer:
   language:
     strict-casts: true
@@ -16,11 +11,16 @@ analyzer:
     missing_return: error
 
   exclude:
-    - "**/*.g.dart"
-    - "**/*.mocks.dart"
-    - "**/*.config.dart"
-    - "**/*.route.dart"
-    - "**/firebase_options.dart"
+    - '**/*.g.dart'
+    - '**/*.route.dart'
+    - '**/*.mocks.dart'
+    - '**/*.module.dart'
+    - '**/*.config.dart'
+    - '**/firebase_*.dart'
+
+formatter:
+  page_width: 140
+  trailing_commas: preserve
 
 linter:
   rules:
@@ -103,8 +103,6 @@ linter:
     - omit_local_variable_types
     - only_throw_errors
     - overridden_fields
-    - package_api_docs
-    - package_names
     - package_prefixed_library_names
     - parameter_assignments
     - prefer_adjacent_string_concatenation
@@ -142,7 +140,6 @@ linter:
     - prefer_void_to_null
     - provide_deprecation_message
     - recursive_getters
-    - require_trailing_commas
     - secure_pubspec_urls
     - sized_box_for_whitespace
     - sized_box_shrink_expand

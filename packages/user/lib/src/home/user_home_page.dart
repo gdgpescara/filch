@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:quests/quests.dart';
+import 'package:schedule/schedule.dart';
 import 'package:ui/ui.dart';
 
 import '../profile/user_profile_page.dart';
@@ -32,6 +33,7 @@ class UserHomePage extends StatelessWidget {
               child: IndexedStack(
                 index: state.currentView,
                 children: [
+                  const SchedulePage(embedded: true),
                   const RankingPage(),
                   if (!state.isRankingFreezed) const CurrentQuestPage(),
                   UserProfilePage(
@@ -43,27 +45,33 @@ class UserHomePage extends StatelessWidget {
                 ],
               ),
             ),
-            bottomNavigationBar: BottomNavigationBar(
-              enableFeedback: true,
-              currentIndex: state.currentView,
-              onTap: context.read<HomePageCubit>().changeView,
-              items: [
-                BottomNavigationBarItem(
+            bottomNavigationBar: NavigationBar(
+              backgroundColor: Colors.transparent,
+              selectedIndex: state.currentView,
+              onDestinationSelected: context.read<HomePageCubit>().changeView,
+              destinations: [
+                NavigationDestination(
+                  icon: const Icon(FontAwesomeIcons.calendar),
+                  selectedIcon: const Icon(FontAwesomeIcons.solidCalendar),
+                  tooltip: t.common.home.bottom_nav.sessions,
+                  label: t.common.home.bottom_nav.sessions,
+                ),
+                NavigationDestination(
                   icon: const Icon(Icons.military_tech_outlined),
-                  activeIcon: const Icon(Icons.military_tech_rounded),
+                  selectedIcon: const Icon(Icons.military_tech_rounded),
                   tooltip: t.common.home.bottom_nav.ranking,
                   label: t.common.home.bottom_nav.ranking,
                 ),
                 if (!state.isRankingFreezed)
-                  BottomNavigationBarItem(
+                  NavigationDestination(
                     icon: const Icon(FontAwesomeIcons.handLizard),
-                    activeIcon: const Icon(FontAwesomeIcons.solidHandLizard),
+                    selectedIcon: const Icon(FontAwesomeIcons.solidHandLizard),
                     tooltip: t.common.home.bottom_nav.current_quest,
                     label: t.common.home.bottom_nav.current_quest,
                   ),
-                BottomNavigationBarItem(
+                NavigationDestination(
                   icon: const Icon(FontAwesomeIcons.user),
-                  activeIcon: const Icon(FontAwesomeIcons.solidUser),
+                  selectedIcon: const Icon(FontAwesomeIcons.solidUser),
                   tooltip: t.common.home.bottom_nav.profile,
                   label: t.common.home.bottom_nav.profile,
                 ),

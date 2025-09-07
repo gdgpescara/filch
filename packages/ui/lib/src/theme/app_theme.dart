@@ -4,39 +4,40 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../ui.dart';
 
 part 'app_bar_theme.dart';
+part 'navigation_bar_theme.dart';
+part 'bottom_sheet_theme.dart';
 part 'button_theme.dart';
 part 'extended_color.dart';
 part 'input_decorator_theme.dart';
 part 'text_theme.dart';
-part 'bottom_sheet_theme.dart';
 
 const appColors = _extendedColor;
-const _backgroundSeedColor = Color(0xFF0A0D36);
-const _pinkColor = Color(0xFFE71F80);
-const _orangeColor = Color(0xFFF3932E);
-const _lightBlueColor = Color(0xFF3ABBED);
+const _backgroundSeedColor = Color(0xFF060404);
+const _primaryColor = Color(0xFF3089FF);
+const _surfaceColor = Color(0xFFFCFBFF);
+const _onSurfaceColor = Color(0xFF060404);
 
 ColorScheme _colorScheme(Brightness brightness, Color? seedColor) =>
     ColorScheme.fromSeed(
-      seedColor: seedColor ?? _pinkColor,
+      seedColor: seedColor ?? _primaryColor,
       brightness: brightness,
       dynamicSchemeVariant: DynamicSchemeVariant.fidelity,
     ).copyWith(
-      surface: _backgroundSeedColor,
-      onSurface: const Color(0xFFFFFFFF),
-      surfaceBright: const Color(0xFF1A1B2A),
-      primary: _pinkColor,
-      onPrimary: const Color(0xFFFFFFFF),
-      primaryContainer: const Color(0xFFAC2567),
-      onPrimaryContainer: const Color(0xFFFFFFFF),
-      secondary: _orangeColor,
-      onSecondary: const Color(0xFF1A1B2A),
-      secondaryContainer: const Color(0xFFE5A23D),
-      onSecondaryContainer: const Color(0xFF1A1B2A),
-      tertiary: _lightBlueColor,
-      onTertiary: const Color(0xFF1A1B2A),
-      tertiaryContainer: const Color(0xFF2E8BC0),
-      onTertiaryContainer: const Color(0xFF1A1B2A),
+      surface: brightness == Brightness.dark ? _backgroundSeedColor : _surfaceColor,
+      onSurface: brightness == Brightness.dark ? _surfaceColor : _onSurfaceColor,
+      surfaceBright: brightness == Brightness.dark ? const Color(0xFF1A1A1A) : _surfaceColor,
+      primary: _primaryColor,
+      onPrimary: _surfaceColor,
+      primaryContainer: brightness == Brightness.dark ? const Color(0xFF1E5BA8) : const Color(0xFF5BA2FF),
+      onPrimaryContainer: brightness == Brightness.dark ? _surfaceColor : _onSurfaceColor,
+      secondary: _primaryColor.withValues(alpha: 0.8),
+      onSecondary: _surfaceColor,
+      secondaryContainer: _primaryColor.withValues(alpha: 0.2),
+      onSecondaryContainer: _onSurfaceColor,
+      tertiary: _primaryColor.withValues(alpha: 0.6),
+      onTertiary: _surfaceColor,
+      tertiaryContainer: _primaryColor.withValues(alpha: 0.1),
+      onTertiaryContainer: _onSurfaceColor,
       error: _error._dark.color,
       onError: _error._dark.onColor,
       errorContainer: _error._dark.colorContainer,
@@ -54,6 +55,7 @@ ThemeData buildTheme(Brightness brightness, {Color? seedColor}) {
     outlinedButtonTheme: _outlinedButtonThemeData(colorScheme),
     scaffoldBackgroundColor: Colors.transparent,
     bottomSheetTheme: _bottomSheetTheme(colorScheme),
+    navigationBarTheme: _navigationBarTheme(colorScheme),
   );
 
   return theme.copyWith(appBarTheme: _appBarTheme(theme), textTheme: _textTheme(theme.textTheme));

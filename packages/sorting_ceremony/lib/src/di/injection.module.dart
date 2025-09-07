@@ -20,7 +20,10 @@ class SortingCeremonyPackageModule extends _i526.MicroPackageModule {
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.lazySingleton<_i702.UserNeedSortingCeremonyUseCase>(
-      () => _i702.UserNeedSortingCeremonyUseCase(gh<_i59.FirebaseAuth>(), gh<_i662.SignOutUseCase>()),
+      () => _i702.UserNeedSortingCeremonyUseCase(
+        gh<_i59.FirebaseAuth>(),
+        gh<_i662.SignOutUseCase>(),
+      ),
     );
     gh.lazySingleton<_i802.AssignTeamUseCase>(() => _i802.AssignTeamUseCase(gh<_i809.FirebaseFunctions>()));
     gh.factory<_i111.SortingCeremonyCubit>(() => _i111.SortingCeremonyCubit(gh<_i363.AssignTeamUseCase>()));
