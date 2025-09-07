@@ -68,13 +68,14 @@ class SchedulePage extends StatelessWidget {
   }
 
   Widget _buildBody(ScheduleState state) {
-    if (state is! ScheduleLoaded) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    return TabBarView(
-      children: state.groupedSessions.availableDays.map((day) => _buildDaySession(state, day)).toList(),
-    );
+    return switch (state) {
+      ScheduleLoaded(groupedSessions: final groupedSessions) => TabBarView(
+        children: groupedSessions.availableDays.map((day) => _buildDaySession(state, day)).toList(),
+      ),
+      ScheduleLoading() => const Center(child: CircularProgressIndicator()),
+      ScheduleError(message: final message) => Center(child: Text(message)),
+      _ => const SizedBox.shrink(),
+    };
   }
 
   Widget _buildDaySession(ScheduleLoaded state, DateTime day) {

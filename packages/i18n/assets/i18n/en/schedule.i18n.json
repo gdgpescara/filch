@@ -1,5 +1,32 @@
 {
   "sessions": {
-    "title": "Schedule"
+    "title": "Schedule",
+    "ended_sessions": "Ended sessions",
+    "ended_sessions_count": "Ended sessions ($count)",
+    "ended_sessions_subtitle": "View sessions that have already concluded",
+    "no_sessions_for_room": "No sessions available for the selected room.",
+    "no_sessions_for_day": "No sessions available for this day.",
+    "session_status": {
+      "ended": "Ended",
+      "in_progress": "In progress"
+    },
+    "session_progress": {
+      "in_progress_label": "In progress",
+      "remaining_time": "$minutes m $seconds s remaining"
+    },
+    "session_speakers": {
+      "label(param=count)": {
+        "one": "Speaker",
+        "other": "Speakers"
+      }
+    },
+    "semantics": {
+      "ended_section_label": "Ended sessions section. $count sessions available. Tap to expand.",
+      "ended_section_hint": "Double tap to show or hide concluded sessions",
+      "current_talk": "Session in progress: $title",
+      "upcoming_talk": "Upcoming session: $title",
+      "ended_talk": "Ended session: $title",
+      "generic_talk": "Session: $title"
+    }
   }
 }

@@ -100,6 +100,9 @@ class Session extends Equatable {
   /// Duration of the session
   Duration get duration => endsAt.difference(startsAt);
 
+  /// Duration of the session in minutes
+  int get durationInMinutes => duration.inMinutes;
+
   /// Checks if the session is currently running
   bool get isCurrentlyRunning {
     final now = DateTime.now();

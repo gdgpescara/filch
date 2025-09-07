@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
@@ -17,7 +18,7 @@ class SessionSpeakers extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          'Speaker${speakers.length > 1 ? 's' : ''}',
+          t.schedule.sessions.session_speakers.label(count: speakers.length),
           style: context.textTheme.bodyMedium,
         ),
         const SizedBox(height: Spacing.s),

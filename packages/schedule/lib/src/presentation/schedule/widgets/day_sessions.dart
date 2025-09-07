@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
 import '../../../models/models.dart';
@@ -23,7 +24,7 @@ class DaySessions extends StatelessWidget {
     if (sessions.isEmpty) {
       return Center(
         child: Text(
-          'Nessuna sessione disponibile per questo giorno',
+          t.schedule.sessions.no_sessions_for_day,
           style: context.textTheme.bodyMedium,
         ),
       );

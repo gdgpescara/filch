@@ -39,7 +39,6 @@ class GetGroupedSessionsUseCase {
               ),
             )
             .map((day, sessions) {
-              // Then group by room name within each day
               final sessionsByRoomName = sessions.groupListsBy((session) => session.room.name);
               return MapEntry(day, sessionsByRoomName);
             });

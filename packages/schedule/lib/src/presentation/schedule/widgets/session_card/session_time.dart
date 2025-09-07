@@ -3,16 +3,17 @@ import 'dart:async';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:i18n/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:ui/ui.dart';
 
+import '../../../../models/models.dart';
 import 'session_progress.dart';
 
 class SessionTime extends StatefulWidget {
-  const SessionTime({super.key, required this.startsAt, required this.endsAt});
+  const SessionTime({super.key, required this.session});
 
-  final DateTime startsAt;
-  final DateTime endsAt;
+  final Session session;
 
   @override
   State<SessionTime> createState() => _SessionTimeState();
@@ -39,16 +40,16 @@ class _SessionTimeState extends State<SessionTime> {
     final now = DateTime.now();
 
     // Schedule refresh at session start time
-    if (now.isBefore(widget.startsAt)) {
-      final timeUntilStart = widget.startsAt.difference(now);
+    if (now.isBefore(widget.session.startsAt)) {
+      final timeUntilStart = widget.session.startsAt.difference(now);
       _startTimer = Timer(timeUntilStart, () {
         if (mounted) setState(() {});
       });
     }
 
     // Schedule refresh at session end time
-    if (now.isBefore(widget.endsAt)) {
-      final timeUntilEnd = widget.endsAt.difference(now);
+    if (now.isBefore(widget.session.endsAt)) {
+      final timeUntilEnd = widget.session.endsAt.difference(now);
       _endTimer = Timer(timeUntilEnd, () {
         if (mounted) setState(() {});
       });
@@ -58,23 +59,17 @@ class _SessionTimeState extends State<SessionTime> {
   @override
   Widget build(BuildContext context) {
     final dateFormatter = GetIt.I<DateFormat>(instanceName: DateFormatType.onlyTime);
-    final startTime = dateFormatter.format(widget.startsAt);
-    final endTime = dateFormatter.format(widget.endsAt);
-    final duration = widget.endsAt.difference(widget.startsAt);
-    final durationMinutes = duration.inMinutes;
-    final now = DateTime.now();
-    final isInProgress = now.isAfter(widget.startsAt) && now.isBefore(widget.endsAt);
-    final hasEnded = now.isAfter(widget.endsAt);
-    final isFuture = now.isBefore(widget.startsAt);
+    final startTime = dateFormatter.format(widget.session.startsAt);
+    final endTime = dateFormatter.format(widget.session.endsAt);
 
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _timeSlot(startTime, endTime, context, isFuture, durationMinutes, hasEnded),
-        if (isInProgress) ...[
+        _timeSlot(startTime, endTime, context),
+        if (widget.session.isCurrentlyRunning) ...[
           const SizedBox(height: Spacing.s),
-          SessionProgress(startsAt: widget.startsAt, endsAt: widget.endsAt),
+          SessionProgress(session: widget.session),
         ],
       ],
     );
@@ -84,9 +79,6 @@ class _SessionTimeState extends State<SessionTime> {
     String startTime,
     String endTime,
     BuildContext context,
-    bool isFuture,
-    int durationMinutes,
-    bool hasEnded,
   ) {
     return Row(
       children: [
@@ -99,14 +91,14 @@ class _SessionTimeState extends State<SessionTime> {
             ],
           ),
         ),
-        if (isFuture)
+        if (widget.session.isUpcoming)
           AppChip(
-            text: '${durationMinutes}min',
+            text: '${widget.session.durationInMinutes}min',
             color: appColors.googleBlue,
           ),
-        if (hasEnded)
+        if (widget.session.hasEnded)
           AppChip(
-            text: 'Terminato',
+            text: t.schedule.sessions.session_status.ended,
             color: appColors.googleRed,
           ),
       ],

@@ -7,25 +7,18 @@ import 'session_speakers.dart';
 import 'session_time.dart';
 
 class SessionCard extends StatelessWidget {
-  const SessionCard(this.sessionI, {super.key});
+  const SessionCard(this.session, {super.key});
 
-  final Session sessionI;
+  final Session session;
 
   @override
   Widget build(BuildContext context) {
-    final session = sessionI.copyWith(
-      startsAt: DateTime.now().add(const Duration(minutes: 20)),
-      endsAt: DateTime.now().add(const Duration(minutes: 50)),
-    );
     return AppCard(
       style: AppCardStyle.bordered,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SessionTime(
-            startsAt: session.startsAt,
-            endsAt: session.endsAt,
-          ),
+          SessionTime(session: session),
 
           const SizedBox(height: Spacing.m),
           Text(
