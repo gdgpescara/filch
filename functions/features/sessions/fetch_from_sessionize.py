@@ -20,11 +20,11 @@ def transform_sessions(raw_data: list) -> List[Session]:
             title = session.get("title", "")
             description = session.get("description", "")
             roomId = session.get("roomId")
-            room = session.get("room")
+            roomName = session.get("room")
             startsAt = session.get("startsAt")
             endsAt = session.get("endsAt")
 
-            if roomId is None or room is None or startsAt is None or endsAt is None:
+            if roomId is None or roomName is None or startsAt is None or endsAt is None:
                 logger.info(f"Missing session information for session '{session.get('id')}'. Skipping.")
                 continue
 
@@ -35,8 +35,7 @@ def transform_sessions(raw_data: list) -> List[Session]:
                 "startsAt": startsAt,
                 "endsAt": endsAt,
                 "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name"), profilePicture=None) for s in session.get("speakers", [])],
-                "roomId": roomId,
-                "room": room,
+                "room": NamedEntity(id=roomId, name=roomName),
                 "sessionFormat": None,
                 "tracks": [],
                 "tags": [],

@@ -3,6 +3,9 @@ import { initFirebaseApp } from "./utilities.js";
 import * as fs from "fs";
 import { GoogleAuth } from "google-auth-library";
 
+// Imposta la variabile d'ambiente per ignorare i certificati SSL
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = "0";
+
 /**
  * Funzione per leggere la configurazione dal file sessionize.json
  */
@@ -12,8 +15,7 @@ const getSessionizeConfig = () => {
     const sessionizeData = JSON.parse(data);
     return {
       eventId: sessionizeData.eventId,
-      sessionsUrl: sessionizeData.endpoints.sessionsUrl,
-      speakersUrl: sessionizeData.endpoints.speakersUrl,
+      fetchUrl: sessionizeData.endpoints.fetchUrl,
     };
   } catch (error) {
     console.error("❌ Errore nella lettura del file sessionize.json:", error);
@@ -123,57 +125,34 @@ export const syncSessionizeData = async () => {
     }
 
     console.log(`📋 Event ID: ${config.eventId}`);
-    console.log(`📋 Sessions URL: ${config.sessionsUrl}`);
-    console.log(`📋 Speakers URL: ${config.speakersUrl}\n`);
+    console.log(`📋 Fetch URL: ${config.fetchUrl}\n`);
 
-    // Ottieni Identity Token per ogni endpoint Cloud Run
-    console.log("🔐 Generazione Identity Token per Cloud Run endpoints...");
-    const [sessionsToken, speakersToken] = await Promise.all([
-      getCloudRunIdentityToken(config.sessionsUrl),
-      getCloudRunIdentityToken(config.speakersUrl),
-    ]);
+    // Ottieni Identity Token per l'endpoint Cloud Run
+    console.log("🔐 Generazione Identity Token per Cloud Run endpoint...");
+    const identityToken = await getCloudRunIdentityToken(config.fetchUrl);
 
     // Payload da inviare
     const payload = { event_id: config.eventId };
 
     console.log("\n");
 
-    // Chiama prima l'endpoint speakers
-    console.log("🌐 Chiamando endpoint SPEAKERS...");
-    let speakersResult;
+    // Chiama l'endpoint unificato per sincronizzare tutti i dati
+    console.log("🌐 Chiamando endpoint per sincronizzazione completa...");
+    let result;
     try {
-      speakersResult = await callCloudRunEndpointPOST(
-        config.speakersUrl,
+      result = await callCloudRunEndpointPOST(
+        config.fetchUrl,
         payload,
-        speakersToken
+        identityToken
       );
-      console.log("✅ Speakers completato con successo!");
+      console.log("✅ Sincronizzazione completata con successo!");
     } catch (error) {
-      console.error("❌ Errore con endpoint speakers:", error.message);
-      speakersResult = { error: error.message };
+      console.error("❌ Errore durante la sincronizzazione:", error.message);
+      result = { error: error.message };
     }
 
-    console.log("\n" + "=".repeat(50) + "\n");
-
-    // Poi chiama l'endpoint sessions
-    console.log("🌐 Chiamando endpoint SESSIONS...");
-    let sessionsResult;
-    try {
-      sessionsResult = await callCloudRunEndpointPOST(
-        config.sessionsUrl,
-        payload,
-        sessionsToken
-      );
-      console.log("✅ Sessions completato con successo!");
-    } catch (error) {
-      console.error("❌ Errore con endpoint sessions:", error.message);
-      sessionsResult = { error: error.message };
-    }
-
-    console.log("\n🎉 Sincronizzazione completata con successo!");
-    console.log("📊 Risultati:");
-    console.log("- Sessions:", sessionsResult);
-    console.log("- Speakers:", speakersResult);
+    console.log("\n🎉 Sincronizzazione completata!");
+    console.log("📊 Risultati:", result);
   } catch (error) {
     console.error("❌ Errore durante la sincronizzazione:", error);
   }
