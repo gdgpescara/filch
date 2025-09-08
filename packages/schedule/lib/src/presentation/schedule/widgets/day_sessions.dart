@@ -14,10 +14,12 @@ class DaySessions extends StatelessWidget {
     super.key,
     required this.sessions,
     required this.rooms,
+    required this.onSessionTap,
   });
 
   final Map<String, List<Session>> sessions;
   final Set<NamedEntity> rooms;
+  final ValueChanged<String> onSessionTap;
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +40,7 @@ class DaySessions extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RoomSelector(rooms: rooms),
-            const Expanded(child: RoomSessions()),
+            Expanded(child: RoomSessions(onSessionTap: onSessionTap)),
           ],
         ),
       ),

@@ -13,6 +13,8 @@ class HomePage extends StatelessWidget {
       navigateToLogin: () => Routefly.navigate(routePaths.signIn),
       navigateToSplash: () => Routefly.navigate(routePaths.path),
       navigateToAllPoints: () => Routefly.pushNavigate(routePaths.user.allPoints),
+      navigateToSessionDetail: (sessionId) =>
+          Routefly.pushNavigate(routePaths.session.$id.replaceAll('[id]', sessionId)),
     );
   }
 }

@@ -11,6 +11,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:schedule/src/models/models.dart' as _i438;
 import 'package:schedule/src/presentation/schedule/state/day_sessions_cubit.dart' as _i787;
 import 'package:schedule/src/presentation/schedule/state/schedule_cubit.dart' as _i365;
+import 'package:schedule/src/presentation/session_detail/state/session_detail_cubit.dart' as _i295;
 import 'package:schedule/src/use_cases/get_grouped_sessions_use_case.dart' as _i558;
 import 'package:schedule/src/use_cases/get_session_by_id_use_case.dart' as _i73;
 
@@ -29,5 +30,6 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
         _,
       ) => _i787.DaySessionsCubit(sessions),
     );
+    gh.factory<_i295.SessionDetailCubit>(() => _i295.SessionDetailCubit(gh<_i73.GetSessionByIdUseCase>()));
   }
 }

@@ -8,10 +8,12 @@ import 'session_card/session_card.dart';
 class CurrentAndFutureSessions extends StatelessWidget {
   const CurrentAndFutureSessions({
     required this.sessions,
+    required this.onSessionTap,
     super.key,
   });
 
   final List<Session> sessions;
+  final ValueChanged<String> onSessionTap;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,7 @@ class CurrentAndFutureSessions extends StatelessWidget {
           label: session.isCurrentlyRunning
               ? t.schedule.sessions.semantics.current_talk(title: session.title)
               : t.schedule.sessions.semantics.upcoming_talk(title: session.title),
-          child: SessionCard(session),
+          child: SessionCard(session, onTap: onSessionTap),
         );
       },
       separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),

@@ -32,7 +32,7 @@
 		<dict>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>$(GOOGLE_SIGN_IN_KEY)</string>
+					<string>$(REVERSED_CLIENT_ID)</string>
 				<string>$(ENCODED_APP_ID)</string>
 			</array>
 		</dict>

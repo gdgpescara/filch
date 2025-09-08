@@ -3,7 +3,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-import '../../../../models/models.dart';
+import '../../models/models.dart';
 
 class SessionProgress extends StatefulWidget {
   const SessionProgress({

@@ -6,6 +6,7 @@ import 'package:routefly/routefly.dart';
 import 'app/(splash)/app_page.dart' as a3;
 import 'app/countdown/countdown_page.dart' as a0;
 import 'app/notification/notification_page.dart' as a2;
+import 'app/session/[id]_page.dart' as a10;
 import 'app/sign_in/sign_in_page.dart' as a1;
 import 'app/staff/home_page.dart' as a8;
 import 'app/staff/point_assignment_page.dart' as a7;
@@ -55,4 +56,9 @@ Route b9Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRou
   ctx,
   settings,
   const a9.ThanksPage(),
+);
+Route b10Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
+  ctx,
+  settings,
+  const a10.SessionDetailPage(),
 );

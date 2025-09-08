@@ -9,8 +9,13 @@ import 'state/schedule_state.dart';
 import 'widgets/day_sessions.dart';
 
 class SchedulePage extends StatelessWidget {
-  const SchedulePage({super.key, required this.embedded});
+  const SchedulePage({
+    super.key,
+    required this.navigateToSessionDetail,
+    required this.embedded,
+  });
 
+  final ValueChanged<String> navigateToSessionDetail;
   final bool embedded;
 
   @override
@@ -29,9 +34,7 @@ class SchedulePage extends StatelessWidget {
 
   bool _shouldRebuild(ScheduleState previous, ScheduleState current) {
     return previous != current ||
-        (current is ScheduleLoaded &&
-            previous is ScheduleLoaded &&
-            current.groupedSessions != previous.groupedSessions);
+        (current is ScheduleLoaded && previous is ScheduleLoaded && current.groupedSessions != previous.groupedSessions);
   }
 
   Widget _buildScheduleScaffold(ScheduleState state) {
@@ -84,6 +87,7 @@ class SchedulePage extends StatelessWidget {
 
     return DaySessions(
       sessions: sessions,
+      onSessionTap: navigateToSessionDetail,
       rooms: state.groupedSessions.getRoomsForDay(day),
     );
   }

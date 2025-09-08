@@ -16,11 +16,13 @@ class UserHomePage extends StatelessWidget {
     required this.navigateToSplash,
     required this.navigateToLogin,
     required this.navigateToAllPoints,
+    required this.navigateToSessionDetail,
   });
 
   final VoidCallback navigateToSplash;
   final VoidCallback navigateToLogin;
   final VoidCallback navigateToAllPoints;
+  final ValueChanged<String> navigateToSessionDetail;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +35,10 @@ class UserHomePage extends StatelessWidget {
               child: IndexedStack(
                 index: state.currentView,
                 children: [
-                  const SchedulePage(embedded: true),
+                  SchedulePage(
+                    navigateToSessionDetail: navigateToSessionDetail,
+                    embedded: true,
+                  ),
                   const RankingPage(),
                   if (!state.isRankingFreezed) const CurrentQuestPage(),
                   UserProfilePage(
