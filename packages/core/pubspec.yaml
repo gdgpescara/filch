@@ -26,7 +26,7 @@ dependencies:
   path_provider: ^2.1.5
   image_picker: ^1.2.0
   shorebird_code_push: ^2.0.4
-  catch_and_flow: ^1.0.8
+  catch_and_flow: ^1.0.9
   path: any
   intl: any
 

@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
-import 'session_progress.dart';
+import '../../../widgets/session_progress.dart';
 
 class SessionTime extends StatefulWidget {
   const SessionTime({super.key, required this.session});

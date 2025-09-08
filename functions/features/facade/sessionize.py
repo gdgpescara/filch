@@ -57,6 +57,9 @@ def fetch_from_sessionize(request: Request) -> bool:
             for speaker in speakers:
                 if session_speaker.id == speaker.id:
                     session_speaker.profilePicture = speaker.profilePicture
+                    session_speaker.bio = speaker.bio
+                    session_speaker.links = speaker.links
+                    session_speaker.tagLine = speaker.tagLine
                     break
     upload_to_sessionize(data=sessions, collection_name="sessions")
     return jsonify(True)

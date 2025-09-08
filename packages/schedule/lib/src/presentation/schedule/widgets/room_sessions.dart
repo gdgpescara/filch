@@ -12,7 +12,9 @@ import 'current_and_future_sessions.dart';
 import 'ended_sessions.dart';
 
 class RoomSessions extends StatefulWidget {
-  const RoomSessions({super.key});
+  const RoomSessions({super.key, required this.onSessionTap});
+
+  final ValueChanged<String> onSessionTap;
 
   @override
   State<RoomSessions> createState() => _RoomSessionsState();
@@ -76,8 +78,14 @@ class _RoomSessionsState extends State<RoomSessions> {
 
         return ListView(
           children: [
-            EndedSessions(sessions: endedSessions),
-            CurrentAndFutureSessions(sessions: currentAndFutureSessions),
+            EndedSessions(
+              sessions: endedSessions,
+              onSessionTap: widget.onSessionTap,
+            ),
+            CurrentAndFutureSessions(
+              sessions: currentAndFutureSessions,
+              onSessionTap: widget.onSessionTap,
+            ),
           ],
         );
       },

@@ -34,7 +34,7 @@ def transform_sessions(raw_data: list) -> List[Session]:
                 "description": description,
                 "startsAt": startsAt,
                 "endsAt": endsAt,
-                "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name"), profilePicture=None) for s in session.get("speakers", [])],
+                "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name"), profilePicture=None, bio=None, links=[], tagLine=None) for s in session.get("speakers", [])],
                 "room": NamedEntity(id=roomId, name=roomName),
                 "sessionFormat": None,
                 "tracks": [],

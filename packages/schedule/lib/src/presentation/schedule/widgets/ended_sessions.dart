@@ -8,10 +8,12 @@ import 'session_card/session_card.dart';
 class EndedSessions extends StatelessWidget {
   const EndedSessions({
     required this.sessions,
+    required this.onSessionTap,
     super.key,
   });
 
   final List<Session> sessions;
+  final ValueChanged<String> onSessionTap;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,15 @@ class EndedSessions extends StatelessWidget {
             t.schedule.sessions.ended_sessions_subtitle,
             style: context.textTheme.bodySmall,
           ),
-          children: sessions.map((session) => _EndedSessionCard(session: session, isLast: session == sessions.last)).toList(),
+          children: sessions
+              .map(
+                (session) => _EndedSessionCard(
+                  session: session,
+                  isLast: session == sessions.last,
+                  onSessionTap: onSessionTap,
+                ),
+              )
+              .toList(),
         ),
       ),
     );
@@ -51,9 +61,14 @@ class EndedSessions extends StatelessWidget {
 }
 
 class _EndedSessionCard extends StatelessWidget {
-  const _EndedSessionCard({required this.session, required this.isLast});
+  const _EndedSessionCard({
+    required this.session,
+    required this.isLast,
+    required this.onSessionTap,
+  });
 
   final Session session;
+  final ValueChanged<String> onSessionTap;
   final bool isLast;
 
   @override
@@ -62,7 +77,7 @@ class _EndedSessionCard extends StatelessWidget {
       opacity: 0.7,
       child: Padding(
         padding: EdgeInsets.only(bottom: isLast ? Spacing.s : Spacing.m),
-        child: SessionCard(session),
+        child: SessionCard(session, onTap: onSessionTap),
       ),
     );
   }

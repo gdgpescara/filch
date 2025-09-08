@@ -15,11 +15,13 @@ class StaffHomePage extends StatefulWidget {
     required this.navigateToSplash,
     required this.navigateToAssignment,
     required this.navigateToTShirtAssignment,
+    required this.navigateToSessionDetail,
   });
 
   final VoidCallback navigateToSplash;
   final VoidCallback navigateToTShirtAssignment;
-  final void Function(AssignmentPageArgs) navigateToAssignment;
+  final ValueChanged<AssignmentPageArgs> navigateToAssignment;
+  final ValueChanged<String> navigateToSessionDetail;
 
   @override
   State<StaffHomePage> createState() => _StaffHomePageState();
@@ -38,7 +40,10 @@ class _StaffHomePageState extends State<StaffHomePage> {
         child: IndexedStack(
           index: _currentIndex,
           children: [
-            const SchedulePage(embedded: true),
+            SchedulePage(
+              navigateToSessionDetail: widget.navigateToSessionDetail,
+              embedded: true,
+            ),
             ScanView(
               navigateToAssignment: widget.navigateToAssignment,
               navigateToTShirtAssignment: widget.navigateToTShirtAssignment,

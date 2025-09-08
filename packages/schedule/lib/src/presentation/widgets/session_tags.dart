@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:ui/ui.dart';
 
-import '../../../../models/models.dart';
+import '../../models/models.dart';
 
-class SessionInfo extends StatelessWidget {
-  const SessionInfo({
+class SessionTags extends StatelessWidget {
+  const SessionTags({
     super.key,
     required this.session,
   });
