@@ -53,7 +53,7 @@ class GroupedSessions extends Equatable {
     final rooms = <NamedEntity>{};
     for (final sessions in daySchedule.values) {
       for (final session in sessions) {
-        rooms.add(session.room);
+        if (session.room != null) rooms.add(session.room!);
       }
     }
     return rooms;

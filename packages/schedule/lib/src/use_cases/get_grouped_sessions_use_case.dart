@@ -23,13 +23,13 @@ class GetGroupedSessionsUseCase {
                   ...doc.data(),
                 });
               } catch (e) {
+                logError('Failed to parse session ${doc.id}: $e', LogLevel.error, e, e is Error ? e.stackTrace : null);
                 return null;
               }
             })
             .whereType<Session>()
             .toList();
 
-        // Group by day first
         final sessionsByDay = sessions
             .groupListsBy(
               (session) => DateTime(
@@ -39,7 +39,14 @@ class GetGroupedSessionsUseCase {
               ),
             )
             .map((day, sessions) {
-              final sessionsByRoomName = sessions.groupListsBy((session) => session.room.name);
+              final serviceSessions = sessions.where((s) => s.isServiceSession).toList();
+              final otherSessions = sessions.where((s) => !s.isServiceSession).toList();
+              final sessionsByRoomName = otherSessions.groupListsBy((session) => session.room!.name);
+              for (final entry in sessionsByRoomName.entries) {
+                entry.value
+                  ..addAll(serviceSessions)
+                  ..sort((a, b) => a.startsAt.compareTo(b.startsAt));
+              }
               return MapEntry(day, sessionsByRoomName);
             });
 

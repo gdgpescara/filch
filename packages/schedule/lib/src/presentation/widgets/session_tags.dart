@@ -18,21 +18,21 @@ class SessionTags extends StatelessWidget {
       spacing: Spacing.xs,
       runSpacing: Spacing.xs,
       children: [
-        if (session.language.name.isNotEmpty)
+        if (session.language?.name.isNotEmpty ?? false)
           AppChip(
-            text: session.language.name,
+            text: session.language!.name,
             icon: FontAwesomeIcons.language,
             color: appColors.googleGreen,
           ),
-        if (session.sessionFormat.name.isNotEmpty)
+        if (session.sessionFormat?.name.isNotEmpty ?? false)
           AppChip(
-            text: session.sessionFormat.name,
+            text: session.sessionFormat!.name,
             icon: FontAwesomeIcons.box,
             color: appColors.googleBlue,
           ),
-        if (session.level.name.isNotEmpty)
+        if (session.level?.name.isNotEmpty ?? false)
           AppChip(
-            text: session.level.name,
+            text: session.level!.name,
             icon: FontAwesomeIcons.signal,
             color: appColors.googleRed,
           ),

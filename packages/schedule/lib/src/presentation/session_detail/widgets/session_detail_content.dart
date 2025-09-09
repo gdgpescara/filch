@@ -25,7 +25,7 @@ class SessionDetailContent extends StatelessWidget {
         ),
         const SizedBox(height: Spacing.l),
         SessionDetailInfo(session: session),
-        if (session.description.isNotEmpty) ...[
+        if (session.description?.isNotEmpty ?? false) ...[
           const SizedBox(height: Spacing.l),
           Text(
             'Descrizione',
@@ -33,7 +33,7 @@ class SessionDetailContent extends StatelessWidget {
           ),
           const SizedBox(height: Spacing.m),
           Text(
-            session.description,
+            session.description!,
             style: context.textTheme.bodyMedium,
           ),
         ],

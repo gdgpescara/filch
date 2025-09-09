@@ -15,7 +15,7 @@ class SessionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => onTap(session.id),
+      onTap: () => !session.isServiceSession ? onTap(session.id) : null,
       child: AppCard(
         style: AppCardStyle.bordered,
         child: Column(
@@ -29,10 +29,10 @@ class SessionCard extends StatelessWidget {
               style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
 
-            if (session.description.isNotEmpty) ...[
+            if (session.description?.isNotEmpty ?? false) ...[
               const SizedBox(height: Spacing.s),
               Text(
-                session.description,
+                session.description!,
                 style: context.textTheme.bodyMedium?.copyWith(
                   color: context.colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
