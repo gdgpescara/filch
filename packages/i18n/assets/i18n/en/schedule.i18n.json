@@ -27,6 +27,10 @@
       "upcoming_talk": "Upcoming session: $title",
       "ended_talk": "Ended session: $title",
       "generic_talk": "Session: $title"
+    },
+    "session_card": {
+      "remove_favorite": "Remove from favorites",
+      "add_favorite": "Add to favorites"
     }
   }
 }
