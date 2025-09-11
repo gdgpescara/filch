@@ -12,8 +12,6 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:schedule/src/models/models.dart' as _i438;
 import 'package:schedule/src/presentation/schedule/state/day_sessions_cubit.dart'
     as _i787;
-import 'package:schedule/src/presentation/schedule/state/favorite_cubit.dart'
-    as _i656;
 import 'package:schedule/src/presentation/schedule/state/schedule_cubit.dart'
     as _i365;
 import 'package:schedule/src/presentation/session_detail/state/session_detail_cubit.dart'
@@ -70,7 +68,7 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
       _,
     ) =>
         _i787.DaySessionsCubit(sessions));
-    gh.factory<_i656.FavoriteCubit>(() => _i656.FavoriteCubit(
+    gh.factory<_i603.FavoriteCubit>(() => _i603.FavoriteCubit(
           gh<_i107.ToggleFavoriteUseCase>(),
           gh<_i901.IsFavoriteUseCase>(),
         ));
