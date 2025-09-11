@@ -1,13 +1,11 @@
 import json
 from pydantic import BaseModel
 from firebase_functions.https_fn import on_call, CallableRequest
-from google.cloud.firestore import SERVER_TIMESTAMP
-from firebase_admin import auth
-
+from firebase_admin import auth, firestore
+from firestore_client import client as firestore_client
 from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
-from firestore_client import client as firestore_client
 from shared.get_signed_in_user import get_signed_in_user
 from shared.env import FIREBASE_REGION
 
@@ -41,7 +39,7 @@ def scan_other_attendee(req: CallableRequest) -> bool:
             raise Exception("You have already scanned this user")
 
         points = Points(type=PointsTypeEnum.quest, points=payload.points,
-                        assigned_at=SERVER_TIMESTAMP, assigned_from=user_uid)
+                        assigned_at=firestore.SERVER_TIMESTAMP, assigned_from=user_uid)
         batch = firestore_client.batch()
         doc = (firestore_client
                .collection("users")

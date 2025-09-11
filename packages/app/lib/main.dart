@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:get_it/get_it.dart';
@@ -51,7 +52,17 @@ void main() {
       );
     }
 
-    await FirebaseAppCheck.instance.activate(appleProvider: AppleProvider.appAttest);
+    if (kDebugMode) {
+      await FirebaseAppCheck.instance.activate(
+        androidProvider: AndroidProvider.debug,
+        appleProvider: AppleProvider.debug,
+      );
+    }
+
+    if (kReleaseMode) {
+      await FirebaseAppCheck.instance.activate(appleProvider: AppleProvider.appAttest);
+      await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
+    }
 
     runApp(TranslationProvider(child: const Application()));
   }, onBootstrapError);

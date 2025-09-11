@@ -8,6 +8,7 @@ import 'dart:async' as _i687;
 
 import 'package:auth/auth.dart' as _i662;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
+import 'package:cloud_functions/cloud_functions.dart' as _i809;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:schedule/src/models/models.dart' as _i438;
 import 'package:schedule/src/presentation/schedule/state/day_sessions_cubit.dart'
@@ -17,15 +18,12 @@ import 'package:schedule/src/presentation/schedule/state/schedule_cubit.dart'
 import 'package:schedule/src/presentation/session_detail/state/session_detail_cubit.dart'
     as _i295;
 import 'package:schedule/src/presentation/state/favorite_cubit.dart' as _i603;
-import 'package:schedule/src/use_cases/add_to_favorites_use_case.dart' as _i517;
 import 'package:schedule/src/use_cases/get_grouped_sessions_use_case.dart'
     as _i558;
 import 'package:schedule/src/use_cases/get_session_by_id_use_case.dart' as _i73;
 import 'package:schedule/src/use_cases/get_user_favorite_sessions_use_case.dart'
     as _i242;
 import 'package:schedule/src/use_cases/is_favorite_use_case.dart' as _i901;
-import 'package:schedule/src/use_cases/remove_from_favorites_use_case.dart'
-    as _i552;
 import 'package:schedule/src/use_cases/toggle_favorite_use_case.dart' as _i107;
 
 class SchedulePackageModule extends _i526.MicroPackageModule {
@@ -36,23 +34,8 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
           gh<_i974.FirebaseFirestore>(),
           gh<_i662.GetSignedUserUseCase>(),
         ));
-    gh.lazySingleton<_i552.RemoveFromFavoritesUseCase>(
-        () => _i552.RemoveFromFavoritesUseCase(
-              gh<_i974.FirebaseFirestore>(),
-              gh<_i662.GetSignedUserUseCase>(),
-            ));
-    gh.lazySingleton<_i107.ToggleFavoriteUseCase>(
-        () => _i107.ToggleFavoriteUseCase(
-              gh<_i974.FirebaseFirestore>(),
-              gh<_i662.GetSignedUserUseCase>(),
-            ));
     gh.lazySingleton<_i242.GetUserFavoriteSessionsUseCase>(
         () => _i242.GetUserFavoriteSessionsUseCase(
-              gh<_i974.FirebaseFirestore>(),
-              gh<_i662.GetSignedUserUseCase>(),
-            ));
-    gh.lazySingleton<_i517.AddToFavoritesUseCase>(
-        () => _i517.AddToFavoritesUseCase(
               gh<_i974.FirebaseFirestore>(),
               gh<_i662.GetSignedUserUseCase>(),
             ));
@@ -68,10 +51,8 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
       _,
     ) =>
         _i787.DaySessionsCubit(sessions));
-    gh.factory<_i603.FavoriteCubit>(() => _i603.FavoriteCubit(
-          gh<_i107.ToggleFavoriteUseCase>(),
-          gh<_i901.IsFavoriteUseCase>(),
-        ));
+    gh.lazySingleton<_i107.ToggleFavoriteUseCase>(
+        () => _i107.ToggleFavoriteUseCase(gh<_i809.FirebaseFunctions>()));
     gh.factory<_i603.FavoriteCubit>(() => _i603.FavoriteCubit(
           gh<_i107.ToggleFavoriteUseCase>(),
           gh<_i901.IsFavoriteUseCase>(),

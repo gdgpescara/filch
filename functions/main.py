@@ -24,3 +24,4 @@ from features.points.scan_other_attendee import scan_other_attendee
 from features.points.submit_answer import submit_answer
 from features.points.assign_points import assign_points
 from features.facade.sessionize import fetch_from_sessionize
+from features.sessions.toggle_favorite_session import toggle_favorite_session
