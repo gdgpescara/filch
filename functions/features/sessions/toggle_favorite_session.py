@@ -1,0 +1,40 @@
+from firebase_functions.https_fn import on_call, CallableRequest, HttpsError
+from firebase_admin import firestore
+from shared import get_signed_in_user
+from shared.env import FIREBASE_REGION
+from firestore_client import client as firestore_client
+
+@on_call(region=FIREBASE_REGION)
+def toggle_favorite_session(request: CallableRequest) -> bool:
+    try:
+        logged_user = get_signed_in_user(request)
+        session_id = request.data.get("sessionId")
+
+        if session_id is None:
+            raise HttpsError("invalid-argument", "sessionId is required")
+
+
+        favorite_ref = (firestore_client.collection("users")
+            .document(logged_user.uid)
+            .collection("favorite_sessions")
+            .document(session_id))
+
+        favorite_doc = favorite_ref.get()
+
+        if favorite_doc.exists:
+            favorite_ref.delete()
+            return False 
+        else:
+            favorite_data = {
+                "sessionId": session_id,
+                "addedAt": firestore.SERVER_TIMESTAMP
+            }
+            favorite_ref.set(favorite_data)
+            return True
+
+    except HttpsError:
+        raise
+    except Exception as e:
+        raise HttpsError("internal", f"An error occurred: {str(e)}")
+
+    

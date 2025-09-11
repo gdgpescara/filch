@@ -4,5 +4,8 @@
         "${workspaceFolder}"
     ],
     "python.terminal.activateEnvironment": true,
-    "editor.defaultFormatter": "ms-python.autopep8"
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    }
 }

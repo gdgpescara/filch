@@ -1,9 +1,7 @@
 from logger_config import logger
 from firebase_functions.https_fn import on_call, CallableRequest, on_request, Request
-from firebase_admin import auth
-from google.cloud.firestore import SERVER_TIMESTAMP, Increment
+from firebase_admin import auth, firestore
 from flask import jsonify
-
 from shared.env import FIREBASE_REGION
 from features.points.types.points import Points
 from shared.get_signed_in_user import get_signed_in_user
@@ -45,7 +43,7 @@ def assign_points(request: CallableRequest) -> bool:
         filtered_users = users
 
     points = Points(type=point_type, points=assigned_points,
-                    assigned_at=SERVER_TIMESTAMP, quest=quest_id,
+                    assigned_at=firestore.SERVER_TIMESTAMP, quest=quest_id,
                     assigned_by=logged_user.uid)
 
     logger.info(f"Points: {points}")
@@ -89,7 +87,7 @@ def assign_points(request: CallableRequest) -> bool:
         if len(decoded_id) == 3 and decoded_id[0] == "actor":
             timeline_ref = firestore_client.collection("timelines").document(decoded_id[1])
             if timeline_ref.get().exists:
-                batch.update(timeline_ref, {"count": Increment(1)})
+                batch.update(timeline_ref, {"count": firestore.Increment(1)})
 
     batch.commit()
 

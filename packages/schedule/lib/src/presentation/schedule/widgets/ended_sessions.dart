@@ -74,7 +74,7 @@ class _EndedSessionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Opacity(
-      opacity: 0.7,
+      opacity: 0.9,
       child: Padding(
         padding: EdgeInsets.only(bottom: isLast ? Spacing.s : Spacing.m),
         child: SessionCard(session, onTap: onSessionTap),
