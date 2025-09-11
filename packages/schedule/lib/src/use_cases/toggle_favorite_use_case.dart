@@ -1,5 +1,4 @@
 import 'package:cloud_functions/cloud_functions.dart';
-import 'package:core/core.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
