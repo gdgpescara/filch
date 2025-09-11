@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
 import '../../../widgets/session_speakers.dart';
 import '../../../widgets/session_tags.dart';
+import '../../state/favorite_cubit.dart';
 import 'session_time.dart';
 
 class SessionCard extends StatelessWidget {
@@ -14,41 +17,45 @@ class SessionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () => onTap(session.id),
-      child: AppCard(
-        style: AppCardStyle.bordered,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SessionTime(session: session),
+    return BlocProvider<FavoriteCubit>(
+      key: Key('favorite_cubit_provider_${session.id}'),
+      create: (context) => GetIt.I()..init(session.id),
+      child: InkWell(
+        onTap: () => !session.isServiceSession ? onTap(session.id) : null,
+        child: AppCard(
+          style: AppCardStyle.bordered,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SessionTime(session: session),
 
-            const SizedBox(height: Spacing.m),
-            Text(
-              session.title,
-              style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-            ),
-
-            if (session.description.isNotEmpty) ...[
-              const SizedBox(height: Spacing.s),
+              const SizedBox(height: Spacing.m),
               Text(
-                session.description,
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorScheme.onSurface.withValues(alpha: 0.7),
-                ),
-                maxLines: 3,
-                overflow: TextOverflow.ellipsis,
+                session.title,
+                style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
-            ],
 
-            const SizedBox(height: Spacing.s),
-            SessionTags(session: session),
+              if (session.description?.isNotEmpty ?? false) ...[
+                const SizedBox(height: Spacing.s),
+                Text(
+                  session.description!.trim(),
+                  style: context.textTheme.bodyMedium?.copyWith(
+                    color: context.colorScheme.onSurface.withValues(alpha: 0.7),
+                  ),
+                  maxLines: 3,
+                  overflow: TextOverflow.ellipsis,
+                ),
+              ],
 
-            if (session.speakers.isNotEmpty) ...[
               const SizedBox(height: Spacing.s),
-              SessionSpeakers(speakers: session.speakers),
+              SessionTags(session: session),
+
+              if (session.speakers.isNotEmpty) ...[
+                const SizedBox(height: Spacing.s),
+                SessionSpeakers(speakers: session.speakers),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );

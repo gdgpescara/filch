@@ -27,6 +27,10 @@
       "upcoming_talk": "Sessione in programma: $title",
       "ended_talk": "Sessione terminata: $title",
       "generic_talk": "Sessione: $title"
+    },
+    "session_card": {
+      "remove_favorite": "Rimuovi dai preferiti",
+      "add_favorite": "Aggiungi ai preferiti"
     }
   }
 }

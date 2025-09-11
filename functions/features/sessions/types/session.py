@@ -18,13 +18,14 @@ class SessionSpeaker(BaseModel):
 class Session(BaseModel):
     id: str
     title: str
-    description: str
+    description: Optional[str]
     startsAt: str
     endsAt: str
     speakers: List[SessionSpeaker]
-    room: NamedEntity
-    sessionFormat: NamedEntity
+    room: Optional[NamedEntity]
+    sessionFormat: Optional[NamedEntity]
     tracks: List[NamedEntity]
     tags: List[NamedEntity]
-    level: NamedEntity
-    language: NamedEntity
+    level: Optional[NamedEntity]
+    language: Optional[NamedEntity]
+    isServiceSession: Optional[bool] = False

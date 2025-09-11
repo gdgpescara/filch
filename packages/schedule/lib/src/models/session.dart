@@ -12,16 +12,18 @@ class Session extends Equatable {
   const Session({
     required this.id,
     required this.title,
-    required this.description,
+    this.description,
     required this.startsAt,
     required this.endsAt,
     required this.speakers,
-    required this.room,
-    required this.sessionFormat,
+    this.room,
+    this.sessionFormat,
     required this.tracks,
     required this.tags,
-    required this.level,
-    required this.language,
+    this.level,
+    this.language,
+    this.isFavorite = false,
+    this.isServiceSession = false,
   });
 
   /// Creates a [Session] from a JSON map
@@ -37,7 +39,7 @@ class Session extends Equatable {
   final String title;
 
   /// Description of the session
-  final String description;
+  final String? description;
 
   /// Start time of the session in ISO 8601 format
   final DateTime startsAt;
@@ -49,10 +51,10 @@ class Session extends Equatable {
   final List<Speaker> speakers;
 
   /// Room where the session takes place
-  final NamedEntity room;
+  final NamedEntity? room;
 
   /// Format/type of the session
-  final NamedEntity sessionFormat;
+  final NamedEntity? sessionFormat;
 
   /// List of tracks/categories this session belongs to
   final List<NamedEntity> tracks;
@@ -61,10 +63,16 @@ class Session extends Equatable {
   final List<NamedEntity> tags;
 
   /// Difficulty level of the session
-  final NamedEntity level;
+  final NamedEntity? level;
 
   /// Language of the session
-  final NamedEntity language;
+  final NamedEntity? language;
+
+  /// Whether this session is marked as favorite by the current user
+  final bool isFavorite;
+
+  /// Whether this session is a service session (e.g., registration, coffee break, etc.)
+  final bool isServiceSession;
 
   /// Creates a copy of this [Session] with the given fields replaced
   Session copyWith({
@@ -80,6 +88,8 @@ class Session extends Equatable {
     List<NamedEntity>? tags,
     NamedEntity? level,
     NamedEntity? language,
+    bool? isFavorite,
+    bool? isServiceSession,
   }) {
     return Session(
       id: id ?? this.id,
@@ -94,6 +104,8 @@ class Session extends Equatable {
       tags: tags ?? this.tags,
       level: level ?? this.level,
       language: language ?? this.language,
+      isFavorite: isFavorite ?? this.isFavorite,
+      isServiceSession: isServiceSession ?? this.isServiceSession,
     );
   }
 
@@ -133,5 +145,7 @@ class Session extends Equatable {
     tags,
     level,
     language,
+    isFavorite,
+    isServiceSession,
   ];
 }

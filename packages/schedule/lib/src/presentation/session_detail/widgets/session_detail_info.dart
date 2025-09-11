@@ -26,11 +26,11 @@ class SessionDetailInfo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (session.room.name.isNotEmpty) ...[
+        if (session.room?.name.isNotEmpty ?? false) ...[
           InfoRow(
             icon: FontAwesomeIcons.locationDot,
             label: 'Sala',
-            value: session.room.name,
+            value: session.room!.name,
           ),
           const SizedBox(height: Spacing.s),
         ],
