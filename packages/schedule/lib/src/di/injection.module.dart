@@ -18,6 +18,7 @@ import 'package:schedule/src/presentation/schedule/state/schedule_cubit.dart'
     as _i365;
 import 'package:schedule/src/presentation/session_detail/state/session_detail_cubit.dart'
     as _i295;
+import 'package:schedule/src/presentation/state/favorite_cubit.dart' as _i603;
 import 'package:schedule/src/use_cases/add_to_favorites_use_case.dart' as _i517;
 import 'package:schedule/src/use_cases/get_grouped_sessions_use_case.dart'
     as _i558;
@@ -70,6 +71,10 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
     ) =>
         _i787.DaySessionsCubit(sessions));
     gh.factory<_i656.FavoriteCubit>(() => _i656.FavoriteCubit(
+          gh<_i107.ToggleFavoriteUseCase>(),
+          gh<_i901.IsFavoriteUseCase>(),
+        ));
+    gh.factory<_i603.FavoriteCubit>(() => _i603.FavoriteCubit(
           gh<_i107.ToggleFavoriteUseCase>(),
           gh<_i901.IsFavoriteUseCase>(),
         ));

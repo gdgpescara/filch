@@ -10,6 +10,8 @@ import 'package:intl/intl.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
+import '../../../state/favorite_cubit.dart';
+import '../../../state/favorite_state.dart';
 import '../../../widgets/session_progress.dart';
 import '../../state/favorite_cubit.dart';
 import '../../state/favorite_state.dart';

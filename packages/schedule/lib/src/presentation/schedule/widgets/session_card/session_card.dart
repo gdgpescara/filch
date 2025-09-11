@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
+import '../../../state/favorite_cubit.dart';
 import '../../../widgets/session_speakers.dart';
 import '../../../widgets/session_tags.dart';
 import '../../state/favorite_cubit.dart';
