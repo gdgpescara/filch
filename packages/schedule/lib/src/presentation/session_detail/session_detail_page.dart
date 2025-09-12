@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
-import 'package:i18n/i18n.dart';
-import 'package:ui/ui.dart';
 
-import '../state/favorite_cubit.dart';
-import '../state/favorite_state.dart';
+import '../widgets/favorite_button/favorite_toggle_button.dart';
 import 'state/session_detail_cubit.dart';
 import 'state/session_detail_state.dart';
 import 'widgets/session_detail_content.dart';
@@ -21,15 +17,8 @@ class SessionDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<SessionDetailCubit>(
-          create: (context) => GetIt.I()..init(sessionId),
-        ),
-        BlocProvider<FavoriteCubit>(
-          create: (context) => GetIt.I()..init(sessionId),
-        ),
-      ],
+    return BlocProvider<SessionDetailCubit>(
+      create: (context) => GetIt.I()..init(sessionId),
       child: _SessionDetailView(sessionId: sessionId),
     );
   }
@@ -64,23 +53,10 @@ class _SessionDetailView extends StatelessWidget {
   }
 
   List<Widget> _buildActions(BuildContext context, SessionDetailState state) {
-    if (state is! SessionDetailLoaded || state.session.isServiceSession) {
-      return [];
-    }
+    final shouldShowFavoriteButton = state is SessionDetailLoaded && !state.session.isServiceSession;
 
     return [
-      BlocSelector<FavoriteCubit, FavoriteState, bool>(
-        key: Key('favorite_button_${state.session.id}'),
-        selector: (state) => state.isFavorite,
-        builder: (context, isFavorite) {
-          final color = appColors.googleYellow.brightnessColor(context).color;
-          return IconButton(
-            onPressed: () => context.read<FavoriteCubit>().toggle(sessionId),
-            icon: Icon(isFavorite ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star, color: color),
-            tooltip: isFavorite ? t.schedule.sessions.session_card.remove_favorite : t.schedule.sessions.session_card.add_favorite,
-          );
-        },
-      ),
+      if (shouldShowFavoriteButton) FavoriteToggleButton(sessionId: sessionId),
     ];
   }
 }

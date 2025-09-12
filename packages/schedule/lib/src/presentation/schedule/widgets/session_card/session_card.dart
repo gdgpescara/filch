@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get_it/get_it.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
-import '../../../state/favorite_cubit.dart';
 import '../../../widgets/session_speakers.dart';
 import '../../../widgets/session_tags.dart';
 import 'session_time.dart';
@@ -17,17 +14,14 @@ class SessionCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<FavoriteCubit>(
-      key: Key('favorite_cubit_provider_${session.id}'),
-      create: (context) => GetIt.I()..init(session.id),
-      child: InkWell(
-        onTap: () => !session.isServiceSession ? onTap(session.id) : null,
-        child: AppCard(
-          style: AppCardStyle.bordered,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SessionTime(session: session),
+    return InkWell(
+      onTap: () => !session.isServiceSession ? onTap(session.id) : null,
+      child: AppCard(
+        style: AppCardStyle.bordered,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SessionTime(session: session),
 
               const SizedBox(height: Spacing.m),
               Text(
@@ -56,7 +50,6 @@ class SessionCard extends StatelessWidget {
               ],
             ],
           ),
-        ),
       ),
     );
   }

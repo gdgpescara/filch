@@ -2,16 +2,13 @@ import 'dart:async';
 
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
-import '../../../state/favorite_cubit.dart';
-import '../../../state/favorite_state.dart';
+import '../../../widgets/favorite_button/favorite_toggle_button.dart';
 import '../../../widgets/session_progress.dart';
 
 class SessionTime extends StatefulWidget {
@@ -107,23 +104,7 @@ class _SessionTimeState extends State<SessionTime> {
           ),
         if (!widget.session.isServiceSession) ...[
           const SizedBox(width: Spacing.s),
-          BlocSelector<FavoriteCubit, FavoriteState, bool>(
-            selector: (state) => state.isFavorite,
-            builder: (context, isFavorite) {
-              final color = appColors.googleYellow.brightnessColor(context).color;
-              return IconButton(
-                onPressed: () => context.read<FavoriteCubit>().toggle(widget.session.id),
-                icon: Icon(
-                  isFavorite ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
-                  color: color,
-                  semanticLabel: isFavorite
-                      ? t.schedule.sessions.session_card.remove_favorite
-                      : t.schedule.sessions.session_card.add_favorite,
-                ),
-                tooltip: isFavorite ? t.schedule.sessions.session_card.remove_favorite : t.schedule.sessions.session_card.add_favorite,
-              );
-            },
-          ),
+          FavoriteToggleButton(sessionId: widget.session.id),
         ],
       ],
     );
