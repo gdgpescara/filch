@@ -14,7 +14,7 @@ from firestore_client import client as firestore_client
 def assign_points(request: CallableRequest) -> bool:
     logged_user = get_signed_in_user(request)
     logger.info(f"Assigning points: {request.data}")
-    assigned_points = request.data.get("points")
+    assigned_points = int(request.data.get("points", {}).get('value', None))
     point_type = request.data.get("type")
     quest_id = request.data.get("quest", None)
     user_ids = request.data.get("users", [])
