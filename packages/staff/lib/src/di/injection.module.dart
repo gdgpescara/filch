@@ -6,12 +6,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i687;
 
-import 'package:auth/auth.dart' as _i662;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:quests/quests.dart' as _i177;
 import 'package:staff/src/assignment/state/assignment_cubit.dart' as _i156;
-import 'package:staff/src/profile/state/staff_profile_cubit.dart' as _i757;
 import 'package:staff/src/scan/state/scan_cubit.dart' as _i204;
 import 'package:staff/src/shifts/state/shifts_cubit.dart' as _i1034;
 import 'package:staff/src/shifts/use_cases/get_filtered_shifts_use_case.dart'
@@ -23,10 +21,6 @@ class StaffPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i757.StaffProfileCubit>(() => _i757.StaffProfileCubit(
-          gh<_i662.GetSignedUserUseCase>(),
-          gh<_i662.SignOutUseCase>(),
-        ));
     gh.factory<_i204.ScanCubit>(() => _i204.ScanCubit(
           gh<_i177.GetAssignablePointsUseCase>(),
           gh<_i177.GetSignedUserQuestsUseCase>(),

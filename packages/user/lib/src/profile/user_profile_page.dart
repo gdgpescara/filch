@@ -65,8 +65,10 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: Spacing.xxl),
                 UserQrCode(user: state.user),
                 const SizedBox(height: Spacing.xxl),
-                UserPointsCard(navigateToAllPoints: navigateToAllPoints),
-                const SizedBox(height: Spacing.xxl),
+                if (!state.isStaff) ...[
+                  UserPointsCard(navigateToAllPoints: navigateToAllPoints),
+                  const SizedBox(height: Spacing.xxl),
+                ],
                 RemoveAccountButton(onNeedLogin: navigateToLogin, onAccountRemoved: navigateToSplash),
                 const AppVersion(),
               ],

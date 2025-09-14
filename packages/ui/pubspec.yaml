@@ -23,7 +23,7 @@ dependencies:
   reactive_forms: ^18.1.1
   rive: ^0.13.20
   qr_flutter: ^4.1.0
-  shorebird_code_push: ^2.0.4
+  shorebird_code_push: ^2.0.5
   package_info_plus: ^9.0.0
   confetti: ^0.8.0
 

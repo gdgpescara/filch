@@ -5,11 +5,8 @@ BlocWidgetListener<BootstrapState> get _stateListener => (context, state) {
     case UserLoggedOut():
       Routefly.navigate(routePaths.signIn, arguments: routePaths.path);
       break;
-    case StaffUserLoggedIn():
-      Routefly.navigate(routePaths.staff.home);
-      break;
     case AppCanRun():
-      Routefly.navigate(routePaths.user.home);
+      Routefly.navigate(routePaths.home);
       break;
     case BeforeDevFest():
       Routefly.navigate(routePaths.countdown);

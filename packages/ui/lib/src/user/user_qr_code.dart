@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 import '../../ui.dart';
@@ -26,10 +25,10 @@ class UserQrCode extends StatelessWidget {
       height: dimension + (dimension * 0.1),
       child: Stack(
         children: [
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SvgPicture.asset('images/lines.svg', package: 'assets', excludeFromSemantics: true),
-          ),
+          // Align(
+          //   alignment: Alignment.bottomCenter,
+          //   child: SvgPicture.asset('images/lines.svg', package: 'assets', excludeFromSemantics: true),
+          // ),
           Align(
             alignment: Alignment.topCenter,
             child: SizedBox.square(

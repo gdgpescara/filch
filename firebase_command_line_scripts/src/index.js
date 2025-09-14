@@ -1,10 +1,10 @@
 import { initConfigurations } from "./init-configurations.js";
-import { createAccounts } from "./create-users.js";
 import Enquirer from "enquirer";
 import { updateQuests } from "./update-quests.js";
 import { deployFirebaseFunctions } from "./deploy-functions.js";
 import { sendTShirtNotification } from "./send-t-shirt-notification.js";
 import { syncSessionizeData } from "./sync-sessionize.js";
+import { registerStaffUser } from "./register-staff-user.js";
 
 const steps = [
   {
@@ -13,9 +13,9 @@ const steps = [
     value: initConfigurations,
   },
   {
-    name: "create-users",
-    message: "Create users",
-    value: createAccounts,
+    name: "register-staff-user",
+    message: "Register staff user",
+    value: registerStaffUser,
   },
   {
     name: "upload-quests",

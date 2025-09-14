@@ -5,7 +5,6 @@ import 'package:ui/ui.dart';
 
 import '../state/sign_in_cubit.dart';
 import 'providers_sign_in.dart';
-import 'sign_in_switcher_button.dart';
 import 'staff_sign_in.dart';
 
 part 'state_listener.dart';
@@ -61,10 +60,10 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               ),
-              bottomNavigationBar: const SafeArea(
-                top: false,
-                child: Padding(padding: EdgeInsets.all(20), child: SignInSwitcherButton()),
-              ),
+              // bottomNavigationBar: const SafeArea(
+              //   top: false,
+              //   child: Padding(padding: EdgeInsets.all(20), child: SignInSwitcherButton()),
+              // ),
             ),
           ),
         ),

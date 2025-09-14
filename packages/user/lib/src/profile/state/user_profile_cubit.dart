@@ -8,10 +8,15 @@ part 'user_profile_state.dart';
 
 @injectable
 class UserProfileCubit extends SafeEmitterCubit<UserProfileState> {
-  UserProfileCubit(GetSignedUserUseCase getSignedUserUseCase, this._signOutUseCase)
+  UserProfileCubit(GetSignedUserUseCase getSignedUserUseCase, this._signOutUseCase, this._isStaffUserUseCase)
     : super(UserProfileState(user: getSignedUserUseCase()));
 
+  final IsStaffUserUseCase _isStaffUserUseCase;
   final SignOutUseCase _signOutUseCase;
+
+  void init() {
+    _isStaffUserUseCase().when(success: (isStaff) => emit(state.copyWith(isStaff: isStaff)));
+  }
 
   void signOut() {
     _signOutUseCase();

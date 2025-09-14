@@ -19,7 +19,7 @@ workspace:
   - packages/user
 
 dev_dependencies:
-  melos: ^7.1.0
+  melos: ^7.1.1
 
 melos:
   name: filch
@@ -59,6 +59,7 @@ melos:
           catch_and_flow: ^1.0.9
           google_fonts: ^6.3.1
           accessibility_tools: ^2.7.1
+          shorebird_code_push: ^2.0.5
 
       dev_dependencies:
         flutter_lints: ^6.0.0

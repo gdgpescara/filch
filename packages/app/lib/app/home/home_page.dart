@@ -4,30 +4,49 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:quests/quests.dart';
+import 'package:routefly/routefly.dart';
 import 'package:schedule/schedule.dart';
+import 'package:staff/staff.dart';
 import 'package:ui/ui.dart';
+import 'package:user/user.dart';
 
-import '../profile/user_profile_page.dart';
+import '../../application.dart';
 import 'state/home_page_cubit.dart';
 
-class UserHomePage extends StatelessWidget {
-  const UserHomePage({
-    super.key,
-    required this.navigateToSplash,
-    required this.navigateToLogin,
-    required this.navigateToAllPoints,
-    required this.navigateToSessionDetail,
-  });
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
-  final VoidCallback navigateToSplash;
-  final VoidCallback navigateToLogin;
-  final VoidCallback navigateToAllPoints;
-  final ValueChanged<String> navigateToSessionDetail;
+  void _navigateToSplash() {
+    Routefly.navigate(routePaths.path);
+  }
+
+  void _navigateToLogin() {
+    Routefly.navigate(routePaths.signIn);
+  }
+
+  void _navigateToAllPoints() {
+    Routefly.pushNavigate(routePaths.user.allPoints);
+  }
+
+  void _navigateToSessionDetail(String sessionId) {
+    Routefly.pushNavigate(routePaths.session.$id.replaceAll('[id]', sessionId));
+  }
+
+  void _navigateToAssignment(AssignmentPageArgs args) {
+    Routefly.pushNavigate(
+      routePaths.staff.pointAssignment,
+      arguments: args.copyWith(onAssignDone: Routefly.pop<void>),
+    );
+  }
+
+  void _navigateToTShirtAssignment() {
+    Routefly.pushNavigate(routePaths.staff.tShirtAssignment);
+  }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomePageCubit>(
-      create: (context) => GetIt.I()..checkRankingFreezed(),
+      create: (context) => GetIt.I()..init(),
       child: BlocBuilder<HomePageCubit, HomePageState>(
         builder: (context, state) {
           return Scaffold(
@@ -36,15 +55,22 @@ class UserHomePage extends StatelessWidget {
                 index: state.currentView,
                 children: [
                   SchedulePage(
-                    navigateToSessionDetail: navigateToSessionDetail,
+                    navigateToSessionDetail: _navigateToSessionDetail,
                     embedded: true,
                   ),
                   const RankingPage(),
-                  if (!state.isRankingFreezed) const CurrentQuestPage(),
+                  if (!state.isRankingFreezed && !state.isStaffUser) const CurrentQuestPage(),
+                  if (state.isStaffUser) ...[
+                    ScanView(
+                      navigateToAssignment: _navigateToAssignment,
+                      navigateToTShirtAssignment: _navigateToTShirtAssignment,
+                    ),
+                    const ShiftsView(),
+                  ],
                   UserProfilePage(
-                    navigateToSplash: navigateToSplash,
-                    navigateToLogin: navigateToLogin,
-                    navigateToAllPoints: navigateToAllPoints,
+                    navigateToSplash: _navigateToSplash,
+                    navigateToLogin: _navigateToLogin,
+                    navigateToAllPoints: _navigateToAllPoints,
                     embedded: true,
                   ),
                 ],
@@ -67,13 +93,27 @@ class UserHomePage extends StatelessWidget {
                   tooltip: t.common.home.bottom_nav.ranking,
                   label: t.common.home.bottom_nav.ranking,
                 ),
-                if (!state.isRankingFreezed)
+                if (!state.isRankingFreezed && !state.isStaffUser)
                   NavigationDestination(
                     icon: const Icon(FontAwesomeIcons.handLizard),
                     selectedIcon: const Icon(FontAwesomeIcons.solidHandLizard),
                     tooltip: t.common.home.bottom_nav.current_quest,
                     label: t.common.home.bottom_nav.current_quest,
                   ),
+                if (state.isStaffUser) ...[
+                  NavigationDestination(
+                    icon: const Icon(Icons.qr_code_scanner_outlined),
+                    selectedIcon: const Icon(Icons.qr_code_scanner_rounded),
+                    tooltip: t.staff.home.bottom_nav.scan,
+                    label: t.staff.home.bottom_nav.scan,
+                  ),
+                  NavigationDestination(
+                    icon: const Icon(Icons.access_time_rounded),
+                    selectedIcon: const Icon(Icons.access_time_filled_rounded),
+                    tooltip: t.staff.home.bottom_nav.shifts,
+                    label: t.staff.home.bottom_nav.shifts,
+                  ),
+                ],
                 NavigationDestination(
                   icon: const Icon(FontAwesomeIcons.user),
                   selectedIcon: const Icon(FontAwesomeIcons.solidUser),

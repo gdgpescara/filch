@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,7 +8,10 @@ class IsStaffUserUseCase {
 
   final FirebaseAuth _auth;
 
-  bool call() {
-    return _auth.currentUser?.providerData.any((userInfo) => userInfo.providerId == 'password') ?? false;
+  Future<bool> call() {
+    return runSafetyFuture(() async {
+      final idTokenResult = await _auth.currentUser?.getIdTokenResult();
+      return idTokenResult?.claims?['isStaff'] == true;
+    });
   }
 }
