@@ -24,18 +24,22 @@ class ScheduleLoading extends ScheduleState {
 class ScheduleLoaded extends ScheduleState {
   const ScheduleLoaded({
     required this.groupedSessions,
+    this.onlyFavorites = false,
   });
 
   final GroupedSessions groupedSessions;
+  final bool onlyFavorites;
 
   @override
-  List<Object?> get props => [groupedSessions];
+  List<Object?> get props => [groupedSessions, onlyFavorites];
 
   ScheduleLoaded copyWith({
     GroupedSessions? groupedSessions,
+    bool? onlyFavorites,
   }) {
     return ScheduleLoaded(
       groupedSessions: groupedSessions ?? this.groupedSessions,
+      onlyFavorites: onlyFavorites ?? this.onlyFavorites,
     );
   }
 }

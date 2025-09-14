@@ -8,7 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:ui/ui.dart';
 
 import '../../../../models/models.dart';
-import '../../../widgets/favorite_button/favorite_toggle_button.dart';
+import '../../../widgets/favorite_toggle_button.dart';
 import '../../../widgets/session_progress.dart';
 
 class SessionTime extends StatefulWidget {

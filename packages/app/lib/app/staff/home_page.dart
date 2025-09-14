@@ -16,8 +16,7 @@ class HomePage extends StatelessWidget {
         arguments: args.copyWith(onAssignDone: Routefly.pop<void>),
       ),
       navigateToTShirtAssignment: () => Routefly.pushNavigate(routePaths.staff.tShirtAssignment),
-      navigateToSessionDetail: (sessionId) =>
-          Routefly.pushNavigate(routePaths.session.$id.replaceAll('[id]', sessionId)),
+      navigateToSessionDetail: (sessionId) => Routefly.pushNavigate(routePaths.session.$id.replaceAll('[id]', sessionId)),
     );
   }
 }

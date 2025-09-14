@@ -29,23 +29,11 @@ class SessionCard extends StatelessWidget {
                 style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
 
-              if (session.description?.isNotEmpty ?? false) ...[
-                const SizedBox(height: Spacing.s),
-                Text(
-                  session.description!.trim(),
-                  style: context.textTheme.bodyMedium?.copyWith(
-                    color: context.colorScheme.onSurface.withValues(alpha: 0.7),
-                  ),
-                  maxLines: 3,
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ],
-
-              const SizedBox(height: Spacing.s),
+            const SizedBox(height: Spacing.m),
               SessionTags(session: session),
 
               if (session.speakers.isNotEmpty) ...[
-                const SizedBox(height: Spacing.s),
+              const SizedBox(height: Spacing.m),
                 SessionSpeakers(speakers: session.speakers),
               ],
             ],

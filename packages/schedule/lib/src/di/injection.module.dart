@@ -17,8 +17,8 @@ import 'package:schedule/src/presentation/schedule/state/schedule_cubit.dart'
     as _i365;
 import 'package:schedule/src/presentation/session_detail/state/session_detail_cubit.dart'
     as _i295;
-import 'package:schedule/src/presentation/widgets/favorite_button/state/favorite_cubit.dart'
-    as _i386;
+import 'package:schedule/src/presentation/widgets/state/favorite_cubit.dart'
+    as _i578;
 import 'package:schedule/src/use_cases/get_grouped_sessions_use_case.dart'
     as _i558;
 import 'package:schedule/src/use_cases/get_session_by_id_use_case.dart' as _i73;
@@ -54,7 +54,7 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
         _i787.DaySessionsCubit(sessions));
     gh.lazySingleton<_i107.ToggleFavoriteUseCase>(
         () => _i107.ToggleFavoriteUseCase(gh<_i809.FirebaseFunctions>()));
-    gh.factory<_i386.FavoriteCubit>(() => _i386.FavoriteCubit(
+    gh.factory<_i578.FavoriteCubit>(() => _i578.FavoriteCubit(
           gh<_i107.ToggleFavoriteUseCase>(),
           gh<_i901.IsFavoriteUseCase>(),
         ));

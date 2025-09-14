@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 
-import '../widgets/favorite_button/favorite_toggle_button.dart';
+import '../widgets/favorite_toggle_button.dart';
 import 'state/session_detail_cubit.dart';
 import 'state/session_detail_state.dart';
 import 'widgets/session_detail_content.dart';

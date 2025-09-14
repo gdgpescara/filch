@@ -26,6 +26,12 @@ class ScheduleCubit extends SafeEmitterCubit<ScheduleState> {
     );
   }
 
+  void toggleOnlyFavorites() {
+    if (state case final ScheduleLoaded currentState) {
+      emit(currentState.copyWith(onlyFavorites: !currentState.onlyFavorites));
+    }
+  }
+
   @override
   Future<void> close() {
     _sessionsSubscription?.cancel();

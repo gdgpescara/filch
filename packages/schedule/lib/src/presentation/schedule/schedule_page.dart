@@ -25,7 +25,7 @@ class SchedulePage extends StatelessWidget {
       child: BlocBuilder<ScheduleCubit, ScheduleState>(
         buildWhen: _shouldRebuild,
         builder: (context, state) {
-          final body = _buildScheduleScaffold(state);
+          final body = _buildScheduleScaffold(context, state);
           return embedded ? body : Background(child: body);
         },
       ),
@@ -34,15 +34,17 @@ class SchedulePage extends StatelessWidget {
 
   bool _shouldRebuild(ScheduleState previous, ScheduleState current) {
     return previous != current ||
-        (current is ScheduleLoaded && previous is ScheduleLoaded && current.groupedSessions != previous.groupedSessions);
+        (current is ScheduleLoaded &&
+            previous is ScheduleLoaded &&
+            (current.groupedSessions != previous.groupedSessions || current.onlyFavorites != previous.onlyFavorites));
   }
 
-  Widget _buildScheduleScaffold(ScheduleState state) {
+  Widget _buildScheduleScaffold(BuildContext context, ScheduleState state) {
     return DefaultTabController(
       length: _getTabLength(state),
       child: Scaffold(
         backgroundColor: _bgColor,
-        appBar: _buildAppBar(state),
+        appBar: _buildAppBar(context, state),
         body: _buildBody(state),
       ),
     );
@@ -52,12 +54,21 @@ class SchedulePage extends StatelessWidget {
     return state is ScheduleLoaded ? state.groupedSessions.availableDays.length : 0;
   }
 
-  PreferredSizeWidget _buildAppBar(ScheduleState state) {
+  PreferredSizeWidget _buildAppBar(BuildContext context, ScheduleState state) {
     return AppBar(
       backgroundColor: _bgColor,
       shadowColor: _bgColor,
       forceMaterialTransparency: embedded,
       elevation: _elevation,
+      actions: [
+        TextButton(
+          onPressed: context.read<ScheduleCubit>().toggleOnlyFavorites,
+          child: Text(
+            state is ScheduleLoaded && state.onlyFavorites ? 'Only Favorites' : 'Show All',
+            style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(color: context.colorScheme.primary),
+          ),
+        ),
+      ],
       bottom: _buildTabBar(state),
     );
   }

@@ -22,6 +22,14 @@ class ScannerWidget extends StatelessWidget {
         ),
         onDetect: (barcodes) {
           final scannedBarcodes = barcodes.barcodes.map((e) => e.rawValue).whereType<String>().toList();
+          // if (scannedBarcodes.isNotEmpty) {
+          //   ScaffoldMessenger.of(context).showSnackBar(
+          //     const SnackBar(
+          //       content: Text('QR code scanned correctly, you can continue to scan or proceed.'),
+          //       duration: Duration(seconds: 2),
+          //     ),
+          //   );
+          // }
           context.read<AssignmentCubit>().onQrCodesScanned(scannedBarcodes);
         },
       ),

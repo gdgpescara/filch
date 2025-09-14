@@ -11,7 +11,7 @@ export const createAccounts = async () => {
       try {
         fetchedUser = await getAuth().getUserByEmail(user.email);
       } catch (error) {
-        console.error("‼️ An error occurred:", error);
+        console.info("‼️ User not present");
       }
       if (!fetchedUser) {
         const createdUser = await getAuth().createUser({

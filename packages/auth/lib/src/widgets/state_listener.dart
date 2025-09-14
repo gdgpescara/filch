@@ -6,6 +6,7 @@ BlocWidgetListener<SignInState> _signInStateListener(VoidCallback onSignedInNavi
       onSignedInNavigateTo();
       break;
     case SignInFailure(failure: final failure):
+      LoaderOverlay.hide(context);
       switch (failure.code) {
         case 'account-exists-with-different-credential':
           ScaffoldMessenger.of(context).showSnackBar(
