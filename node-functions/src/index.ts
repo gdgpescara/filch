@@ -1,8 +1,8 @@
-import {initializeApp} from "firebase-admin/app";
-import {searchForQuest} from "./features/quests/search-for-quest";
-import {actorQueueSentinel} from "./features/quests/actor-quest-queue-manager";
-import {removeActiveQuest} from "./features/quests/remove-active-quest";
-import {submitAnswer} from "./features/points/submit-answer";
+import { initializeApp } from "firebase-admin/app";
+import { searchForQuest } from "./features/quests/search-for-quest";
+import { actorQueueSentinel } from "./features/quests/actor-quest-queue-manager";
+import { removeActiveQuest } from "./features/quests/remove-active-quest";
+import { submitAnswer } from "./features/points/submit-answer";
 import { onUserCreateSentinel, onUserDeleteSentinel } from "./features/user/user_manager";
 
 initializeApp();

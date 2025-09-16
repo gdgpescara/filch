@@ -1,15 +1,15 @@
-from firebase_functions import firestore_fn
+from firebase_functions.firestore_fn import on_document_written, Event, DocumentSnapshot
 from google.cloud.firestore import Increment
 
 from logger_config import logger
 from shared.env import FIREBASE_REGION
 
 
-@firestore_fn.on_document_written(
+@on_document_written(
     document="users/{uid}/points/{archivedPointsId}",
     region=FIREBASE_REGION
 )
-def user_points_sentinel(event: firestore_fn.Event[firestore_fn.DocumentSnapshot]) -> None:
+def user_points_sentinel(event: Event[DocumentSnapshot]) -> None:
     """
     Function triggered when a points document is written in a user's points subcollection.
     Updates the user's total points.

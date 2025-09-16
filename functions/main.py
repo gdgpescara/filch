@@ -16,11 +16,11 @@ set_global_options(max_instances=10, memory=512, timeout_sec=300)
 initialize_app()
 
 from features.user.t_shirt_pickup import t_shirt_pickup
-from features.user.t_shirt_notification import t_shirt_notification_schedule
+# from features.user.t_shirt_notification import t_shirt_notification_schedule
 
+from features.points.user_points_sentinel import user_points_sentinel
 
 from features.points.scan_other_attendee import scan_other_attendee
-# from features.points.points_manager import user_points_sentinel
 from features.points.submit_answer import submit_answer
 from features.points.assign_points import assign_points
 from features.facade.sessionize import fetch_from_sessionize
