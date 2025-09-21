@@ -44,10 +44,15 @@ android {
         versionCode = flutter.versionCode
         versionName = flutter.versionName
         multiDexEnabled = true
-                manifestPlaceholders["applicationName"] = "android.app.Application"
+        manifestPlaceholders["applicationName"] = "android.app.Application"
+
         ndk {
             abiFilters.addAll(listOf("armeabi-v7a", "arm64-v8a", "x86_64"))
         }
+    }
+
+    buildFeatures {
+        buildConfig = true
     }
 
     signingConfigs {
@@ -67,6 +72,37 @@ android {
             signingConfig = signingConfigs["release"]
             isShrinkResources = true
             isMinifyEnabled = true
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
+        }
+    }
+
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            excludes += "META-INF/DEPENDENCIES"
+            excludes += "META-INF/LICENSE"
+            excludes += "META-INF/LICENSE.txt"
+            excludes += "META-INF/license.txt"
+            excludes += "META-INF/NOTICE"
+            excludes += "META-INF/NOTICE.txt"
+            excludes += "META-INF/notice.txt"
+            excludes += "META-INF/ASL2.0"
+            excludes += "META-INF/*.kotlin_module"
+            excludes += "META-INF/*.version"
+            excludes += "META-INF/*.properties"
+            excludes += "**/*.md"
+            excludes += "**/README*"
+        }
+
+        dex {
+            useLegacyPackaging = false
+        }
+
+        jniLibs {
+            useLegacyPackaging = false
         }
     }
 }

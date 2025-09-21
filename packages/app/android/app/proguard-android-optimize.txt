@@ -1,0 +1,221 @@
+# Flutter ProGuard rules for Filch app
+# This file includes comprehensive rules for all dependencies used in the project
+
+# Flutter specific rules
+-keep class io.flutter.** { *; }
+-keep class io.flutter.embedding.** { *; }
+-keep class io.flutter.embedding.engine.** { *; }
+-keep class io.flutter.embedding.android.** { *; }
+-keep class io.flutter.plugin.** { *; }
+-keep class io.flutter.util.** { *; }
+-keep class io.flutter.view.** { *; }
+-keep class io.flutter.** { *; }
+-keepattributes *Annotation*
+-dontwarn io.flutter.**
+
+# Dart/Flutter engine
+-keep class io.flutter.embedding.engine.FlutterEngine { *; }
+-keep class io.flutter.embedding.engine.dart.DartExecutor { *; }
+
+# Firebase Core
+-keep class com.google.firebase.** { *; }
+-keep class com.google.android.gms.** { *; }
+-dontwarn com.google.firebase.**
+-dontwarn com.google.android.gms.**
+
+# Firebase Authentication
+-keep class com.google.firebase.auth.** { *; }
+-keep class com.google.android.gms.auth.** { *; }
+-keep class com.google.android.gms.common.** { *; }
+-dontwarn com.google.firebase.auth.**
+
+# Google Sign-In
+-keep class com.google.android.gms.auth.** { *; }
+-keep class com.google.android.gms.signin.** { *; }
+-keep class com.google.android.gms.common.** { *; }
+-dontwarn com.google.android.gms.**
+
+# Cloud Firestore
+-keep class com.google.firebase.firestore.** { *; }
+-keep class com.google.firestore.** { *; }
+-dontwarn com.google.firebase.firestore.**
+
+# Cloud Functions
+-keep class com.google.firebase.functions.** { *; }
+-dontwarn com.google.firebase.functions.**
+
+# Firebase Storage
+-keep class com.google.firebase.storage.** { *; }
+-dontwarn com.google.firebase.storage.**
+
+# Firebase Messaging (FCM)
+-keep class com.google.firebase.messaging.** { *; }
+-keep class com.google.firebase.iid.** { *; }
+-dontwarn com.google.firebase.messaging.**
+
+# Firebase Crashlytics
+-keep class com.google.firebase.crashlytics.** { *; }
+-keep class com.crashlytics.** { *; }
+-dontwarn com.google.firebase.crashlytics.**
+-keepattributes SourceFile,LineNumberTable
+
+# Firebase App Check
+-keep class com.google.firebase.appcheck.** { *; }
+-dontwarn com.google.firebase.appcheck.**
+
+# Google Fonts
+-keep class com.google.fonts.** { *; }
+-dontwarn com.google.fonts.**
+
+# Image Picker
+-keep class io.flutter.plugins.imagepicker.** { *; }
+-dontwarn io.flutter.plugins.imagepicker.**
+
+# Path Provider
+-keep class io.flutter.plugins.pathprovider.** { *; }
+-dontwarn io.flutter.plugins.pathprovider.**
+
+# Shared Preferences
+-keep class io.flutter.plugins.sharedpreferences.** { *; }
+-dontwarn io.flutter.plugins.sharedpreferences.**
+
+# Package Info Plus
+-keep class dev.fluttercommunity.plus.packageinfo.** { *; }
+-dontwarn dev.fluttercommunity.plus.packageinfo.**
+
+# Font Awesome Flutter (icon fonts)
+-keep class **.R
+-keep class **.R$* {
+    <fields>;
+}
+
+# SVG (flutter_svg)
+-keep class com.horcrux.svg.** { *; }
+-dontwarn com.horcrux.svg.**
+
+# QR Flutter
+-keep class net.touchcapture.qr.flutterqr.** { *; }
+-dontwarn net.touchcapture.qr.flutterqr.**
+
+# Reactive Forms
+-keep class reactive_forms.** { *; }
+-dontwarn reactive_forms.**
+
+# Shorebird Code Push
+-keep class dev.shorebird.** { *; }
+-dontwarn dev.shorebird.**
+
+# JSON Serialization
+-keepattributes Signature
+-keepattributes *Annotation*
+-keep class com.google.gson.** { *; }
+-keep class * implements com.google.gson.TypeAdapterFactory
+-keep class * implements com.google.gson.JsonSerializer
+-keep class * implements com.google.gson.JsonDeserializer
+
+# Keep model classes for JSON serialization
+-keep class ** {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+
+# Generic keepclassmembers for serialization
+-keepclassmembers class * {
+    @com.google.gson.annotations.SerializedName <fields>;
+}
+
+# Bloc pattern classes
+-keep class ** extends io.flutter.plugin.common.MethodCallHandler { *; }
+
+# Kotlin coroutines
+-keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}
+-keepnames class kotlinx.coroutines.CoroutineExceptionHandler {}
+-dontwarn kotlinx.coroutines.**
+
+# OkHttp (used by many networking libraries)
+-keep class okhttp3.** { *; }
+-keep interface okhttp3.** { *; }
+-dontwarn okhttp3.**
+-dontwarn okio.**
+
+# Retrofit (if used indirectly)
+-keepattributes Signature
+-keepattributes Exceptions
+-keepclassesofinheritors interface retrofit2.Call
+
+# Keep native methods
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+# Keep custom exceptions
+-keep public class * extends java.lang.Exception
+
+# Remove logging in release builds
+-assumenosideeffects class android.util.Log {
+    public static boolean isLoggable(java.lang.String, int);
+    public static int v(...);
+    public static int i(...);
+    public static int w(...);
+    public static int d(...);
+    public static int e(...);
+}
+
+# Keep Parcelable implementations
+-keep class * implements android.os.Parcelable {
+    public static final android.os.Parcelable$Creator *;
+}
+
+# Keep Serializable implementations
+-keepnames class * implements java.io.Serializable
+-keepclassmembers class * implements java.io.Serializable {
+    static final long serialVersionUID;
+    private static final java.io.ObjectStreamField[] serialPersistentFields;
+    !static !transient <fields>;
+    private void writeObject(java.io.ObjectOutputStream);
+    private void readObject(java.io.ObjectInputStream);
+    java.lang.Object writeReplace();
+    java.lang.Object readResolve();
+}
+
+# Accessibility tools
+-keep class com.rive.** { *; }
+-dontwarn com.rive.**
+
+# Confetti animation library
+-keep class nl.dionsegijn.konfetti.** { *; }
+-dontwarn nl.dionsegijn.konfetti.**
+
+# General Android optimizations
+-optimizationpasses 5
+-dontusemixedcaseclassnames
+-dontskipnonpubliclibraryclasses
+-dontpreverify
+-verbose
+
+# Optimization settings
+-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*,!code/allocation/variable
+-allowaccessmodification
+-mergeinterfacesaggressively
+
+# Keep application class
+-keep public class * extends android.app.Application
+
+# Keep all activities, services, receivers, providers
+-keep public class * extends android.app.Activity
+-keep public class * extends android.app.Service
+-keep public class * extends android.content.BroadcastReceiver
+-keep public class * extends android.content.ContentProvider
+
+# Keep view constructors
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+# Keep enum values
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
