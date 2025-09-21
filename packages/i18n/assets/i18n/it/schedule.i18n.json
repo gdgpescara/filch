@@ -31,6 +31,8 @@
     "session_card": {
       "remove_favorite": "Rimuovi dai preferiti",
       "add_favorite": "Aggiungi ai preferiti"
-    }
+    },
+    "show_favorites": "Mostra Preferiti",
+    "show_all": "Mostra Tutto"
   }
 }

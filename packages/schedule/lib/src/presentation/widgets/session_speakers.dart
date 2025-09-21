@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
@@ -46,7 +47,7 @@ class SessionSpeakers extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: speakerAvatarRadius,
-            backgroundImage: speaker.profilePicture?.isNotEmpty ?? false ? NetworkImage(speaker.profilePicture!) : null,
+            backgroundImage: speaker.profilePicture?.isNotEmpty ?? false ? CachedNetworkImageProvider(speaker.profilePicture!) : null,
             child: speaker.profilePicture?.isEmpty ?? false ? Text(speaker.name[0]) : null,
           ),
           const SizedBox(width: Spacing.s),

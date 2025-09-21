@@ -56,7 +56,7 @@ class _SessionDetailView extends StatelessWidget {
     final shouldShowFavoriteButton = state is SessionDetailLoaded && !state.session.isServiceSession;
 
     return [
-      if (shouldShowFavoriteButton) FavoriteToggleButton(sessionId: sessionId),
+      if (shouldShowFavoriteButton) FavoriteToggleButton(session: state.session),
     ];
   }
 }

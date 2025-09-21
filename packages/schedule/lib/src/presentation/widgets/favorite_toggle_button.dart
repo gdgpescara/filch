@@ -5,22 +5,23 @@ import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
+import '../../models/session.dart';
 import 'state/favorite_cubit.dart';
 import 'state/favorite_state.dart';
 
 class FavoriteToggleButton extends StatelessWidget {
   const FavoriteToggleButton({
     super.key,
-    required this.sessionId,
+    required this.session,
   });
 
-  final String sessionId;
+  final Session session;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider<FavoriteCubit>(
-      key: ValueKey('FavoriteToggleButton_$sessionId'),
-      create: (context) => GetIt.I()..init(sessionId),
+      key: ValueKey('FavoriteToggleButton_${session.id}'),
+      create: (context) => GetIt.I()..init(session),
       child: BlocBuilder<FavoriteCubit, FavoriteState>(
         builder: (context, state) {
           final isFavorite = state.isFavorite;
@@ -28,7 +29,7 @@ class FavoriteToggleButton extends StatelessWidget {
           return switch (state) {
             FavoriteLoading() => const LoaderAnimation(),
             _ => IconButton(
-              onPressed: () => context.read<FavoriteCubit>().toggle(sessionId),
+              onPressed: () => context.read<FavoriteCubit>().toggle(session.id),
               icon: Icon(isFavorite ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star, color: color),
               tooltip: isFavorite ? t.schedule.sessions.session_card.remove_favorite : t.schedule.sessions.session_card.add_favorite,
             ),

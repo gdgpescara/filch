@@ -69,6 +69,7 @@ flutter:
   assets:
     - shorebird.yaml
     - packages/assets/logo/logo.png
+    - certificates/sessionize.pem
   fonts:
     - family: Digital
       fonts:

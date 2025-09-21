@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:i18n/i18n.dart';
 import 'package:intl/intl.dart';
 import 'package:ui/ui.dart';
 
@@ -51,7 +52,7 @@ class SchedulePage extends StatelessWidget {
   }
 
   int _getTabLength(ScheduleState state) {
-    return state is ScheduleLoaded ? state.groupedSessions.availableDays.length : 0;
+    return state is ScheduleLoaded ? state.groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites).length : 0;
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context, ScheduleState state) {
@@ -64,7 +65,9 @@ class SchedulePage extends StatelessWidget {
         TextButton(
           onPressed: context.read<ScheduleCubit>().toggleOnlyFavorites,
           child: Text(
-            state is ScheduleLoaded && state.onlyFavorites ? 'Only Favorites' : 'Show All',
+            state is ScheduleLoaded && state.onlyFavorites
+                ? context.t.schedule.sessions.show_all
+                : context.t.schedule.sessions.show_favorites,
             style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(color: context.colorScheme.primary),
           ),
         ),
@@ -77,14 +80,17 @@ class SchedulePage extends StatelessWidget {
     if (state is! ScheduleLoaded) return null;
 
     return TabBar(
-      tabs: state.groupedSessions.availableDays.map((day) => Tab(text: DateFormat.MMMd().format(day))).toList(),
+      tabs: state.groupedSessions
+          .getAvailableDays(onlyFavorites: state.onlyFavorites)
+          .map((day) => Tab(text: DateFormat.MMMd().format(day)))
+          .toList(),
     );
   }
 
   Widget _buildBody(ScheduleState state) {
     return switch (state) {
       ScheduleLoaded(groupedSessions: final groupedSessions) => TabBarView(
-        children: groupedSessions.availableDays.map((day) => _buildDaySession(state, day)).toList(),
+        children: groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites).map((day) => _buildDaySession(state, day)).toList(),
       ),
       ScheduleLoading() => const Center(child: CircularProgressIndicator()),
       ScheduleError(message: final message) => Center(child: Text(message)),
@@ -93,13 +99,13 @@ class SchedulePage extends StatelessWidget {
   }
 
   Widget _buildDaySession(ScheduleLoaded state, DateTime day) {
-    final sessions = state.groupedSessions.getSessionsForDay(day);
+    final sessions = state.groupedSessions.getSessionsForDay(day, onlyFavorites: state.onlyFavorites);
     if (sessions == null) return const SizedBox.shrink();
 
     return DaySessions(
       sessions: sessions,
       onSessionTap: navigateToSessionDetail,
-      rooms: state.groupedSessions.getRoomsForDay(day),
+      rooms: state.groupedSessions.getRoomsForDay(day, onlyFavorites: state.onlyFavorites),
     );
   }
 

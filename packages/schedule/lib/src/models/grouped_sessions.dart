@@ -25,28 +25,46 @@ class GroupedSessions extends Equatable {
   final Map<DateTime, Map<String, List<Session>>> sessionsByDay;
 
   /// Gets all available days sorted chronologically
-  List<DateTime> get availableDays {
-    final days = sessionsByDay.keys.toList()..sort();
+  List<DateTime> getAvailableDays({bool onlyFavorites = false}) {
+    final days = sessionsByDay.keys.where((day) {
+      if (!onlyFavorites) return true;
+      final daySchedule = sessionsByDay[day];
+      if (daySchedule == null) return false;
+      return daySchedule.values.any((sessions) => sessions.any((session) => session.isFavorite));
+    }).toList()..sort();
     return days;
   }
 
   /// Gets sessions for a specific day grouped by room name
-  Map<String, List<Session>>? getSessionsForDay(DateTime day) {
+  Map<String, List<Session>>? getSessionsForDay(DateTime day, {bool onlyFavorites = false}) {
     final dayKey = DateTime(day.year, day.month, day.day);
-    return sessionsByDay[dayKey];
+    final daySchedule = sessionsByDay[dayKey];
+    if (daySchedule == null) return null;
+
+    if (!onlyFavorites) return daySchedule;
+
+    // Filter only favorite sessions
+    final filteredSchedule = <String, List<Session>>{};
+    daySchedule.forEach((room, sessions) {
+      final favoriteSessions = sessions.where((session) => session.isFavorite).toList();
+      if (favoriteSessions.isNotEmpty) {
+        filteredSchedule[room] = favoriteSessions;
+      }
+    });
+    return filteredSchedule.isEmpty ? null : filteredSchedule;
   }
 
   /// Gets all sessions for a specific day and room
-  List<Session> getSessionsForDayAndRoom(DateTime day, NamedEntity room) {
-    final daySchedule = getSessionsForDay(day);
+  List<Session> getSessionsForDayAndRoom(DateTime day, NamedEntity room, {bool onlyFavorites = false}) {
+    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
     if (daySchedule == null) return [];
 
     return daySchedule[room.name] ?? [];
   }
 
   /// Gets all available rooms for a specific day
-  Set<NamedEntity> getRoomsForDay(DateTime day) {
-    final daySchedule = getSessionsForDay(day);
+  Set<NamedEntity> getRoomsForDay(DateTime day, {bool onlyFavorites = false}) {
+    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
     if (daySchedule == null) return {};
 
     // Get all unique rooms from the sessions
@@ -60,8 +78,8 @@ class GroupedSessions extends Equatable {
   }
 
   /// Gets all start times for a specific day sorted chronologically
-  List<DateTime> getStartTimesForDay(DateTime day) {
-    final daySchedule = getSessionsForDay(day);
+  List<DateTime> getStartTimesForDay(DateTime day, {bool onlyFavorites = false}) {
+    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
     if (daySchedule == null) return [];
 
     // Get all unique start times from all sessions
@@ -77,8 +95,8 @@ class GroupedSessions extends Equatable {
   }
 
   /// Gets sessions for a specific day and time
-  List<Session> getSessionsForDayAndTime(DateTime day, DateTime time) {
-    final daySchedule = getSessionsForDay(day);
+  List<Session> getSessionsForDayAndTime(DateTime day, DateTime time, {bool onlyFavorites = false}) {
+    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
     if (daySchedule == null) return [];
 
     // Find all sessions that start at the specified time

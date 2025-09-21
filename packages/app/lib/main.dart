@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_functions/cloud_functions.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
@@ -23,6 +25,10 @@ import 'firebase_options.dart';
 void main() {
   runZonedGuarded(() async {
     WidgetsFlutterBinding.ensureInitialized();
+
+    final data = await rootBundle.load('certificates/sessionize.pem');
+    SecurityContext.defaultContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
+
     await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
     await LocaleSettings.useDeviceLocale();
     Loggy.initLoggy(logPrinter: const PrettyDeveloperPrinter());

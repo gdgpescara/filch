@@ -104,7 +104,7 @@ class _SessionTimeState extends State<SessionTime> {
           ),
         if (!widget.session.isServiceSession) ...[
           const SizedBox(width: Spacing.s),
-          FavoriteToggleButton(sessionId: widget.session.id),
+          FavoriteToggleButton(session: widget.session),
         ],
       ],
     );
