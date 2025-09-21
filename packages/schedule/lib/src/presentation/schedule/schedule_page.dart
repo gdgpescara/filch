@@ -41,8 +41,12 @@ class SchedulePage extends StatelessWidget {
   }
 
   Widget _buildScheduleScaffold(BuildContext context, ScheduleState state) {
+    final days = state is ScheduleLoaded ? state.groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites) : <DateTime>[];
+    final initialIndex = _calculateInitialIndex(days);
     return DefaultTabController(
-      length: _getTabLength(state),
+      key: ValueKey('schedule_tab_controller_${days.length}_$initialIndex'),
+      length: days.length,
+      initialIndex: initialIndex,
       child: Scaffold(
         backgroundColor: _bgColor,
         appBar: _buildAppBar(context, state),
@@ -51,8 +55,11 @@ class SchedulePage extends StatelessWidget {
     );
   }
 
-  int _getTabLength(ScheduleState state) {
-    return state is ScheduleLoaded ? state.groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites).length : 0;
+  int _calculateInitialIndex(List<DateTime> days) {
+    if (days.isEmpty) return 0;
+    final today = DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+    final index = days.indexWhere((day) => day.isAtSameMomentAs(today));
+    return index >= 0 ? index : 0;
   }
 
   PreferredSizeWidget _buildAppBar(BuildContext context, ScheduleState state) {
