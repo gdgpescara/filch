@@ -43,6 +43,11 @@ class HomePage extends StatelessWidget {
     Routefly.pushNavigate(routePaths.staff.tShirtAssignment);
   }
 
+  void _navigateToScheduleDelayReporting() {
+    // TODO: Implement navigation to schedule delay reporting page
+    // Routefly.pushNavigate(routePaths.staff.scheduleDelayReporting);
+  }
+
   @override
   Widget build(BuildContext context) {
     return BlocProvider<HomePageCubit>(
@@ -64,6 +69,7 @@ class HomePage extends StatelessWidget {
                     ManagementView(
                       navigateToAssignment: _navigateToAssignment,
                       navigateToTShirtAssignment: _navigateToTShirtAssignment,
+                      navigateToScheduleDelayReporting: _navigateToScheduleDelayReporting,
                     ),
                     const ShiftsView(),
                   ],
@@ -102,8 +108,8 @@ class HomePage extends StatelessWidget {
                   ),
                 if (state.isStaffUser) ...[
                   NavigationDestination(
-                    icon: const Icon(Icons.qr_code_scanner_outlined),
-                    selectedIcon: const Icon(Icons.qr_code_scanner_rounded),
+                    icon: const Icon(FontAwesomeIcons.gears),
+                    selectedIcon: const Icon(FontAwesomeIcons.gear),
                     tooltip: t.staff.home.bottom_nav.scan,
                     label: t.staff.home.bottom_nav.scan,
                   ),

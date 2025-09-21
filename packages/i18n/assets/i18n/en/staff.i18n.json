@@ -23,6 +23,9 @@
       "error": "An error occurred while assigning t-shirt."
     }
   },
+  "schedule_delay": {
+    "label": "Report schedule delay"
+  },
   "shifts": {
     "title": "Daily Shifts",
     "me": "Me",
@@ -31,7 +34,7 @@
   "home": {
     "bottom_nav": {
       "profile": "Profile",
-      "scan": "Scan",
+      "scan": "Management",
       "shifts": "Shifts"
     }
   },

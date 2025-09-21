@@ -23,6 +23,9 @@
       "error": "Si è verificato un errore durante l'assegnazione della t-shirt, riprova più tardi."
     }
   },
+  "schedule_delay": {
+    "label": "Segnala ritardo nel programma"
+  },
   "shifts": {
     "title": "Turni giornalieri",
     "me": "Io",
@@ -31,7 +34,7 @@
   "home": {
     "bottom_nav": {
       "profile": "Profilo",
-      "scan": "Scan",
+      "scan": "Gestione",
       "shifts": "Turni"
     }
   },
