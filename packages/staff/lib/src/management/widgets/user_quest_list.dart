@@ -5,7 +5,7 @@ import 'package:quests/quests.dart';
 import 'package:ui/ui.dart';
 
 import '../../assignment/assignment_page.dart';
-import '../state/scan_cubit.dart';
+import '../state/management_cubit.dart';
 
 class UserQuestList extends StatelessWidget {
   const UserQuestList(this.navigateToAssignment, {super.key});
@@ -14,8 +14,8 @@ class UserQuestList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<ScanCubit, ScanState, List<Quest>>(
-      selector: (state) => state is ScanLoaded ? state.quests : [],
+    return BlocSelector<ManagementCubit, ManagementState, List<Quest>>(
+      selector: (state) => state is ManagementLoaded ? state.quests : [],
       builder: (context, quests) {
         return Column(
           mainAxisSize: MainAxisSize.min,

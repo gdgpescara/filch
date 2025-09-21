@@ -5,7 +5,7 @@ import 'package:quests/quests.dart';
 import 'package:ui/ui.dart';
 
 import '../../assignment/assignment_page.dart';
-import '../state/scan_cubit.dart';
+import '../state/management_cubit.dart';
 
 class FreePointsList extends StatelessWidget {
   const FreePointsList(this.navigateToAssignment, {super.key});
@@ -14,8 +14,8 @@ class FreePointsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocSelector<ScanCubit, ScanState, List<AssignablePoints>>(
-      selector: (state) => state is ScanLoaded ? state.points : [],
+    return BlocSelector<ManagementCubit, ManagementState, List<AssignablePoints>>(
+      selector: (state) => state is ManagementLoaded ? state.points : [],
       builder: (context, points) {
         return Column(
           mainAxisSize: MainAxisSize.min,

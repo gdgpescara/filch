@@ -61,7 +61,7 @@ class HomePage extends StatelessWidget {
                   const RankingPage(),
                   if (!state.isRankingFreezed && !state.isStaffUser) const CurrentQuestPage(),
                   if (state.isStaffUser) ...[
-                    ScanView(
+                    ManagementView(
                       navigateToAssignment: _navigateToAssignment,
                       navigateToTShirtAssignment: _navigateToTShirtAssignment,
                     ),

@@ -5,12 +5,12 @@ import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
 import '../../staff.dart';
-import 'state/scan_cubit.dart';
+import 'state/management_cubit.dart';
 import 'widgets/assign_t_shirt.dart';
 import 'widgets/assignable_points_list.dart';
 
-class ScanView extends StatelessWidget {
-  const ScanView({super.key, required this.navigateToAssignment, required this.navigateToTShirtAssignment});
+class ManagementView extends StatelessWidget {
+  const ManagementView({super.key, required this.navigateToAssignment, required this.navigateToTShirtAssignment});
 
   final void Function(AssignmentPageArgs) navigateToAssignment;
   final VoidCallback navigateToTShirtAssignment;
@@ -21,14 +21,14 @@ class ScanView extends StatelessWidget {
       child: ListView(
         padding: const EdgeInsets.all(20),
         children: [
-          BlocProvider<ScanCubit>(
+          BlocProvider<ManagementCubit>(
             create: (context) => GetIt.I()..load(),
-            child: BlocBuilder<ScanCubit, ScanState>(
+            child: BlocBuilder<ManagementCubit, ManagementState>(
               builder: (context, state) {
                 return switch (state) {
-                  ScanLoading() => const Center(child: LoaderAnimation()),
-                  ScanLoaded() => AssignablePointsList(navigateToAssignment),
-                  ScanFailure() => Center(child: Text(t.common.errors.generic)),
+                  ManagementLoading() => const Center(child: LoaderAnimation()),
+                  ManagementLoaded() => AssignablePointsList(navigateToAssignment),
+                  ManagementFailure() => Center(child: Text(t.common.errors.generic)),
                 };
               },
             ),
