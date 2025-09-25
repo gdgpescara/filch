@@ -1,16 +1,16 @@
-from shared.get_signed_in_user import verify_firebase_auth
 from firebase_functions.https_fn import on_request
 from firestore_client import client as firestore_client
 from logger_config import logger
-import json, requests
 from flask import jsonify, Request
 from typing import List
 
 from shared.env import FIREBASE_REGION, SESSIONIZE_EVENT_ID
 from features.speakers.types.speaker import Speaker
 from features.sessions.types.session import Session
+from features.rooms.types.room import Room
 from features.speakers.fetch_from_sessionize import fetch_speakers
 from features.sessions.fetch_from_sessionize import fetch_sessions
+from features.rooms.infer_room import infer_rooms_from_sessions
 
 
 def get_event_id(request: Request) -> str:
@@ -31,11 +31,11 @@ def get_event_id(request: Request) -> str:
         return SESSIONIZE_EVENT_ID
 
 
-def upload_to_sessionize(data: List[Session | Speaker], collection_name: str) -> None:
+def upload_to_sessionize(data: List[Session | Speaker | Room], collection_name: str) -> None:
     try:
         batch = firestore_client.batch()
         for d in data:
-            doc_ref = firestore_client.collection(collection_name).document(d.id)
+            doc_ref = firestore_client.collection(collection_name).document(str(d.id))
             session_dict = d.model_dump()
             batch.set(doc_ref, session_dict)
         batch.commit()
@@ -46,7 +46,6 @@ def upload_to_sessionize(data: List[Session | Speaker], collection_name: str) ->
 
 @on_request(region=FIREBASE_REGION)
 def fetch_from_sessionize(request: Request) -> bool:
-    # user_info = verify_firebase_auth(request=request)
     # logger.info(f"Logged User Info: {user_info}")
     event_id = get_event_id(request)
     speakers = fetch_speakers(event_id=event_id)
@@ -62,4 +61,6 @@ def fetch_from_sessionize(request: Request) -> bool:
                     session_speaker.tagLine = speaker.tagLine
                     break
     upload_to_sessionize(data=sessions, collection_name="sessions")
+    rooms = infer_rooms_from_sessions(sessions=sessions)
+    upload_to_sessionize(data=rooms, collection_name="rooms")
     return jsonify(True)
