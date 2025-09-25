@@ -8,10 +8,9 @@ from shared.env import FIREBASE_REGION, SESSIONIZE_EVENT_ID
 from features.speakers.types.speaker import Speaker
 from features.sessions.types.session import Session
 from features.rooms.types.room import Room
-from features.speakers.fetch_from_sessionize import fetch_speakers
-from features.sessions.fetch_from_sessionize import fetch_sessions
-from features.rooms.infer_room import infer_rooms_from_sessions
-
+from features.speakers.fetch_from_sessionize import fetch_speakers, COLLECTION_SPEAKER_NAME
+from features.sessions.fetch_from_sessionize import fetch_sessions, COLLECTION_SESSION_NAME
+from features.rooms.manage_room import infer_rooms_from_sessions, COLLECTION_ROOM_NAME
 
 def get_event_id(request: Request) -> str:
     try:
@@ -49,7 +48,7 @@ def fetch_from_sessionize(request: Request) -> bool:
     # logger.info(f"Logged User Info: {user_info}")
     event_id = get_event_id(request)
     speakers = fetch_speakers(event_id=event_id)
-    upload_to_sessionize(data=speakers, collection_name="speakers")
+    upload_to_sessionize(data=speakers, collection_name=COLLECTION_SPEAKER_NAME)
     sessions = fetch_sessions(event_id=event_id)
     for session in sessions:
         for session_speaker in session.speakers:
@@ -60,7 +59,9 @@ def fetch_from_sessionize(request: Request) -> bool:
                     session_speaker.links = speaker.links
                     session_speaker.tagLine = speaker.tagLine
                     break
-    upload_to_sessionize(data=sessions, collection_name="sessions")
+
+    upload_to_sessionize(data=sessions, collection_name=COLLECTION_SESSION_NAME)
     rooms = infer_rooms_from_sessions(sessions=sessions)
-    upload_to_sessionize(data=rooms, collection_name="rooms")
+    upload_to_sessionize(data=rooms, collection_name=COLLECTION_ROOM_NAME)
+
     return jsonify(True)
