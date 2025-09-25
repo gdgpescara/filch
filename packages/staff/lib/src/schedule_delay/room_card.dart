@@ -80,7 +80,35 @@ class RoomCard extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: FilledButton(
-                    onPressed: hasChanges ? () => context.read<RoomCardCubit>().sendDelay() : null,
+                    onPressed: hasChanges
+                        ? () async {
+                            final cubit = context.read<RoomCardCubit>();
+                            final result = await showDialog<bool>(
+                              context: context,
+                              builder: (dialogContext) => AlertDialog(
+                                title: Text(t.staff.schedule_delay.confirm_delay_dialog.title),
+                                content: Text(
+                                  t.staff.schedule_delay.confirm_delay_dialog.message
+                                      .replaceAll('{delay}', delay.toString())
+                                      .replaceAll('{room_name}', room.name),
+                                ),
+                                actions: [
+                                  TextButton(
+                                    onPressed: () => Navigator.of(dialogContext).pop(false),
+                                    child: Text(t.common.buttons.cancel),
+                                  ),
+                                  TextButton(
+                                    onPressed: () => Navigator.of(dialogContext).pop(true),
+                                    child: Text(t.common.buttons.confirm),
+                                  ),
+                                ],
+                              ),
+                            );
+                            if (result ?? false) {
+                              await cubit.sendDelay();
+                            }
+                          }
+                        : null,
                     child: Text(t.staff.schedule_delay.confirm_delay_button),
                   ),
                 ),

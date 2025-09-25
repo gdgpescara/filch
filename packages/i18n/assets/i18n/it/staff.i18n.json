@@ -31,7 +31,11 @@
     "delay_unit": "min",
     "confirm_delay_button": "Conferma Ritardo",
     "no_rooms_available": "Nessuna stanza disponibile",
-    "available_rooms_title": "Stanze Disponibili"
+    "available_rooms_title": "Stanze Disponibili",
+    "confirm_delay_dialog": {
+      "title": "Conferma Ritardo",
+      "message": "Sei sicuro di voler impostare il ritardo a {delay} minuti per {room_name}?"
+    }
   },
   "shifts": {
     "title": "Turni giornalieri",
