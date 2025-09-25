@@ -21,9 +21,13 @@ import 'package:schedule/src/presentation/widgets/state/favorite_cubit.dart'
     as _i578;
 import 'package:schedule/src/use_cases/get_grouped_sessions_use_case.dart'
     as _i558;
+import 'package:schedule/src/use_cases/get_room_delay_use_case.dart' as _i882;
+import 'package:schedule/src/use_cases/get_rooms_use_case.dart' as _i234;
 import 'package:schedule/src/use_cases/get_session_by_id_use_case.dart' as _i73;
 import 'package:schedule/src/use_cases/get_user_favorite_session_ids_use_case.dart'
     as _i634;
+import 'package:schedule/src/use_cases/register_room_delay_use_case.dart'
+    as _i85;
 import 'package:schedule/src/use_cases/toggle_favorite_use_case.dart' as _i107;
 
 class SchedulePackageModule extends _i526.MicroPackageModule {
@@ -37,6 +41,10 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
             ));
     gh.lazySingleton<_i73.GetSessionByIdUseCase>(
         () => _i73.GetSessionByIdUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i234.GetRoomsUseCase>(
+        () => _i234.GetRoomsUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i882.GetRoomDelayUseCase>(
+        () => _i882.GetRoomDelayUseCase(gh<_i974.FirebaseFirestore>()));
     gh.factoryParam<_i787.DaySessionsCubit, Map<String, List<_i438.Session>>,
         dynamic>((
       sessions,
@@ -45,6 +53,8 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
         _i787.DaySessionsCubit(sessions));
     gh.lazySingleton<_i107.ToggleFavoriteUseCase>(
         () => _i107.ToggleFavoriteUseCase(gh<_i809.FirebaseFunctions>()));
+    gh.lazySingleton<_i85.RegisterRoomDelayUseCase>(
+        () => _i85.RegisterRoomDelayUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i558.GetGroupedSessionsUseCase>(
         () => _i558.GetGroupedSessionsUseCase(
               gh<_i974.FirebaseFirestore>(),

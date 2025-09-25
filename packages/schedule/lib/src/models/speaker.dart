@@ -5,7 +5,7 @@ import 'speaker_link.dart';
 part 'speaker.g.dart';
 
 /// Represents a speaker for a session
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Speaker extends Equatable {
   const Speaker({
     required this.id,
@@ -18,9 +18,6 @@ class Speaker extends Equatable {
 
   /// Creates a [Speaker] from a JSON map
   factory Speaker.fromJson(Map<String, dynamic> json) => _$SpeakerFromJson(json);
-
-  /// Converts this [Speaker] to a JSON map
-  Map<String, dynamic> toJson() => _$SpeakerToJson(this);
 
   /// Unique identifier for the speaker
   final String id;

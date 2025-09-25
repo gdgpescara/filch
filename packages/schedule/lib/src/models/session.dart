@@ -7,7 +7,7 @@ import 'speaker.dart';
 part 'session.g.dart';
 
 /// Represents a conference session
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Session extends Equatable {
   const Session({
     required this.id,
@@ -28,9 +28,6 @@ class Session extends Equatable {
 
   /// Creates a [Session] from a JSON map
   factory Session.fromJson(Map<String, dynamic> json) => _$SessionFromJson(json);
-
-  /// Converts this [Session] to a JSON map
-  Map<String, dynamic> toJson() => _$SessionToJson(this);
 
   /// Unique identifier for the session
   final String id;

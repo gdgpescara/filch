@@ -24,7 +24,14 @@
     }
   },
   "schedule_delay": {
-    "label": "Segnala ritardo nel programma"
+    "label": "Gestisci ritardi programma",
+    "id_label": "ID: ",
+    "decrease_delay_tooltip": "Diminuisci ritardo di 5 minuti",
+    "increase_delay_tooltip": "Aumenta ritardo di 5 minuti",
+    "delay_unit": "min",
+    "confirm_delay_button": "Conferma Ritardo",
+    "no_rooms_available": "Nessuna stanza disponibile",
+    "available_rooms_title": "Stanze Disponibili"
   },
   "shifts": {
     "title": "Turni giornalieri",

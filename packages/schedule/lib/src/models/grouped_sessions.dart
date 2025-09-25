@@ -7,7 +7,7 @@ import 'session.dart';
 part 'grouped_sessions.g.dart';
 
 /// Represents sessions grouped by day, then by start time, then by room
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class GroupedSessions extends Equatable {
   const GroupedSessions({
     required this.sessionsByDay,
@@ -15,9 +15,6 @@ class GroupedSessions extends Equatable {
 
   /// Creates a [GroupedSessions] from a JSON map
   factory GroupedSessions.fromJson(Map<String, dynamic> json) => _$GroupedSessionsFromJson(json);
-
-  /// Converts this [GroupedSessions] to a JSON map
-  Map<String, dynamic> toJson() => _$GroupedSessionsToJson(this);
 
   /// Sessions grouped by day (date as key), then by room name
   /// Key: Date as DateTime (only date part, time will be 00:00:00)

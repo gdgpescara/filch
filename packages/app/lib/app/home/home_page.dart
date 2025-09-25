@@ -44,8 +44,7 @@ class HomePage extends StatelessWidget {
   }
 
   void _navigateToScheduleDelayReporting() {
-    // TODO: Implement navigation to schedule delay reporting page
-    // Routefly.pushNavigate(routePaths.staff.scheduleDelayReporting);
+    Routefly.pushNavigate(routePaths.staff.scheduleDelay);
   }
 
   @override

@@ -53,6 +53,7 @@ ThemeData buildTheme(Brightness brightness, {Color? seedColor}) {
     elevatedButtonTheme: _elevatedButtonThemeData(colorScheme),
     textButtonTheme: _textButtonThemeData(colorScheme),
     outlinedButtonTheme: _outlinedButtonThemeData(colorScheme),
+    filledButtonTheme: _filledButtonThemeData(colorScheme),
     scaffoldBackgroundColor: Colors.transparent,
     bottomSheetTheme: _bottomSheetTheme(colorScheme),
     navigationBarTheme: _navigationBarTheme(colorScheme),

@@ -25,6 +25,7 @@ dependencies:
   shorebird_code_push: ^2.0.5
   package_info_plus: ^9.0.0
   confetti: ^0.8.0
+  font_awesome_flutter: ^10.10.0
 
 dev_dependencies:
   flutter_test:

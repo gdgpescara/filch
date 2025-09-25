@@ -24,7 +24,14 @@
     }
   },
   "schedule_delay": {
-    "label": "Report schedule delay"
+    "label": "Manage schedule delays",
+    "id_label": "ID: ",
+    "decrease_delay_tooltip": "Decrease delay by 5 minutes",
+    "increase_delay_tooltip": "Increase delay by 5 minutes",
+    "delay_unit": "min",
+    "confirm_delay_button": "Confirm Delay",
+    "no_rooms_available": "No rooms available",
+    "available_rooms_title": "Available Rooms"
   },
   "shifts": {
     "title": "Daily Shifts",
