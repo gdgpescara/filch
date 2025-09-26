@@ -12,7 +12,6 @@ from features.speakers.fetch_from_sessionize import fetch_speakers, COLLECTION_S
 from features.sessions.fetch_from_sessionize import fetch_sessions, COLLECTION_SESSION_NAME
 from features.rooms.manage_room import infer_rooms_from_sessions, COLLECTION_ROOM_NAME
 
-
 def get_event_id(request: Request) -> str:
     try:
         payload = request.get_json(silent=True) or {}
@@ -60,7 +59,9 @@ def fetch_from_sessionize(request: Request) -> Response:
                     session_speaker.links = speaker.links
                     session_speaker.tagLine = speaker.tagLine
                     break
+
     upload_to_sessionize(data=sessions, collection_name=COLLECTION_SESSION_NAME)
     rooms = infer_rooms_from_sessions(sessions=sessions)
     upload_to_sessionize(data=rooms, collection_name=COLLECTION_ROOM_NAME)
+
     return jsonify(True)
