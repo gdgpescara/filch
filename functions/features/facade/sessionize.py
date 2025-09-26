@@ -1,7 +1,7 @@
 from firebase_functions.https_fn import on_request
 from firestore_client import client as firestore_client
 from logger_config import logger
-from flask import jsonify, Request
+from flask import jsonify, Request, Response
 from typing import List
 
 from shared.env import FIREBASE_REGION, SESSIONIZE_EVENT_ID
@@ -45,7 +45,7 @@ def upload_to_sessionize(data: List[Session | Speaker | Room], collection_name: 
 
 
 @on_request(region=FIREBASE_REGION)
-def fetch_from_sessionize(request: Request) -> bool:
+def fetch_from_sessionize(request: Request) -> Response:
     # logger.info(f"Logged User Info: {user_info}")
     event_id = get_event_id(request)
     speakers = fetch_speakers(event_id=event_id)
