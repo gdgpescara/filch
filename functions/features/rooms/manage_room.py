@@ -1,5 +1,7 @@
+import json
+from firebase_functions.https_fn import HttpsError, FunctionsErrorCode
 from firebase_functions.https_fn import on_request
-from flask import jsonify, Request
+from flask import jsonify, Request, Response
 from firestore_client import client
 from features.rooms.types.room import Room
 from features.rooms.types.delay import Delay
@@ -30,23 +32,40 @@ def fetch_room_ids() -> list[str]:
 
 
 @on_request(region=FIREBASE_REGION)
-def add_delay(request: Request) -> bool:
-    data = request.get_json(silent=True) or {}
-    roomId = data.get("roomId", None)
-    if roomId is not None: roomId = str(roomId)
-    delay = int(data.get("delay", 0))
+def add_delay(request: Request) -> Response:
+    try:
+        data = request.get_json(silent=True) or {}
+        roomId = data.get("roomId", None)
+        if roomId is not None: roomId = str(roomId)
+        delay = int(data.get("delay", 0))
+    except json.JSONDecodeError:
+        logger.exception("Error During Decoding Response")
+        raise HttpsError(
+            code=FunctionsErrorCode.INTERNAL,
+            message="Invalid JSON"
+        )
     if delay != 0:
-        if roomId is None:
-            ids = fetch_room_ids()
-            if len(ids):
-                batch = client.batch()
-                for room_id in ids:
-                    d = Delay(roomId=int(room_id), delay=delay)
-                    ref = client.collection(COLLECTION_DELAY_NAME).document(room_id)
-                    batch.set(ref, {"delay": firestore.Increment(d.delay), 'roomId': d.roomId}, merge=True)
-                batch.commit()
-                logger.info(f'Incrementato Ritardo di tutte le stanze di {delay} minuti')
-        else:
-            d = Delay(roomId=int(roomId), delay=delay)
-            client.collection(COLLECTION_DELAY_NAME).document(roomId).set({"delay": firestore.Increment(d.delay), 'roomId': d.roomId}, merge=True)
-    return jsonify(True)
+        try:
+            if roomId is None:
+                ids = fetch_room_ids()
+                if len(ids):
+                    batch = client.batch()
+                    for room_id in ids:
+                        d = Delay(roomId=int(room_id), delay=delay)
+                        ref = client.collection(COLLECTION_DELAY_NAME).document(room_id)
+                        batch.set(ref, {"delay": firestore.Increment(d.delay), 'roomId': d.roomId}, merge=True)
+                    batch.commit()
+                    logger.info(f'Incrementato Ritardo di tutte le stanze di {delay} minuti')
+            else:
+                d = Delay(roomId=int(roomId), delay=delay)
+                client.collection(COLLECTION_DELAY_NAME).document(roomId).set({"delay": firestore.Increment(d.delay), 'roomId': d.roomId}, merge=True)
+                logger.info(f'Incrementato Ritardo di {int(roomId)} di {delay} minuti')
+        except Exception as e:
+            logger.exception("Errore nell'inserimento del delay")
+            raise HttpsError(
+                code=FunctionsErrorCode.INTERNAL,
+                message=str(e)
+            )
+        return jsonify(True)
+    else:
+        return jsonify(False)

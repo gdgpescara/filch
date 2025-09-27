@@ -1,7 +1,7 @@
 from logger_config import logger
 from firebase_functions.https_fn import on_call, CallableRequest, on_request, Request
 from firebase_admin import auth, firestore
-from flask import jsonify
+from flask import jsonify, Response
 from shared.env import FIREBASE_REGION
 from features.points.types.points import Points
 from shared.get_signed_in_user import get_signed_in_user
@@ -11,7 +11,7 @@ from firestore_client import client as firestore_client
 
 #TODO Testare questa funzione
 @on_call(region=FIREBASE_REGION)
-def assign_points(request: CallableRequest) -> bool:
+def assign_points(request: CallableRequest) -> Response:
     logged_user = get_signed_in_user(request)
     logger.info(f"Assigning points: {request.data}")
     assigned_points = int(request.data.get("points", {}).get('value', None))
