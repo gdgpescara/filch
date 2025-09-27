@@ -40,7 +40,11 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
               gh<_i662.GetSignedUserUseCase>(),
             ));
     gh.lazySingleton<_i73.GetSessionByIdUseCase>(
-        () => _i73.GetSessionByIdUseCase(gh<_i974.FirebaseFirestore>()));
+      () => _i73.GetSessionByIdUseCase(
+        gh<_i974.FirebaseFirestore>(),
+        gh<_i634.GetUserFavoriteSessionIdsUseCase>(),
+      ),
+    );
     gh.lazySingleton<_i234.GetRoomsUseCase>(
         () => _i234.GetRoomsUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i882.GetRoomDelayUseCase>(
