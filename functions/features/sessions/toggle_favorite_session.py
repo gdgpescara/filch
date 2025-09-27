@@ -1,5 +1,6 @@
 from firebase_functions.https_fn import on_call, CallableRequest, HttpsError
 from firebase_admin import firestore
+from features.sessions.types.favorite import FavoriteSession
 from shared import get_signed_in_user
 from shared.env import FIREBASE_REGION
 from firestore_client import client as firestore_client
@@ -25,11 +26,10 @@ def toggle_favorite_session(request: CallableRequest) -> bool:
             favorite_ref.delete()
             return False 
         else:
-            favorite_data = {
-                "sessionId": session_id,
-                "addedAt": firestore.SERVER_TIMESTAMP
-            }
-            favorite_ref.set(favorite_data)
+            favorite_data = FavoriteSession(
+                addedAt=firestore.SERVER_TIMESTAMP
+            )
+            favorite_ref.set(favorite_data.model_dump())
             return True
 
     except HttpsError:

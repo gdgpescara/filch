@@ -49,7 +49,7 @@ class RoomCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     IconButton.filledTonal(
-                      onPressed: () => context.read<RoomCardCubit>().updateDelay(delay - 5),
+                      onPressed: () => context.read<RoomCardCubit>().updateDelayValue(delay - 5),
                       icon: Icon(Icons.remove, color: context.colorScheme.onSurface),
                       tooltip: t.staff.schedule_delay.decrease_delay_tooltip,
                     ),
@@ -70,7 +70,7 @@ class RoomCard extends StatelessWidget {
                     ),
                     const SizedBox(width: Spacing.m),
                     IconButton.filledTonal(
-                      onPressed: () => context.read<RoomCardCubit>().updateDelay(delay + 5),
+                      onPressed: () => context.read<RoomCardCubit>().updateDelayValue(delay + 5),
                       icon: Icon(Icons.add, color: context.colorScheme.onSurface),
                       tooltip: t.staff.schedule_delay.increase_delay_tooltip,
                     ),

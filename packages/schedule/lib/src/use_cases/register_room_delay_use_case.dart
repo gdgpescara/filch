@@ -12,7 +12,7 @@ class RegisterRoomDelayUseCase {
     const url = String.fromEnvironment('ADD_ROOM_DELAY_URL');
     final result = await _functions.httpsCallableFromUrl(url).call<bool>({
       'roomId': roomId,
-      'delay': delay,
+      'delay': delay.toString(),
     });
     return result.data;
   }

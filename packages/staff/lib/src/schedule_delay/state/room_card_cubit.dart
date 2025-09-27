@@ -26,12 +26,12 @@ class RoomCardCubit extends Cubit<RoomCardState> {
   Future<void> init() async {
     await _delaySubscription?.cancel();
     _delaySubscription = _getRoomDelayUseCase(room.id.toString()).listen((roomDelay) {
-      final delay = roomDelay?.minutes ?? 0;
+      final delay = roomDelay?.delay ?? 0;
       emit(RoomCardLoaded(delay, delay));
     });
   }
 
-  void updateDelay(int newDelay) {
+  void updateDelayValue(int newDelay) {
     final clamped = newDelay.clamp(0, double.infinity).toInt();
     final currentState = state;
     if (currentState is RoomCardLoaded) {
@@ -42,7 +42,8 @@ class RoomCardCubit extends Cubit<RoomCardState> {
   Future<void> sendDelay() async {
     final currentState = state;
     if (currentState is RoomCardLoaded) {
-      await _registerRoomDelayUseCase(room.id.toString(), currentState.delay);
+      final delayDifference = currentState.delay - currentState.originalDelay;
+      await _registerRoomDelayUseCase(room.id.toString(), delayDifference);
     }
   }
 

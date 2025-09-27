@@ -8,13 +8,11 @@ from shared.get_signed_in_user import get_signed_in_user
 from features.points.types.points_type_enum import PointsTypeEnum
 from firestore_client import client as firestore_client
 
-
-#TODO Testare questa funzione
 @on_call(region=FIREBASE_REGION)
 def assign_points(request: CallableRequest) -> Response:
     logged_user = get_signed_in_user(request)
     logger.info(f"Assigning points: {request.data}")
-    assigned_points = int(request.data.get("points", {}).get('value', None))
+    assigned_points = int(request.data.get("points"))
     point_type = request.data.get("type")
     quest_id = request.data.get("quest", None)
     user_ids = request.data.get("users", [])
@@ -91,4 +89,4 @@ def assign_points(request: CallableRequest) -> Response:
 
     batch.commit()
 
-    return jsonify(True)
+    return True

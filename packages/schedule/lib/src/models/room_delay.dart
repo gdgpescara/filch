@@ -10,10 +10,9 @@ part 'room_delay.g.dart';
 class RoomDelay extends Equatable {
   const RoomDelay({
     required this.id,
-    required this.minutes,
+    required this.delay,
     required this.updatedBy,
     required this.updatedAt,
-    this.description,
   });
 
   /// Creates a [RoomDelay] from a JSON map
@@ -25,7 +24,7 @@ class RoomDelay extends Equatable {
   final String id;
 
   /// Delay duration in minutes
-  final int minutes;
+  final int delay;
 
   /// User ID who updated this delay
   final String updatedBy;
@@ -34,23 +33,20 @@ class RoomDelay extends Equatable {
   @JsonKey(fromJson: _timestampFromJson, toJson: _timestampToJson)
   final DateTime updatedAt;
 
-  /// Optional description of the delay
-  final String? description;
+
 
   /// Creates a copy of this [RoomDelay] with the given fields replaced
   RoomDelay copyWith({
     String? id,
-    int? minutes,
+    int? delay,
     String? updatedBy,
     DateTime? updatedAt,
-    String? description,
   }) {
     return RoomDelay(
       id: id ?? this.id,
-      minutes: minutes ?? this.minutes,
+      delay: delay ?? this.delay,
       updatedBy: updatedBy ?? this.updatedBy,
       updatedAt: updatedAt ?? this.updatedAt,
-      description: description ?? this.description,
     );
   }
 
@@ -59,5 +55,5 @@ class RoomDelay extends Equatable {
   static Timestamp _timestampToJson(DateTime dateTime) => Timestamp.fromDate(dateTime);
 
   @override
-  List<Object?> get props => [id, minutes, updatedBy, updatedAt, description];
+  List<Object?> get props => [id, delay, updatedBy, updatedAt];
 }
