@@ -12,6 +12,7 @@ import 'package:quests/quests.dart' as _i177;
 import 'package:schedule/schedule.dart' as _i199;
 import 'package:staff/src/assignment/state/assignment_cubit.dart' as _i156;
 import 'package:staff/src/management/state/management_cubit.dart' as _i813;
+import 'package:staff/src/schedule_delay/state/room_card_cubit.dart' as _i528;
 import 'package:staff/src/schedule_delay/state/schedule_delay_cubit.dart'
     as _i553;
 import 'package:staff/src/shifts/state/shifts_cubit.dart' as _i1034;
@@ -38,5 +39,10 @@ class StaffPackageModule extends _i526.MicroPackageModule {
         () => _i1034.ShiftsCubit(gh<_i119.GetFilteredShiftsUseCase>()));
     gh.factory<_i734.TShirtAssignmentCubit>(
         () => _i734.TShirtAssignmentCubit(gh<_i177.AssignTShirtUseCase>()));
+    gh.factory<_i528.RoomCardCubit>(() => _i528.RoomCardCubit(
+          gh<_i199.NamedEntity>(),
+          gh<_i199.GetRoomDelayUseCase>(),
+          gh<_i199.RegisterRoomDelayUseCase>(),
+        ));
   }
 }
