@@ -51,14 +51,6 @@ class GroupedSessions extends Equatable {
     return filteredSchedule.isEmpty ? null : filteredSchedule;
   }
 
-  /// Gets all sessions for a specific day and room
-  List<Session> getSessionsForDayAndRoom(DateTime day, NamedEntity room, {bool onlyFavorites = false}) {
-    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return [];
-
-    return daySchedule[room.name] ?? [];
-  }
-
   /// Gets all available rooms for a specific day
   Set<NamedEntity> getRoomsForDay(DateTime day, {bool onlyFavorites = false}) {
     final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
@@ -72,50 +64,6 @@ class GroupedSessions extends Equatable {
       }
     }
     return rooms;
-  }
-
-  /// Gets all start times for a specific day sorted chronologically
-  List<DateTime> getStartTimesForDay(DateTime day, {bool onlyFavorites = false}) {
-    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return [];
-
-    // Get all unique start times from all sessions
-    final startTimes = <DateTime>{};
-    for (final sessions in daySchedule.values) {
-      for (final session in sessions) {
-        startTimes.add(session.startsAt);
-      }
-    }
-
-    final sortedTimes = startTimes.toList()..sort();
-    return sortedTimes;
-  }
-
-  /// Gets sessions for a specific day and time
-  List<Session> getSessionsForDayAndTime(DateTime day, DateTime time, {bool onlyFavorites = false}) {
-    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return [];
-
-    // Find all sessions that start at the specified time
-    final sessions = <Session>[];
-    for (final roomSessions in daySchedule.values) {
-      for (final session in roomSessions) {
-        if (session.startsAt == time) {
-          sessions.add(session);
-        }
-      }
-    }
-
-    return sessions;
-  }
-
-  /// Creates a copy of this [GroupedSessions] with the given fields replaced
-  GroupedSessions copyWith({
-    Map<DateTime, Map<String, List<Session>>>? sessionsByDay,
-  }) {
-    return GroupedSessions(
-      sessionsByDay: sessionsByDay ?? this.sessionsByDay,
-    );
   }
 
   @override
