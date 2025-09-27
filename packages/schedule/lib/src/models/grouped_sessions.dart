@@ -23,13 +23,15 @@ class GroupedSessions extends Equatable {
 
   /// Gets all available days sorted chronologically
   List<DateTime> getAvailableDays({bool onlyFavorites = false}) {
-    final days = sessionsByDay.keys.where((day) {
-      if (!onlyFavorites) return true;
-      final daySchedule = sessionsByDay[day];
-      if (daySchedule == null) return false;
-      return daySchedule.values.any((sessions) => sessions.any((session) => session.isFavorite));
-    }).toList()..sort();
-    return days;
+    if (!onlyFavorites) {
+      return sessionsByDay.keys.toList()..sort();
+    }
+
+    return sessionsByDay.entries
+        .where((entry) => entry.value.values.any((sessions) => sessions.any((session) => session.isFavorite)))
+        .map((entry) => entry.key)
+        .toList()
+      ..sort();
   }
 
   /// Gets sessions for a specific day grouped by room name
@@ -42,28 +44,29 @@ class GroupedSessions extends Equatable {
 
     // Filter only favorite sessions
     final filteredSchedule = <String, List<Session>>{};
-    daySchedule.forEach((room, sessions) {
+    
+    for (final entry in daySchedule.entries) {
+      final room = entry.key;
+      final sessions = entry.value;
       final favoriteSessions = sessions.where((session) => session.isFavorite).toList();
+      
       if (favoriteSessions.isNotEmpty) {
         filteredSchedule[room] = favoriteSessions;
       }
-    });
-    return filteredSchedule.isEmpty ? null : filteredSchedule;
+    }
+
+    return filteredSchedule.isNotEmpty ? filteredSchedule : null;
   }
 
   /// Gets all available rooms for a specific day
   Set<NamedEntity> getRoomsForDay(DateTime day, {bool onlyFavorites = false}) {
     final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return {};
+    if (daySchedule == null) return <NamedEntity>{};
 
-    // Get all unique rooms from the sessions
-    final rooms = <NamedEntity>{};
-    for (final sessions in daySchedule.values) {
-      for (final session in sessions) {
-        if (session.room != null) rooms.add(session.room!);
-      }
-    }
-    return rooms;
+    // Get all unique rooms from the sessions using expand for better performance
+    return daySchedule.values
+        .expand((sessions) => sessions.where((session) => session.room != null).map((session) => session.room!))
+        .toSet();
   }
 
   @override
