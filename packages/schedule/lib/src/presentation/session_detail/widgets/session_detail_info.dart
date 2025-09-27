@@ -50,7 +50,7 @@ class SessionDetailInfo extends StatelessWidget {
         if (session.isCurrentlyRunning)
           SessionProgress(session: session)
         else
-          AppChip(text: _statusLabel, color: _statusColor),
+          AppChip(text: _statusLabel, customColor: _statusColor),
       ],
     );
   }

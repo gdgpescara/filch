@@ -25,16 +25,16 @@
   },
   "schedule_delay": {
     "label": "Gestisci ritardi programma",
-    "id_label": "ID: ",
+    "id_label": "ID: $id",
     "decrease_delay_tooltip": "Diminuisci ritardo di 5 minuti",
     "increase_delay_tooltip": "Aumenta ritardo di 5 minuti",
-    "delay_unit": "min",
+    "delay_unit": "$delay min",
     "confirm_delay_button": "Conferma Ritardo",
     "no_rooms_available": "Nessuna stanza disponibile",
     "available_rooms_title": "Stanze Disponibili",
     "confirm_delay_dialog": {
       "title": "Conferma Ritardo",
-      "message": "Sei sicuro di voler impostare il ritardo a {delay} minuti per {room_name}?"
+      "message": "Sei sicuro di voler impostare il ritardo a $delay minuti per $roomName?"
     }
   },
   "shifts": {

@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 from typing import Any, Optional
 
 class Delay(BaseModel):
@@ -6,3 +6,5 @@ class Delay(BaseModel):
     delay: Any
     updatedAt: Any
     updatedBy: str
+    
+    model_config = ConfigDict(exclude_none=True)

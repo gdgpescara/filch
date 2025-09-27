@@ -55,7 +55,7 @@ def assign_points(request: CallableRequest) -> Response:
             .collection("points")
             .document()
         )
-        batch.set(user_points_ref, points.model_dump())
+        batch.set(user_points_ref, points.model_dump(exclude_none=True))
 
         if point_type == PointsTypeEnum.quest and quest_id:
             logger.info("Is quest points removing active quest and queue")

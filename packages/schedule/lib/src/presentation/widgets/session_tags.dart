@@ -22,25 +22,25 @@ class SessionTags extends StatelessWidget {
           AppChip(
             text: session.language!.name,
             icon: FontAwesomeIcons.language,
-            color: appColors.googleGreen,
+            customColor: appColors.googleGreen,
           ),
         if (session.sessionFormat?.name.isNotEmpty ?? false)
           AppChip(
             text: session.sessionFormat!.name,
             icon: FontAwesomeIcons.box,
-            color: appColors.googleBlue,
+            customColor: appColors.googleBlue,
           ),
         if (session.level?.name.isNotEmpty ?? false)
           AppChip(
             text: session.level!.name,
             icon: FontAwesomeIcons.signal,
-            color: appColors.googleRed,
+            customColor: appColors.googleRed,
           ),
         if (session.tags.isNotEmpty)
           ...session.tags.map((tag) {
             return AppChip(
               text: tag.name,
-              color: appColors.googleYellow,
+              customColor: appColors.googleYellow,
             );
           }),
       ],

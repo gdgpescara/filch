@@ -6,35 +6,48 @@ class AppChip extends StatelessWidget {
   const AppChip({
     super.key,
     this.icon,
-    required this.text,
-    required this.color,
-  });
+    this.padding,
+    this.borderRadius,
+    this.text,
+    this.child,
+    this.customColor,
+    this.color,
+  }) : assert(!(text != null && child != null), 'Only one of text or child can be provided'),
+       assert(!(customColor != null && color != null), 'Only one of customColor or color can be provided');
 
   final IconData? icon;
-  final String text;
-  final CustomColor color;
+  final EdgeInsets? padding;
+  final double? borderRadius;
+  final String? text;
+  final Widget? child;
+  final CustomColor? customColor;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
-    final colorFamily = color.brightnessColor(context);
+    final actualColor = (customColor?.brightnessColor(context).colorContainer ?? color)!;
     return Container(
-      padding: const EdgeInsets.symmetric(
+      padding:
+          padding ??
+          const EdgeInsets.symmetric(
         horizontal: Spacing.s,
         vertical: Spacing.xs,
       ),
       decoration: BoxDecoration(
-        color: colorFamily.colorContainer.withValues(alpha: 0.2),
-        border: Border.all(color: colorFamily.colorContainer),
-        borderRadius: BorderRadius.circular(RadiusSize.xl),
+        color: actualColor.withValues(alpha: 0.2),
+        border: Border.all(color: actualColor),
+        borderRadius: BorderRadius.circular(borderRadius ?? RadiusSize.xl),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
           if (icon != null) ...[Icon(icon, size: 12), const SizedBox(width: Spacing.s)],
-          Text(
-            text,
-            style: context.getTextTheme(TextThemeType.monospace).bodySmall,
-          ),
+          if (text != null)
+            Text(
+              text!,
+              style: context.getTextTheme(TextThemeType.monospace).bodySmall,
+            ),
+          if (child != null) child!,
         ],
       ),
     );

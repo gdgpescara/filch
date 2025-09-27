@@ -1,4 +1,4 @@
-from firebase_functions.https_fn import on_request
+from firebase_functions.https_fn import on_call, CallableRequest
 from flask import jsonify, Request
 from firestore_client import client
 from features.rooms.types.room import Room
@@ -30,24 +30,34 @@ def fetch_room_ids() -> list[str]:
     return ids
 
 
-@on_request(region=FIREBASE_REGION)
-def add_delay(request: Request) -> bool:
-    data = request.get_json(silent=True) or {}
-    roomId = data.get("roomId", None)
+@on_call(region=FIREBASE_REGION)
+def add_room_delay(request: CallableRequest) -> bool:
+    logger.info(f'Request data: {request.data}')
+    delay = int(request.data.get("delay", 0))
+    if delay == 0:
+        return True
+
+    signed_user = get_signed_in_user(request)
+
+    roomId = request.data.get("roomId", None)
     if roomId is not None: roomId = str(roomId)
-    delay = int(data.get("delay", 0))
-    if delay != 0:
-        if roomId is None:
-            ids = fetch_room_ids()
-            if len(ids):
-                batch = client.batch()
-                for room_id in ids:
-                    d = Delay(roomId=int(room_id), delay=delay)
-                    ref = client.collection(COLLECTION_DELAY_NAME).document(room_id)
-                    batch.set(ref, {"delay": firestore.Increment(d.delay), 'roomId': d.roomId}, merge=True)
-                batch.commit()
-                logger.info(f'Incrementato Ritardo di tutte le stanze di {delay} minuti')
-        else:
-            d = Delay(roomId=int(roomId), delay=delay)
-            client.collection(COLLECTION_DELAY_NAME).document(roomId).set({"delay": firestore.Increment(d.delay), 'roomId': d.roomId}, merge=True)
-    return jsonify(True)
+
+    delay_data = Delay(
+        delay=firestore.Increment(delay),
+        updatedAt=firestore.SERVER_TIMESTAMP,
+        updatedBy=signed_user.email
+    )
+    
+    if roomId is None:
+        ids = fetch_room_ids()
+        if len(ids):
+            batch = client.batch()
+            for room_id in ids:
+                ref = client.collection(COLLECTION_DELAY_NAME).document(room_id)
+                batch.set(ref, delay_data.model_dump(), merge=True)
+            batch.commit()
+            logger.info(f'Incrementato Ritardo di tutte le stanze di {delay} minuti')
+    else:
+        client.collection(COLLECTION_DELAY_NAME).document(roomId).set(delay_data.model_dump(), merge=True)
+        logger.info(f'Incrementato Ritardo della stanza {roomId} di {delay} minuti')
+    return True

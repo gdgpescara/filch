@@ -95,12 +95,12 @@ class _SessionTimeState extends State<SessionTime> {
         if (widget.session.isUpcoming)
           AppChip(
             text: '${widget.session.durationInMinutes}min',
-            color: appColors.googleBlue,
+            customColor: appColors.googleBlue,
           ),
         if (widget.session.hasEnded)
           AppChip(
             text: t.schedule.sessions.session_status.ended,
-            color: appColors.googleRed,
+            customColor: appColors.googleRed,
           ),
         if (!widget.session.isServiceSession) ...[
           const SizedBox(width: Spacing.s),
