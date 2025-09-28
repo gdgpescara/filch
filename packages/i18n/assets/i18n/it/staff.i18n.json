@@ -24,7 +24,7 @@
     }
   },
   "schedule_delay": {
-    "label": "Gestisci ritardi programma",
+    "label": "Gestisci ritardi programma:",
     "button": {
       "label": "Segnala Ritardo"
     },

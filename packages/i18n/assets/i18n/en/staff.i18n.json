@@ -24,7 +24,7 @@
     }
   },
   "schedule_delay": {
-    "label": "Manage schedule delays",
+    "label": "Manage schedule delays:",
     "button": {
       "label": "Report Delay"
     },
