@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
+import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:schedule/schedule.dart';
@@ -25,10 +26,14 @@ class RoomCardCubit extends Cubit<RoomCardState> {
 
   Future<void> init() async {
     await _delaySubscription?.cancel();
-    _delaySubscription = _getRoomDelayUseCase(room.id.toString()).listen((roomDelay) {
-      final delay = roomDelay?.delay ?? 0;
-      emit(RoomCardLoaded(delay, delay));
-    });
+    _delaySubscription = _getRoomDelayUseCase(room.id.toString()).when(
+      progress: () => emit(const RoomCardInitial()),
+      success: (roomDelay) {
+        final delay = roomDelay?.delay ?? 0;
+        emit(RoomCardLoaded(delay, delay));
+      },
+      error: (_) => emit(const RoomCardError()),
+    );
   }
 
   void updateDelayValue(int newDelay) {
@@ -39,11 +44,14 @@ class RoomCardCubit extends Cubit<RoomCardState> {
     }
   }
 
-  Future<void> sendDelay() async {
-    final currentState = state;
-    if (currentState is RoomCardLoaded) {
+  void sendDelay() {
+    if (state case final RoomCardLoaded currentState) {
       final delayDifference = currentState.delay - currentState.originalDelay;
-      await _registerRoomDelayUseCase(room.id.toString(), delayDifference);
+      _registerRoomDelayUseCase(room.id.toString(), delayDifference).when(
+        progress: () => emit(RoomCardDelaySending(currentState.delay, currentState.originalDelay)),
+        success: (_) => init(),
+        error: (_) => emit(RoomCardDelaySendError(currentState.delay, currentState.originalDelay)),
+      );
     }
   }
 

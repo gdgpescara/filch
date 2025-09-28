@@ -13,35 +13,24 @@ class RoomCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<RoomCardCubit, RoomCardState>(
+    return BlocConsumer<RoomCardCubit, RoomCardState>(
+      listener: (context, state) {
+        if (state is RoomCardDelaySendError) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(t.common.errors.generic)),
+          );
+        }
+      },
       builder: (context, state) {
-        final (delay, originalDelay) = switch (state) {
-          RoomCardInitial() => (0, 0),
-          RoomCardLoaded(delay: final d, originalDelay: final o) => (d, o),
-        };
-        final hasChanges = delay != originalDelay;
-
-        return AppCard(
-          style: AppCardStyle.normal,
-          padding: const EdgeInsets.all(Spacing.m),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _RoomHeader(room: room),
-              const SizedBox(height: Spacing.m),
-              _DelayControls(delay: delay, originalDelay: originalDelay),
-              const SizedBox(height: Spacing.m),
-              SizedBox(
-                width: double.infinity,
-                child: FilledButton(
-                  onPressed: hasChanges ? () => _onConfirmDelayPressed(context, delay) : null,
-                  child: Text(t.staff.schedule_delay.confirm_delay_button),
-                ),
-              ),
-            ],
+        return switch (state) {
+          RoomCardError() => Center(
+            child: Text(
+              t.common.errors.generic,
+              style: context.textTheme.bodyMedium?.copyWith(color: context.colorScheme.error),
+            ),
           ),
-        );
+          _ => _buildCardContent(context, state),
+        };
       },
     );
   }
@@ -68,8 +57,47 @@ class RoomCard extends StatelessWidget {
       ),
     );
     if (result ?? false) {
-      await cubit.sendDelay();
+      cubit.sendDelay();
     }
+  }
+
+  Widget _buildCardContent(BuildContext context, RoomCardState state) {
+    final (delay, originalDelay, isLoading) = switch (state) {
+      RoomCardLoaded(delay: final d, originalDelay: final o) => (d, o, false),
+      RoomCardDelaySending(delay: final d, originalDelay: final o) => (d, o, true),
+      RoomCardDelaySendError(delay: final d, originalDelay: final o) => (d, o, false),
+      _ => (0, 0, false),
+    };
+
+    final hasChanges = delay != originalDelay;
+
+    return AppCard(
+      style: AppCardStyle.normal,
+      padding: const EdgeInsets.all(Spacing.m),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          _RoomHeader(room: room),
+          const SizedBox(height: Spacing.m),
+          _DelayControls(delay: delay, originalDelay: originalDelay),
+          const SizedBox(height: Spacing.m),
+          SizedBox(
+            width: double.infinity,
+            child: FilledButton(
+              onPressed: hasChanges && !isLoading ? () => _onConfirmDelayPressed(context, delay) : null,
+              child: isLoading
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    )
+                  : Text(t.staff.schedule_delay.confirm_delay_button),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 
