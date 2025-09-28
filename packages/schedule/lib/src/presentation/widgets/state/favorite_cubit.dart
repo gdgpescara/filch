@@ -17,9 +17,9 @@ class FavoriteCubit extends SafeEmitterCubit<FavoriteState> {
 
   void toggle(String sessionId) {
     _toggleFavoriteUseCase(sessionId).when(
-      progress: () => emit(FavoriteToggleLoading(isFavorite: state.isFavorite)),
+      progress: () => emit(FavoriteToggleLoading(isFavorite: !state.isFavorite)),
       success: (isFavorite) => emit(FavoriteToggleSuccess(isFavorite: isFavorite)),
-      error: (error) => emit(FavoriteToggleError(isFavorite: state.isFavorite)),
+      error: (error) => emit(FavoriteToggleError(isFavorite: !state.isFavorite)),
     );
   }
 }

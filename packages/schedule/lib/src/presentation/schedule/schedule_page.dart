@@ -7,7 +7,7 @@ import 'package:ui/ui.dart';
 
 import 'state/schedule_cubit.dart';
 import 'state/schedule_state.dart';
-import 'widgets/day_sessions.dart';
+import 'widgets/day_sessions_view.dart';
 
 class SchedulePage extends StatelessWidget {
   const SchedulePage({
@@ -106,13 +106,15 @@ class SchedulePage extends StatelessWidget {
   }
 
   Widget _buildDaySession(ScheduleLoaded state, DateTime day) {
-    final sessions = state.groupedSessions.getSessionsForDay(day, onlyFavorites: state.onlyFavorites);
-    if (sessions == null) return const SizedBox.shrink();
-
-    return DaySessions(
-      sessions: sessions,
+    final sessions = state.groupedSessions.getSessionsForDay(day);
+    if (sessions.isEmpty) {
+      return Center(child: Text(t.schedule.sessions.no_sessions_for_day));
+    }
+    return DaySessionsView(
+      daySessions: sessions,
+      onlyFavorites: state.onlyFavorites,
       onSessionTap: navigateToSessionDetail,
-      rooms: state.groupedSessions.getRoomsForDay(day, onlyFavorites: state.onlyFavorites),
+      rooms: state.groupedSessions.getRoomsForDay(day),
     );
   }
 

@@ -25,6 +25,15 @@
   },
   "schedule_delay": {
     "label": "Gestisci ritardi programma",
+    "button": {
+      "label": "Segnala Ritardo"
+    },
+    "current_reported_delay": {
+      "prefix": "Il ritardo massimo segnalato è di",
+      "delay_unit": "$delay minuti",
+      "suffix": ", se sei MC cerca di allinearti al più presto per far si che il ritardo sia uguale in tutte le sale."
+    },
+    "no_reported_delay": "Nessun ritardo segnalato",
     "id_label": "ID: $id",
     "decrease_delay_tooltip": "Diminuisci ritardo di 5 minuti",
     "increase_delay_tooltip": "Aumenta ritardo di 5 minuti",

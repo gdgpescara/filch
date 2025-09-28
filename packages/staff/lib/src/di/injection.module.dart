@@ -27,10 +27,6 @@ class StaffPackageModule extends _i526.MicroPackageModule {
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.factory<_i553.ScheduleDelayCubit>(
         () => _i553.ScheduleDelayCubit(gh<_i199.GetRoomsUseCase>()));
-    gh.factory<_i813.ManagementCubit>(() => _i813.ManagementCubit(
-          gh<_i177.GetAssignablePointsUseCase>(),
-          gh<_i177.GetSignedUserQuestsUseCase>(),
-        ));
     gh.lazySingleton<_i119.GetFilteredShiftsUseCase>(
         () => _i119.GetFilteredShiftsUseCase(gh<_i974.FirebaseFirestore>()));
     gh.factory<_i156.AssignmentCubit>(
@@ -39,6 +35,11 @@ class StaffPackageModule extends _i526.MicroPackageModule {
         () => _i1034.ShiftsCubit(gh<_i119.GetFilteredShiftsUseCase>()));
     gh.factory<_i734.TShirtAssignmentCubit>(
         () => _i734.TShirtAssignmentCubit(gh<_i177.AssignTShirtUseCase>()));
+    gh.factory<_i813.ManagementCubit>(() => _i813.ManagementCubit(
+          gh<_i177.GetAssignablePointsUseCase>(),
+          gh<_i177.GetSignedUserQuestsUseCase>(),
+          gh<_i199.GetMaxRoomDelayUseCase>(),
+        ));
     gh.factory<_i528.RoomCardCubit>(() => _i528.RoomCardCubit(
           gh<_i199.NamedEntity>(),
           gh<_i199.GetRoomDelayUseCase>(),

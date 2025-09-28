@@ -16,15 +16,24 @@ class ManagementFailure extends ManagementState {
 }
 
 class ManagementLoaded extends ManagementState {
-  const ManagementLoaded({this.points = const [], this.quests = const []});
+  const ManagementLoaded({this.points = const [], this.quests = const [], this.maxRoomDelay = 0});
 
   final List<AssignablePoints> points;
   final List<Quest> quests;
+  final int maxRoomDelay;
 
-  ManagementLoaded copyWith({List<AssignablePoints>? points, List<Quest>? quests}) {
-    return ManagementLoaded(points: points ?? this.points, quests: quests ?? this.quests);
+  ManagementLoaded copyWith({
+    List<AssignablePoints>? points,
+    List<Quest>? quests,
+    int? maxRoomDelay,
+  }) {
+    return ManagementLoaded(
+      points: points ?? this.points,
+      quests: quests ?? this.quests,
+      maxRoomDelay: maxRoomDelay ?? this.maxRoomDelay,
+    );
   }
 
   @override
-  List<Object?> get props => [points, quests];
+  List<Object?> get props => [points, quests, maxRoomDelay];
 }

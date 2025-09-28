@@ -25,12 +25,12 @@ class ManagementView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          BlocProvider<ManagementCubit>(
-            create: (context) => GetIt.I()..load(),
-            child: BlocBuilder<ManagementCubit, ManagementState>(
+      child: BlocProvider<ManagementCubit>(
+        create: (context) => GetIt.I()..load(),
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            BlocBuilder<ManagementCubit, ManagementState>(
               builder: (context, state) {
                 return switch (state) {
                   ManagementLoading() => const Center(child: LoaderAnimation()),
@@ -39,12 +39,12 @@ class ManagementView extends StatelessWidget {
                 };
               },
             ),
-          ),
-          const Gap.vertical(Spacing.xl),
-          AssignTShirt(navigateToTShirtAssignment),
-          const Gap.vertical(Spacing.xl),
-          ReportScheduleDelay(navigateToScheduleDelayReporting),
-        ],
+            const Gap.vertical(Spacing.xl),
+            ReportScheduleDelay(navigateToScheduleDelayReporting),
+            const Gap.vertical(Spacing.xl),
+            AssignTShirt(navigateToTShirtAssignment),
+          ],
+        ),
       ),
     );
   }

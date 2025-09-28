@@ -15,6 +15,8 @@ class Session extends Equatable {
     this.description,
     required this.startsAt,
     required this.endsAt,
+    required this.realStartsAt,
+    required this.realEndsAt,
     required this.speakers,
     this.room,
     this.sessionFormat,
@@ -43,6 +45,12 @@ class Session extends Equatable {
 
   /// End time of the session in ISO 8601 format
   final DateTime endsAt;
+
+  /// Actual start time of the session (considering delays)
+  final DateTime realStartsAt;
+
+  /// Actual end time of the session (considering delays)
+  final DateTime realEndsAt;
 
   /// List of speakers for this session
   final List<Speaker> speakers;
@@ -78,6 +86,8 @@ class Session extends Equatable {
     String? description,
     DateTime? startsAt,
     DateTime? endsAt,
+    DateTime? realStartsAt,
+    DateTime? realEndsAt,
     List<Speaker>? speakers,
     NamedEntity? room,
     NamedEntity? sessionFormat,
@@ -94,6 +104,8 @@ class Session extends Equatable {
       description: description ?? this.description,
       startsAt: startsAt ?? this.startsAt,
       endsAt: endsAt ?? this.endsAt,
+      realStartsAt: realStartsAt ?? this.realStartsAt,
+      realEndsAt: realEndsAt ?? this.realEndsAt,
       speakers: speakers ?? this.speakers,
       room: room ?? this.room,
       sessionFormat: sessionFormat ?? this.sessionFormat,
@@ -135,6 +147,8 @@ class Session extends Equatable {
     description,
     startsAt,
     endsAt,
+    realStartsAt,
+    realEndsAt,
     speakers,
     room,
     sessionFormat,

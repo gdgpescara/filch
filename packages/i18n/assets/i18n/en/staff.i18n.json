@@ -25,6 +25,15 @@
   },
   "schedule_delay": {
     "label": "Manage schedule delays",
+    "button": {
+      "label": "Report Delay"
+    },
+    "current_reported_delay": {
+      "prefix": "The maximum reported delay is",
+      "delay_unit": "$delay minutes",
+      "suffix": ", if you are an MC please try to align as soon as possible to ensure the delay is equal in all rooms."
+    },
+    "no_reported_delay": "No delay reported",
     "id_label": "ID: $id",
     "decrease_delay_tooltip": "Decrease delay by 5 minutes",
     "increase_delay_tooltip": "Increase delay by 5 minutes",

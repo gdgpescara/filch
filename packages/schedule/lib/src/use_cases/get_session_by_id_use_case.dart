@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../models/session.dart';
+import 'get_max_room_delay_use_case.dart';
 import 'get_user_favorite_session_ids_use_case.dart';
 
 @lazySingleton
@@ -12,84 +14,49 @@ class GetSessionByIdUseCase {
   GetSessionByIdUseCase(
     this._firestore,
     this._getUserFavoriteSessionIdsUseCase,
+    this._getMaxRoomDelayUseCase,
   );
 
   final FirebaseFirestore _firestore;
   final GetUserFavoriteSessionIdsUseCase _getUserFavoriteSessionIdsUseCase;
+  final GetMaxRoomDelayUseCase _getMaxRoomDelayUseCase;
 
-  /// Retrieves a session by its ID with favorite status
-  ///
-  /// Returns a [Stream<Session>] that emits the session data when found.
-  /// Throws [NotFoundError] if the session doesn't exist.
-  /// The stream will update automatically if the session data or favorite status changes.
-  Stream<Session> call(String sessionId) {
+  Stream<(Session, int)> call(String sessionId) {
     return runSafetyStream(() {
-      late StreamController<Session> controller;
-      StreamSubscription<DocumentSnapshot<Map<String, dynamic>>>? sessionSub;
-      StreamSubscription<Set<String>>? favoritesSub;
-
-      var favoriteIds = <String>{};
-      DocumentSnapshot<Map<String, dynamic>>? latestSnapshot;
-
-      void emitSession() {
-        final snapshot = latestSnapshot;
-        if (snapshot == null) return;
-
-        try {
-          final session = _parseSessionFromSnapshot(snapshot, favoriteIds);
-          controller.add(session);
-        } catch (error) {
-          controller.addError(error);
-        }
-      }
-
-      void handleError(Object error) {
-        controller.addError(error);
-      }
-
-      controller = StreamController<Session>(
-        onListen: () {
-          favoritesSub = _getUserFavoriteSessionIdsUseCase().listen(
-            (ids) {
-              favoriteIds = ids;
-              emitSession();
-            },
-            onError: handleError,
-          );
-
-          sessionSub = _firestore.collection('sessions').doc(sessionId).snapshots().listen(
-            (snapshot) {
-              latestSnapshot = snapshot;
-              emitSession();
-            },
-            onError: handleError,
-          );
-        },
-        onCancel: () {
-          sessionSub?.cancel();
-          favoritesSub?.cancel();
+      return Rx.combineLatest3(
+        _firestore.collection('sessions').doc(sessionId).snapshots(),
+        _getUserFavoriteSessionIdsUseCase(),
+        _getMaxRoomDelayUseCase(),
+        (snapshot, favoriteIds, maxDelay) {
+          final session = _parseSessionFromSnapshot(snapshot, favoriteIds, maxDelay);
+          return (session, maxDelay);
         },
       );
-
-      return controller.stream;
     });
   }
 
-  /// Parses a Firestore document snapshot into a Session object with favorite status
   Session _parseSessionFromSnapshot(
     DocumentSnapshot<Map<String, dynamic>> snapshot,
     Set<String> favoriteIds,
+    int maxDelay,
   ) {
-    if (!snapshot.exists || snapshot.data() == null) {
+    final data = snapshot.data();
+    if (!snapshot.exists || data == null) {
       throw NotFoundError();
     }
 
     try {
       final session = Session.fromJson({
         'id': snapshot.id,
-        ...snapshot.data()!,
+        'realStartsAt': data['startsAt'],
+        'realEndsAt': data['endsAt'],
+        ...data,
       });
-      return session.copyWith(isFavorite: favoriteIds.contains(session.id));
+      return session.copyWith(
+        isFavorite: favoriteIds.contains(session.id),
+        realStartsAt: session.startsAt.add(Duration(minutes: maxDelay)),
+        realEndsAt: session.endsAt.add(Duration(minutes: maxDelay)),
+      );
     } catch (e) {
       throw GenericError(
         message: 'Failed to parse session data for ID ${snapshot.id}: $e',

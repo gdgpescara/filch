@@ -22,7 +22,7 @@ class SessionDetailCubit extends SafeEmitterCubit<SessionDetailState> {
 
     _sessionSubscription = _getSessionByIdUseCase(sessionId).when(
       progress: () => emit(SessionDetailLoading()),
-      success: (session) => emit(SessionDetailLoaded(session: session)),
+      success: (data) => emit(SessionDetailLoaded(session: data.$1, delay: data.$2)),
       error: (error) => emit(SessionDetailError(error: error.toString())),
     );
   }

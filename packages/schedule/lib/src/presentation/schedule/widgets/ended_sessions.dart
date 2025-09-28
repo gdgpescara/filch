@@ -24,37 +24,34 @@ class EndedSessions extends StatelessWidget {
     return Semantics(
       label: t.schedule.sessions.semantics.ended_section_label(count: sessions.length),
       hint: t.schedule.sessions.semantics.ended_section_hint,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: Spacing.m),
-        child: ExpansionTile(
-          tilePadding: const EdgeInsets.symmetric(horizontal: Spacing.m),
-          childrenPadding: const EdgeInsets.symmetric(horizontal: Spacing.s),
-          backgroundColor: context.colorScheme.secondaryContainer,
-          collapsedBackgroundColor: context.colorScheme.secondaryContainer,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(RadiusSize.m),
-          ),
-          collapsedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(RadiusSize.m),
-          ),
-          title: Text(
-            t.schedule.sessions.ended_sessions_count(count: sessions.length),
-            style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.w600),
-          ),
-          subtitle: Text(
-            t.schedule.sessions.ended_sessions_subtitle,
-            style: context.textTheme.bodySmall,
-          ),
-          children: sessions
-              .map(
-                (session) => _EndedSessionCard(
-                  session: session,
-                  isLast: session == sessions.last,
-                  onSessionTap: onSessionTap,
-                ),
-              )
-              .toList(),
+      child: ExpansionTile(
+        tilePadding: const EdgeInsets.symmetric(horizontal: Spacing.m),
+        childrenPadding: const EdgeInsets.symmetric(horizontal: Spacing.s),
+        backgroundColor: context.colorScheme.secondaryContainer,
+        collapsedBackgroundColor: context.colorScheme.secondaryContainer,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(RadiusSize.m),
         ),
+        collapsedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(RadiusSize.m),
+        ),
+        title: Text(
+          t.schedule.sessions.ended_sessions_count(count: sessions.length),
+          style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.w600),
+        ),
+        subtitle: Text(
+          t.schedule.sessions.ended_sessions_subtitle,
+          style: context.textTheme.bodySmall,
+        ),
+        children: sessions
+            .map(
+              (session) => _EndedSessionCard(
+                session: session,
+                isLast: session == sessions.last,
+                onSessionTap: onSessionTap,
+              ),
+            )
+            .toList(),
       ),
     );
   }

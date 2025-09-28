@@ -33,7 +33,7 @@ class CurrentAndFutureSessions extends StatelessWidget {
           child: SessionCard(session, onTap: onSessionTap),
         );
       },
-      separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),
+      separatorBuilder: (context, index) => const Gap.vertical(Spacing.m),
       itemCount: sessions.length,
     );
   }

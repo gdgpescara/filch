@@ -38,6 +38,7 @@ dependencies:
   time_planner: ^0.1.2+1
   json_annotation: ^4.9.0
   mobile_scanner: ^7.0.1
+  rxdart: ^0.28.0
   intl: any
   collection: any
 

@@ -22,7 +22,7 @@ class RoomList extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.all(Spacing.m),
       itemCount: rooms.length,
-      separatorBuilder: (context, index) => const SizedBox(height: Spacing.m),
+      separatorBuilder: (context, index) => const Gap.vertical(Spacing.m),
       itemBuilder: (context, index) {
         final room = rooms[index];
         return BlocProvider<RoomCardCubit>(

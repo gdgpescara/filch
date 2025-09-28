@@ -1,4 +1,5 @@
 export 'get_grouped_sessions_use_case.dart';
+export 'get_max_room_delay_use_case.dart';
 export 'get_room_delay_use_case.dart';
 export 'get_rooms_use_case.dart';
 export 'get_session_by_id_use_case.dart';

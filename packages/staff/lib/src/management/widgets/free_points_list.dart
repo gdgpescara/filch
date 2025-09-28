@@ -25,7 +25,7 @@ class FreePointsList extends StatelessWidget {
               t.staff.point_assignment.free_points.label,
               style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: Spacing.m),
+            const Gap.vertical(Spacing.m),
             Wrap(
               spacing: Spacing.l,
               runSpacing: Spacing.l,

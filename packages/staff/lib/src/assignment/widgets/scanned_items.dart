@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ui/ui.dart';
 
 import '../state/assignment_cubit.dart';
 import 'scanned_item.dart';
@@ -17,7 +18,7 @@ class ScannedItems extends StatelessWidget {
             padding: const EdgeInsets.all(20),
             shrinkWrap: true,
             itemCount: users.length,
-            separatorBuilder: (context, index) => const SizedBox(height: 10),
+            separatorBuilder: (context, index) => const Gap.vertical(10),
             itemBuilder: (context, index) => ScannedItem(users[index]),
           ),
         );

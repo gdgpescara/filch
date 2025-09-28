@@ -3,15 +3,17 @@ import 'package:flutter/scheduler.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-import '../../models/models.dart';
-
 class SessionProgress extends StatefulWidget {
   const SessionProgress({
     super.key,
-    required this.session,
+    required this.sessionDuration,
+    required this.startsAt,
+    required this.endsAt,
   });
 
-  final Session session;
+  final Duration sessionDuration;
+  final DateTime startsAt;
+  final DateTime endsAt;
 
   @override
   State<SessionProgress> createState() => _SessionProgressState();
@@ -24,14 +26,14 @@ class _SessionProgressState extends State<SessionProgress> {
 
   double get _progress {
     final now = DateTime.now();
-    final totalDuration = widget.session.duration.inMilliseconds;
-    final elapsed = now.difference(widget.session.startsAt).inMilliseconds;
+    final totalDuration = widget.sessionDuration.inMilliseconds;
+    final elapsed = now.difference(widget.startsAt).inMilliseconds;
     return (elapsed / totalDuration).clamp(0.0, 1.0);
   }
 
   (int, int) get _remainingTime {
     final now = DateTime.now();
-    final remaining = widget.session.endsAt.difference(now);
+    final remaining = widget.endsAt.difference(now);
     return (remaining.inMinutes, remaining.inSeconds % 60);
   }
 
@@ -88,7 +90,7 @@ class _SessionProgressState extends State<SessionProgress> {
             ),
           ],
         ),
-        const SizedBox(height: Spacing.xs),
+        const Gap.vertical(Spacing.xs),
         ValueListenableBuilder<double>(
           valueListenable: _progressNotifier,
           builder: (context, progress, child) {

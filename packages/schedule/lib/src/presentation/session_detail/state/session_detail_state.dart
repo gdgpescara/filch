@@ -11,12 +11,13 @@ class SessionDetailInitial extends SessionDetailState {}
 class SessionDetailLoading extends SessionDetailState {}
 
 class SessionDetailLoaded extends SessionDetailState {
-  SessionDetailLoaded({required this.session});
+  SessionDetailLoaded({required this.session, required this.delay});
 
   final Session session;
+  final int delay;
 
   @override
-  List<Object?> get props => [session];
+  List<Object?> get props => [session, delay];
 }
 
 class SessionDetailError extends SessionDetailState {
