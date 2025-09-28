@@ -15,8 +15,8 @@ class SessionTags extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      spacing: Spacing.xs,
-      runSpacing: Spacing.xs,
+      spacing: Spacing.s,
+      runSpacing: Spacing.s,
       children: [
         if (session.language?.name.isNotEmpty ?? false)
           AppChip(
