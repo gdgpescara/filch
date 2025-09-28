@@ -1,126 +1,60 @@
+import 'package:collection/collection.dart';
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'day_sessions.dart';
 import 'named_entity.dart';
-import 'session.dart';
+import 'room_sessions.dart';
 
 part 'grouped_sessions.g.dart';
 
-/// Represents sessions grouped by day, then by start time, then by room
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class GroupedSessions extends Equatable {
   const GroupedSessions({
-    required this.sessionsByDay,
+    required this.daySessions,
   });
 
-  /// Creates a [GroupedSessions] from a JSON map
   factory GroupedSessions.fromJson(Map<String, dynamic> json) => _$GroupedSessionsFromJson(json);
 
-  /// Converts this [GroupedSessions] to a JSON map
-  Map<String, dynamic> toJson() => _$GroupedSessionsToJson(this);
-
-  /// Sessions grouped by day (date as key), then by room name
-  /// Key: Date as DateTime (only date part, time will be 00:00:00)
-  /// Value: Map where key is room name (String) and value is list of sessions
-  final Map<DateTime, Map<String, List<Session>>> sessionsByDay;
+  final List<DaySessions> daySessions;
 
   /// Gets all available days sorted chronologically
   List<DateTime> getAvailableDays({bool onlyFavorites = false}) {
-    final days = sessionsByDay.keys.where((day) {
-      if (!onlyFavorites) return true;
-      final daySchedule = sessionsByDay[day];
-      if (daySchedule == null) return false;
-      return daySchedule.values.any((sessions) => sessions.any((session) => session.isFavorite));
-    }).toList()..sort();
-    return days;
+    if (!onlyFavorites) {
+      return daySessions.map((daySession) => daySession.day).toList()..sort();
+    }
+
+    return daySessions
+        .where((daySession) => daySession.roomSessions.any((roomSession) => roomSession.sessions.any((session) => session.isFavorite)))
+        .map((daySession) => daySession.day)
+        .toList()
+      ..sort();
   }
 
   /// Gets sessions for a specific day grouped by room name
-  Map<String, List<Session>>? getSessionsForDay(DateTime day, {bool onlyFavorites = false}) {
+  List<RoomSessions> getSessionsForDay(DateTime day) {
     final dayKey = DateTime(day.year, day.month, day.day);
-    final daySchedule = sessionsByDay[dayKey];
-    if (daySchedule == null) return null;
+    final daySession = daySessions.firstWhereOrNull((ds) => ds.day == dayKey);
 
-    if (!onlyFavorites) return daySchedule;
+    if (daySession == null) {
+      return [];
+    }
 
-    // Filter only favorite sessions
-    final filteredSchedule = <String, List<Session>>{};
-    daySchedule.forEach((room, sessions) {
-      final favoriteSessions = sessions.where((session) => session.isFavorite).toList();
-      if (favoriteSessions.isNotEmpty) {
-        filteredSchedule[room] = favoriteSessions;
-      }
-    });
-    return filteredSchedule.isEmpty ? null : filteredSchedule;
-  }
-
-  /// Gets all sessions for a specific day and room
-  List<Session> getSessionsForDayAndRoom(DateTime day, NamedEntity room, {bool onlyFavorites = false}) {
-    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return [];
-
-    return daySchedule[room.name] ?? [];
+    return daySession.roomSessions;
   }
 
   /// Gets all available rooms for a specific day
-  Set<NamedEntity> getRoomsForDay(DateTime day, {bool onlyFavorites = false}) {
-    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return {};
+  Set<NamedEntity> getRoomsForDay(DateTime day) {
+    final dayKey = DateTime(day.year, day.month, day.day);
+    final daySession = daySessions.firstWhereOrNull((ds) => ds.day == dayKey);
 
-    // Get all unique rooms from the sessions
-    final rooms = <NamedEntity>{};
-    for (final sessions in daySchedule.values) {
-      for (final session in sessions) {
-        if (session.room != null) rooms.add(session.room!);
-      }
-    }
-    return rooms;
-  }
-
-  /// Gets all start times for a specific day sorted chronologically
-  List<DateTime> getStartTimesForDay(DateTime day, {bool onlyFavorites = false}) {
-    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return [];
-
-    // Get all unique start times from all sessions
-    final startTimes = <DateTime>{};
-    for (final sessions in daySchedule.values) {
-      for (final session in sessions) {
-        startTimes.add(session.startsAt);
-      }
+    if (daySession == null) {
+      return {};
     }
 
-    final sortedTimes = startTimes.toList()..sort();
-    return sortedTimes;
-  }
-
-  /// Gets sessions for a specific day and time
-  List<Session> getSessionsForDayAndTime(DateTime day, DateTime time, {bool onlyFavorites = false}) {
-    final daySchedule = getSessionsForDay(day, onlyFavorites: onlyFavorites);
-    if (daySchedule == null) return [];
-
-    // Find all sessions that start at the specified time
-    final sessions = <Session>[];
-    for (final roomSessions in daySchedule.values) {
-      for (final session in roomSessions) {
-        if (session.startsAt == time) {
-          sessions.add(session);
-        }
-      }
-    }
-
-    return sessions;
-  }
-
-  /// Creates a copy of this [GroupedSessions] with the given fields replaced
-  GroupedSessions copyWith({
-    Map<DateTime, Map<String, List<Session>>>? sessionsByDay,
-  }) {
-    return GroupedSessions(
-      sessionsByDay: sessionsByDay ?? this.sessionsByDay,
-    );
+    return daySession.roomSessions.map((rs) => rs.room).toSet();
   }
 
   @override
-  List<Object?> get props => [sessionsByDay];
+  List<Object?> get props => [daySessions];
 }

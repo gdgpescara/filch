@@ -5,5 +5,5 @@ AppBarTheme _appBarTheme(ThemeData theme) => AppBarTheme(
   shadowColor: Colors.transparent,
   elevation: 0,
   centerTitle: true,
-  titleTextStyle: GoogleFonts.openSans(fontSize: theme.textTheme.titleLarge?.fontSize),
+  titleTextStyle: GoogleFonts.poppins(fontSize: theme.textTheme.titleLarge?.fontSize),
 );

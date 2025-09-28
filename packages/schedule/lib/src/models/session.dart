@@ -7,7 +7,7 @@ import 'speaker.dart';
 part 'session.g.dart';
 
 /// Represents a conference session
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class Session extends Equatable {
   const Session({
     required this.id,
@@ -15,6 +15,8 @@ class Session extends Equatable {
     this.description,
     required this.startsAt,
     required this.endsAt,
+    required this.realStartsAt,
+    required this.realEndsAt,
     required this.speakers,
     this.room,
     this.sessionFormat,
@@ -28,9 +30,6 @@ class Session extends Equatable {
 
   /// Creates a [Session] from a JSON map
   factory Session.fromJson(Map<String, dynamic> json) => _$SessionFromJson(json);
-
-  /// Converts this [Session] to a JSON map
-  Map<String, dynamic> toJson() => _$SessionToJson(this);
 
   /// Unique identifier for the session
   final String id;
@@ -46,6 +45,12 @@ class Session extends Equatable {
 
   /// End time of the session in ISO 8601 format
   final DateTime endsAt;
+
+  /// Actual start time of the session (considering delays)
+  final DateTime realStartsAt;
+
+  /// Actual end time of the session (considering delays)
+  final DateTime realEndsAt;
 
   /// List of speakers for this session
   final List<Speaker> speakers;
@@ -81,6 +86,8 @@ class Session extends Equatable {
     String? description,
     DateTime? startsAt,
     DateTime? endsAt,
+    DateTime? realStartsAt,
+    DateTime? realEndsAt,
     List<Speaker>? speakers,
     NamedEntity? room,
     NamedEntity? sessionFormat,
@@ -97,6 +104,8 @@ class Session extends Equatable {
       description: description ?? this.description,
       startsAt: startsAt ?? this.startsAt,
       endsAt: endsAt ?? this.endsAt,
+      realStartsAt: realStartsAt ?? this.realStartsAt,
+      realEndsAt: realEndsAt ?? this.realEndsAt,
       speakers: speakers ?? this.speakers,
       room: room ?? this.room,
       sessionFormat: sessionFormat ?? this.sessionFormat,
@@ -118,17 +127,17 @@ class Session extends Equatable {
   /// Checks if the session is currently running
   bool get isCurrentlyRunning {
     final now = DateTime.now();
-    return now.isAfter(startsAt) && now.isBefore(endsAt);
+    return now.isAfter(realStartsAt) && now.isBefore(realEndsAt);
   }
 
   /// Checks if the session has ended
   bool get hasEnded {
-    return DateTime.now().isAfter(endsAt);
+    return DateTime.now().isAfter(realEndsAt);
   }
 
   /// Checks if the session is upcoming
   bool get isUpcoming {
-    return DateTime.now().isBefore(startsAt);
+    return DateTime.now().isBefore(realStartsAt);
   }
 
   @override
@@ -138,6 +147,8 @@ class Session extends Equatable {
     description,
     startsAt,
     endsAt,
+    realStartsAt,
+    realEndsAt,
     speakers,
     room,
     sessionFormat,

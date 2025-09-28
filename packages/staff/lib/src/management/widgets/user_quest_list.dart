@@ -25,7 +25,7 @@ class UserQuestList extends StatelessWidget {
               t.staff.point_assignment.user_quests.label,
               style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: Spacing.m),
+            const Gap.vertical(Spacing.m),
             Wrap(
               spacing: Spacing.l,
               runSpacing: Spacing.l,
@@ -43,7 +43,7 @@ class UserQuestList extends StatelessWidget {
                           .titleMedium
                           ?.copyWith(fontWeight: FontWeight.bold),
                     ),
-                    const SizedBox(height: Spacing.m),
+                    const Gap.vertical(Spacing.m),
                     Wrap(
                       spacing: Spacing.l,
                       runSpacing: Spacing.l,

@@ -6,12 +6,14 @@ class InfoRow extends StatelessWidget {
     super.key,
     required this.icon,
     required this.label,
-    required this.value,
-  });
+    this.value,
+    this.child,
+  }) : assert(value != null || child != null, 'Either value or child must be provided');
 
   final IconData icon;
   final String label;
-  final String value;
+  final Widget? child;
+  final String? value;
 
   @override
   Widget build(BuildContext context) {
@@ -27,12 +29,14 @@ class InfoRow extends StatelessWidget {
           '$label: ',
           style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
         ),
-        Expanded(
-          child: Text(
-            value,
-            style: context.textTheme.bodyMedium,
+        if (value != null)
+          Expanded(
+            child: Text(
+              value!,
+              style: context.textTheme.bodyMedium,
+            ),
           ),
-        ),
+        if (child != null) Expanded(child: child!),
       ],
     );
   }

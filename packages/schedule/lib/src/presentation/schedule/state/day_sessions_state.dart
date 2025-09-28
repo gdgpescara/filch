@@ -3,23 +3,23 @@ import '../../../models/models.dart';
 
 class DaySessionsState extends Equatable {
   const DaySessionsState({
-    required this.sessions,
-    required this.filteredSessions,
+    required this.daySessions,
+    this.selectedRoomSessions,
   });
 
-  final Map<String, List<Session>> sessions;
-  final List<Session> filteredSessions;
+  final List<RoomSessions> daySessions;
+  final RoomSessions? selectedRoomSessions;
 
   @override
-  List<Object?> get props => [sessions, filteredSessions];
+  List<Object?> get props => [daySessions, selectedRoomSessions];
 
   DaySessionsState copyWith({
-    Map<String, List<Session>>? sessions,
-    List<Session>? filteredSessions,
+    List<RoomSessions>? daySessions,
+    RoomSessions? selectedRoomSessions,
   }) {
     return DaySessionsState(
-      sessions: sessions ?? this.sessions,
-      filteredSessions: filteredSessions ?? this.filteredSessions,
+      daySessions: daySessions ?? this.daySessions,
+      selectedRoomSessions: selectedRoomSessions ?? this.selectedRoomSessions,
     );
   }
 }

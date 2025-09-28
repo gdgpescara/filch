@@ -7,11 +7,12 @@ import 'app/(splash)/app_page.dart' as a4;
 import 'app/countdown/countdown_page.dart' as a1;
 import 'app/home/home_page.dart' as a0;
 import 'app/notification/notification_page.dart' as a3;
-import 'app/session/[id]_page.dart' as a9;
+import 'app/session/[id]_page.dart' as a10;
 import 'app/sign_in/sign_in_page.dart' as a2;
 import 'app/staff/point_assignment_page.dart' as a7;
+import 'app/staff/schedule_delay_page.dart' as a8;
 import 'app/staff/t_shirt_assignment_page.dart' as a6;
-import 'app/thanks/thanks_page.dart' as a8;
+import 'app/thanks/thanks_page.dart' as a9;
 import 'app/user/all_points_page.dart' as a5;
 
 Route b0Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
@@ -49,10 +50,15 @@ Route b7Builder(BuildContext context, RouteSettings settings) => a7.routeBuilder
 Route b8Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,
   settings,
-  const a8.ThanksPage(),
+  const a8.ScheduleDelayPage(),
 );
 Route b9Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,
   settings,
-  const a9.SessionDetailPage(),
+  const a9.ThanksPage(),
+);
+Route b10Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
+  ctx,
+  settings,
+  const a10.SessionDetailPage(),
 );

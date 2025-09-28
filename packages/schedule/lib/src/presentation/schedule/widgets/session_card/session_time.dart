@@ -41,16 +41,16 @@ class _SessionTimeState extends State<SessionTime> {
     final now = DateTime.now();
 
     // Schedule refresh at session start time
-    if (now.isBefore(widget.session.startsAt)) {
-      final timeUntilStart = widget.session.startsAt.difference(now);
+    if (now.isBefore(widget.session.realStartsAt)) {
+      final timeUntilStart = widget.session.realStartsAt.difference(now);
       _startTimer = Timer(timeUntilStart, () {
         if (mounted) setState(() {});
       });
     }
 
     // Schedule refresh at session end time
-    if (now.isBefore(widget.session.endsAt)) {
-      final timeUntilEnd = widget.session.endsAt.difference(now);
+    if (now.isBefore(widget.session.realEndsAt)) {
+      final timeUntilEnd = widget.session.realEndsAt.difference(now);
       _endTimer = Timer(timeUntilEnd, () {
         if (mounted) setState(() {});
       });
@@ -59,28 +59,26 @@ class _SessionTimeState extends State<SessionTime> {
 
   @override
   Widget build(BuildContext context) {
-    final dateFormatter = GetIt.I<DateFormat>(instanceName: DateFormatType.onlyTime);
-    final startTime = dateFormatter.format(widget.session.startsAt);
-    final endTime = dateFormatter.format(widget.session.endsAt);
-
     return Column(
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _timeSlot(startTime, endTime, context),
+        _timeSlot(context),
         if (widget.session.isCurrentlyRunning) ...[
-          const SizedBox(height: Spacing.s),
-          SessionProgress(session: widget.session),
+          const Gap.vertical(Spacing.s),
+          SessionProgress(
+            sessionDuration: widget.session.duration,
+            startsAt: widget.session.realStartsAt,
+            endsAt: widget.session.realEndsAt,
+          ),
         ],
       ],
     );
   }
 
-  Row _timeSlot(
-    String startTime,
-    String endTime,
-    BuildContext context,
-  ) {
+  Row _timeSlot(BuildContext context) {
+    final dateFormatter = GetIt.I<DateFormat>(instanceName: DateFormatType.onlyTime);
+    final hasDelay = !widget.session.startsAt.isAtSameMomentAs(widget.session.realStartsAt);
     return Row(
       children: [
         Expanded(
@@ -88,19 +86,36 @@ class _SessionTimeState extends State<SessionTime> {
             children: [
               const Icon(Icons.schedule, size: 12),
               const SizedBox(width: Spacing.xs),
-              Text('$startTime - $endTime', style: context.textTheme.bodySmall?.copyWith(fontWeight: FontWeight.w700)),
+              Column(
+                children: [
+                  Text(
+                    '${dateFormatter.format(widget.session.startsAt)} - ${dateFormatter.format(widget.session.endsAt)}',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      decoration: hasDelay ? TextDecoration.lineThrough : null,
+                    ),
+                  ),
+                  Text(
+                    '${dateFormatter.format(widget.session.realStartsAt)} - ${dateFormatter.format(widget.session.realEndsAt)}',
+                    style: context.textTheme.bodySmall?.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: appColors.googleRed.seed,
+                    ),
+                  ),
+                ],
+              ),
             ],
           ),
         ),
         if (widget.session.isUpcoming)
           AppChip(
             text: '${widget.session.durationInMinutes}min',
-            color: appColors.googleBlue,
+            customColor: appColors.googleBlue,
           ),
         if (widget.session.hasEnded)
           AppChip(
             text: t.schedule.sessions.session_status.ended,
-            color: appColors.googleRed,
+            customColor: appColors.googleRed,
           ),
         if (!widget.session.isServiceSession) ...[
           const SizedBox(width: Spacing.s),

@@ -5,7 +5,7 @@ part 'named_entity.g.dart';
 
 /// Represents a generic entity with id and name
 /// Used for Track, Room, SessionFormat, Level, Language, etc.
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class NamedEntity extends Equatable {
   const NamedEntity({
     required this.id,
@@ -14,9 +14,6 @@ class NamedEntity extends Equatable {
 
   /// Creates a [NamedEntity] from a JSON map
   factory NamedEntity.fromJson(Map<String, dynamic> json) => _$NamedEntityFromJson(json);
-
-  /// Converts this [NamedEntity] to a JSON map
-  Map<String, dynamic> toJson() => _$NamedEntityToJson(this);
 
   /// Unique identifier for the entity
   final int id;

@@ -33,7 +33,7 @@ class SessionSpeakers extends StatelessWidget {
           t.schedule.sessions.session_speakers.label(count: speakers.length),
           style: sectionTitleStyle ?? context.getTextTheme(TextThemeType.monospace).bodyMedium,
         ),
-        const SizedBox(height: Spacing.s),
+        const Gap.vertical(Spacing.s),
         ...speakers.map((speaker) => _buildSpeakerRow(context, speaker)),
       ],
     );
@@ -61,7 +61,7 @@ class SessionSpeakers extends StatelessWidget {
                   style: speakerNameStyle ?? context.textTheme.bodyMedium,
                 ),
                 if (speaker.tagLine != null && speaker.tagLine!.isNotEmpty) ...[
-                  const SizedBox(height: Spacing.xs),
+                  const Gap.vertical(Spacing.xs),
                   Text(
                     speaker.tagLine!,
                     style: context.textTheme.bodySmall?.copyWith(
@@ -71,7 +71,7 @@ class SessionSpeakers extends StatelessWidget {
                   ),
                 ],
                 if (showAllInfo && speaker.bio != null && speaker.bio!.isNotEmpty) ...[
-                  const SizedBox(height: Spacing.m),
+                  const Gap.vertical(Spacing.m),
                   Text(
                     speaker.bio!,
                     style: context.textTheme.bodySmall?.copyWith(

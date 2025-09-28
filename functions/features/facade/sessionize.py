@@ -63,5 +63,5 @@ def fetch_from_sessionize(request: Request) -> Response:
     upload_to_sessionize(data=sessions, collection_name=COLLECTION_SESSION_NAME)
     rooms = infer_rooms_from_sessions(sessions=sessions)
     upload_to_sessionize(data=rooms, collection_name=COLLECTION_ROOM_NAME)
-
+    
     return jsonify(True)

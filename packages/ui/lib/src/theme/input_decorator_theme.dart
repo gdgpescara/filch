@@ -22,5 +22,5 @@ InputDecorationTheme _inputDecorationTheme(ColorScheme colorScheme) => InputDeco
   ),
   fillColor: colorScheme.surface,
   errorStyle: GoogleFonts.jetBrainsMono(color: _extendedColor.error.seed),
-  labelStyle: GoogleFonts.openSans(color: colorScheme.primary),
+  labelStyle: GoogleFonts.poppins(color: colorScheme.primary),
 );

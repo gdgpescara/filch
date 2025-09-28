@@ -20,6 +20,19 @@
         "other": "Speakers"
       }
     },
+    "room_delay": {
+      "delay_message": "Le sessioni inizieranno con $delay minuti di ritardo",
+      "no_delay_message": "Nessun ritardo"
+    },
+    "session_detail": {
+      "title": "Dettaglio Sessione",
+      "room_label": "Sala",
+      "date_label": "Data",
+      "time_label": "Orario",
+      "status_upcoming": "inizierà tra $minutes min",
+      "status_ended": "Terminata",
+      "duration_minutes": "($minutes min)"
+    },
     "semantics": {
       "ended_section_label": "Sezione sessioni terminate. $count sessioni disponibili. Toccare per espandere.",
       "ended_section_hint": "Doppio tocco per mostrare o nascondere le sessioni già concluse",

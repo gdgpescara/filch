@@ -23,6 +23,29 @@
       "error": "An error occurred while assigning t-shirt."
     }
   },
+  "schedule_delay": {
+    "label": "Manage schedule delays:",
+    "button": {
+      "label": "Report Delay"
+    },
+    "current_reported_delay": {
+      "prefix": "The maximum reported delay is",
+      "delay_unit": "$delay minutes",
+      "suffix": ", if you are an MC please try to align as soon as possible to ensure the delay is equal in all rooms."
+    },
+    "no_reported_delay": "No delay reported",
+    "id_label": "ID: $id",
+    "decrease_delay_tooltip": "Decrease delay by 5 minutes",
+    "increase_delay_tooltip": "Increase delay by 5 minutes",
+    "delay_unit": "$delay min",
+    "confirm_delay_button": "Confirm Delay",
+    "no_rooms_available": "No rooms available",
+    "available_rooms_title": "Available Rooms",
+    "confirm_delay_dialog": {
+      "title": "Confirm Delay",
+      "message": "Are you sure you want to set the delay to $delay minutes for $roomName?"
+    }
+  },
   "shifts": {
     "title": "Daily Shifts",
     "me": "Me",
@@ -31,7 +54,7 @@
   "home": {
     "bottom_nav": {
       "profile": "Profile",
-      "scan": "Scan",
+      "scan": "Management",
       "shifts": "Shifts"
     }
   },

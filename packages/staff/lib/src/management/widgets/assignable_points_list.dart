@@ -25,7 +25,7 @@ class AssignablePointsList extends StatelessWidget {
             return UserQuestList(navigateToAssignment);
           },
         ),
-        const SizedBox(height: Spacing.xl),
+        const Gap.vertical(Spacing.xl),
         FreePointsList(navigateToAssignment),
       ],
     );

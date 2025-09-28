@@ -6,15 +6,6 @@ from logger_config import logger
 
 
 def get_signed_in_user(request: CallableRequest) -> UserRecord:
-    """
-    Function to get the signed-in user from the request.
-    
-    Args:
-        request: The request object containing the auth context.
-    
-    Returns:
-        The signed-in user data or an error message.
-    """
     uid = getattr(request.auth, "uid", None)
 
     if not uid:

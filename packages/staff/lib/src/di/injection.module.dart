@@ -9,8 +9,12 @@ import 'dart:async' as _i687;
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:injectable/injectable.dart' as _i526;
 import 'package:quests/quests.dart' as _i177;
+import 'package:schedule/schedule.dart' as _i199;
 import 'package:staff/src/assignment/state/assignment_cubit.dart' as _i156;
 import 'package:staff/src/management/state/management_cubit.dart' as _i813;
+import 'package:staff/src/schedule_delay/state/room_card_cubit.dart' as _i528;
+import 'package:staff/src/schedule_delay/state/schedule_delay_cubit.dart'
+    as _i553;
 import 'package:staff/src/shifts/state/shifts_cubit.dart' as _i1034;
 import 'package:staff/src/shifts/use_cases/get_filtered_shifts_use_case.dart'
     as _i119;
@@ -21,10 +25,8 @@ class StaffPackageModule extends _i526.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
-    gh.factory<_i813.ManagementCubit>(() => _i813.ManagementCubit(
-          gh<_i177.GetAssignablePointsUseCase>(),
-          gh<_i177.GetSignedUserQuestsUseCase>(),
-        ));
+    gh.factory<_i553.ScheduleDelayCubit>(
+        () => _i553.ScheduleDelayCubit(gh<_i199.GetRoomsUseCase>()));
     gh.lazySingleton<_i119.GetFilteredShiftsUseCase>(
         () => _i119.GetFilteredShiftsUseCase(gh<_i974.FirebaseFirestore>()));
     gh.factory<_i156.AssignmentCubit>(
@@ -33,5 +35,15 @@ class StaffPackageModule extends _i526.MicroPackageModule {
         () => _i1034.ShiftsCubit(gh<_i119.GetFilteredShiftsUseCase>()));
     gh.factory<_i734.TShirtAssignmentCubit>(
         () => _i734.TShirtAssignmentCubit(gh<_i177.AssignTShirtUseCase>()));
+    gh.factory<_i813.ManagementCubit>(() => _i813.ManagementCubit(
+          gh<_i177.GetAssignablePointsUseCase>(),
+          gh<_i177.GetSignedUserQuestsUseCase>(),
+          gh<_i199.GetMaxRoomDelayUseCase>(),
+        ));
+    gh.factory<_i528.RoomCardCubit>(() => _i528.RoomCardCubit(
+          gh<_i199.NamedEntity>(),
+          gh<_i199.GetRoomDelayUseCase>(),
+          gh<_i199.RegisterRoomDelayUseCase>(),
+        ));
   }
 }

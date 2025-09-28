@@ -4,97 +4,116 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:collection/collection.dart';
 import 'package:core/core.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 
-import '../models/grouped_sessions.dart';
-import '../models/session.dart';
-import 'get_user_favorite_session_ids_use_case.dart';
+import '../../schedule.dart';
+import 'get_max_room_delay_use_case.dart';
 
 @lazySingleton
 class GetGroupedSessionsUseCase {
   GetGroupedSessionsUseCase(
     this._firestore,
     this._getUserFavoriteSessionIdsUseCase,
+    this._getMaxRoomDelayUseCase,
   );
 
   final FirebaseFirestore _firestore;
   final GetUserFavoriteSessionIdsUseCase _getUserFavoriteSessionIdsUseCase;
-
-  List<Session> _parseSessions(QuerySnapshot snapshot) {
-    return snapshot.docs
-        .map((doc) {
-          try {
-            final data = (doc.data() as Map<String, dynamic>?) ?? <String, dynamic>{};
-            final json = <String, dynamic>{'id': doc.id}..addAll(data);
-            return Session.fromJson(json);
-          } catch (e) {
-            logError('Failed to parse session ${doc.id}: $e', LogLevel.error, e, e is Error ? e.stackTrace : null);
-            return null;
-          }
-        })
-        .whereType<Session>()
-        .toList();
-  }
-
-  GroupedSessions _groupSessions(List<Session> sessions) {
-    final sessionsByDay = sessions
-        .groupListsBy(
-          (session) => DateTime(
-            session.startsAt.year,
-            session.startsAt.month,
-            session.startsAt.day,
-          ),
-        )
-        .map((day, sessions) {
-          final serviceSessions = sessions.where((s) => s.isServiceSession).toList();
-          final otherSessions = sessions.where((s) => !s.isServiceSession).toList();
-          final sessionsByRoomName = otherSessions.groupListsBy((session) => session.room!.name);
-          for (final entry in sessionsByRoomName.entries) {
-            entry.value
-              ..addAll(serviceSessions)
-              ..sort((a, b) => a.startsAt.compareTo(b.startsAt));
-          }
-          return MapEntry(day, sessionsByRoomName);
-        });
-
-    return GroupedSessions(sessionsByDay: sessionsByDay);
-  }
+  final GetMaxRoomDelayUseCase _getMaxRoomDelayUseCase;
 
   Stream<GroupedSessions> call() {
     return runSafetyStream(() {
-      final favoritesStream = _getUserFavoriteSessionIdsUseCase();
-      final sessionsStream = _firestore.collection('sessions').orderBy('startsAt', descending: false).snapshots();
+      return Rx.combineLatest3(
+        _firestore.collection('sessions').snapshots(),
+        _getUserFavoriteSessionIdsUseCase(),
+        _getMaxRoomDelayUseCase(),
+        (snapshot, favoriteIds, maxDelay) {
+          final sessions = _parseSessions(snapshot, favoriteIds, maxDelay);
+          return _groupSessions(sessions, maxDelay);
+        },
+      );
+    });
+  }
 
-      final controller = StreamController<GroupedSessions>();
-      StreamSubscription<QuerySnapshot<Map<String, dynamic>>>? sessionsSub;
-      StreamSubscription<Set<String>>? favoritesSub;
-      var favoriteIds = <String>{};
-      QuerySnapshot? lastSessionsSnap;
+  List<Session> _parseSessions(QuerySnapshot snapshot, Set<String> favoriteIds, int maxDelays) {
+    final sessions = <Session>[];
 
-      void emit() {
-        if (lastSessionsSnap != null) {
-          final sessions = _parseSessions(lastSessionsSnap!);
-          final sessionsWithFavorites = sessions.map((s) => s.copyWith(isFavorite: favoriteIds.contains(s.id))).toList();
-          final grouped = _groupSessions(sessionsWithFavorites);
-          controller.add(grouped);
-        }
+    for (final doc in snapshot.docs) {
+      try {
+        final data = doc.data() as Map<String, dynamic>? ?? <String, dynamic>{};
+        final session = Session.fromJson({
+          'id': doc.id,
+          ...data,
+          'realStartsAt': data['startsAt'],
+          'realEndsAt': data['endsAt'],
+        });
+        sessions.add(
+          session.copyWith(
+            isFavorite: favoriteIds.contains(session.id),
+            realStartsAt: session.startsAt.add(Duration(minutes: maxDelays)),
+            realEndsAt: session.endsAt.add(Duration(minutes: maxDelays)),
+          ),
+        );
+      } catch (e, stackTrace) {
+        logError(
+          'Failed to parse session ${doc.id}: $e',
+          LogLevel.error,
+          e,
+          stackTrace,
+        );
+      }
+    }
+
+    return sessions;
+  }
+
+  GroupedSessions _groupSessions(List<Session> sessions, int maxDelay) {
+    final daySessions = sessions.groupListsBy(_normalizeToDay).entries.map((entry) {
+      final day = entry.key;
+      final daySessions = entry.value;
+      final roomSessions = _groupSessionsByRoom(daySessions, maxDelay);
+      return DaySessions(day: day, roomSessions: roomSessions);
+    });
+
+    return GroupedSessions(daySessions: daySessions.toList());
+  }
+
+  DateTime _normalizeToDay(Session session) {
+    final startTime = session.startsAt;
+    return DateTime(startTime.year, startTime.month, startTime.day);
+  }
+
+  List<RoomSessions> _groupSessionsByRoom(List<Session> sessions, int maxDelay) {
+    final serviceSessions = <Session>[];
+    final roomDataMap = <String, ({List<Session> all, List<Session> favorites})>{};
+
+    for (final session in sessions) {
+      if (session.isServiceSession) {
+        serviceSessions.add(session);
+        continue;
       }
 
-      favoritesSub = favoritesStream.listen((ids) {
-        favoriteIds = ids;
-        emit();
-      });
+      final roomName = session.room?.name ?? 'Unknown Room';
+      final roomData = roomDataMap.putIfAbsent(roomName, () => (all: <Session>[], favorites: <Session>[]));
 
-      sessionsSub = sessionsStream.listen((snap) {
-        lastSessionsSnap = snap;
-        emit();
-      });
+      roomData.all.add(session);
+      if (session.isFavorite) {
+        roomData.favorites.add(session);
+      }
+    }
 
-      controller.onCancel = () {
-        sessionsSub?.cancel();
-        favoritesSub?.cancel();
-      };
+    return roomDataMap.entries.map((entry) {
+      final roomName = entry.key;
+      final roomData = entry.value;
+      final allSessions = [...roomData.all, ...serviceSessions]..sort((a, b) => a.startsAt.compareTo(b.startsAt));
+      final allFavorites = [...roomData.favorites, ...serviceSessions]..sort((a, b) => a.startsAt.compareTo(b.startsAt));
 
-      return controller.stream;
-    });
+      return RoomSessions(
+        room: NamedEntity(id: roomName.hashCode, name: roomName),
+        sessions: allSessions,
+        favoriteSessions: allFavorites,
+        scheduleDelay: maxDelay,
+      );
+    }).toList();
   }
 }

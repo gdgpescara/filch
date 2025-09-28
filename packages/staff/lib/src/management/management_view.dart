@@ -8,22 +8,29 @@ import '../../staff.dart';
 import 'state/management_cubit.dart';
 import 'widgets/assign_t_shirt.dart';
 import 'widgets/assignable_points_list.dart';
+import 'widgets/report_schedule_delay.dart';
 
 class ManagementView extends StatelessWidget {
-  const ManagementView({super.key, required this.navigateToAssignment, required this.navigateToTShirtAssignment});
+  const ManagementView({
+    super.key,
+    required this.navigateToAssignment,
+    required this.navigateToTShirtAssignment,
+    required this.navigateToScheduleDelayReporting,
+  });
 
   final void Function(AssignmentPageArgs) navigateToAssignment;
   final VoidCallback navigateToTShirtAssignment;
+  final VoidCallback navigateToScheduleDelayReporting;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          BlocProvider<ManagementCubit>(
-            create: (context) => GetIt.I()..load(),
-            child: BlocBuilder<ManagementCubit, ManagementState>(
+      child: BlocProvider<ManagementCubit>(
+        create: (context) => GetIt.I()..load(),
+        child: ListView(
+          padding: const EdgeInsets.all(20),
+          children: [
+            BlocBuilder<ManagementCubit, ManagementState>(
               builder: (context, state) {
                 return switch (state) {
                   ManagementLoading() => const Center(child: LoaderAnimation()),
@@ -32,10 +39,12 @@ class ManagementView extends StatelessWidget {
                 };
               },
             ),
-          ),
-          const Gap.vertical(Spacing.xl),
-          AssignTShirt(navigateToTShirtAssignment),
-        ],
+            const Gap.vertical(Spacing.xl),
+            ReportScheduleDelay(navigateToScheduleDelayReporting),
+            const Gap.vertical(Spacing.xl),
+            AssignTShirt(navigateToTShirtAssignment),
+          ],
+        ),
       ),
     );
   }

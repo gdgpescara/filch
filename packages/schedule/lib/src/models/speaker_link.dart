@@ -6,7 +6,7 @@ import 'speaker_link_type.dart';
 part 'speaker_link.g.dart';
 
 /// Represents a social media or web link for a speaker
-@JsonSerializable()
+@JsonSerializable(createToJson: false)
 class SpeakerLink extends Equatable {
   const SpeakerLink({
     required this.title,
@@ -15,9 +15,6 @@ class SpeakerLink extends Equatable {
 
   /// Creates a [SpeakerLink] from a JSON map
   factory SpeakerLink.fromJson(Map<String, dynamic> json) => _$SpeakerLinkFromJson(json);
-
-  /// Converts this [SpeakerLink] to a JSON map
-  Map<String, dynamic> toJson() => _$SpeakerLinkToJson(this);
 
   /// The type/title of the link
   @JsonKey(fromJson: SpeakerLinkType.fromJsonSafe)

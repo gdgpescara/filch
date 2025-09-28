@@ -21,7 +21,7 @@ class ShiftPlannerTask extends TimePlannerTask {
                     '${shift.start.hour.toString().padLeft(2, '0')}:${shift.start.minute.toString().padLeft(2, '0')} - ${(shift.start.hour + shift.duration ~/ 60).toString().padLeft(2, '0')}:${(shift.start.minute + (shift.duration % 60)).toString().padLeft(2, '0')}',
                     style: context.getTextTheme(TextThemeType.monospace).labelMedium,
                   ),
-                  const SizedBox(height: 4),
+                  const Gap.vertical(4),
                   Text(
                     shift.location.label,
                     style: context

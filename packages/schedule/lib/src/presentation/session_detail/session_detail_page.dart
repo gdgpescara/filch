@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:i18n/i18n.dart';
 
 import '../widgets/favorite_toggle_button.dart';
 import 'state/session_detail_cubit.dart';
@@ -35,7 +36,7 @@ class _SessionDetailView extends StatelessWidget {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Dettaglio della Sessione'),
+            title: Text(t.schedule.sessions.session_detail.title),
             actions: _buildActions(context, state),
           ),
           body: SafeArea(
@@ -44,7 +45,7 @@ class _SessionDetailView extends StatelessWidget {
               SessionDetailInitial() => const SizedBox.shrink(),
               SessionDetailLoading() => const Center(child: CircularProgressIndicator()),
               SessionDetailError(:final error) => Center(child: Text(error)),
-              SessionDetailLoaded(:final session) => SessionDetailContent(session: session),
+              SessionDetailLoaded(:final session, :final delay) => SessionDetailContent(session: session, delay: delay),
             },
           ),
         );
