@@ -26,10 +26,16 @@ class FreePointsList extends StatelessWidget {
               style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
             const Gap.vertical(Spacing.m),
-            Wrap(
-              spacing: Spacing.l,
-              runSpacing: Spacing.l,
-              children: points.map((item) => _ItemWidget(item, navigateToAssignment)).toList(),
+            GridView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                crossAxisSpacing: Spacing.s,
+                mainAxisSpacing: Spacing.s,
+              ),
+              itemCount: points.length,
+              itemBuilder: (context, index) => _ItemWidget(points[index], navigateToAssignment),
             ),
           ],
         );
@@ -46,26 +52,47 @@ class _ItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final description = item.description[LocaleSettings.currentLocale.languageCode] ?? '';
+
     return InkWell(
+      borderRadius: BorderRadius.circular(RadiusSize.m),
       onTap: () => navigateToAssignment(AssignmentPageArgs.points(item.points)),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.4,
-        child: AppCard(
-          style: AppCardStyle.bordered,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                item.points.toString(),
-                style: context
-                    .getTextTheme(TextThemeType.monospace)
-                    .displaySmall
-                    ?.copyWith(fontWeight: FontWeight.bold),
+      child: AppCard(
+        style: AppCardStyle.bordered,
+        padding: const EdgeInsets.all(Spacing.s),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            UnconstrainedBox(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: Spacing.m, vertical: Spacing.s),
+                constraints: const BoxConstraints(minWidth: 50),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: context.colorScheme.primaryContainer,
+                  borderRadius: BorderRadius.circular(RadiusSize.m),
+                ),
+                child: Text(
+                  item.points.toString(),
+                  style: context
+                      .getTextTheme(TextThemeType.monospace)
+                      .titleMedium
+                      ?.copyWith(color: context.colorScheme.onPrimaryContainer, fontWeight: FontWeight.w700),
+                ),
               ),
-              Text(item.description[LocaleSettings.currentLocale.languageCode] ?? ' - '),
-            ],
-          ),
+            ),
+            const Gap.vertical(Spacing.s),
+            Flexible(
+              child: Text(
+                description,
+                style: context.textTheme.labelMedium?.copyWith(height: 1.2),
+                textAlign: TextAlign.center,
+                maxLines: 3,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+          ],
         ),
       ),
     );

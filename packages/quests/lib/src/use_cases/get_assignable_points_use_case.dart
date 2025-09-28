@@ -12,11 +12,9 @@ class GetAssignablePointsUseCase {
 
   Stream<List<AssignablePoints>> call() {
     return runSafetyStream(() {
-      return _firestore
-          .collection('assignable_points')
-          .orderBy('points', descending: false)
-          .snapshots()
-          .map((snapshot) => snapshot.docs.map((doc) => AssignablePoints.fromJson(doc.data())).toList());
+      return _firestore.collection('assignable_points').orderBy('points', descending: false).snapshots().map((snapshot) {
+        return snapshot.docs.map((doc) => AssignablePoints.fromJson(doc.data())).toList();
+      });
     });
   }
 }

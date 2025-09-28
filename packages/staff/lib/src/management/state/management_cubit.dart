@@ -29,7 +29,7 @@ class ManagementCubit extends SafeEmitterCubit<ManagementState> {
           _getAssignablePointsUseCase(),
           _getQuestsUseCase(),
           _getMaxRoomDelayUseCase(),
-          (pointsResource, questsResource, delay) => (pointsResource, questsResource, delay),
+          (points, quests, delay) => (points, quests, delay),
         ).when(
       progress: () => emit(const ManagementLoading()),
       error: (_) => emit(const ManagementFailure()),
