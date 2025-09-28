@@ -127,17 +127,17 @@ class Session extends Equatable {
   /// Checks if the session is currently running
   bool get isCurrentlyRunning {
     final now = DateTime.now();
-    return now.isAfter(startsAt) && now.isBefore(endsAt);
+    return now.isAfter(realStartsAt) && now.isBefore(realEndsAt);
   }
 
   /// Checks if the session has ended
   bool get hasEnded {
-    return DateTime.now().isAfter(endsAt);
+    return DateTime.now().isAfter(realEndsAt);
   }
 
   /// Checks if the session is upcoming
   bool get isUpcoming {
-    return DateTime.now().isBefore(startsAt);
+    return DateTime.now().isBefore(realStartsAt);
   }
 
   @override

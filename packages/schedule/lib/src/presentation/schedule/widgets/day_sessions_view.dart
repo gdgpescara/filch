@@ -35,6 +35,7 @@ class DaySessionsView extends StatelessWidget {
     }
 
     return BlocProvider<DaySessionsCubit>(
+      key: ValueKey(daySessions.map((rs) => '${rs.room.id}-${rs.scheduleDelay}').join(',')),
       create: (context) => GetIt.I(param1: daySessions),
       child: DefaultTabController(
         length: rooms.length,
