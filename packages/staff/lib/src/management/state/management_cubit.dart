@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
@@ -15,34 +16,43 @@ class ManagementCubit extends SafeEmitterCubit<ManagementState> {
     this._getAssignablePointsUseCase,
     this._getQuestsUseCase,
     this._getMaxRoomDelayUseCase,
+    this._countUsersWithTShirtUseCase,
+    this._countUsersWithoutTShirtUseCase,
   ) : super(const ManagementLoading());
 
   final GetAssignablePointsUseCase _getAssignablePointsUseCase;
   final GetSignedUserQuestsUseCase _getQuestsUseCase;
   final GetMaxRoomDelayUseCase _getMaxRoomDelayUseCase;
+  final CountUsersWithTShirtUseCase _countUsersWithTShirtUseCase;
+  final CountUsersWithoutTShirtUseCase _countUsersWithoutTShirtUseCase;
 
   StreamSubscription<dynamic>? _subscription;
 
   void load() {
     _subscription =
-        Rx.combineLatest3(
+        Rx.combineLatest5(
           _getAssignablePointsUseCase(),
           _getQuestsUseCase(),
           _getMaxRoomDelayUseCase(),
-          (points, quests, delay) => (points, quests, delay),
+          _countUsersWithTShirtUseCase(),
+          _countUsersWithoutTShirtUseCase(),
+          (points, quests, delay, countWithTShirt, countWithoutTShirt) =>
+              (points, quests, delay, countWithTShirt, countWithoutTShirt),
         ).when(
-      progress: () => emit(const ManagementLoading()),
-      error: (_) => emit(const ManagementFailure()),
+          progress: () => emit(const ManagementLoading()),
+          error: (_) => emit(const ManagementFailure()),
           success: (data) {
-            final (pointsResource, questsResource, delay) = data;
+            final (pointsResource, questsResource, delay, countWithTShirt, countWithoutTShirt) = data;
             emit(
               ManagementLoaded(
                 points: pointsResource,
                 quests: questsResource,
                 maxRoomDelay: delay,
+                countUsersWithTShirt: countWithTShirt,
+                countUsersWithoutTShirt: countWithoutTShirt,
               ),
             );
-      },
+          },
         );
   }
 

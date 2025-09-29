@@ -31,7 +31,9 @@ class FavoriteToggleButton extends StatelessWidget {
             _ => IconButton(
               onPressed: () => context.read<FavoriteCubit>().toggle(session.id),
               icon: Icon(isFavorite ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star, color: color),
-              tooltip: isFavorite ? t.schedule.sessions.session_card.remove_favorite : t.schedule.sessions.session_card.add_favorite,
+              tooltip: isFavorite
+                  ? t.schedule.sessions.session_card.remove_favorite
+                  : t.schedule.sessions.session_card.add_favorite,
             ),
           };
         },

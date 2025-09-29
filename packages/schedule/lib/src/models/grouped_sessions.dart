@@ -25,7 +25,10 @@ class GroupedSessions extends Equatable {
     }
 
     return daySessions
-        .where((daySession) => daySession.roomSessions.any((roomSession) => roomSession.sessions.any((session) => session.isFavorite)))
+        .where(
+          (daySession) =>
+              daySession.roomSessions.any((roomSession) => roomSession.sessions.any((session) => session.isFavorite)),
+        )
         .map((daySession) => daySession.day)
         .toList()
       ..sort();

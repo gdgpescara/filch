@@ -30,9 +30,9 @@ class AppChip extends StatelessWidget {
       padding:
           padding ??
           const EdgeInsets.symmetric(
-        horizontal: Spacing.s,
-        vertical: Spacing.xs,
-      ),
+            horizontal: Spacing.s,
+            vertical: Spacing.xs,
+          ),
       decoration: BoxDecoration(
         color: actualColor.withValues(alpha: 0.2),
         border: Border.all(color: actualColor),

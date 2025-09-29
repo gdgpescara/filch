@@ -26,7 +26,7 @@ class UserProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider<UserProfileCubit>(
-      create: (context) => GetIt.I(),
+      create: (context) => GetIt.I()..init(),
       child: BlocConsumer<UserProfileCubit, UserProfileState>(
         listenWhen: (previous, current) => current is SignedOut,
         listener: (context, state) {
@@ -62,12 +62,12 @@ class UserProfilePage extends StatelessWidget {
                 ),
                 const SizedBox(height: Spacing.m),
                 const UserTShirt(),
-                const SizedBox(height: Spacing.xxl),
+                const SizedBox(height: Spacing.xl),
                 UserQrCode(user: state.user),
-                const SizedBox(height: Spacing.xxl),
+                const SizedBox(height: Spacing.xl),
                 if (!state.isStaff) ...[
                   UserPointsCard(navigateToAllPoints: navigateToAllPoints),
-                  const SizedBox(height: Spacing.xxl),
+                  const SizedBox(height: Spacing.xl),
                 ],
                 RemoveAccountButton(onNeedLogin: navigateToLogin, onAccountRemoved: navigateToSplash),
                 const AppVersion(),

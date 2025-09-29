@@ -7,7 +7,7 @@ import 'shift_locations_enum.dart';
 
 part 'shift.g.dart';
 
-@JsonSerializable(explicitToJson: true, includeIfNull: false)
+@JsonSerializable(createToJson: false)
 class Shift extends Equatable {
   const Shift({
     required this.user,
@@ -26,13 +26,11 @@ class Shift extends Equatable {
   final ShiftLocationsEnum location;
   final String notes;
 
-  Map<String, dynamic> toJson() => _$ShiftToJson(this);
-
   @override
   List<Object?> get props => [user, start, duration, location, notes];
 }
 
-@JsonSerializable(explicitToJson: true, includeIfNull: false)
+@JsonSerializable(createToJson: false)
 class FirestoreUser extends Equatable {
   const FirestoreUser({required this.uid, this.displayName, required this.email, required this.photoUrl});
 
@@ -42,8 +40,6 @@ class FirestoreUser extends Equatable {
   final String? displayName;
   final String email;
   final String photoUrl;
-
-  Map<String, dynamic> toJson() => _$FirestoreUserToJson(this);
 
   @override
   List<Object?> get props => [uid, displayName, email, photoUrl];
