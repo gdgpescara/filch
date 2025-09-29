@@ -85,7 +85,10 @@ class AssignmentPage extends StatelessWidget {
 
 @immutable
 class AssignmentPageArgs {
-  const AssignmentPageArgs.points(this.points, {this.onAssignDone}) : questId = null, questType = null, type = PointsTypeEnum.staff;
+  const AssignmentPageArgs.points(this.points, {this.onAssignDone})
+    : questId = null,
+      questType = null,
+      type = PointsTypeEnum.staff;
 
   const AssignmentPageArgs.quest({this.questId, required this.questType, required this.points, this.onAssignDone})
     : type = PointsTypeEnum.quest;

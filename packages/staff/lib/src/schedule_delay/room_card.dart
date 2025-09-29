@@ -119,7 +119,10 @@ class _RoomHeader extends StatelessWidget {
         ),
         Text(
           t.staff.schedule_delay.id_label(id: room.id),
-          style: context.getTextTheme(TextThemeType.monospace).bodySmall?.copyWith(color: context.colorScheme.onSurfaceVariant),
+          style: context
+              .getTextTheme(TextThemeType.monospace)
+              .bodySmall
+              ?.copyWith(color: context.colorScheme.onSurfaceVariant),
         ),
       ],
     );

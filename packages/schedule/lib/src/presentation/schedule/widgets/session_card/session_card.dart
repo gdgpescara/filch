@@ -23,21 +23,21 @@ class SessionCard extends StatelessWidget {
           children: [
             SessionTime(session: session),
 
-              const SizedBox(height: Spacing.m),
-              Text(
-                session.title,
-                style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-              ),
+            const SizedBox(height: Spacing.m),
+            Text(
+              session.title,
+              style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
 
             const SizedBox(height: Spacing.m),
-              SessionTags(session: session),
+            SessionTags(session: session),
 
-              if (session.speakers.isNotEmpty) ...[
+            if (session.speakers.isNotEmpty) ...[
               const SizedBox(height: Spacing.m),
-                SessionSpeakers(speakers: session.speakers),
-              ],
+              SessionSpeakers(speakers: session.speakers),
             ],
-          ),
+          ],
+        ),
       ),
     );
   }

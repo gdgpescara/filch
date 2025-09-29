@@ -28,7 +28,7 @@ class ManagementView extends StatelessWidget {
       child: BlocProvider<ManagementCubit>(
         create: (context) => GetIt.I()..load(),
         child: ListView(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(Spacing.m),
           children: [
             BlocBuilder<ManagementCubit, ManagementState>(
               builder: (context, state) {
@@ -39,9 +39,9 @@ class ManagementView extends StatelessWidget {
                 };
               },
             ),
-            const Gap.vertical(Spacing.xl),
+            const Gap.vertical(Spacing.m),
             ReportScheduleDelay(navigateToScheduleDelayReporting),
-            const Gap.vertical(Spacing.xl),
+            const Gap.vertical(Spacing.m),
             AssignTShirt(navigateToTShirtAssignment),
           ],
         ),

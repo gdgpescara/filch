@@ -43,7 +43,9 @@ class DaySessionsView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             RoomSelector(rooms: rooms),
-            Expanded(child: RoomSessionsView(onlyFavorites: onlyFavorites, onSessionTap: onSessionTap)),
+            Expanded(
+              child: RoomSessionsView(onlyFavorites: onlyFavorites, onSessionTap: onSessionTap),
+            ),
           ],
         ),
       ),

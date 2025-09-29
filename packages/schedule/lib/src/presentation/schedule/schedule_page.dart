@@ -41,7 +41,9 @@ class SchedulePage extends StatelessWidget {
   }
 
   Widget _buildScheduleScaffold(BuildContext context, ScheduleState state) {
-    final days = state is ScheduleLoaded ? state.groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites) : <DateTime>[];
+    final days = state is ScheduleLoaded
+        ? state.groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites)
+        : <DateTime>[];
     final initialIndex = _calculateInitialIndex(days);
     return DefaultTabController(
       key: ValueKey('schedule_tab_controller_${days.length}_$initialIndex'),
@@ -75,7 +77,10 @@ class SchedulePage extends StatelessWidget {
             state is ScheduleLoaded && state.onlyFavorites
                 ? context.t.schedule.sessions.show_all
                 : context.t.schedule.sessions.show_favorites,
-            style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(color: context.colorScheme.primary),
+            style: context
+                .getTextTheme(TextThemeType.monospace)
+                .bodyMedium
+                ?.copyWith(color: context.colorScheme.primary),
           ),
         ),
       ],
@@ -97,7 +102,10 @@ class SchedulePage extends StatelessWidget {
   Widget _buildBody(ScheduleState state) {
     return switch (state) {
       ScheduleLoaded(groupedSessions: final groupedSessions) => TabBarView(
-        children: groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites).map((day) => _buildDaySession(state, day)).toList(),
+        children: groupedSessions
+            .getAvailableDays(onlyFavorites: state.onlyFavorites)
+            .map((day) => _buildDaySession(state, day))
+            .toList(),
       ),
       ScheduleLoading() => const Center(child: CircularProgressIndicator()),
       ScheduleError(message: final message) => Center(child: Text(message)),

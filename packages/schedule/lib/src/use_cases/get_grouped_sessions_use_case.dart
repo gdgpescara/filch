@@ -7,7 +7,6 @@ import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
 import '../../schedule.dart';
-import 'get_max_room_delay_use_case.dart';
 
 @lazySingleton
 class GetGroupedSessionsUseCase {
@@ -106,7 +105,8 @@ class GetGroupedSessionsUseCase {
       final roomName = entry.key;
       final roomData = entry.value;
       final allSessions = [...roomData.all, ...serviceSessions]..sort((a, b) => a.startsAt.compareTo(b.startsAt));
-      final allFavorites = [...roomData.favorites, ...serviceSessions]..sort((a, b) => a.startsAt.compareTo(b.startsAt));
+      final allFavorites = [...roomData.favorites, ...serviceSessions]
+        ..sort((a, b) => a.startsAt.compareTo(b.startsAt));
 
       return RoomSessions(
         room: NamedEntity(id: roomName.hashCode, name: roomName),

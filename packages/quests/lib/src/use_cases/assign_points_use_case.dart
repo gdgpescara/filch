@@ -19,7 +19,7 @@ class AssignPointsUseCase {
     return runSafetyFuture(() async {
       const url = String.fromEnvironment('ASSIGN_POINTS_URL');
       final result = await _functions.httpsCallableFromUrl(url).call<bool>({
-        'points': points,
+        'points': points.toString(),
         'users': users,
         'quest': quest,
         'type': pointsType.name,
