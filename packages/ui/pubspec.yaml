@@ -38,4 +38,4 @@ flutter:
   uses-material-design: true
   assets:
     - packages/assets/logo/logo.png
-    - packages/assets/images/background.svg
+    - packages/assets/images/background.png

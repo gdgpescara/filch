@@ -14,10 +14,12 @@ class GetRoomsUseCase {
     return runSafetyStream(() async* {
       yield* _firestore.collection('rooms').snapshots().map((snapshot) {
         return snapshot.docs
-            .map((doc) => NamedEntity.fromJson({
-                  'id': doc.id,
-                  ...doc.data(),
-                }))
+            .map(
+              (doc) => NamedEntity.fromJson({
+                'id': doc.id,
+                ...doc.data(),
+              }),
+            )
             .toList();
       });
     });

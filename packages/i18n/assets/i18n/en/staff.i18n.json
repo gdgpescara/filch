@@ -16,6 +16,9 @@
   },
   "t_shirt_assignment": {
     "label": "Assign t-shirt to user",
+    "message_part_1": "T-shirts have been distributed to ",
+    "message_part_2": " out of ",
+    "message_part_3": " participants.",
     "page": {
       "title": "Scan user QR code",
       "assigning": "Assigning t-shirt...",
@@ -29,9 +32,9 @@
       "label": "Report Delay"
     },
     "current_reported_delay": {
-      "prefix": "The maximum reported delay is",
+      "prefix": "The maximum reported delay is ",
       "delay_unit": "$delay minutes",
-      "suffix": ", if you are an MC please try to align as soon as possible to ensure the delay is equal in all rooms."
+      "suffix": ", MCs are requested to align to the delay at the end of the current session."
     },
     "no_reported_delay": "No delay reported",
     "id_label": "ID: $id",

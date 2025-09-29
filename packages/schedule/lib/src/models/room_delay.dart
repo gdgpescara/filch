@@ -33,8 +33,6 @@ class RoomDelay extends Equatable {
   @JsonKey(fromJson: _timestampFromJson, toJson: _timestampToJson)
   final DateTime updatedAt;
 
-
-
   /// Creates a copy of this [RoomDelay] with the given fields replaced
   RoomDelay copyWith({
     String? id,

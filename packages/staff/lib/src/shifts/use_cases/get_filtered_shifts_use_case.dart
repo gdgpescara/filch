@@ -16,7 +16,9 @@ class GetFilteredShiftsUseCase {
           .collection('shifts')
           .where(
             'start',
-            isGreaterThan: Timestamp.fromDate(DateTime.now().copyWith(hour: 0, minute: 0, second: 0, millisecond: 0)),
+            isGreaterThanOrEqualTo: Timestamp.fromDate(
+              DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day),
+            ),
           )
           .snapshots()
           .map((value) => value.docs.map((e) => Shift.fromJson(e.data())).toList());

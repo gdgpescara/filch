@@ -16,6 +16,9 @@
   },
   "t_shirt_assignment": {
     "label": "Assegna t-shirt all'utente",
+    "message_part_1": "Sono state consegnate le magliette a ",
+    "message_part_2": " su ",
+    "message_part_3": " partecipanti.",
     "page": {
       "title": "Scansiona il QR Code dell'utente",
       "assigning": "Assegnazione della t-shirt...",
@@ -29,9 +32,9 @@
       "label": "Segnala Ritardo"
     },
     "current_reported_delay": {
-      "prefix": "Il ritardo massimo segnalato è di",
+      "prefix": "Il ritardo massimo segnalato è di ",
       "delay_unit": "$delay minuti",
-      "suffix": ", se sei MC cerca di allinearti al più presto per far si che il ritardo sia uguale in tutte le sale."
+      "suffix": ", gli MC sono pregati di allinearsi al ritardo alla fine della sessione attuale."
     },
     "no_reported_delay": "Nessun ritardo segnalato",
     "id_label": "ID: $id",

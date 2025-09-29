@@ -47,7 +47,9 @@ class SessionSpeakers extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: speakerAvatarRadius,
-            backgroundImage: speaker.profilePicture?.isNotEmpty ?? false ? CachedNetworkImageProvider(speaker.profilePicture!) : null,
+            backgroundImage: speaker.profilePicture?.isNotEmpty ?? false
+                ? CachedNetworkImageProvider(speaker.profilePicture!)
+                : null,
             child: speaker.profilePicture?.isEmpty ?? false ? Text(speaker.name[0]) : null,
           ),
           const SizedBox(width: Spacing.s),

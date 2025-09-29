@@ -59,10 +59,11 @@ class ErrorView extends StatelessWidget {
           ],
           if (onRetry != null) ...[
             const SizedBox(height: Spacing.xl),
-          TextButton(
-            onPressed: onRetry,
-            child: Text(retryText ?? t.common.buttons.try_again),
-          ),],
+            TextButton(
+              onPressed: onRetry,
+              child: Text(retryText ?? t.common.buttons.try_again),
+            ),
+          ],
         ],
       ),
     );

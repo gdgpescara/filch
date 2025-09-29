@@ -54,7 +54,9 @@ class SessionDetailInfo extends StatelessWidget {
                 children: [
                   Text(
                     '${dateFormatter.format(session.startsAt)} • ${dateFormatter.format(session.endsAt)}',
-                    style: context.textTheme.bodyMedium?.copyWith(decoration: delay > 0 ? TextDecoration.lineThrough : null),
+                    style: context.textTheme.bodyMedium?.copyWith(
+                      decoration: delay > 0 ? TextDecoration.lineThrough : null,
+                    ),
                   ),
                   if (delay > 0)
                     Text(
