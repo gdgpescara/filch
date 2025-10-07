@@ -21,6 +21,9 @@ workspace:
 dev_dependencies:
   melos: ^7.1.1
 
+dependency_overrides:
+  analyzer: ^8.1.1
+
 melos:
   name: filch
   sdkPath: .fvm/flutter_sdk
@@ -38,7 +41,7 @@ melos:
 
       dependencies:
           get_it: ^8.2.0
-          injectable: ^2.5.1
+          injectable: ^2.5.2
           firebase_core: ^4.1.1
           firebase_messaging: ^16.0.2
           cloud_firestore: ^6.0.2
@@ -54,7 +57,7 @@ melos:
           equatable: ^2.0.7
           json_annotation: ^4.9.0
           reactive_forms: ^18.1.1
-          slang: ^4.8.1
+          slang: ^4.9.0
           font_awesome_flutter: ^10.10.0
           flutter_svg: ^2.2.1
           package_info_plus: ^9.0.0
@@ -66,10 +69,10 @@ melos:
 
       dev_dependencies:
         flutter_lints: ^6.0.0
-        mockito: ^5.5.0
-        build_runner: ^2.7.0
-        injectable_generator: ^2.8.1
-        json_serializable: ^6.11.0
+        mockito: ^5.5.1
+        build_runner: ^2.9.0
+        injectable_generator: ^2.9.0
+        json_serializable: ^6.11.1
 
     clean:
       hooks:
@@ -263,5 +266,3 @@ melos:
 
     shorebird:patch:
       run: melos shorebird:patch:android --no-select && melos shorebird:patch:ios --no-select
-dependencies:
-  google_fonts: ^6.2.1

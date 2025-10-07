@@ -36,7 +36,7 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   get_it: ^8.2.0
-  injectable: ^2.5.1
+  injectable: ^2.5.2
   google_fonts: ^6.3.2
   firebase_core: ^4.1.1
   firebase_messaging: ^16.0.2
@@ -60,8 +60,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  build_runner: ^2.7.0
-  injectable_generator: ^2.8.1
+  build_runner: ^2.9.0
+  injectable_generator: ^2.9.0
   flutter_launcher_icons: ^0.14.4
 
 flutter:

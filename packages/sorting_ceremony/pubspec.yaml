@@ -21,15 +21,15 @@ dependencies:
     path: ../ui
   firebase_auth: ^6.1.0
   cloud_functions: ^6.0.2
-  injectable: ^2.5.1
+  injectable: ^2.5.2
   equatable: ^2.0.7
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
-  build_runner: ^2.7.0
-  injectable_generator: ^2.8.1
+  build_runner: ^2.9.0
+  injectable_generator: ^2.9.0
 
 flutter:
   uses-material-design: true
