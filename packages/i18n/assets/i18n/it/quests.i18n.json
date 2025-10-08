@@ -63,6 +63,7 @@
   },
   "ranking": {
     "title": "Classifica",
+    "your_position": "La tua posizione",
     "points": {
       "label($n)": {
         "one": "punto: ",

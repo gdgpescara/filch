@@ -63,6 +63,7 @@
   },
   "ranking": {
     "title": "Ranking",
+    "your_position": "Your Position",
     "points": {
       "label($n)": {
         "one": "point: ",

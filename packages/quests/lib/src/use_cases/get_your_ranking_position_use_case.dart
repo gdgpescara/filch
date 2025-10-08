@@ -12,7 +12,9 @@ class GetYourRankingPositionUseCase {
 
   Stream<int?> call() {
     return runSafetyStream(() async* {
-      yield* _firestore.collection('users').orderBy('points', descending: true).snapshots().map((snapshot) {
+      yield* _firestore.collection('users').where('isStaff', isNotEqualTo: true).orderBy('points', descending: true).snapshots().map((
+        snapshot,
+      ) {
         final docs = snapshot.docs;
         final user = _getSignedUserUseCase();
         final userIndex = docs.indexWhere((doc) => doc.id == user?.uid);

@@ -31,6 +31,7 @@ dependencies:
   qr_flutter: ^4.1.0
   reactive_forms: ^18.1.1
   mobile_scanner: ^7.1.2
+  font_awesome_flutter: ^10.10.0
 
 dev_dependencies:
   flutter_test:
