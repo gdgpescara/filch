@@ -58,8 +58,8 @@ class _ApplicationState extends State<Application> {
         },
         child: MaterialApp.router(
           locale: TranslationProvider.of(context).flutterLocale,
-          themeMode: ThemeMode.dark,
-          theme: buildTheme(Brightness.dark),
+          themeMode: ThemeMode.light,
+          theme: buildTheme(Brightness.light),
           debugShowCheckedModeBanner: false,
           supportedLocales: AppLocaleUtils.supportedLocales,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,

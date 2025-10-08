@@ -39,7 +39,7 @@ class AssignTShirt extends StatelessWidget {
           const Gap.vertical(Spacing.m),
           SizedBox(
             width: double.infinity,
-            child: OutlinedButton(onPressed: navigateToTShirtAssignment, child: Text(t.staff.t_shirt_assignment.label)),
+            child: FilledButton(onPressed: navigateToTShirtAssignment, child: Text(t.staff.t_shirt_assignment.label)),
           ),
         ],
       ),

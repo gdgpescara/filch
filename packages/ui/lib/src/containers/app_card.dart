@@ -34,7 +34,7 @@ class AppCard extends StatelessWidget {
       brightness: brightness,
       border: switch (style) {
         AppCardStyle.normal => null,
-        AppCardStyle.bordered => Border.all(color: borderColor ?? context.colorScheme.primaryContainer),
+        AppCardStyle.bordered => Border.all(color: borderColor ?? context.colorScheme.secondaryContainer),
         AppCardStyle.caption => Border(
           top: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius * .038),
           left: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius),

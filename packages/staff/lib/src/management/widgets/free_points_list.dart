@@ -70,7 +70,7 @@ class _ItemWidget extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.primaryContainer,
+                  color: context.colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(RadiusSize.m),
                 ),
                 child: Text(
@@ -78,7 +78,7 @@ class _ItemWidget extends StatelessWidget {
                   style: context
                       .getTextTheme(TextThemeType.monospace)
                       .titleMedium
-                      ?.copyWith(color: context.colorScheme.onPrimaryContainer, fontWeight: FontWeight.w700),
+                      ?.copyWith(color: context.colorScheme.onSecondaryContainer, fontWeight: FontWeight.w700),
                 ),
               ),
             ),

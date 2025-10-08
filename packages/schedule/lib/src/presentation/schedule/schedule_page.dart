@@ -77,10 +77,6 @@ class SchedulePage extends StatelessWidget {
             state is ScheduleLoaded && state.onlyFavorites
                 ? context.t.schedule.sessions.show_all
                 : context.t.schedule.sessions.show_favorites,
-            style: context
-                .getTextTheme(TextThemeType.monospace)
-                .bodyMedium
-                ?.copyWith(color: context.colorScheme.primary),
           ),
         ),
       ],
@@ -88,10 +84,10 @@ class SchedulePage extends StatelessWidget {
     );
   }
 
-  TabBar? _buildTabBar(ScheduleState state) {
+  AppTabBar? _buildTabBar(ScheduleState state) {
     if (state is! ScheduleLoaded) return null;
 
-    return TabBar(
+    return AppTabBar.primary(
       tabs: state.groupedSessions
           .getAvailableDays(onlyFavorites: state.onlyFavorites)
           .map((day) => Tab(text: DateFormat.MMMd().format(day)))

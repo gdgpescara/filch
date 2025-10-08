@@ -39,7 +39,7 @@ class ReportScheduleDelay extends StatelessWidget {
               const Gap.vertical(Spacing.m),
               SizedBox(
                 width: double.infinity,
-                child: OutlinedButton(
+                child: FilledButton(
                   onPressed: navigateToScheduleDelayReporting,
                   child: Text(t.staff.schedule_delay.button.label),
                 ),

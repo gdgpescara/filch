@@ -14,18 +14,9 @@ class RemoveAccountButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButtonTheme(
-      data: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          minimumSize: const Size(double.infinity, kMinInteractiveDimension),
-          foregroundColor: context.colorScheme.errorContainer,
-          textStyle: context.textTheme.labelLarge?.copyWith(fontWeight: FontWeight.bold),
-        ),
-      ),
-      child: TextButton(
-        onPressed: () => _removeAccount(context),
-        child: Text(t.profile.remove_account.button.toUpperCase()),
-      ),
+    return OutlinedButton(
+      onPressed: () => _removeAccount(context),
+      child: Text(t.profile.remove_account.button.toUpperCase()),
     );
   }
 

@@ -67,9 +67,10 @@ class UserProfilePage extends StatelessWidget {
                 const SizedBox(height: Spacing.xl),
                 if (!state.isStaff) ...[
                   UserPointsCard(navigateToAllPoints: navigateToAllPoints),
-                  const SizedBox(height: Spacing.xl),
+                  const SizedBox(height: Spacing.l),
                 ],
                 RemoveAccountButton(onNeedLogin: navigateToLogin, onAccountRemoved: navigateToSplash),
+                const SizedBox(height: Spacing.l),
                 const AppVersion(),
               ],
             ),
