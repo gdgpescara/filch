@@ -10,6 +10,7 @@ part 'bottom_sheet_theme.dart';
 part 'button_theme.dart';
 part 'extended_color.dart';
 part 'input_decorator_theme.dart';
+part 'progress_indicator_theme.dart';
 part 'tab_bar_theme.dart';
 part 'text_theme.dart';
 
@@ -60,6 +61,8 @@ ThemeData buildTheme(Brightness brightness, {Color? seedColor}) {
     bottomSheetTheme: _bottomSheetTheme(colorScheme),
     navigationBarTheme: _navigationBarTheme(colorScheme),
     tabBarTheme: _tabBarTheme(colorScheme),
+    progressIndicatorTheme: _progressIndicatorThemeData(colorScheme),
+
   );
 
   return theme.copyWith(appBarTheme: _appBarTheme(theme), textTheme: _textTheme(theme.textTheme));

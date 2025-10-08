@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
 
-import '../../ui.dart';
 
 class LoaderAnimation extends StatelessWidget {
   const LoaderAnimation({super.key});
@@ -10,7 +9,7 @@ class LoaderAnimation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Semantics(
       label: t.common.semantics.loading,
-      child: CupertinoActivityIndicator(color: context.colorScheme.primary),
+      child: const CircularProgressIndicator(),
     );
   }
 }
