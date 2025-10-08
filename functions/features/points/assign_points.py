@@ -11,7 +11,7 @@ from firestore_client import client as firestore_client
 @on_call(region=FIREBASE_REGION)
 def assign_points(request: CallableRequest) -> Response:
     logged_user = get_signed_in_user(request)
-    logger.info(f"Assigning points: {request.data}")
+    
     assigned_points = int(request.data.get("points"))
     point_type = request.data.get("type")
     quest_id = request.data.get("quest", None)
@@ -40,9 +40,13 @@ def assign_points(request: CallableRequest) -> Response:
     else:
         filtered_users = users
 
-    points = Points(type=point_type, points=assigned_points,
-                    assigned_at=firestore.SERVER_TIMESTAMP, quest=quest_id,
-                    assigned_by=logged_user.uid)
+    points = Points(
+        type=point_type, 
+        points=assigned_points,
+        assignedAt=firestore.SERVER_TIMESTAMP, 
+        quest=quest_id,
+        assignedBy=logged_user.email
+    )
 
     logger.info(f"Points: {points}")
 
@@ -80,12 +84,12 @@ def assign_points(request: CallableRequest) -> Response:
             batch.delete(queue_ref)
 
     # Handle actor quest timeline update
-    if point_type == PointsTypeEnum.quest and quest_id:
-        decoded_id = quest_id.split("-")
-        if len(decoded_id) == 3 and decoded_id[0] == "actor":
-            timeline_ref = firestore_client.collection("timelines").document(decoded_id[1])
-            if timeline_ref.get().exists:
-                batch.update(timeline_ref, {"count": firestore.Increment(1)})
+    # if point_type == PointsTypeEnum.quest and quest_id:
+    #     decoded_id = quest_id.split("-")
+    #     if len(decoded_id) == 3 and decoded_id[0] == "actor":
+    #         timeline_ref = firestore_client.collection("timelines").document(decoded_id[1])
+    #         if timeline_ref.get().exists:
+    #             batch.update(timeline_ref, {"count": firestore.Increment(1)})
 
     batch.commit()
 

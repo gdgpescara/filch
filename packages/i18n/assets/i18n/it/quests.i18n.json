@@ -7,6 +7,11 @@
     "suggestion_explore": "Esplora l'evento e conosci nuove persone",
     "suggestion_schedule": "Controlla il programma per sessioni interessanti",
     "suggestion_ranking": "Guarda la classifica dei migliori partecipanti",
+    "ready_for_adventure": "Pronto per l'Avventura?",
+    "quest_tips_title": "Consigli per le Missioni:",
+    "tip_phone_charged": "Tieni il telefono carico per la scansione QR",
+    "tip_interact_participants": "Preparati a interagire con altri partecipanti",
+    "tip_explore_areas": "Esplora diverse aree dell'evento",
     "no_quest_assigned": "Non hai ancora una missione, cosa aspetti a cercarne una e iniziare a guadagnare punti?",
     "time_remaining": {
       "hours": {

@@ -31,7 +31,7 @@ class QuizQuestWidget extends StatelessWidget {
                   LoaderOverlay.show(context, message: t.quests.active_quest.quiz.answer.evaluating);
                   break;
                 case QuizAnswerSent(isCorrect: _, points: _):
-                  Navigator.pop(context);
+                  LoaderOverlay.hide(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(
@@ -44,12 +44,13 @@ class QuizQuestWidget extends StatelessWidget {
                   );
                   break;
                 case QuizAnswerFailure():
-                  Navigator.pop(context);
+                  LoaderOverlay.hide(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(content: Text(t.common.errors.generic_retry), backgroundColor: appColors.error.seed),
                   );
                   break;
                 case QuizActivationFailure():
+                  LoaderOverlay.hide(context);
                   ScaffoldMessenger.of(context).showSnackBar(
                     SnackBar(
                       content: Text(t.quests.active_quest.quiz.scan_error),

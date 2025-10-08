@@ -50,14 +50,18 @@ ElevatedButtonThemeData _elevatedButtonThemeData(ColorScheme colorScheme) => Ele
     tapTargetSize: MaterialTapTargetSize.padded,
     backgroundColor: WidgetStateProperty.resolveWith((colorStates) {
       if (colorStates.contains(WidgetState.disabled)) {
-        return colorScheme.tertiaryContainer;
+        return colorScheme.tertiaryContainer.withValues(alpha: 0.90);
       }
       return colorScheme.primary;
     }),
+    foregroundColor: WidgetStateProperty.resolveWith((colorStates) {
+      if (colorStates.contains(WidgetState.disabled)) {
+        return colorScheme.onTertiaryContainer;
+      }
+      return colorScheme.onPrimary;
+    }),
     textStyle: WidgetStateProperty.all(
-      GoogleFonts.poppins(
-        fontWeight: FontWeight.bold,
-      ),
+      GoogleFonts.poppins(fontWeight: FontWeight.bold),
     ),
     minimumSize: WidgetStateProperty.all(const Size(kMinInteractiveDimension, kMinInteractiveDimension)),
   ),
@@ -69,14 +73,12 @@ TextButtonThemeData _textButtonThemeData(ColorScheme colorScheme) => TextButtonT
     tapTargetSize: MaterialTapTargetSize.padded,
     foregroundColor: WidgetStateProperty.resolveWith((colorStates) {
       if (colorStates.contains(WidgetState.disabled)) {
-        return colorScheme.tertiaryContainer;
+        return colorScheme.tertiaryContainer.withValues(alpha: 0.90);
       }
       return colorScheme.primary;
     }),
     textStyle: WidgetStateProperty.all(
-      GoogleFonts.poppins(
-        fontWeight: FontWeight.bold,
-      ),
+      GoogleFonts.poppins(fontWeight: FontWeight.bold),
     ),
     minimumSize: WidgetStateProperty.all(const Size(kMinInteractiveDimension, kMinInteractiveDimension)),
   ),
@@ -90,11 +92,16 @@ OutlinedButtonThemeData _outlinedButtonThemeData(ColorScheme colorScheme) => Out
     side: WidgetStateProperty.all(BorderSide(color: colorScheme.primary)),
     backgroundColor: WidgetStateProperty.resolveWith((colorStates) {
       if (colorStates.contains(WidgetState.disabled)) {
-        return colorScheme.tertiaryContainer.withValues(alpha: 0.40);
+        return colorScheme.tertiaryContainer.withValues(alpha: 0.90);
       }
-      return colorScheme.tertiaryContainer.withValues(alpha: 0.40);
+      return colorScheme.tertiaryContainer.withValues(alpha: 0.90);
     }),
-    foregroundColor: WidgetStateProperty.all(colorScheme.primary),
+    foregroundColor: WidgetStateProperty.resolveWith((colorStates) {
+      if (colorStates.contains(WidgetState.disabled)) {
+        return colorScheme.onTertiaryContainer;
+      }
+      return colorScheme.primary;
+    }),
     textStyle: WidgetStateProperty.all(
       GoogleFonts.poppins(
         fontWeight: FontWeight.bold,
@@ -111,7 +118,7 @@ FilledButtonThemeData _filledButtonThemeData(ColorScheme colorScheme) => FilledB
     tapTargetSize: MaterialTapTargetSize.padded,
     backgroundColor: WidgetStateProperty.resolveWith((colorStates) {
       if (colorStates.contains(WidgetState.disabled)) {
-        return colorScheme.tertiaryContainer;
+        return colorScheme.tertiaryContainer.withValues(alpha: 0.90);
       }
       return colorScheme.primary;
     }),

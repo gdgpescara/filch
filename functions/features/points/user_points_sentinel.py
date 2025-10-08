@@ -10,11 +10,6 @@ from shared.env import FIREBASE_REGION
     region=FIREBASE_REGION
 )
 def user_points_sentinel(event: Event[DocumentSnapshot]) -> None:
-    """
-    Function triggered when a points document is written in a user's points subcollection.
-    Updates the user's total points.
-    """
-
     current_value = event.data.after
     prev_value = event.data.before
 

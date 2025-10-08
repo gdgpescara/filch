@@ -14,42 +14,26 @@ class SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ElevatedButton(
-      onPressed: () {
-        if (onPressed != null) {
-          LoaderOverlay.show(context);
-          return onPressed?.call();
-        }
-        context.read<SignInCubit>().providerSignIn(provider);
-      },
-      child: _child(context, provider),
-    );
-  }
-
-  Widget _child(BuildContext context, ProvidersEnum provider) {
-    return Row(
-      children: [
-        Expanded(
-          child: Text(
-            _providerName,
-            textAlign: TextAlign.center,
-            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600, color: context.colorScheme.onPrimary),
+    return SizedBox(
+      width: double.infinity,
+      child: ElevatedButton(
+        onPressed: () {
+          if (onPressed != null) {
+            LoaderOverlay.show(context);
+            return onPressed?.call();
+          }
+          context.read<SignInCubit>().providerSignIn(provider);
+        },
+        child: Text(
+          _providerName,
+          style: context.textTheme.bodyLarge?.copyWith(
+            fontWeight: FontWeight.w600,
+            color: context.colorScheme.onPrimary,
           ),
         ),
-        const SizedBox(width: 16),
-        _providerLoading,
-      ],
+      ),
     );
   }
-
-  Widget get _providerLoading => BlocSelector<SignInCubit, SignInState, bool>(
-    selector: (state) => state is SignInLoading && state.provider == provider,
-    builder: (context, showLoader) {
-      return showLoader
-          ? const SizedBox(width: 10, height: 10, child: CircularProgressIndicator())
-          : const SizedBox.shrink();
-    },
-  );
 
   String get _providerName => {
     ProvidersEnum.google: t.auth.sign_in_providers.google,

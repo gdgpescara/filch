@@ -4,7 +4,7 @@ import 'package:i18n/i18n.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:ui/ui.dart';
 
-import '../commons/quest_description_widget.dart';
+import '../commons/active_quest/quest_description_widget.dart';
 import '../current_quest/state/current_quest_cubit.dart';
 import 'state/quiz_cubit.dart';
 
@@ -26,7 +26,7 @@ class QuizScanView extends StatelessWidget {
             QuestDescriptionWidget(activeQuest: currentQuestState.activeQuest),
             const SizedBox(height: 20),
             AppCard(
-              style: AppCardStyle.normal,
+              style: AppCardStyle.bordered,
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -43,19 +43,26 @@ class QuizScanView extends StatelessWidget {
   }
 
   Widget _scanView(BuildContext context, CurrentQuestLoaded currentQuestState) {
-    return SizedBox.square(
-      dimension: 200,
-      child: MobileScanner(
-        controller: MobileScannerController(
-          detectionSpeed: DetectionSpeed.noDuplicates,
-          formats: [BarcodeFormat.qrCode],
+    return Container(
+      width: 200,
+      height: 200,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(RadiusSize.m),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(RadiusSize.m),
+        child: MobileScanner(
+          controller: MobileScannerController(
+            detectionSpeed: DetectionSpeed.noDuplicates,
+            formats: [BarcodeFormat.qrCode],
+          ),
+          onDetect: (capture) {
+            final barcodes = capture.barcodes;
+            if (barcodes.isNotEmpty && barcodes.first.rawValue != null) {
+              context.read<QuizCubit>().activateQuiz(currentQuestState.activeQuest.quest, barcodes.first.rawValue!);
+            }
+          },
         ),
-        onDetect: (capture) {
-          final barcodes = capture.barcodes;
-          if (barcodes.isNotEmpty && barcodes.first.rawValue != null) {
-            context.read<QuizCubit>().activateQuiz(currentQuestState.activeQuest.quest, barcodes.first.rawValue!);
-          }
-        },
       ),
     );
   }

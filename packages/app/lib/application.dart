@@ -65,7 +65,7 @@ class _ApplicationState extends State<Application> {
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           routerConfig: _router,
           themeAnimationCurve: Curves.easeInOut,
-          themeAnimationDuration: const Duration(milliseconds: 600),
+          themeAnimationDuration: const Duration(milliseconds: 400),
           builder: (context, child) {
             return AccessibilityTools(checkFontOverflows: true, child: child);
           },

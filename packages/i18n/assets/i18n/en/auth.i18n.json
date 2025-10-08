@@ -16,5 +16,8 @@
   "welcome": {
     "title": "Welcome",
     "subtitle": "Sign in to your account to continue and discover all available features"
+  },
+  "errors": {
+    "sign_in_failed": "Sign in failed. Please try again later."
   }
 }

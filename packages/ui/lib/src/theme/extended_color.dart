@@ -21,18 +21,18 @@ const _googleYellow = CustomColor(
 /// google red
 const _googleRed = CustomColor(
   seed: Color(0xffdb4437),
-  value: Color(0xffd34f00),
+  value: Color(0xffdb4437),
   light: ColorFamily(
     color: Color(0xff8d3200),
     onColor: Color(0xffffffff),
-    colorContainer: Color(0xffca4b00),
-    onColorContainer: Color(0xffffffff),
+    colorContainer: Color(0xffef5350),
+    onColorContainer: Color(0xff3e0000),
   ),
   dark: ColorFamily(
-    color: Color(0xffffb598),
-    onColor: Color(0xff591d00),
-    colorContainer: Color(0xffc54900),
-    onColorContainer: Color(0xffffffff),
+    color: Color(0xffffb3b3),
+    onColor: Color(0xff680003),
+    colorContainer: Color(0xffd32f2f),
+    onColorContainer: Color(0xff1a0000),
   ),
 );
 
@@ -60,15 +60,15 @@ const _googleBlue = CustomColor(
   value: Color(0xff3089ff),
   light: ColorFamily(
     color: Color(0xff1e5ba8),
-    onColor: Color(0xfffcfbff),
-    colorContainer: Color(0xff5ba2ff),
-    onColorContainer: Color(0xff060404),
+    onColor: Color(0xffffffff),
+    colorContainer: Color(0xff66b3ff),
+    onColorContainer: Color(0xff001d36),
   ),
   dark: ColorFamily(
     color: Color(0xff7db4ff),
-    onColor: Color(0xff060404),
-    colorContainer: Color(0xff2470d9),
-    onColorContainer: Color(0xfffcfbff),
+    onColor: Color(0xff001d36),
+    colorContainer: Color(0xff4d9fff),
+    onColorContainer: Color(0xff000a14),
   ),
 );
 
@@ -133,14 +133,14 @@ const _appYellow = CustomColor(
   light: ColorFamily(
     color: Color(0xFF6E5E00),
     onColor: Color(0xFFFFFFFF),
-    colorContainer: Color(0xFFE5C61D),
-    onColorContainer: Color(0xFF403600),
+    colorContainer: Color(0xFFF0FF80),
+    onColorContainer: Color(0xFF2A2E00),
   ),
   dark: ColorFamily(
-    color: Color(0xFFFFE259),
-    onColor: Color(0xFF393000),
-    colorContainer: Color(0xFFD5B800),
-    onColorContainer: Color(0xFF352C00),
+    color: Color(0xFFF4FF61),
+    onColor: Color(0xFF2A2E00),
+    colorContainer: Color(0xFFE8F74D),
+    onColorContainer: Color(0xFF1F2300),
   ),
 );
 
