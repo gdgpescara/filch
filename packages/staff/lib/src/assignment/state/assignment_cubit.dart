@@ -16,7 +16,7 @@ class AssignmentCubit extends SafeEmitterCubit<AssignmentState> {
     emit(AssignmentInitial({...actualValues, ...values}.toList()));
   }
 
-  Future<void> assign({int? points, String? quest, required PointsTypeEnum type, required List<String> users}) async {
+  Future<void> assign({double? points, String? quest, required PointsTypeEnum type, required List<String> users}) async {
     final currentState = state;
     await _assignPointsUseCase(points: points ?? 0, users: users, quest: quest, pointsType: type).when(
       progress: () => emitAction(currentState, const Assigning()),

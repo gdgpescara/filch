@@ -38,10 +38,7 @@ class UserQuestList extends StatelessWidget {
                   children: [
                     Text(
                       quest.title?[LocaleSettings.currentLocale.languageCode] ?? ' - ',
-                      style: context
-                          .getTextTheme(TextThemeType.monospace)
-                          .titleMedium
-                          ?.copyWith(fontWeight: FontWeight.bold),
+                      style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const Gap.vertical(Spacing.m),
                     Wrap(
@@ -75,8 +72,9 @@ class _ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () =>
-          navigateToAssignment(AssignmentPageArgs.quest(points: points, questId: questId, questType: questType)),
+      onTap: () => navigateToAssignment(
+        AssignmentPageArgs.quest(points: points.toDouble(), questId: questId, questType: questType),
+      ),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.4,
         child: AppCard(

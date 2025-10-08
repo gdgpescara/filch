@@ -56,7 +56,7 @@ class _ItemWidget extends StatelessWidget {
 
     return InkWell(
       borderRadius: BorderRadius.circular(RadiusSize.m),
-      onTap: () => navigateToAssignment(AssignmentPageArgs.points(item.points)),
+      onTap: () => navigateToAssignment(AssignmentPageArgs.points(item.points, assignablePointsType: item.type)),
       child: AppCard(
         style: AppCardStyle.bordered,
         padding: const EdgeInsets.all(Spacing.s),
@@ -74,7 +74,7 @@ class _ItemWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(RadiusSize.m),
                 ),
                 child: Text(
-                  item.points.toString(),
+                  '${item.type == AssignablePointsTypeEnum.multiplier ? 'x' : ''}${item.points}',
                   style: context
                       .getTextTheme(TextThemeType.monospace)
                       .titleMedium

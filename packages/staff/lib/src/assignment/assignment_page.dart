@@ -85,29 +85,33 @@ class AssignmentPage extends StatelessWidget {
 
 @immutable
 class AssignmentPageArgs {
-  const AssignmentPageArgs.points(this.points, {this.onAssignDone})
+  const AssignmentPageArgs.points(this.points, {required this.assignablePointsType, this.onAssignDone})
     : questId = null,
       questType = null,
       type = PointsTypeEnum.staff;
 
   const AssignmentPageArgs.quest({this.questId, required this.questType, required this.points, this.onAssignDone})
-    : type = PointsTypeEnum.quest;
+    : assignablePointsType = AssignablePointsTypeEnum.value,
+      type = PointsTypeEnum.quest;
 
-  final int points;
+  final double points;
   final String? questId;
   final QuestTypeEnum? questType;
+  final AssignablePointsTypeEnum assignablePointsType;
   final PointsTypeEnum type;
   final ValueChanged<BuildContext>? onAssignDone;
 
   AssignmentPageArgs copyWith({
-    int? points,
+    double? points,
     String? questId,
+    AssignablePointsTypeEnum? assignablePointsType,
     QuestTypeEnum? questType,
     ValueChanged<BuildContext>? onAssignDone,
   }) {
     return switch (type) {
       PointsTypeEnum.staff => AssignmentPageArgs.points(
         points ?? this.points,
+        assignablePointsType: assignablePointsType ?? this.assignablePointsType,
         onAssignDone: onAssignDone ?? this.onAssignDone,
       ),
       PointsTypeEnum.quest => AssignmentPageArgs.quest(

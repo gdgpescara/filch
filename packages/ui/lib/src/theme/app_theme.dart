@@ -14,7 +14,7 @@ part 'tab_bar_theme.dart';
 part 'text_theme.dart';
 
 const appColors = _extendedColor;
-const _primaryColor = Color(0xFFC12F2F);
+const _primaryColor = Color(0xFF060404);
 const _secondaryColor = Color(0xFF3089FF); // Blue secondary color
 const _surfaceColor = Color(0xFFDDDDDD);
 const _onSurfaceColor = Color(0xFF1A1A1A);

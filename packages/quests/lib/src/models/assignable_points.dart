@@ -1,17 +1,20 @@
 import 'package:equatable/equatable.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../quests.dart';
+
 part 'assignable_points.g.dart';
 
 @JsonSerializable(createToJson: false)
 class AssignablePoints extends Equatable {
-  const AssignablePoints({required this.description, required this.points});
+  const AssignablePoints({required this.description, required this.points, required this.type});
 
   factory AssignablePoints.fromJson(Map<String, dynamic> json) => _$AssignablePointsFromJson(json);
 
   final Map<String, String> description;
-  final int points;
+  final double points;
+  final AssignablePointsTypeEnum type;
 
   @override
-  List<Object?> get props => [description, points];
+  List<Object?> get props => [description, points, type];
 }
