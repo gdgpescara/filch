@@ -12,5 +12,9 @@
     "email": "Email",
     "password": "Password",
     "sign_in": "Accedi"
+  },
+  "welcome": {
+    "title": "Benvenuto",
+    "subtitle": "Accedi al tuo account per continuare e scoprire tutte le funzionalità disponibili"
   }
 }

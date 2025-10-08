@@ -2,6 +2,11 @@
   "active_quest": {
     "search_button": "Cerca una missione",
     "request_closed": "La richiesta di missioni è chiusa. Prova più tardi.",
+    "request_closed_title": "Richiesta Missioni Chiusa",
+    "suggestions_title": "Cosa posso fare:",
+    "suggestion_explore": "Esplora l'evento e conosci nuove persone",
+    "suggestion_schedule": "Controlla il programma per sessioni interessanti",
+    "suggestion_ranking": "Guarda la classifica dei migliori partecipanti",
     "no_quest_assigned": "Non hai ancora una missione, cosa aspetti a cercarne una e iniziare a guadagnare punti?",
     "time_remaining": {
       "hours": {

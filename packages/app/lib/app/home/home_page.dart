@@ -17,11 +17,11 @@ class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   void _navigateToSplash() {
-    Routefly.navigate(routePaths.path);
+    Routefly.pushNavigate(routePaths.path);
   }
 
   void _navigateToLogin() {
-    Routefly.navigate(routePaths.signIn);
+    Routefly.pushNavigate(routePaths.signIn);
   }
 
   void _navigateToAllPoints() {

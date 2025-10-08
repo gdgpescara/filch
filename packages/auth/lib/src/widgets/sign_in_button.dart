@@ -22,14 +22,20 @@ class SignInButton extends StatelessWidget {
         }
         context.read<SignInCubit>().providerSignIn(provider);
       },
-      child: _child(provider),
+      child: _child(context, provider),
     );
   }
 
-  Widget _child(ProvidersEnum provider) {
+  Widget _child(BuildContext context, ProvidersEnum provider) {
     return Row(
       children: [
-        Expanded(child: Text(_providerName, textAlign: TextAlign.center)),
+        Expanded(
+          child: Text(
+            _providerName,
+            textAlign: TextAlign.center,
+            style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600, color: context.colorScheme.onPrimary),
+          ),
+        ),
         const SizedBox(width: 16),
         _providerLoading,
       ],

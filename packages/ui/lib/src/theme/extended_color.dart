@@ -92,37 +92,37 @@ const _success = CustomColor(
 
 /// warning
 const _warning = CustomColor(
-  seed: Color(0xfffbbd23),
-  value: Color(0xffe3c62a),
+  seed: Color(0xffff9800),
+  value: Color(0xffff9800),
   light: ColorFamily(
-    color: Color(0xff6e5e00),
+    color: Color(0xff8f4e00),
     onColor: Color(0xffffffff),
-    colorContainer: Color(0xffebcd32),
-    onColorContainer: Color(0xff453b00),
+    colorContainer: Color(0xffffb951),
+    onColorContainer: Color(0xff5d3200),
   ),
   dark: ColorFamily(
-    color: Color(0xffffec9b),
-    onColor: Color(0xff393000),
-    colorContainer: Color(0xffdec124),
-    onColorContainer: Color(0xff3c3200),
+    color: Color(0xffffcc7a),
+    onColor: Color(0xff4a2800),
+    colorContainer: Color(0xfff09000),
+    onColorContainer: Color(0xff1f1100),
   ),
 );
 
 /// error
 const _error = CustomColor(
-  seed: Color(0xfff87272),
-  value: Color(0xfff6764f),
+  seed: Color(0xffe53935),
+  value: Color(0xffe53935),
   light: ColorFamily(
-    color: Color(0xffa53b19),
+    color: Color(0xffb71c1c),
     onColor: Color(0xffffffff),
-    colorContainer: Color(0xffff845f),
-    onColorContainer: Color(0xff3c0a00),
+    colorContainer: Color(0xffef5350),
+    onColorContainer: Color(0xff3e0000),
   ),
   dark: ColorFamily(
-    color: Color(0xffffb59f),
-    onColor: Color(0xff5f1600),
-    colorContainer: Color(0xffed6f49),
-    onColorContainer: Color(0xff000000),
+    color: Color(0xffffb3b3),
+    onColor: Color(0xff680003),
+    colorContainer: Color(0xffd32f2f),
+    onColorContainer: Color(0xff1a0000),
   ),
 );
 
