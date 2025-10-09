@@ -26,10 +26,13 @@ class AssignmentPage extends StatelessWidget {
             case Assigning():
               LoaderOverlay.show(context, message: t.staff.point_assignment.page.assigning);
               break;
-            case AssignFailure():
+            case AssignFailure(:final code):
               LoaderOverlay.hide(context);
               ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(t.staff.point_assignment.page.error), backgroundColor: appColors.error.seed),
+                SnackBar(
+                  content: Text(t.staff.point_assignment.page.errors[code] ?? t.staff.point_assignment.page.generic_error),
+                  backgroundColor: appColors.error.seed,
+                ),
               );
               break;
             case Assigned():

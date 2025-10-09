@@ -18,13 +18,20 @@ class AssignPointsUseCase {
   }) {
     return runSafetyFuture(() async {
       const url = String.fromEnvironment('ASSIGN_POINTS_URL');
-      final result = await _functions.httpsCallableFromUrl(url).call<bool>({
+      final result = await _functions.httpsCallableFromUrl(url).call<String>({
         'points': points.toInt().toString(),
         'users': users,
         'quest': quest,
         'type': pointsType.name,
       });
-      return result.data;
+      if (result.data != 'success') {
+        throw PointsAssignmentError(code: result.data);
+      }
+      return true;
     }, onError: onFirebaseFunctionError);
   }
+}
+
+class PointsAssignmentError extends CustomError {
+  PointsAssignmentError({required super.code}) : super(message: 'Failed to assign points');
 }

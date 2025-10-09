@@ -21,7 +21,7 @@ class AssignmentCubit extends SafeEmitterCubit<AssignmentState> {
     await _assignPointsUseCase(points: points ?? 0, users: users, quest: quest, pointsType: type).when(
       progress: () => emitAction(currentState, const Assigning()),
       success: (_) => emitAction(currentState, const Assigned()),
-      error: (_) => emitAction(currentState, const AssignFailure()),
+      error: (error) => emitAction(currentState, AssignFailure(code: error.code)),
     );
   }
 

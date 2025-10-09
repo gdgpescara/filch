@@ -11,7 +11,10 @@
       "assign_button": "Assign points",
       "assigning": "Assigning points...",
       "success": "Points assigned successfully.",
-      "error": "An error occurred while assigning points."
+      "generic_error": "An error occurred while assigning points.",
+      "errors(map)": {
+        "points_already_assigned": "You have already assigned points to selected users."
+      }
     }
   },
   "t_shirt_assignment": {

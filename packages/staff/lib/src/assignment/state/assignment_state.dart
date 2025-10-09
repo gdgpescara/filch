@@ -21,7 +21,12 @@ class Assigning extends AssignmentState {
 }
 
 class AssignFailure extends AssignmentState {
-  const AssignFailure();
+  const AssignFailure({required this.code});
+
+  final String code;
+
+  @override
+  List<Object?> get props => [code];
 }
 
 class Assigned extends AssignmentState {

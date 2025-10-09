@@ -8,6 +8,7 @@ from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from shared.get_signed_in_user import get_signed_in_user
 from shared.env import FIREBASE_REGION
+from google.cloud.firestore import SERVER_TIMESTAMP
 
 
 class ScanOtherAttendeePayload(BaseModel):
@@ -39,7 +40,7 @@ def scan_other_attendee(req: CallableRequest) -> bool:
         points = Points(
             type=PointsTypeEnum.quest, 
             points=payload.points,
-            assignedAt=firestore.SERVER_TIMESTAMP, 
+            assignedAt=SERVER_TIMESTAMP, 
             assignedBy=user_uid
         )
         
