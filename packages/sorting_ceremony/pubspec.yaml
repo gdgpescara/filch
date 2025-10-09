@@ -19,6 +19,8 @@ dependencies:
     path: ../auth
   ui:
     path: ../ui
+  get_it: ^8.2.0
+  flutter_bloc: ^9.1.1
   firebase_auth: ^6.1.0
   cloud_functions: ^6.0.2
   injectable: ^2.5.2

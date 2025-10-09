@@ -14,6 +14,8 @@ BlocWidgetListener<BootstrapState> get _stateListener => (context, state) {
       Routefly.navigate(routePaths.thanks);
       break;
     case UserNeedSortingCeremony():
+      Routefly.navigate(routePaths.sortingCeremony);
+      break;
     case BootstrapProcessing():
       break;
   }
