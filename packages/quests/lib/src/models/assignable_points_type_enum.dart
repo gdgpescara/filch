@@ -1,0 +1,1 @@
+enum AssignablePointsTypeEnum { value, multiplier }

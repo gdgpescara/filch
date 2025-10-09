@@ -30,35 +30,40 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
   final CanRequestForQuestUseCase _canRequestForQuestUseCase;
   final GiveUpQuestUseCase _giveUpQuestUseCase;
 
-  final List<StreamSubscription<void>> _subscriptions = [];
+  final Map<String, StreamSubscription<void>> _activeSubscriptions = {};
 
   @override
   Future<void> close() {
-    for (final subscription in _subscriptions) {
+    for (final subscription in _activeSubscriptions.values) {
       subscription.cancel();
     }
+    _activeSubscriptions.clear();
     return super.close();
   }
 
-  void loadCurrentQuest() {
-    _subscriptions.add(
-      _getSignedUserActiveQuestUseCase().when(
-        progress: () => emit(const CurrentQuestLoading()),
-        success: (quest) {
-          if (quest != null) {
-            final user = _getSignedUserUseCase();
-            emit(CurrentQuestLoaded(user: user, activeQuest: quest));
-          } else {
-            _canRequestForQuest();
-          }
-        },
-        error: (_) => emit(const CurrentQuestFailure()),
-      ),
+  Future<void> loadCurrentQuest() async {
+    const subscriptionKey = 'active_quest';
+    await _activeSubscriptions[subscriptionKey]?.cancel();
+    _activeSubscriptions[subscriptionKey] = _getSignedUserActiveQuestUseCase().when(
+      progress: () {
+        if (state is! CurrentQuestLoading) {
+          emit(const CurrentQuestLoading());
+        }
+      },
+      success: (quest) {
+        if (quest != null) {
+          final user = _getSignedUserUseCase();
+          emit(CurrentQuestLoaded(user: user, activeQuest: quest));
+        } else {
+          _performCanRequestForQuest();
+        }
+      },
+      error: (_) => emit(const CurrentQuestFailure()),
     );
   }
 
   void timeExpired() {
-    _canRequestForQuest();
+    _performCanRequestForQuest();
   }
 
   void giveUp() {
@@ -69,20 +74,27 @@ class CurrentQuestCubit extends SafeEmitterCubit<CurrentQuestState> {
     );
   }
 
-  Future<void> _canRequestForQuest() async {
-    await Future<void>.delayed(const Duration(seconds: 1));
-    _subscriptions.add(
-      _canRequestForQuestUseCase().when(
-        progress: () => emit(const CurrentQuestLoading()),
-        success: (canRequest) => canRequest ? emit(const NoQuestAssigned()) : emit(const QuestRequestClosed()),
-        error: (_) => emit(const CurrentQuestFailure()),
-      ),
+  Future<void> _performCanRequestForQuest() async {
+    const subscriptionKey = 'can_request_quest';
+    await _activeSubscriptions[subscriptionKey]?.cancel();
+    _activeSubscriptions[subscriptionKey] = _canRequestForQuestUseCase().when(
+      progress: () {
+        if (state is! CurrentQuestLoading) {
+          emit(const CurrentQuestLoading());
+        }
+      },
+      success: (canRequest) => canRequest ? emit(const NoQuestAssigned()) : emit(const QuestRequestClosed()),
+      error: (_) => emit(const CurrentQuestFailure()),
     );
   }
 
   void searchForQuest() {
     _searchForQuestUseCase().when(
-      progress: () => emit(const CurrentQuestLoading()),
+      progress: () {
+        if (state is! CurrentQuestLoading) {
+          emit(const CurrentQuestLoading());
+        }
+      },
       success: (quest) => emit(CurrentQuestLoaded(activeQuest: quest)),
       error: (_) => emit(const CurrentQuestFailure()),
     );

@@ -58,14 +58,14 @@ class _ApplicationState extends State<Application> {
         },
         child: MaterialApp.router(
           locale: TranslationProvider.of(context).flutterLocale,
-          themeMode: ThemeMode.dark,
-          theme: buildTheme(Brightness.dark),
+          themeMode: ThemeMode.light,
+          theme: buildTheme(Brightness.light),
           debugShowCheckedModeBanner: false,
           supportedLocales: AppLocaleUtils.supportedLocales,
           localizationsDelegates: GlobalMaterialLocalizations.delegates,
           routerConfig: _router,
           themeAnimationCurve: Curves.easeInOut,
-          themeAnimationDuration: const Duration(milliseconds: 600),
+          themeAnimationDuration: const Duration(milliseconds: 400),
           builder: (context, child) {
             return AccessibilityTools(checkFontOverflows: true, child: child);
           },

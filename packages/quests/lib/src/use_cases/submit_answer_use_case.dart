@@ -13,7 +13,10 @@ class SubmitAnswerUseCase {
   Future<(bool, int)> call(Quest quest, List<int> answers) {
     return runSafetyFuture(() async {
       const url = String.fromEnvironment('SUBMIT_ANSWER_URL');
-      final result = await _functions.httpsCallableFromUrl(url).call<bool>({'quest': quest.id, 'answers': answers});
+      final result = await _functions.httpsCallableFromUrl(url).call<bool>({
+        'quest': quest.id,
+        'answers': answers.map((e) => '$e').toList(),
+      });
       return (result.data, quest.points.first);
     }, onError: onFirebaseFunctionError);
   }

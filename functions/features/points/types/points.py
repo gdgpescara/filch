@@ -6,7 +6,6 @@ class Points(BaseModel):
     """Model representing points assigned to a user."""
     type: str
     points: int
-    assigned_by: Optional[str] = None
-    assigned_from: Optional[str] = None
-    assigned_at: Any
+    assignedBy: Optional[str] = None
+    assignedAt: Any
     quest: Optional[str] = None

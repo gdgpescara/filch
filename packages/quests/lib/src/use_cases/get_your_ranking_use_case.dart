@@ -6,14 +6,28 @@ import '../models/ranking_item.dart';
 
 @lazySingleton
 class GetYourRankingUseCase {
-  GetYourRankingUseCase(this._firestore, this._getSignedUserUseCase);
+  GetYourRankingUseCase(
+    this._firestore,
+    this._getSignedUserUseCase,
+    this._isStaffUserUseCase,
+  );
 
   final FirebaseFirestore _firestore;
   final GetSignedUserUseCase _getSignedUserUseCase;
+  final IsStaffUserUseCase _isStaffUserUseCase;
 
   Stream<RankingItem?> call() {
     return runSafetyStream(() async* {
-      yield* _firestore.collection('users').doc(_getSignedUserUseCase()?.uid).snapshots().map((snapshot) {
+      if (await _isStaffUserUseCase()) {
+        yield null;
+        return;
+      }
+      final user = _getSignedUserUseCase();
+      if (user == null) {
+        yield null;
+        return;
+      }
+      yield* _firestore.collection('users').doc(user.uid).snapshots().map((snapshot) {
         if (snapshot.exists) {
           return RankingItem.fromJson({...snapshot.data()!, 'uid': snapshot.id});
         } else {

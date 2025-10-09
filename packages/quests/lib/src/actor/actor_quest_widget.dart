@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ui/ui.dart';
 
-import '../commons/quest_description_widget.dart';
-import '../commons/quest_prompt_widget.dart';
-import '../commons/quest_qr_code_widget.dart';
+import '../commons/active_quest/quest_description_widget.dart';
+import '../commons/active_quest/quest_prompt_widget.dart';
+import '../commons/active_quest/quest_qr_code_widget.dart';
 import '../current_quest/state/current_quest_cubit.dart';
 
 class ActorQuestWidget extends StatelessWidget {

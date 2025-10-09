@@ -2,7 +2,11 @@ part of 'sign_in_page.dart';
 
 BlocWidgetListener<SignInState> _signInStateListener(VoidCallback onSignedInNavigateTo) => (context, state) {
   switch (state) {
+    case SignInLoading():
+      LoaderOverlay.show(context);
+      break;
     case SignInSuccess():
+      LoaderOverlay.hide(context);
       onSignedInNavigateTo();
       break;
     case SignInFailure(failure: final failure):
@@ -23,7 +27,7 @@ BlocWidgetListener<SignInState> _signInStateListener(VoidCallback onSignedInNavi
           break;
         default:
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('${failure.code}: ${failure.message}'), backgroundColor: context.colorScheme.error),
+            SnackBar(content: Text(t.auth.errors.sign_in_failed), backgroundColor: context.colorScheme.error),
           );
           break;
       }

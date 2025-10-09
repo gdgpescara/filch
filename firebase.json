@@ -2,7 +2,7 @@
   "functions": [
     {
       "source": "node-functions",
-      "runtime": "nodejs20",
+      "runtime": "nodejs22",
       "codebase": "nodejs_functions",
       "ignore": [
         "node_modules",

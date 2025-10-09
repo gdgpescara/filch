@@ -2,6 +2,16 @@
   "active_quest": {
     "search_button": "Search for a quest",
     "request_closed": "The quest request is closed. Try later.",
+    "request_closed_title": "Quest Request Closed",
+    "suggestions_title": "What can I do:",
+    "suggestion_explore": "Explore the event and meet new people",
+    "suggestion_schedule": "Check the event schedule for interesting sessions",
+    "suggestion_ranking": "View the leaderboard to see top participants",
+    "ready_for_adventure": "Ready for Adventure?",
+    "quest_tips_title": "Quest Tips:",
+    "tip_phone_charged": "Keep your phone charged for QR scanning",
+    "tip_interact_participants": "Be ready to interact with other participants",
+    "tip_explore_areas": "Explore different areas of the event",
     "no_quest_assigned": "You don't have a quest yet. What are you waiting for? Look for one and start earning points!",
     "time_remaining": {
       "hours": {
@@ -63,6 +73,7 @@
   },
   "ranking": {
     "title": "Ranking",
+    "your_position": "Your Position",
     "points": {
       "label($n)": {
         "one": "point: ",

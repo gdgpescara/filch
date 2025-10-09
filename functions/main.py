@@ -16,7 +16,6 @@ set_global_options(max_instances=10, memory=512, timeout_sec=300)
 initialize_app()
 
 from features.user.t_shirt_pickup import t_shirt_pickup
-# from features.user.t_shirt_notification import t_shirt_notification_schedule
 
 from features.points.user_points_sentinel import user_points_sentinel
 

@@ -12,11 +12,11 @@ from shared.env import FIREBASE_REGION
 
 
 @on_call(region=FIREBASE_REGION)
-def submit_answer(req: CallableRequest) -> bool:
-    logged_user = get_signed_in_user(request=req)
+def submit_answer(request: CallableRequest) -> bool:
+    logged_user = get_signed_in_user(request)
 
-    quest_id = req.data.quest
-    answers = req.data.answers
+    quest_id = request.data.get("quest")
+    answers = [int(ans) for ans in request.data.get("answers", [])]
 
     quest_snap = (firestore_client
                   .collection("quests")
@@ -47,8 +47,13 @@ def submit_answer(req: CallableRequest) -> bool:
     is_correct = all(e in answers for e in correct_answers)
     logger.info(f"Is correct: {is_correct}")
 
-    archived_points = Points(type=PointsTypeEnum.quest, points=quest.points[0],
-                             assigned_at=SERVER_TIMESTAMP)
+    archived_points = Points(
+        type=PointsTypeEnum.quest, 
+        quest=quest.id,
+        assignedBy=logged_user.email,
+        points=quest.points[0],
+        assignedAt=SERVER_TIMESTAMP
+    )
 
     batch = firestore_client.batch()
     if is_correct:
@@ -61,6 +66,7 @@ def submit_answer(req: CallableRequest) -> bool:
         )
 
         batch.set(doc_ref, archived_points.model_dump())
+
     user_ref = firestore_client.collection("users").document(logged_user.uid)
     batch.update(user_ref, {"activeQuest": None})
 

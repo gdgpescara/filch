@@ -64,24 +64,26 @@ class _AppVersionState extends State<AppVersion> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Expanded(child: Text(_version, style: context.getTextTheme().bodySmall)),
-        if (_newVersionAvailable)
-          Expanded(
-            child: Text(
-              t.common.app_version.new_patch_available_to_download,
-              style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-        if (_updateError)
-          Expanded(
-            child: Text(
-              t.common.app_version.update_error,
-              style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
-            ),
-          ),
-      ],
+    return AppCard(
+      style: AppCardStyle.normal,
+      child: RichText(
+        text: TextSpan(
+          text: _version,
+          style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
+          children: [
+            if (_newVersionAvailable)
+              TextSpan(
+                text: ' - ${t.common.app_version.new_patch_available_to_download}',
+                style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            if (_updateError)
+              TextSpan(
+                text: ' - ${t.common.app_version.update_error}',
+                style: context.getTextTheme().bodySmall?.copyWith(fontWeight: FontWeight.bold),
+              ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ui/ui.dart';
 
-import 'ranking_card.dart';
+import 'card/ranking_card.dart';
 import 'state/ranking_cubit.dart';
 
 class RankingList extends StatelessWidget {

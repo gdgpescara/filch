@@ -56,7 +56,7 @@ class _ItemWidget extends StatelessWidget {
 
     return InkWell(
       borderRadius: BorderRadius.circular(RadiusSize.m),
-      onTap: () => navigateToAssignment(AssignmentPageArgs.points(item.points)),
+      onTap: () => navigateToAssignment(AssignmentPageArgs.points(item.points, assignablePointsType: item.type)),
       child: AppCard(
         style: AppCardStyle.bordered,
         padding: const EdgeInsets.all(Spacing.s),
@@ -70,15 +70,15 @@ class _ItemWidget extends StatelessWidget {
                 constraints: const BoxConstraints(minWidth: 50),
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: context.colorScheme.primaryContainer,
+                  color: context.colorScheme.secondaryContainer,
                   borderRadius: BorderRadius.circular(RadiusSize.m),
                 ),
                 child: Text(
-                  item.points.toString(),
+                  '${item.type == AssignablePointsTypeEnum.multiplier ? 'x' : ''}${item.points}',
                   style: context
                       .getTextTheme(TextThemeType.monospace)
                       .titleMedium
-                      ?.copyWith(color: context.colorScheme.onPrimaryContainer, fontWeight: FontWeight.w700),
+                      ?.copyWith(color: context.colorScheme.onSecondaryContainer, fontWeight: FontWeight.w700),
                 ),
               ),
             ),

@@ -8,6 +8,7 @@ from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from shared.get_signed_in_user import get_signed_in_user
 from shared.env import FIREBASE_REGION
+from google.cloud.firestore import SERVER_TIMESTAMP
 
 
 class ScanOtherAttendeePayload(BaseModel):
@@ -18,7 +19,6 @@ class ScanOtherAttendeePayload(BaseModel):
 @on_call(region=FIREBASE_REGION)
 def scan_other_attendee(req: CallableRequest) -> bool:
     payload = req.data
-    logger.debug(f"Input Payload: {payload}")
 
     payload = ScanOtherAttendeePayload(**payload)
     logged_user = get_signed_in_user(request=req)
@@ -31,15 +31,19 @@ def scan_other_attendee(req: CallableRequest) -> bool:
                            .document(logged_uid)
                            .collection("points")
                            .where("type", "==", PointsTypeEnum.quest)
-                           .where("assignedFrom", "==", user_uid)
+                           .where("assignedBy", "==", user_uid)
                            .get())
-        logger.debug(f"Snapshot For User {user_uid}: {[doc.to_dict() for doc in user_point_snap]}")
 
         if user_point_snap:
             raise Exception("You have already scanned this user")
 
-        points = Points(type=PointsTypeEnum.quest, points=payload.points,
-                        assigned_at=firestore.SERVER_TIMESTAMP, assigned_from=user_uid)
+        points = Points(
+            type=PointsTypeEnum.quest, 
+            points=payload.points,
+            assignedAt=SERVER_TIMESTAMP, 
+            assignedBy=user_uid
+        )
+        
         batch = firestore_client.batch()
         doc = (firestore_client
                .collection("users")
@@ -48,6 +52,7 @@ def scan_other_attendee(req: CallableRequest) -> bool:
                .document())
         batch.set(doc, points.model_dump())
         batch.commit()
+        
         logger.info("Points added")
         return True
     else:

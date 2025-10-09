@@ -34,12 +34,12 @@ class AppCard extends StatelessWidget {
       brightness: brightness,
       border: switch (style) {
         AppCardStyle.normal => null,
-        AppCardStyle.bordered => Border.all(color: borderColor ?? context.colorScheme.primaryContainer),
+        AppCardStyle.bordered => Border.all(color: borderColor ?? context.colorScheme.secondary),
         AppCardStyle.caption => Border(
-          top: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius * .038),
-          left: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius),
-          right: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius * .038),
-          bottom: BorderSide(color: borderColor ?? context.colorScheme.primaryContainer, width: radius * .038),
+          top: BorderSide(color: borderColor ?? context.colorScheme.secondary, width: radius * .038),
+          left: BorderSide(color: borderColor ?? context.colorScheme.secondary, width: radius),
+          right: BorderSide(color: borderColor ?? context.colorScheme.secondary, width: radius * .038),
+          bottom: BorderSide(color: borderColor ?? context.colorScheme.secondary, width: radius * .038),
         ),
       },
       child: Padding(padding: padding, child: child),

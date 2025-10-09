@@ -21,18 +21,18 @@ const _googleYellow = CustomColor(
 /// google red
 const _googleRed = CustomColor(
   seed: Color(0xffdb4437),
-  value: Color(0xffd34f00),
+  value: Color(0xffdb4437),
   light: ColorFamily(
     color: Color(0xff8d3200),
     onColor: Color(0xffffffff),
-    colorContainer: Color(0xffca4b00),
-    onColorContainer: Color(0xffffffff),
+    colorContainer: Color(0xffef5350),
+    onColorContainer: Color(0xff3e0000),
   ),
   dark: ColorFamily(
-    color: Color(0xffffb598),
-    onColor: Color(0xff591d00),
-    colorContainer: Color(0xffc54900),
-    onColorContainer: Color(0xffffffff),
+    color: Color(0xffffb3b3),
+    onColor: Color(0xff680003),
+    colorContainer: Color(0xffd32f2f),
+    onColorContainer: Color(0xff1a0000),
   ),
 );
 
@@ -60,15 +60,15 @@ const _googleBlue = CustomColor(
   value: Color(0xff3089ff),
   light: ColorFamily(
     color: Color(0xff1e5ba8),
-    onColor: Color(0xfffcfbff),
-    colorContainer: Color(0xff5ba2ff),
-    onColorContainer: Color(0xff060404),
+    onColor: Color(0xffffffff),
+    colorContainer: Color(0xff66b3ff),
+    onColorContainer: Color(0xff001d36),
   ),
   dark: ColorFamily(
     color: Color(0xff7db4ff),
-    onColor: Color(0xff060404),
-    colorContainer: Color(0xff2470d9),
-    onColorContainer: Color(0xfffcfbff),
+    onColor: Color(0xff001d36),
+    colorContainer: Color(0xff4d9fff),
+    onColorContainer: Color(0xff000a14),
   ),
 );
 
@@ -92,37 +92,37 @@ const _success = CustomColor(
 
 /// warning
 const _warning = CustomColor(
-  seed: Color(0xfffbbd23),
-  value: Color(0xffe3c62a),
+  seed: Color(0xffff9800),
+  value: Color(0xffff9800),
   light: ColorFamily(
-    color: Color(0xff6e5e00),
+    color: Color(0xff8f4e00),
     onColor: Color(0xffffffff),
-    colorContainer: Color(0xffebcd32),
-    onColorContainer: Color(0xff453b00),
+    colorContainer: Color(0xffffb951),
+    onColorContainer: Color(0xff5d3200),
   ),
   dark: ColorFamily(
-    color: Color(0xffffec9b),
-    onColor: Color(0xff393000),
-    colorContainer: Color(0xffdec124),
-    onColorContainer: Color(0xff3c3200),
+    color: Color(0xffffcc7a),
+    onColor: Color(0xff4a2800),
+    colorContainer: Color(0xfff09000),
+    onColorContainer: Color(0xff1f1100),
   ),
 );
 
 /// error
 const _error = CustomColor(
-  seed: Color(0xfff87272),
-  value: Color(0xfff6764f),
+  seed: Color(0xffe53935),
+  value: Color(0xffe53935),
   light: ColorFamily(
-    color: Color(0xffa53b19),
+    color: Color(0xffb71c1c),
     onColor: Color(0xffffffff),
-    colorContainer: Color(0xffff845f),
-    onColorContainer: Color(0xff3c0a00),
+    colorContainer: Color(0xffef5350),
+    onColorContainer: Color(0xff3e0000),
   ),
   dark: ColorFamily(
-    color: Color(0xffffb59f),
-    onColor: Color(0xff5f1600),
-    colorContainer: Color(0xffed6f49),
-    onColorContainer: Color(0xff000000),
+    color: Color(0xffffb3b3),
+    onColor: Color(0xff680003),
+    colorContainer: Color(0xffd32f2f),
+    onColorContainer: Color(0xff1a0000),
   ),
 );
 
@@ -133,14 +133,68 @@ const _appYellow = CustomColor(
   light: ColorFamily(
     color: Color(0xFF6E5E00),
     onColor: Color(0xFFFFFFFF),
-    colorContainer: Color(0xFFE5C61D),
-    onColorContainer: Color(0xFF403600),
+    colorContainer: Color(0xFFF0FF80),
+    onColorContainer: Color(0xFF2A2E00),
   ),
   dark: ColorFamily(
-    color: Color(0xFFFFE259),
-    onColor: Color(0xFF393000),
-    colorContainer: Color(0xFFD5B800),
-    onColorContainer: Color(0xFF352C00),
+    color: Color(0xFFF4FF61),
+    onColor: Color(0xFF2A2E00),
+    colorContainer: Color(0xFFE8F74D),
+    onColorContainer: Color(0xFF1F2300),
+  ),
+);
+
+/// gold medal
+const _gold = CustomColor(
+  seed: Color(0xFFFFD700),
+  value: Color(0xFFFFD700),
+  light: ColorFamily(
+    color: Color(0xFF8B6914),
+    onColor: Color(0xFFFFFFFF),
+    colorContainer: Color(0xFFFFD700),
+    onColorContainer: Color(0xFF2A1800),
+  ),
+  dark: ColorFamily(
+    color: Color(0xFFFFE082),
+    onColor: Color(0xFF2A1800),
+    colorContainer: Color(0xFFFFD700),
+    onColorContainer: Color(0xFF2A1800),
+  ),
+);
+
+/// silver medal
+const _silver = CustomColor(
+  seed: Color(0xFFC0C0C0),
+  value: Color(0xFFC0C0C0),
+  light: ColorFamily(
+    color: Color(0xFF6E6E6E),
+    onColor: Color(0xFFFFFFFF),
+    colorContainer: Color(0xFFC0C0C0),
+    onColorContainer: Color(0xFF1C1C1C),
+  ),
+  dark: ColorFamily(
+    color: Color(0xFFE0E0E0),
+    onColor: Color(0xFF1C1C1C),
+    colorContainer: Color(0xFFC0C0C0),
+    onColorContainer: Color(0xFF1C1C1C),
+  ),
+);
+
+/// bronze medal
+const _bronze = CustomColor(
+  seed: Color(0xFFCD7F32),
+  value: Color(0xFFCD7F32),
+  light: ColorFamily(
+    color: Color(0xFF8B4513),
+    onColor: Color(0xFFFFFFFF),
+    colorContainer: Color(0xFFCD7F32),
+    onColorContainer: Color(0xFF2A1400),
+  ),
+  dark: ColorFamily(
+    color: Color(0xFFE6A85C),
+    onColor: Color(0xFF2A1400),
+    colorContainer: Color(0xFFCD7F32),
+    onColorContainer: Color(0xFF2A1400),
   ),
 );
 
@@ -153,6 +207,9 @@ const _extendedColor = ExtendedColor(
   warning: _warning,
   error: _error,
   appYellow: _appYellow,
+  gold: _gold,
+  silver: _silver,
+  bronze: _bronze,
 );
 
 class ExtendedColor extends ThemeExtension<CustomColor> {
@@ -165,6 +222,9 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
     required this.warning,
     required this.error,
     required this.appYellow,
+    required this.gold,
+    required this.silver,
+    required this.bronze,
   });
 
   final CustomColor googleYellow;
@@ -175,6 +235,9 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
   final CustomColor warning;
   final CustomColor error;
   final CustomColor appYellow;
+  final CustomColor gold;
+  final CustomColor silver;
+  final CustomColor bronze;
 
   @override
   ThemeExtension<CustomColor> copyWith({
@@ -186,6 +249,9 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
     CustomColor? warning,
     CustomColor? error,
     CustomColor? appYellow,
+    CustomColor? gold,
+    CustomColor? silver,
+    CustomColor? bronze,
   }) {
     return ExtendedColor(
       googleYellow: googleYellow ?? this.googleYellow,
@@ -196,6 +262,9 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
       warning: warning ?? this.warning,
       error: error ?? this.error,
       appYellow: appYellow ?? this.appYellow,
+      gold: gold ?? this.gold,
+      silver: silver ?? this.silver,
+      bronze: bronze ?? this.bronze,
     );
   }
 
@@ -213,6 +282,9 @@ class ExtendedColor extends ThemeExtension<CustomColor> {
       warning: warning.lerp(other.warning, t),
       error: error.lerp(other.error, t),
       appYellow: appYellow.lerp(other.appYellow, t),
+      gold: gold.lerp(other.gold, t),
+      silver: silver.lerp(other.silver, t),
+      bronze: bronze.lerp(other.bronze, t),
     );
   }
 }

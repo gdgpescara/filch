@@ -14,29 +14,27 @@ class UserPointsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppCard(
-      style: AppCardStyle.normal,
-      child: BlocProvider<UserPointsCubit>(
-        create: (context) => GetIt.I()..loadPoints(),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              t.profile.my_points.label,
-              style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            BlocBuilder<UserPointsCubit, UserPointsState>(
-              builder: (context, state) {
-                return switch (state) {
-                  UserPointsLoading() => const Center(child: LoaderAnimation()),
-                  UserPointsLoaded() => UserPointsSummary(navigateToAllPoints: navigateToAllPoints),
-                  UserPointsFailure() => Center(child: Text(t.common.errors.generic_retry)),
-                };
-              },
-            ),
-          ],
-        ),
+    return BlocProvider<UserPointsCubit>(
+      create: (context) => GetIt.I()..loadPoints(),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            t.profile.my_points.label,
+            style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: Spacing.s),
+          BlocBuilder<UserPointsCubit, UserPointsState>(
+            builder: (context, state) {
+              return switch (state) {
+                UserPointsLoading() => const Center(child: LoaderAnimation()),
+                UserPointsLoaded() => UserPointsSummary(navigateToAllPoints: navigateToAllPoints),
+                UserPointsFailure() => Center(child: Text(t.common.errors.generic_retry)),
+              };
+            },
+          ),
+        ],
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:i18n/i18n.dart';
 import '../../ui.dart';
 
@@ -13,14 +14,60 @@ class UserInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        if (user?.displayName != null && user?.displayName != '') ...[
-          LabelValue(label: t.profile.user_info.name.label, value: user?.displayName),
+        if (user?.displayName != null && (user?.displayName?.isNotEmpty ?? false)) ...[
+          _buildInfoRow(
+            context,
+            icon: FontAwesomeIcons.user,
+            label: t.profile.user_info.name.label,
+            value: user!.displayName!,
+          ),
           const SizedBox(height: Spacing.m),
         ],
-        LabelValue(label: t.profile.user_info.email.label, value: user?.email),
-        extra ?? const SizedBox.shrink(),
+        _buildInfoRow(
+          context,
+          icon: FontAwesomeIcons.envelope,
+          label: t.profile.user_info.email.label,
+          value: user?.email ?? 'N/A',
+        ),
+        if (extra != null) ...[
+          const SizedBox(height: Spacing.m),
+          extra!,
+        ],
+      ],
+    );
+  }
+
+  Widget _buildInfoRow(BuildContext context, {required IconData icon, required String label, required String value}) {
+    return Row(
+      children: [
+        Container(
+          width: 40,
+          height: 40,
+          decoration: BoxDecoration(
+            color: context.colorScheme.primaryContainer,
+            borderRadius: BorderRadius.circular(RadiusSize.s),
+          ),
+          child: Icon(
+            icon,
+            size: 20,
+            color: context.colorScheme.onPrimaryContainer,
+          ),
+        ),
+        const SizedBox(width: Spacing.m),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(label, style: context.textTheme.bodySmall),
+              const SizedBox(height: Spacing.xs),
+              Text(
+                value,
+                style: context.textTheme.titleSmall?.copyWith(fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }

@@ -1,5 +1,5 @@
 from logger_config import logger
-from firebase_functions.https_fn import on_call, CallableRequest, on_request, Request
+from firebase_functions.https_fn import on_call, CallableRequest
 from firebase_admin import auth, firestore
 from flask import jsonify, Response
 from shared.env import FIREBASE_REGION
@@ -7,11 +7,12 @@ from features.points.types.points import Points
 from shared.get_signed_in_user import get_signed_in_user
 from features.points.types.points_type_enum import PointsTypeEnum
 from firestore_client import client as firestore_client
+from google.cloud.firestore import SERVER_TIMESTAMP
 
 @on_call(region=FIREBASE_REGION)
-def assign_points(request: CallableRequest) -> Response:
+def assign_points(request: CallableRequest) -> str:
     logged_user = get_signed_in_user(request)
-    logger.info(f"Assigning points: {request.data}")
+    
     assigned_points = int(request.data.get("points"))
     point_type = request.data.get("type")
     quest_id = request.data.get("quest", None)
@@ -19,7 +20,8 @@ def assign_points(request: CallableRequest) -> Response:
     users = [auth.get_user(uid) for uid in user_ids]
     filtered_users = []
 
-    if point_type == PointsTypeEnum.staff or point_type == PointsTypeEnum.community:
+    # If the point type is staff, community, or sponsor, ensure no duplicate assignments
+    if point_type in (PointsTypeEnum.staff, PointsTypeEnum.community, PointsTypeEnum.sponsor):
         batch = firestore_client.batch()
 
         for user in users:
@@ -28,6 +30,7 @@ def assign_points(request: CallableRequest) -> Response:
                 .document(user.uid)
                 .collection("points")
                 .where("type", "==", point_type)
+                .where("assignedBy", "==", logged_user.email)
                 .get()
             )
 
@@ -39,10 +42,18 @@ def assign_points(request: CallableRequest) -> Response:
         batch.commit()
     else:
         filtered_users = users
+        
+    # If no users to assign points to, return early
+    if not filtered_users:
+        return "points_already_assigned"
 
-    points = Points(type=point_type, points=assigned_points,
-                    assigned_at=firestore.SERVER_TIMESTAMP, quest=quest_id,
-                    assigned_by=logged_user.uid)
+    points = Points(
+        type=point_type, 
+        points=assigned_points,
+        assignedAt=SERVER_TIMESTAMP, 
+        quest=quest_id,
+        assignedBy=logged_user.email
+    )
 
     logger.info(f"Points: {points}")
 
@@ -79,14 +90,6 @@ def assign_points(request: CallableRequest) -> Response:
             )
             batch.delete(queue_ref)
 
-    # Handle actor quest timeline update
-    if point_type == PointsTypeEnum.quest and quest_id:
-        decoded_id = quest_id.split("-")
-        if len(decoded_id) == 3 and decoded_id[0] == "actor":
-            timeline_ref = firestore_client.collection("timelines").document(decoded_id[1])
-            if timeline_ref.get().exists:
-                batch.update(timeline_ref, {"count": firestore.Increment(1)})
-
     batch.commit()
 
-    return True
+    return "success"

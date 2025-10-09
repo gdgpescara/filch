@@ -11,7 +11,10 @@
       "assign_button": "Assegna punti",
       "assigning": "Assegnazione dei punti...",
       "success": "I punti sono stati assegnati con successo.",
-      "error": "Si è verificato un errore durante l'assegnazione dei punti, riprova più tardi."
+      "generic_error": "Si è verificato un errore durante l'assegnazione dei punti, riprova più tardi.",
+      "errors(map)": {
+        "points_already_assigned": "Hai già assegnato punti agli utenti selezionati."
+      }
     }
   },
   "t_shirt_assignment": {

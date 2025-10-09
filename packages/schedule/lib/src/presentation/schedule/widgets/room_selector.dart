@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ui/ui.dart';
 
 import '../../../models/models.dart';
 import '../state/day_sessions_cubit.dart';
@@ -30,7 +31,7 @@ class _RoomSelectorState extends State<RoomSelector> with SingleTickerProviderSt
 
   @override
   Widget build(BuildContext context) {
-    return TabBar(
+    return AppTabBar.secondary(
       isScrollable: true,
       controller: tabController,
       tabAlignment: TabAlignment.start,

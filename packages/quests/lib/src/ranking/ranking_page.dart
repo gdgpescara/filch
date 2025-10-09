@@ -4,9 +4,9 @@ import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-import 'ranking_card.dart';
 import 'ranking_list.dart';
 import 'state/ranking_cubit.dart';
+import 'user_ranking_card.dart';
 
 class RankingPage extends StatelessWidget {
   const RankingPage({super.key});
@@ -17,18 +17,20 @@ class RankingPage extends StatelessWidget {
       create: (context) => GetIt.I()..init(),
       child: Scaffold(
         extendBody: true,
-        body: Padding(
-          padding: const EdgeInsets.only(top: Spacing.xxl),
-          child: BlocBuilder<RankingCubit, RankingState>(
-            buildWhen: (previous, current) => current is! YourRankingState,
-            builder: (context, state) {
-              return switch (state) {
-                RankingLoading() => const Center(child: LoaderAnimation()),
-                RankingLoaded() => const RankingList(),
-                RankingFailure() => Center(child: Text(t.common.errors.generic_retry)),
-                _ => const SizedBox.shrink(),
-              };
-            },
+        body: SafeArea(
+          bottom: false,
+          child: Background(
+            child: BlocBuilder<RankingCubit, RankingState>(
+              buildWhen: (previous, current) => current is! YourRankingState,
+              builder: (context, state) {
+                return switch (state) {
+                  RankingLoading() => const Center(child: LoaderAnimation()),
+                  RankingLoaded() => const RankingList(),
+                  RankingFailure() => Center(child: Text(t.common.errors.generic_retry)),
+                  _ => const SizedBox.shrink(),
+                };
+              },
+            ),
           ),
         ),
         bottomNavigationBar: BlocBuilder<RankingCubit, RankingState>(
@@ -36,14 +38,19 @@ class RankingPage extends StatelessWidget {
           builder: (context, state) {
             return Container(
               padding: const EdgeInsets.all(Spacing.s),
-              height: 115 + Spacing.s * 2,
               child: switch (state) {
-                YourRankingLoading() => const LoaderAnimation(),
-                YourRankingLoaded(item: final item, position: final position) => DecoratedBox(
-                  decoration: BoxDecoration(color: context.colorScheme.tertiary.withValues(alpha: .2)),
-                  child: RankingCard(item: item, position: position, isUser: true, style: AppCardStyle.caption),
+                YourRankingLoading() => const SizedBox(
+                  height: 115 + Spacing.s * 2,
+                  child: LoaderAnimation(),
                 ),
-                YourRankingFailure() => Text(t.common.errors.generic_retry),
+                YourRankingLoaded(item: final item, position: final position) => UserRankingCard(
+                  item: item,
+                  position: position,
+                ),
+                YourRankingFailure() => SizedBox(
+                  height: 115 + Spacing.s * 2,
+                  child: Center(child: Text(t.common.errors.generic_retry)),
+                ),
                 _ => const SizedBox.shrink(),
               },
             );

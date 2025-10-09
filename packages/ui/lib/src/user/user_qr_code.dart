@@ -21,30 +21,16 @@ class UserQrCode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: dimension + (dimension * 0.1),
-      child: Stack(
-        children: [
-          // Align(
-          //   alignment: Alignment.bottomCenter,
-          //   child: SvgPicture.asset('images/lines.svg', package: 'assets', excludeFromSemantics: true),
-          // ),
-          Align(
-            alignment: Alignment.topCenter,
-            child: SizedBox.square(
-              dimension: dimension,
-              child: QrImageView(
-                data: _buildData,
-                backgroundColor: context.colorScheme.surface,
-                dataModuleStyle: QrDataModuleStyle(
-                  dataModuleShape: QrDataModuleShape.square,
-                  color: context.colorScheme.onSurface,
-                ),
-                eyeStyle: QrEyeStyle(color: context.colorScheme.onSurface, eyeShape: QrEyeShape.square),
-              ),
-            ),
-          ),
-        ],
+    return AppCard(
+      style: AppCardStyle.normal,
+      child: QrImageView(
+        data: _buildData,
+        size: dimension,
+        backgroundColor: context.colorScheme.surface,
+        dataModuleStyle: QrDataModuleStyle(
+          dataModuleShape: QrDataModuleShape.square,
+          color: context.colorScheme.onSurface,
+        ),
       ),
     );
   }

@@ -95,13 +95,14 @@ class _SessionTimeState extends State<SessionTime> {
                       decoration: hasDelay ? TextDecoration.lineThrough : null,
                     ),
                   ),
-                  Text(
-                    '${dateFormatter.format(widget.session.realStartsAt)} - ${dateFormatter.format(widget.session.realEndsAt)}',
-                    style: context.textTheme.bodySmall?.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: appColors.googleRed.seed,
+                  if (hasDelay)
+                    Text(
+                      '${dateFormatter.format(widget.session.realStartsAt)} - ${dateFormatter.format(widget.session.realEndsAt)}',
+                      style: context.textTheme.bodySmall?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: appColors.googleRed.seed,
+                      ),
                     ),
-                  ),
                 ],
               ),
             ],

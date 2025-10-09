@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
 import '../state/sign_in_cubit.dart';
 import 'providers_sign_in.dart';
-import 'staff_sign_in.dart';
 
 part 'state_listener.dart';
 
@@ -39,6 +39,27 @@ class SignInPage extends StatelessWidget {
                           child: const Logo(),
                         ),
                       ),
+                      const SizedBox(height: Spacing.xl),
+                      RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          children: [
+                            TextSpan(
+                              text: '${t.auth.welcome.title}\n',
+                              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                                fontWeight: FontWeight.bold,
+                                color: context.colorScheme.onSurface,
+                              ),
+                            ),
+                            TextSpan(
+                              text: t.auth.welcome.subtitle,
+                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                color: context.colorScheme.onSurfaceVariant,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       const SizedBox(height: Spacing.xxl),
                       Flexible(
                         child: BlocBuilder<SignInCubit, SignInState>(
@@ -46,7 +67,6 @@ class SignInPage extends StatelessWidget {
                           builder: (context, state) {
                             Widget child() {
                               return switch (state) {
-                                SignInWithUserPassword() => const StaffSignIn(),
                                 SignInWithProviders() => const ProvidersSignIn(),
                                 _ => const SizedBox(),
                               };
@@ -60,10 +80,6 @@ class SignInPage extends StatelessWidget {
                   ),
                 ),
               ),
-              // bottomNavigationBar: const SafeArea(
-              //   top: false,
-              //   child: Padding(padding: EdgeInsets.all(20), child: SignInSwitcherButton()),
-              // ),
             ),
           ),
         ),
