@@ -20,10 +20,6 @@ class HomePage extends StatelessWidget {
     Routefly.pushNavigate(routePaths.path);
   }
 
-  void _navigateToLogin() {
-    Routefly.pushNavigate(routePaths.signIn);
-  }
-
   void _navigateToAllPoints() {
     Routefly.pushNavigate(routePaths.user.allPoints);
   }
@@ -74,7 +70,6 @@ class HomePage extends StatelessWidget {
                   ],
                   UserProfilePage(
                     navigateToSplash: _navigateToSplash,
-                    navigateToLogin: _navigateToLogin,
                     navigateToAllPoints: _navigateToAllPoints,
                     embedded: true,
                   ),

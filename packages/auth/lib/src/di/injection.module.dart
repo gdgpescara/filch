@@ -15,6 +15,7 @@ import 'package:auth/src/use_cases/count_users_with_t_shirt_use_case.dart'
     as _i714;
 import 'package:auth/src/use_cases/count_users_without_t_shirt_use_case.dart'
     as _i173;
+import 'package:auth/src/use_cases/get_signed_user_team_use_case.dart' as _i491;
 import 'package:auth/src/use_cases/get_signed_user_use_case.dart' as _i704;
 import 'package:auth/src/use_cases/google_sign_in_use_case.dart' as _i395;
 import 'package:auth/src/use_cases/has_signed_user_use_case.dart' as _i499;
@@ -69,6 +70,11 @@ class AuthPackageModule extends _i526.MicroPackageModule {
           gh<_i395.GoogleSignInUseCase>(),
           gh<_i1021.AppleSignInUseCase>(),
         ));
+    gh.lazySingleton<_i491.GetSignedUserTeamUseCase>(
+        () => _i491.GetSignedUserTeamUseCase(
+              gh<_i974.FirebaseFirestore>(),
+              gh<_i59.FirebaseAuth>(),
+            ));
     gh.lazySingleton<_i246.UploadFcmTokenUseCase>(
         () => _i246.UploadFcmTokenUseCase(
               gh<_i974.FirebaseFirestore>(),

@@ -1,12 +1,13 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
 import '../../ui.dart';
 
 class UserPicture extends StatelessWidget {
-  const UserPicture({super.key, this.imageUrl, this.badgeImageName});
+  const UserPicture({super.key, this.imageUrl, this.teamImageUrl});
 
   final String? imageUrl;
-  final String? badgeImageName;
+  final String? teamImageUrl;
 
   static const double _totalSize = 140;
   static const double _borderSize = 110;
@@ -22,7 +23,7 @@ class UserPicture extends StatelessWidget {
           alignment: Alignment.center,
           children: [
             _buildGradientBorder(context),
-            if (badgeImageName != null) _buildBadge(context),
+            if (teamImageUrl != null) _buildBadge(context),
           ],
         ),
       ),
@@ -68,11 +69,13 @@ class UserPicture extends StatelessWidget {
         color: context.colorScheme.surface,
       ),
       child: imageUrl != null
-          ? Image.network(
-              imageUrl!,
-              fit: BoxFit.cover,
-              semanticLabel: t.common.user.image.semantic,
-              errorBuilder: (context, error, stackTrace) => _buildPlaceholder(context),
+          ? Semantics(
+              label: t.common.user.image.semantic,
+              child: CachedNetworkImage(
+                imageUrl: imageUrl!,
+                fit: BoxFit.cover,
+                errorWidget: (context, url, error) => _buildPlaceholder(context),
+              ),
             )
           : _buildPlaceholder(context),
     );
@@ -114,14 +117,15 @@ class UserPicture extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(6),
           child: ClipOval(
-            child: Image.asset(
-              'profile_badges/$badgeImageName.png',
-              package: 'assets',
-              fit: BoxFit.contain,
-              errorBuilder: (context, error, stackTrace) => Icon(
-                Icons.star_rounded,
-                color: context.colorScheme.primary,
-                size: 30,
+            child: ExcludeSemantics(
+              child: CachedNetworkImage(
+                imageUrl: teamImageUrl!,
+                fit: BoxFit.contain,
+                errorWidget: (context, error, stackTrace) => Icon(
+                  Icons.star_rounded,
+                  color: context.colorScheme.primary,
+                  size: 30,
+                ),
               ),
             ),
           ),

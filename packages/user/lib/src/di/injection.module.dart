@@ -32,6 +32,7 @@ class UserPackageModule extends _i526.MicroPackageModule {
           gh<_i662.GetSignedUserUseCase>(),
           gh<_i662.SignOutUseCase>(),
           gh<_i662.IsStaffUserUseCase>(),
+          gh<_i662.GetSignedUserTeamUseCase>(),
         ));
     gh.factory<_i120.UserTShirtCubit>(
         () => _i120.UserTShirtCubit(gh<_i899.TShirtPickUpStateUseCase>()));

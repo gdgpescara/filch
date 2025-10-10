@@ -10,12 +10,12 @@ class SortingCeremonyLoading extends SortingCeremonyState {
 }
 
 class SortingCeremonySuccess extends SortingCeremonyState {
-  const SortingCeremonySuccess({required this.house});
+  const SortingCeremonySuccess({required this.team});
 
-  final String house;
+  final Team team;
 
   @override
-  List<Object?> get props => [house];
+  List<Object?> get props => [team];
 }
 
 class SortingCeremonyFailure extends SortingCeremonyState {

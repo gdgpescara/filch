@@ -4,19 +4,18 @@ import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-import '../use_cases/remove_account_use_case.dart';
+import '../../auth.dart';
 
 class RemoveAccountButton extends StatelessWidget {
-  const RemoveAccountButton({super.key, required this.onNeedLogin, required this.onAccountRemoved});
+  const RemoveAccountButton({super.key, required this.onAccountRemoved});
 
-  final VoidCallback onNeedLogin;
   final VoidCallback onAccountRemoved;
 
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
       onPressed: () => _removeAccount(context),
-      child: Text(t.profile.remove_account.button.toUpperCase()),
+      child: Text(t.user.profile.remove_account.button.toUpperCase()),
     );
   }
 
@@ -25,13 +24,13 @@ class RemoveAccountButton extends StatelessWidget {
       context: context,
       builder: (context) {
         return AlertDialog(
-          title: Text(t.profile.remove_account.dialog.title),
-          content: Text(t.profile.remove_account.dialog.content),
+          title: Text(t.user.profile.remove_account.dialog.title),
+          content: Text(t.user.profile.remove_account.dialog.content),
           actions: [
             TextButton(onPressed: () => Navigator.pop(context), child: Text(t.common.buttons.cancel)),
             TextButton(
               onPressed: () => _confirmAccountRemoval(context),
-              child: Text(t.profile.remove_account.dialog.confirm),
+              child: Text(t.user.profile.remove_account.dialog.confirm),
             ),
           ],
         );
@@ -52,7 +51,7 @@ class RemoveAccountButton extends StatelessWidget {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
-          t.profile.remove_account.success,
+          t.user.profile.remove_account.success,
           style: context.textTheme.bodyMedium?.copyWith(
             color: appColors.success.brightnessColor(context).onColorContainer,
           ),
@@ -71,11 +70,11 @@ class RemoveAccountButton extends StatelessWidget {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text(t.profile.remove_account.need_login.dialog.title),
-            content: Text(t.profile.remove_account.need_login.dialog.content),
+            title: Text(t.user.profile.remove_account.need_login.dialog.title),
+            content: Text(t.user.profile.remove_account.need_login.dialog.content),
             actions: [
               TextButton(onPressed: () => Navigator.pop(context), child: Text(t.common.buttons.cancel)),
-              TextButton(onPressed: onNeedLogin, child: Text(t.common.buttons.ok)),
+              TextButton(onPressed: GetIt.I<SignOutUseCase>().call, child: Text(t.common.buttons.ok)),
             ],
           );
         },
@@ -87,7 +86,7 @@ class RemoveAccountButton extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            t.profile.remove_account.error,
+            t.user.profile.remove_account.error,
             style: context.textTheme.bodyMedium?.copyWith(
               color: appColors.error.brightnessColor(context).onColorContainer,
             ),

@@ -7,6 +7,9 @@
       "email": {
         "label": "email: "
       },
+      "team": {
+        "label": "team: "
+      },
       "t_shirt": {
         "picked": "You have collected your t-shirt!",
         "not_picked": "Don't forget to collect your t-shirt!"
@@ -20,13 +23,23 @@
     },
     "remove_account": {
       "button": "Remove Account",
-      "dialog": {
-        "title": "Remove Account",
-        "content": "Are you sure you want to remove your account? This action cannot be undone.",
-        "confirm": "Remove Account"
+      "need_login": {
+        "dialog": {
+          "content": "This operation is sensitive and requires recent authentication. Log in again and retry again.",
+          "title": "Need to fresh login"
+        }
       },
-      "success": "Your account has been removed.",
-      "error": "An error occurred while removing your account."
+      "dialog": {
+        "confirm": "Remove Account",
+        "content": "Are you sure you want to remove your account? This action cannot be undone.",
+        "title": "Remove Account"
+      },
+      "error": "An error occurred while removing your account.",
+      "success": "Your account has been removed."
+    },
+    "qr_code": {
+      "show": "Show QR Code",
+      "close": "Close"
     }
   },
   "my_points_details": {

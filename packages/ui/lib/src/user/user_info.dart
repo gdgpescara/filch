@@ -5,10 +5,10 @@ import 'package:i18n/i18n.dart';
 import '../../ui.dart';
 
 class UserInfo extends StatelessWidget {
-  const UserInfo(this.user, {super.key, this.extra});
+  const UserInfo(this.user, {super.key, this.teamName});
 
   final User? user;
-  final Widget? extra;
+  final String? teamName;
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class UserInfo extends StatelessWidget {
           _buildInfoRow(
             context,
             icon: FontAwesomeIcons.user,
-            label: t.profile.user_info.name.label,
+            label: t.user.profile.user_info.name.label,
             value: user!.displayName!,
           ),
           const SizedBox(height: Spacing.m),
@@ -27,12 +27,17 @@ class UserInfo extends StatelessWidget {
         _buildInfoRow(
           context,
           icon: FontAwesomeIcons.envelope,
-          label: t.profile.user_info.email.label,
+          label: t.user.profile.user_info.email.label,
           value: user?.email ?? 'N/A',
         ),
-        if (extra != null) ...[
+        if (teamName != null) ...[
           const SizedBox(height: Spacing.m),
-          extra!,
+          _buildInfoRow(
+            context,
+            icon: FontAwesomeIcons.users,
+            label: t.user.profile.user_info.team.label,
+            value: teamName!,
+          ),
         ],
       ],
     );

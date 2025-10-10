@@ -3,21 +3,31 @@ import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../sorting_ceremony.dart';
+import '../use_cases/get_team_use_case.dart';
 
 part 'sorting_ceremony_state.dart';
 
 @injectable
 class SortingCeremonyCubit extends SafeEmitterCubit<SortingCeremonyState> {
-  SortingCeremonyCubit(this._assignTeamUseCase) : super(SortingCeremonyLoading());
+  SortingCeremonyCubit(
+    this._assignTeamUseCase,
+    this._getTeamUseCase,
+  ) : super(SortingCeremonyLoading());
 
   final AssignTeamUseCase _assignTeamUseCase;
-
+  final GetTeamUseCase _getTeamUseCase;
+  
   Future<void> startSortingCeremony() async {
     await Future<void>.delayed(const Duration(seconds: 10));
     await _assignTeamUseCase().when(
       progress: () => emit(SortingCeremonyLoading()),
-      success: (house) async {
-        emit(SortingCeremonySuccess(house: house));
+      success: (teamId) async {
+        final team = await _getTeamUseCase(teamId);
+        if (team == null) {
+          emit(const SortingCeremonyFailure(failure: 'Team not found'));
+          return;
+        }
+        emit(SortingCeremonySuccess(team: team));
         await Future<void>.delayed(const Duration(seconds: 15));
         emit(SortingCeremonyFinish());
       },

@@ -26,6 +26,7 @@ dependencies:
   package_info_plus: ^9.0.0
   confetti: ^0.8.0
   font_awesome_flutter: ^10.10.0
+  cached_network_image: ^3.4.1
 
 dev_dependencies:
   flutter_test:

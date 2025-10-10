@@ -29,7 +29,7 @@ class SortingCeremonyPage extends StatelessWidget {
               builder: (context, state) {
                 final child = switch (state) {
                   SortingCeremonyLoading() => const SortingLoading(),
-                  SortingCeremonySuccess(house: final house) => SortingSuccess(house: house),
+                  SortingCeremonySuccess(team: final team) => SortingSuccess(team: team),
                   SortingCeremonyFailure(failure: final failure) => SortingFailure(failure: failure),
                   _ => const SizedBox.shrink(),
                 };

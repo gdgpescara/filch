@@ -1,14 +1,3 @@
 {
-  "assigned": "You are in $house",
-  "loading": [
-    "Hmm, difficult, very difficult. Much better than I ever was, would you tell me where you want to go?",
-    "Where you should be? This is the place that will make you great.",
-    "Yes, yes, of course... it's your desire that tells me what to do..."
-  ],
-  "assignment(map)": {
-    "pytherin": "In Pytherin, you will find your strength, oh wise and skilled developer. Here, the art of programming reigns supreme, and with Python, you will transform ideas into reality.",
-    "kerasdor": "In Kerasdor, oh curious mind, artificial intelligence and deep learning are the pulsating heart. Here, your passion for innovation and discovery will find its true home.",
-    "dashclaw": "Mmmmh, I see you're full of creativity with an eye for detail? Then Dashclaw is the house for you. Here, you will combine your UI talent with the power of Dash to create enchanting and inspiring applications.",
-    "gopherpuff": "In Gopherpuff, your determination and practicality will find fertile ground. With the spirit of the Go language, you will build robust and efficient systems, solid foundations on which great projects will rise."
-  }
+  "assigned": "You are in $team"
 }
