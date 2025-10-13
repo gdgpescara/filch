@@ -92,7 +92,7 @@ class _SessionTimeState extends State<SessionTime> {
                     '${dateFormatter.format(widget.session.startsAt)} - ${dateFormatter.format(widget.session.endsAt)}',
                     style: context.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w700,
-                      decoration: hasDelay ? TextDecoration.lineThrough : null,
+                      decoration: hasDelay && !widget.session.isEnded ? TextDecoration.lineThrough : null,
                     ),
                   ),
                   if (hasDelay && !widget.session.isEnded)
