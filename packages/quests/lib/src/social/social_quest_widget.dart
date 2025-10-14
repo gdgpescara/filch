@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../commons/active_quest/quest_description_widget.dart';
+import '../commons/active_quest/quest_qr_code_widget.dart';
 import '../current_quest/state/current_quest_cubit.dart';
 import '../models/quest_sub_types_enum.dart';
 import 'qr_code/social_qr_code_view.dart';
@@ -21,7 +22,8 @@ class SocialQuestWidget extends StatelessWidget {
             QuestDescriptionWidget(activeQuest: state.activeQuest),
             const SizedBox(height: 20),
             switch (state.activeQuest.quest.subType) {
-              QuestSubTypeEnum.qrCode => const SocialQrCodeView(),
+              QuestSubTypeEnum.scan => const SocialQrCodeView(),
+              QuestSubTypeEnum.qrCode => const QuestQrCodeWidget(),
               _ => const SizedBox(),
             },
           ],

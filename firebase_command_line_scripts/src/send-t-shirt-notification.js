@@ -9,7 +9,7 @@ export const sendTShirtNotification = async () => {
       .collection("users")
       .where("tShirtPickupRequested", "==", false)
       .where("tShirtPickup", "==", false)
-      .where("isStaff", "==", false)
+      .where("staff", "==", false)
       .where("fcmToken", "!=", null)
       .get();
 

@@ -14,7 +14,8 @@ class GetRankingUseCase {
     return runSafetyStream(() async* {
       yield* _firestore
           .collection('users')
-          .where('isStaff', isNotEqualTo: true)
+          .where('staff', isNotEqualTo: true)
+          .where('sponsor', isNotEqualTo: true)
           .orderBy('points', descending: true)
           .limit(10)
           .snapshots()

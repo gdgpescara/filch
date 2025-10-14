@@ -18,6 +18,11 @@ const steps = [
     value: registerStaffUser,
   },
   {
+    name: "register-sponsor-user",
+    message: "Register sponsor user",
+    value: registerSponsorUser,
+  },
+  {
     name: "upload-quests",
     message: "Upload quests",
     value: updateQuests,

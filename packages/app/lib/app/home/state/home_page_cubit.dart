@@ -10,17 +10,23 @@ part 'home_page_state.dart';
 
 @injectable
 class HomePageCubit extends SafeEmitterCubit<HomePageState> {
-  HomePageCubit(this._isRankingFreezedUseCase, this._isStaffUserUseCase) : super(const HomePageState());
+  HomePageCubit(this._isRankingFreezedUseCase, this._staffUserUseCase, this._sponsorUserUseCase) : super(const HomePageState());
 
   final IsRankingFreezedUseCase _isRankingFreezedUseCase;
-  final IsStaffUserUseCase _isStaffUserUseCase;
+  final IsStaffUserUseCase _staffUserUseCase;
+  final IsSponsorUserUseCase _sponsorUserUseCase;
   StreamSubscription<void>? _subscription;
 
   void init() {
     _subscription?.cancel();
-    _isStaffUserUseCase().when(
+    _staffUserUseCase().when(
       progress: () => emit(const HomePageState()),
-      success: (isStaff) => emit(state.copyWith(isStaffUser: isStaff)),
+      success: (staff) => emit(state.copyWith(staffUser: staff)),
+      error: (_) => emit(const HomePageState()),
+    );
+    _sponsorUserUseCase().when(
+      progress: () => emit(const HomePageState()),
+      success: (sponsor) => emit(state.copyWith(sponsorUser: sponsor)),
       error: (_) => emit(const HomePageState()),
     );
     _subscription = _isRankingFreezedUseCase().when(

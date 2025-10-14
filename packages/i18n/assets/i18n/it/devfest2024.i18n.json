@@ -1,6 +1,13 @@
 {
+  "thanks": {
+    "title": "Grazie per aver partecipato!\n",
+    "subtitle": "L'evento è terminato, ma i ricordi rimarranno per sempre.",
+    "see_you_soon_prefix": "Non vediamo l'ora di ",
+    "see_you_soon_bold": "rivederti presto",
+    "see_you_soon_suffix": "! 🌟"
+  },
   "semantic": {
-    "logo": "Back to DevFest Pescara 2024"
+    "logo": "Logo GDG Pescara"
   },
   "delorean_clock": {
     "destination_time": "ORARIO DI DESTINAZIONE",

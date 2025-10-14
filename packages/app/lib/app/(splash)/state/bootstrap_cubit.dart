@@ -14,14 +14,16 @@ part 'bootstrap_state.dart';
 class BootstrapCubit extends Cubit<BootstrapState> {
   BootstrapCubit(
     this._hasSignedUserUseCase,
-    this._isStaffUserUseCase,
+    this._staffUserUseCase,
+    this._sponsorUserUseCase,
     this._needSortingCeremonyUseCase,
     this._uploadQueueExecutorUseCase,
     this._getFeatureFlagsUseCase,
   ) : super(const BootstrapProcessing());
 
   final HasSignedUserUseCase _hasSignedUserUseCase;
-  final IsStaffUserUseCase _isStaffUserUseCase;
+  final IsStaffUserUseCase _staffUserUseCase;
+  final IsSponsorUserUseCase _sponsorUserUseCase;
   final UserNeedSortingCeremonyUseCase _needSortingCeremonyUseCase;
   final UploadQueueExecutorUseCase _uploadQueueExecutorUseCase;
   final GetFeatureFlagsUseCase _getFeatureFlagsUseCase;
@@ -42,9 +44,12 @@ class BootstrapCubit extends Cubit<BootstrapState> {
       return;
     }
 
-    var isStaffUser = false;
+    final (isStaff, isSponsor) = await (
+      _staffUserUseCase(),
+      _sponsorUserUseCase(),
+    ).wait;
 
-    await _isStaffUserUseCase().when(success: (result) => isStaffUser = result);
+    final staffUser = isStaff || isSponsor;
 
     _subscriptions.add(
       _getFeatureFlagsUseCase().when(
@@ -62,7 +67,7 @@ class BootstrapCubit extends Cubit<BootstrapState> {
             emit(const UserNeedSortingCeremony());
             return;
           }
-          if (isStaffUser) {
+          if (staffUser) {
             _subscriptions.add(_uploadQueueExecutorUseCase());
           }
           emit(const AppCanRun());

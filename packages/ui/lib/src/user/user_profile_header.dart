@@ -1,3 +1,4 @@
+import 'package:core/src/models/team.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -6,11 +7,18 @@ import 'package:i18n/i18n.dart';
 import '../../ui.dart';
 
 class UserProfileHeader extends StatelessWidget {
-  const UserProfileHeader({super.key, required this.user, this.teamName, this.teamImageUrl});
+  const UserProfileHeader({
+    super.key,
+    required this.user,
+    this.team,
+    this.staffUser = false,
+    this.sponsorUser = false,
+  });
 
   final firebase_auth.User? user;
-  final String? teamName;
-  final String? teamImageUrl;
+  final Team? team;
+  final bool staffUser;
+  final bool sponsorUser;
 
   @override
   Widget build(BuildContext context) {
@@ -20,8 +28,11 @@ class UserProfileHeader extends StatelessWidget {
           style: AppCardStyle.bordered,
           child: Column(
             children: [
-              UserPicture(imageUrl: user?.photoURL, teamImageUrl: teamImageUrl),
-              UserInfo(user, teamName: teamName),
+              UserPicture(
+                imageUrl: user?.photoURL,
+                teamImageUrl: team?.imageUrl,
+              ),
+              UserInfo(user, teamName: team?.name),
             ],
           ),
         ),
@@ -33,6 +44,22 @@ class UserProfileHeader extends StatelessWidget {
             tooltip: t.user.profile.qr_code.show,
             padding: const EdgeInsets.all(Spacing.s),
             icon: const Icon(FontAwesomeIcons.qrcode),
+          ),
+        ),
+        Positioned(
+          top: Spacing.m,
+          left: Spacing.m,
+          child: AppChip(
+            customColor: staffUser
+                ? appColors.googleYellow
+                : sponsorUser
+                ? appColors.googleBlue
+                : appColors.googleGreen,
+            text: staffUser
+                ? t.user.profile.user_info.roles.staff
+                : sponsorUser
+                ? t.user.profile.user_info.roles.sponsor
+                : t.user.profile.user_info.roles.attendee,
           ),
         ),
       ],

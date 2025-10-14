@@ -18,6 +18,7 @@ class ManagementCubit extends SafeEmitterCubit<ManagementState> {
     this._getMaxRoomDelayUseCase,
     this._countUsersWithTShirtUseCase,
     this._countUsersWithoutTShirtUseCase,
+    this._isSponsorUserUseCase,
   ) : super(const ManagementLoading());
 
   final GetAssignablePointsUseCase _getAssignablePointsUseCase;
@@ -25,26 +26,29 @@ class ManagementCubit extends SafeEmitterCubit<ManagementState> {
   final GetMaxRoomDelayUseCase _getMaxRoomDelayUseCase;
   final CountUsersWithTShirtUseCase _countUsersWithTShirtUseCase;
   final CountUsersWithoutTShirtUseCase _countUsersWithoutTShirtUseCase;
+  final IsSponsorUserUseCase _isSponsorUserUseCase;
 
   StreamSubscription<dynamic>? _subscription;
 
   void load() {
     _subscription =
-        Rx.combineLatest5(
+        Rx.combineLatest6(
+          _isSponsorUserUseCase().asStream(),
           _getAssignablePointsUseCase(),
           _getQuestsUseCase(),
           _getMaxRoomDelayUseCase(),
           _countUsersWithTShirtUseCase(),
           _countUsersWithoutTShirtUseCase(),
-          (points, quests, delay, countWithTShirt, countWithoutTShirt) =>
-              (points, quests, delay, countWithTShirt, countWithoutTShirt),
+          (isSponsor, points, quests, delay, countWithTShirt, countWithoutTShirt) =>
+              (isSponsor, points, quests, delay, countWithTShirt, countWithoutTShirt),
         ).when(
           progress: () => emit(const ManagementLoading()),
           error: (_) => emit(const ManagementFailure()),
           success: (data) {
-            final (pointsResource, questsResource, delay, countWithTShirt, countWithoutTShirt) = data;
+            final (isSponsor, pointsResource, questsResource, delay, countWithTShirt, countWithoutTShirt) = data;
             emit(
               ManagementLoaded(
+                isSponsor: isSponsor,
                 points: pointsResource,
                 quests: questsResource,
                 maxRoomDelay: delay,

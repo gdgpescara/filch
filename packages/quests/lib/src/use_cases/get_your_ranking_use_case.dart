@@ -9,16 +9,16 @@ class GetYourRankingUseCase {
   GetYourRankingUseCase(
     this._firestore,
     this._getSignedUserUseCase,
-    this._isStaffUserUseCase,
+    this._staffUserUseCase,
   );
 
   final FirebaseFirestore _firestore;
   final GetSignedUserUseCase _getSignedUserUseCase;
-  final IsStaffUserUseCase _isStaffUserUseCase;
+  final IsSponsorUserUseCase _staffUserUseCase;
 
   Stream<RankingItem?> call() {
     return runSafetyStream(() async* {
-      if (await _isStaffUserUseCase()) {
+      if (await _staffUserUseCase()) {
         yield null;
         return;
       }

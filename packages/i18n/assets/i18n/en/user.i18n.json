@@ -13,6 +13,11 @@
       "t_shirt": {
         "picked": "You have collected your t-shirt!",
         "not_picked": "Don't forget to collect your t-shirt!"
+      },
+      "roles": {
+        "staff": "Staff",
+        "sponsor": "Sponsor",
+        "attendee": "Attendee"
       }
     },
     "my_points": {

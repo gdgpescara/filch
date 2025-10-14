@@ -1,1 +1,1 @@
-enum QuestSubTypeEnum { qrCode, prompted }
+enum QuestSubTypeEnum { scan, prompted, qrCode }

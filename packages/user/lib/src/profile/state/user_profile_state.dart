@@ -1,28 +1,42 @@
 part of 'user_profile_cubit.dart';
 
 class UserProfileState extends Equatable {
-  const UserProfileState({this.user, this.house, this.isNimbusUser = false, this.isStaff = false, this.team});
+  const UserProfileState({
+    this.user,
+    this.isNimbusUser = false,
+    this.staff = false,
+    this.sponsor = false,
+    this.team,
+  });
 
   final User? user;
-  final String? house;
   final bool isNimbusUser;
-  final bool isStaff;
+  final bool staff;
+  final bool sponsor;
   final Team? team;
 
-  UserProfileState copyWith({User? user, String? house, bool? isNimbusUser, bool? isStaff, Team? team}) {
+  UserProfileState copyWith({
+    User? user,
+    bool? isNimbusUser,
+    bool? staff,
+    bool? sponsor,
+    Team? team,
+  }) {
     return UserProfileState(
       user: user ?? this.user,
-      house: house ?? this.house,
       isNimbusUser: isNimbusUser ?? this.isNimbusUser,
-      isStaff: isStaff ?? this.isStaff,
+      staff: staff ?? this.staff,
+      sponsor: sponsor ?? this.sponsor,
       team: team ?? this.team,
     );
   }
 
   @override
-  List<Object?> get props => [user, house, isNimbusUser, isStaff, team];
+  List<Object?> get props => [user, isNimbusUser, staff, sponsor, team];
+
+  bool get showPointsCard => !staff && !sponsor;
 }
 
 class SignedOut extends UserProfileState {
-  const SignedOut() : super(user: null, house: null);
+  const SignedOut() : super(user: null);
 }

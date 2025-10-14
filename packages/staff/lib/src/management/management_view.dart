@@ -27,23 +27,27 @@ class ManagementView extends StatelessWidget {
     return SafeArea(
       child: BlocProvider<ManagementCubit>(
         create: (context) => GetIt.I()..load(),
-        child: ListView(
-          padding: const EdgeInsets.all(Spacing.m),
-          children: [
-            BlocBuilder<ManagementCubit, ManagementState>(
-              builder: (context, state) {
-                return switch (state) {
-                  ManagementLoading() => const Center(child: LoaderAnimation()),
-                  ManagementLoaded() => AssignablePointsList(navigateToAssignment),
-                  ManagementFailure() => Center(child: Text(t.common.errors.generic)),
-                };
-              },
-            ),
-            const Gap.vertical(Spacing.m),
-            ReportScheduleDelay(navigateToScheduleDelayReporting),
-            const Gap.vertical(Spacing.m),
-            AssignTShirt(navigateToTShirtAssignment),
-          ],
+        child: BlocBuilder<ManagementCubit, ManagementState>(
+          builder: (context, state) {
+            return ListView(
+              padding: const EdgeInsets.all(Spacing.m),
+              children: [
+                ...switch (state) {
+                  ManagementLoading() => [const Center(child: LoaderAnimation())],
+                  ManagementLoaded() => [
+                    AssignablePointsList(navigateToAssignment),
+                    if (!state.isSponsor) ...[
+                      const Gap.vertical(Spacing.m),
+                      ReportScheduleDelay(navigateToScheduleDelayReporting),
+                      const Gap.vertical(Spacing.m),
+                      AssignTShirt(navigateToTShirtAssignment),
+                    ],
+                  ],
+                  ManagementFailure() => [Center(child: Text(t.common.errors.generic))],
+                },
+              ],
+            );
+          },
         ),
       ),
     );

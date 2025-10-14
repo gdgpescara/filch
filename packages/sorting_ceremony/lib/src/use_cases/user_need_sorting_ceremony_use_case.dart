@@ -18,7 +18,11 @@ class UserNeedSortingCeremonyUseCase {
     return runSafetyFuture(
       () async {
         final idToken = await _auth.currentUser!.getIdTokenResult(true);
-        return !(idToken.claims?.containsKey('team') ?? true);
+        final claims = idToken.claims;
+        if (claims == null || claims.containsKey('staff') || claims.containsKey('sponsor')) {
+          return false;
+        }
+        return !claims.containsKey('team');
       },
       onError: (e) {
         _signOutUseCase();

@@ -17,6 +17,7 @@ class ManagementFailure extends ManagementState {
 
 class ManagementLoaded extends ManagementState {
   const ManagementLoaded({
+    this.isSponsor = true,
     this.points = const [],
     this.quests = const [],
     this.maxRoomDelay = 0,
@@ -24,13 +25,18 @@ class ManagementLoaded extends ManagementState {
     this.countUsersWithoutTShirt = 0,
   });
 
+  final bool isSponsor;
   final List<AssignablePoints> points;
   final List<Quest> quests;
   final int maxRoomDelay;
   final int countUsersWithTShirt;
   final int countUsersWithoutTShirt;
 
+  List<AssignablePoints> get assignablePointsByUser =>
+      points.where((point) => point.assigner == (isSponsor ? PointAssigner.sponsor : PointAssigner.staff)).toList(growable: false);
+
   ManagementLoaded copyWith({
+    bool? isSponsor,
     List<AssignablePoints>? points,
     List<Quest>? quests,
     int? maxRoomDelay,
@@ -38,6 +44,7 @@ class ManagementLoaded extends ManagementState {
     int? countUsersWithoutTShirt,
   }) {
     return ManagementLoaded(
+      isSponsor: isSponsor ?? this.isSponsor,
       points: points ?? this.points,
       quests: quests ?? this.quests,
       maxRoomDelay: maxRoomDelay ?? this.maxRoomDelay,

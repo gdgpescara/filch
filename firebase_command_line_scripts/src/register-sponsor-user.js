@@ -3,13 +3,13 @@ import { createInterface } from "readline";
 import { getAuth } from "firebase-admin/auth";
 import { getFirestore } from "firebase-admin/firestore";
 
-export const registerStaffUser = async () => {
+export const registerSponsorUser = async () => {
   const rl = createInterface({
     input: process.stdin,
     output: process.stdout,
   });
 
-  rl.question("Qual'è la mail dell'utente registrato che si vuole promuovere a staff? ", async (email) => {
+  rl.question("Qual'è la mail dell'utente registrato che si vuole promuovere a sponsor? ", async (email) => {
     rl.close();
 
     if (!email.trim()) {
@@ -23,13 +23,13 @@ export const registerStaffUser = async () => {
 
       // Aggiorna custom claims
       const currentClaims = fetchedUser.customClaims || {};
-      const newClaims = { ...currentClaims, staff: true };
+      const newClaims = { ...currentClaims, sponsor: true };
       await getAuth().setCustomUserClaims(fetchedUser.uid, newClaims);
       console.info(`✅ Custom claims aggiornati per ${fetchedUser.email}`);
 
       // Aggiorna documento Firestore
       await getFirestore().collection("users").doc(fetchedUser.uid).update({
-        staff: true,
+        sponsor: true,
       });
       console.info(`✅ Documento Firestore aggiornato per ${fetchedUser.email}`);
 

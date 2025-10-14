@@ -40,9 +40,9 @@ dependencies:
   google_fonts: ^6.3.2
   firebase_core: ^4.1.1
   firebase_messaging: ^16.0.2
-  cloud_firestore: ^6.0.2
-  cloud_functions: ^6.0.2
-  firebase_auth: ^6.1.0
+  cloud_firestore: ^6.0.3
+  cloud_functions: ^6.0.3
+  firebase_auth: ^6.1.1
   firebase_crashlytics: ^5.0.2
   firebase_app_check: ^0.4.1
   loggy: ^2.0.3
@@ -69,7 +69,9 @@ flutter:
   assets:
     - shorebird.yaml
     - packages/assets/logo/logo.png
+    - packages/assets/logo/gdg_logo_full.png
     - certificates/sessionize.pem
+    
   fonts:
     - family: Digital
       fonts:

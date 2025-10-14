@@ -13,6 +13,11 @@
       "t_shirt": {
         "picked": "Hai ritirato la tua t-shirt!",
         "not_picked": "Non dimenticare di ritirare la tua t-shirt!"
+      },
+      "roles": {
+        "staff": "Staff",
+        "sponsor": "Sponsor",
+        "attendee": "Partecipante"
       }
     },
     "my_points": {

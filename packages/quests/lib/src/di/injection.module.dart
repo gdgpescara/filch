@@ -54,6 +54,12 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
         _i792.IsRankingFreezedUseCase(gh<_i494.GetFeatureFlagsUseCase>()));
     gh.lazySingleton<_i384.CanRequestForQuestUseCase>(() =>
         _i384.CanRequestForQuestUseCase(gh<_i494.GetFeatureFlagsUseCase>()));
+    gh.lazySingleton<_i843.GetYourRankingUseCase>(
+        () => _i843.GetYourRankingUseCase(
+              gh<_i974.FirebaseFirestore>(),
+              gh<_i662.GetSignedUserUseCase>(),
+              gh<_i662.IsSponsorUserUseCase>(),
+            ));
     gh.lazySingleton<_i814.GetSignedUserQuestsUseCase>(
         () => _i814.GetSignedUserQuestsUseCase(
               gh<_i974.FirebaseFirestore>(),
@@ -73,6 +79,13 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
         () => _i251.GetRankingUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i650.GetAssignablePointsUseCase>(
         () => _i650.GetAssignablePointsUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.factory<_i96.RankingCubit>(() => _i96.RankingCubit(
+          gh<_i662.GetSignedUserUseCase>(),
+          gh<_i177.GetRankingUseCase>(),
+          gh<_i177.GetYourRankingUseCase>(),
+          gh<_i177.GetYourRankingPositionUseCase>(),
+          gh<_i177.IsRankingFreezedUseCase>(),
+        ));
     gh.lazySingleton<_i615.AssignPointsUseCase>(
         () => _i615.AssignPointsUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i806.SocialQuestRegistrationUseCase>(() =>
@@ -87,12 +100,6 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
         () => _i954.GetSignedUserActiveQuestUseCase(
               gh<_i974.FirebaseFirestore>(),
               gh<_i59.FirebaseAuth>(),
-            ));
-    gh.lazySingleton<_i843.GetYourRankingUseCase>(
-        () => _i843.GetYourRankingUseCase(
-              gh<_i974.FirebaseFirestore>(),
-              gh<_i662.GetSignedUserUseCase>(),
-              gh<_i662.IsStaffUserUseCase>(),
             ));
     gh.lazySingleton<_i1056.SearchForQuestUseCase>(
         () => _i1056.SearchForQuestUseCase(
@@ -111,13 +118,6 @@ class QuestsPackageModule extends _i526.MicroPackageModule {
           gh<_i1056.SearchForQuestUseCase>(),
           gh<_i384.CanRequestForQuestUseCase>(),
           gh<_i616.GiveUpQuestUseCase>(),
-        ));
-    gh.factory<_i96.RankingCubit>(() => _i96.RankingCubit(
-          gh<_i662.GetSignedUserUseCase>(),
-          gh<_i177.GetRankingUseCase>(),
-          gh<_i177.GetYourRankingUseCase>(),
-          gh<_i177.GetYourRankingPositionUseCase>(),
-          gh<_i177.IsRankingFreezedUseCase>(),
         ));
   }
 }

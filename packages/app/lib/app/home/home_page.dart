@@ -59,15 +59,14 @@ class HomePage extends StatelessWidget {
                     embedded: true,
                   ),
                   const RankingPage(),
-                  if (!state.isRankingFreezed && !state.isStaffUser) const CurrentQuestPage(),
-                  if (state.isStaffUser) ...[
+                  if (state.showQuestPage) const CurrentQuestPage(),
+                  if (state.showManagementView)
                     ManagementView(
                       navigateToAssignment: _navigateToAssignment,
                       navigateToTShirtAssignment: _navigateToTShirtAssignment,
                       navigateToScheduleDelayReporting: _navigateToScheduleDelayReporting,
                     ),
-                    const ShiftsView(),
-                  ],
+                  if (state.showShiftView) const ShiftsView(),
                   UserProfilePage(
                     navigateToSplash: _navigateToSplash,
                     navigateToAllPoints: _navigateToAllPoints,
@@ -93,27 +92,27 @@ class HomePage extends StatelessWidget {
                   tooltip: t.common.home.bottom_nav.ranking,
                   label: t.common.home.bottom_nav.ranking,
                 ),
-                if (!state.isRankingFreezed && !state.isStaffUser)
+                if (state.showQuestPage)
                   NavigationDestination(
                     icon: const Icon(FontAwesomeIcons.handLizard),
                     selectedIcon: const Icon(FontAwesomeIcons.solidHandLizard),
                     tooltip: t.common.home.bottom_nav.current_quest,
                     label: t.common.home.bottom_nav.current_quest,
                   ),
-                if (state.isStaffUser) ...[
+                if (state.showManagementView)
                   NavigationDestination(
                     icon: const Icon(FontAwesomeIcons.gears),
                     selectedIcon: const Icon(FontAwesomeIcons.gear),
                     tooltip: t.staff.home.bottom_nav.scan,
                     label: t.staff.home.bottom_nav.scan,
                   ),
+                if (state.showShiftView)
                   NavigationDestination(
                     icon: const Icon(Icons.access_time_rounded),
                     selectedIcon: const Icon(Icons.access_time_filled_rounded),
                     tooltip: t.staff.home.bottom_nav.shifts,
                     label: t.staff.home.bottom_nav.shifts,
                   ),
-                ],
                 NavigationDestination(
                   icon: const Icon(FontAwesomeIcons.user),
                   selectedIcon: const Icon(FontAwesomeIcons.solidUser),

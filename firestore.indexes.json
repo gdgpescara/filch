@@ -63,7 +63,11 @@
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "isStaff",
+          "fieldPath": "staff",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "sponsor",
           "order": "ASCENDING"
         },
         {
@@ -89,7 +93,11 @@
           "order": "DESCENDING"
         },
         {
-          "fieldPath": "isStaff",
+          "fieldPath": "staff",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "sponsor",
           "order": "DESCENDING"
         }
       ]

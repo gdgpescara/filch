@@ -42,11 +42,16 @@ class UserProfilePage extends StatelessWidget {
                 padding: _padding,
                 shrinkWrap: true,
                 children: [
-                  UserProfileHeader(user: state.user, teamName: state.team?.name, teamImageUrl: state.team?.imageUrl),
+                  UserProfileHeader(
+                    user: state.user,
+                    team: state.team,
+                    staffUser: state.staff,
+                    sponsorUser: state.sponsor,
+                  ),
                   const SizedBox(height: Spacing.m),
                   const UserTShirt(),
                   const SizedBox(height: Spacing.m),
-                  if (!state.isStaff) ...[
+                  if (!state.showPointsCard) ...[
                     UserPointsCard(navigateToAllPoints: navigateToAllPoints),
                     const SizedBox(height: Spacing.l),
                   ],

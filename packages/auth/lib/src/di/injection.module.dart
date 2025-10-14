@@ -19,6 +19,7 @@ import 'package:auth/src/use_cases/get_signed_user_team_use_case.dart' as _i491;
 import 'package:auth/src/use_cases/get_signed_user_use_case.dart' as _i704;
 import 'package:auth/src/use_cases/google_sign_in_use_case.dart' as _i395;
 import 'package:auth/src/use_cases/has_signed_user_use_case.dart' as _i499;
+import 'package:auth/src/use_cases/is_sponsor_user_use_case.dart' as _i914;
 import 'package:auth/src/use_cases/is_staff_user_use_case.dart' as _i461;
 import 'package:auth/src/use_cases/remove_account_use_case.dart' as _i972;
 import 'package:auth/src/use_cases/sign_out_use_case.dart' as _i643;
@@ -57,6 +58,8 @@ class AuthPackageModule extends _i526.MicroPackageModule {
         () => _i608.UserPasswordSignInUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i184.AuthStateChangesUseCase>(
         () => _i184.AuthStateChangesUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i914.IsSponsorUserUseCase>(
+        () => _i914.IsSponsorUserUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i173.CountUsersWithoutTShirtUseCase>(() =>
         _i173.CountUsersWithoutTShirtUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i714.CountUsersWithTShirtUseCase>(
