@@ -34,11 +34,11 @@ class ThanksPage extends StatelessWidget {
                             style: context.textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.w900),
                           ),
                           TextSpan(
-                            text: t.devfest2024.thanks.title,
+                            text: t.devfest.thanks.title,
                             style: context.textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.w900),
                           ),
                           TextSpan(
-                            text: t.devfest2024.thanks.subtitle,
+                            text: t.devfest.thanks.subtitle,
                             style: context.textTheme.titleMedium?.copyWith(
                               fontWeight: FontWeight.w500,
                               fontStyle: FontStyle.italic,
@@ -50,15 +50,15 @@ class ThanksPage extends StatelessWidget {
                             style: context.textTheme.bodyLarge?.copyWith(fontStyle: FontStyle.italic),
                           ),
                           TextSpan(
-                            text: t.devfest2024.thanks.see_you_soon_prefix,
+                            text: t.devfest.thanks.see_you_soon_prefix,
                             style: context.textTheme.bodyLarge,
                           ),
                           TextSpan(
-                            text: t.devfest2024.thanks.see_you_soon_bold,
+                            text: t.devfest.thanks.see_you_soon_bold,
                             style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.w600),
                           ),
                           TextSpan(
-                            text: t.devfest2024.thanks.see_you_soon_suffix,
+                            text: t.devfest.thanks.see_you_soon_suffix,
                             style: context.textTheme.bodyLarge,
                           ),
                         ],
@@ -94,7 +94,7 @@ class ThanksPage extends StatelessWidget {
                 child: Image.asset(
                   'logo/gdg_logo_full.png',
                   package: 'assets',
-                  semanticLabel: t.devfest2024.semantic.logo,
+                  semanticLabel: t.devfest.semantic.logo_gdg,
                 ),
               ),
             ],
@@ -121,11 +121,8 @@ class _DecorativeIcon extends StatelessWidget {
       height: 32,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        color: color.withOpacity(0.1),
-        border: Border.all(
-          color: color.withOpacity(0.3),
-          width: 1,
-        ),
+        color: color.withValues(alpha: 0.1),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
       ),
       child: Icon(
         icon,

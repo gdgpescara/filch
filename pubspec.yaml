@@ -42,12 +42,12 @@ melos:
       dependencies:
           get_it: ^8.2.0
           injectable: ^2.5.2
-          firebase_core: ^4.1.1
-          firebase_messaging: ^16.0.2
+          firebase_core: ^4.2.0
+          firebase_messaging: ^16.0.3
           cloud_firestore: ^6.0.3
           cloud_functions: ^6.0.3
           firebase_auth: ^6.1.1
-          firebase_crashlytics: ^5.0.2
+          firebase_crashlytics: ^5.0.3
           firebase_storage: ^13.0.2
           firebase_app_check: ^0.4.1
           google_sign_in: ^7.2.0

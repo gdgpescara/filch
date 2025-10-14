@@ -15,6 +15,8 @@ dependencies:
     path: ../i18n
   assets:
     path: ../../packages/assets
+  core:
+    path: ../../packages/core
   get_it: ^8.2.0
   injectable: ^2.5.2
   firebase_auth: ^6.1.1
@@ -38,5 +40,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
-    - packages/assets/logo/logo.png
+    - packages/assets/logo/logo.svg
     - packages/assets/images/background.svg

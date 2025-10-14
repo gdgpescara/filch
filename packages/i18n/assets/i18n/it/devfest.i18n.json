@@ -7,11 +7,7 @@
     "see_you_soon_suffix": "! 🌟"
   },
   "semantic": {
-    "logo": "Logo GDG Pescara"
-  },
-  "delorean_clock": {
-    "destination_time": "ORARIO DI DESTINAZIONE",
-    "present_time": "ORARIO ATTUALE",
-    "last_time_departed": "ULTIMA PARTENZA"
+    "logo_dev_fest": "Logo DevFest Pescara",
+    "logo_gdg": "Logo GDG Pescara"
   }
 }

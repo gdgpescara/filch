@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:i18n/i18n.dart';
 
 import '../../ui.dart';
 
@@ -39,7 +38,7 @@ class LoaderOverlay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             if (message == null && messageWidget == null) ...[
-              Image.asset('logo/logo.png', package: 'assets', height: 100, semanticLabel: t.devfest2024.semantic.logo),
+              const Logo(),
               const Gap.vertical(Spacing.l),
             ],
             const LoaderAnimation(),
@@ -47,9 +46,7 @@ class LoaderOverlay extends StatelessWidget {
             if (message != null || messageWidget != null)
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child:
-                    messageWidget ??
-                    Text(message!, style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
+                child: messageWidget ?? Text(message!, style: context.textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold)),
               ),
           ],
         ),

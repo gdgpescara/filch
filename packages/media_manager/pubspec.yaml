@@ -20,7 +20,7 @@ dependencies:
   ui:
     path: ../ui
 
-  firebase_crashlytics: ^5.0.2
+  firebase_crashlytics: ^5.0.3
   get_it: ^8.2.0
   injectable: ^2.5.2
   equatable: ^2.0.7

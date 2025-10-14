@@ -60,13 +60,13 @@ void main() {
 
     if (kDebugMode) {
       await FirebaseAppCheck.instance.activate(
-        androidProvider: AndroidProvider.debug,
-        appleProvider: AppleProvider.debug,
+        providerAndroid: const AndroidDebugProvider(debugToken: 'debug-token'),
+        providerApple: const AppleDebugProvider(debugToken: 'debug-token'),
       );
     }
 
     if (kReleaseMode) {
-      await FirebaseAppCheck.instance.activate(appleProvider: AppleProvider.appAttest);
+      await FirebaseAppCheck.instance.activate(providerApple: const AppleAppAttestProvider());
       await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
     }
 
