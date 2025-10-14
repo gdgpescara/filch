@@ -41,7 +41,7 @@ class RankingPage extends StatelessWidget {
               child: switch (state) {
                 YourRankingLoading() => const SizedBox(
                   height: 115 + Spacing.s * 2,
-                  child: LoaderAnimation(),
+                  child: UnconstrainedBox(child: LoaderAnimation()),
                 ),
                 YourRankingLoaded(item: final item, position: final position) => UserRankingCard(
                   item: item,

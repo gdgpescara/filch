@@ -4,6 +4,7 @@ import 'package:auth/auth.dart';
 import 'package:core/core.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
+import 'package:rxdart/rxdart.dart';
 
 import '../../../quests.dart';
 
@@ -25,24 +26,24 @@ class RankingCubit extends SafeEmitterCubit<RankingState> {
   final GetYourRankingPositionUseCase _getYourRankingPositionUseCase;
   final IsRankingFreezedUseCase _isRankingFreezedUseCase;
 
-  final List<StreamSubscription<void>> _subscriptions = [];
+  final CompositeSubscription _subscriptions = CompositeSubscription();
 
   @override
   Future<void> close() {
-    for (final element in _subscriptions) {
-      element.cancel();
-    }
+    _subscriptions.cancel();
     return super.close();
   }
 
   void init() {
-    _subscriptions.add(
-      _isRankingFreezedUseCase().when(
-        progress: () => emit(const RankingLoading()),
-        error: (_) => emit(const RankingFailure()),
-        success: loadItems,
-      ),
-    );
+    _subscriptions
+      ..clear()
+      ..add(
+        _isRankingFreezedUseCase().when(
+          progress: () => emit(const RankingLoading()),
+          error: (_) => emit(const RankingFailure()),
+          success: loadItems,
+        ),
+      );
   }
 
   void loadItems(bool rankingFreezed) {
@@ -75,12 +76,15 @@ class RankingCubit extends SafeEmitterCubit<RankingState> {
         progress: () => emit(const YourRankingLoading()),
         success: (item) {
           if (item != null) {
-            _getYourRankingPositionUseCase().listen((position) {
-              if (position == null) {
-                return;
-              }
-              emit(YourRankingLoaded(item: item, position: position));
-            });
+            _subscriptions.add(
+              _getYourRankingPositionUseCase().listen((position) {
+                if (position == null) {
+                  emit(const YourRankingNotInRanking());
+                } else {
+                  emit(YourRankingLoaded(item: item, position: position));
+                }
+              }),
+            );
           } else {
             emit(const YourRankingNotInRanking());
           }
