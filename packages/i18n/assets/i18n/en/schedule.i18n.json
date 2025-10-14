@@ -6,6 +6,10 @@
     "ended_sessions_subtitle": "View sessions that have already concluded",
     "no_sessions_for_room": "No sessions available for the selected room.",
     "no_sessions_for_day": "No sessions available for this day.",
+    "no_sessions": {
+      "title": "No sessions available",
+      "subtitle": "There are no scheduled sessions at this time"
+    },
     "session_status": {
       "ended": "Ended",
       "in_progress": "In progress"
