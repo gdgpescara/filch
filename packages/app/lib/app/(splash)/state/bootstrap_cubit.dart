@@ -55,10 +55,6 @@ class BootstrapCubit extends Cubit<BootstrapState> {
       _getFeatureFlagsUseCase().when(
         progress: () => emit(const BootstrapProcessing()),
         success: (flags) async {
-          if (flags['beforeDevFest'] ?? false) {
-            emit(const BeforeDevFest());
-            return;
-          }
           if (flags['afterDevFest'] ?? false) {
             emit(const AfterDevFest());
             return;

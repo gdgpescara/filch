@@ -15,7 +15,7 @@ class GetRankingUseCase {
       yield* _firestore
           .collection('users')
           .where('staff', isNotEqualTo: true)
-          .where('sponsor', isNotEqualTo: true)
+          .where('sponsor', isEqualTo: false)
           .orderBy('points', descending: true)
           .limit(10)
           .snapshots()

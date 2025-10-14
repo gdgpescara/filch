@@ -54,12 +54,12 @@ class AuthPackageModule extends _i526.MicroPackageModule {
         () => _i704.GetSignedUserUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i461.IsStaffUserUseCase>(
         () => _i461.IsStaffUserUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i914.IsSponsorUserUseCase>(
+        () => _i914.IsSponsorUserUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i608.UserPasswordSignInUseCase>(
         () => _i608.UserPasswordSignInUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i184.AuthStateChangesUseCase>(
         () => _i184.AuthStateChangesUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i914.IsSponsorUserUseCase>(
-        () => _i914.IsSponsorUserUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i173.CountUsersWithoutTShirtUseCase>(() =>
         _i173.CountUsersWithoutTShirtUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i714.CountUsersWithTShirtUseCase>(

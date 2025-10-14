@@ -12,6 +12,7 @@ import 'package:cloud_functions/cloud_functions.dart' as _i809;
 import 'package:core/src/di/date_format_module.dart' as _i1016;
 import 'package:core/src/di/external_libraries.dart' as _i545;
 import 'package:core/src/use_cases/get_feature_flags_use_case.dart' as _i866;
+import 'package:core/src/use_cases/is_before_dev_fest_use_case.dart' as _i139;
 import 'package:firebase_messaging/firebase_messaging.dart' as _i892;
 import 'package:firebase_storage/firebase_storage.dart' as _i457;
 import 'package:image_picker/image_picker.dart' as _i183;
@@ -94,6 +95,8 @@ class CorePackageModule extends _i526.MicroPackageModule {
       () => dateFormatModule.dateFormatFullReadable,
       instanceName: 'fullReadable',
     );
+    gh.lazySingleton<_i139.IsBeforeDevFestUseCase>(
+        () => _i139.IsBeforeDevFestUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i866.GetFeatureFlagsUseCase>(
         () => _i866.GetFeatureFlagsUseCase(gh<_i974.FirebaseFirestore>()));
   }

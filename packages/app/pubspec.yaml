@@ -54,6 +54,7 @@ dependencies:
   accessibility_tools: ^2.7.1
   flutter_svg: ^2.2.1
   font_awesome_flutter: ^10.10.0
+  rxdart: ^0.28.0
   intl: any
 
 dev_dependencies:

@@ -1,62 +1,27 @@
 {
   "indexes": [
     {
-      "collectionGroup": "cut_images",
+      "collectionGroup": "users",
       "queryScope": "COLLECTION",
       "fields": [
         {
-          "fieldPath": "joy",
+          "fieldPath": "sponsor",
           "order": "ASCENDING"
         },
         {
-          "fieldPath": "partner",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "count",
-          "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "cut_images",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "joy",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "partner",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "status",
-          "order": "ASCENDING"
-        },
-        {
-          "fieldPath": "count",
-          "order": "DESCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "timelines",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "count",
+          "fieldPath": "points",
           "order": "DESCENDING"
         },
         {
-          "fieldPath": "name",
-          "order": "ASCENDING"
+          "fieldPath": "staff",
+          "order": "DESCENDING"
+        },
+        {
+          "fieldPath": "__name__",
+          "order": "DESCENDING"
         }
-      ]
+      ],
+      "density": "SPARSE_ALL"
     },
     {
       "collectionGroup": "users",
@@ -81,26 +46,13 @@
         {
           "fieldPath": "fcmToken",
           "order": "ASCENDING"
-        }
-      ]
-    },
-    {
-      "collectionGroup": "users",
-      "queryScope": "COLLECTION",
-      "fields": [
-        {
-          "fieldPath": "points",
-          "order": "DESCENDING"
         },
         {
-          "fieldPath": "staff",
-          "order": "DESCENDING"
-        },
-        {
-          "fieldPath": "sponsor",
-          "order": "DESCENDING"
+          "fieldPath": "__name__",
+          "order": "ASCENDING"
         }
-      ]
+      ],
+      "density": "SPARSE_ALL"
     }
   ],
   "fieldOverrides": []
