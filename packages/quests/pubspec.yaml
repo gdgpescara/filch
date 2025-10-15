@@ -26,7 +26,7 @@ dependencies:
   equatable: ^2.0.7
   json_annotation: ^4.9.0
   cloud_firestore: ^6.0.3
-  bloc: ^9.0.1
+  bloc: ^9.1.0
   flutter_bloc: ^9.1.1
   qr_flutter: ^4.1.0
   reactive_forms: ^18.1.1

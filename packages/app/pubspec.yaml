@@ -47,7 +47,7 @@ dependencies:
   firebase_app_check: ^0.4.1
   loggy: ^2.0.3
   flutter_loggy: ^2.0.3+1
-  bloc: ^9.0.1
+  bloc: ^9.1.0
   flutter_bloc: ^9.1.1
   equatable: ^2.0.7
   routefly: ^3.1.3
