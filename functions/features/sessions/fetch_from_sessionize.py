@@ -28,7 +28,7 @@ def transform_sessions(raw_data: list) -> List[Session]:
             isServiceSession = session.get("isServiceSession", False)
 
             if roomId is None or roomName is None or startsAt is None or endsAt is None:
-                logger.info(f"Missing session information for session '{session.get('id')}'. Skipping.")
+                logger.info(f"Missing session information for session '{session.get('id') - session.get('title')}:\n roomId: {roomId}, roomName: {roomName}, startsAt: {startsAt}, endsAt: {endsAt}'. Skipping.")
                 continue
 
             pp_session = {
