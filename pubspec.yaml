@@ -266,6 +266,3 @@ melos:
 
     shorebird:patch:
       run: melos shorebird:patch:android --no-select && melos shorebird:patch:ios --no-select
-flutter:
-  assets:
-    - shorebird.yaml
