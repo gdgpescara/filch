@@ -1,11 +1,14 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
-class SortingSuccess extends StatefulWidget {
-  const SortingSuccess({super.key, required this.house});
 
-  final String house;
+class SortingSuccess extends StatefulWidget {
+  const SortingSuccess({super.key, required this.team});
+
+  final Team team;
 
   @override
   State<SortingSuccess> createState() => _SortingSuccessState();
@@ -22,11 +25,11 @@ class _SortingSuccessState extends State<SortingSuccess> {
           children: [
             if ((snapshot.data ?? 0) < 2)
               Text(
-                t.sorting_ceremony.assignment[widget.house]!,
+                widget.team.claim[LocaleSettings.currentLocale.languageCode] ?? '',
                 style: context.textTheme.titleLarge,
                 textAlign: TextAlign.center,
               ),
-            if ((snapshot.data ?? 0) >= 2) ...[const SizedBox(height: 20), _houseLogo()],
+            if ((snapshot.data ?? 0) >= 2) ...[const SizedBox(height: 20), _teamLogo()],
           ],
         );
         return Padding(
@@ -40,12 +43,14 @@ class _SortingSuccessState extends State<SortingSuccess> {
     );
   }
 
-  Image _houseLogo() {
-    return Image.asset(
-      'assets/images/houses/${widget.house}.png',
-      height: 200,
-      width: 200,
-      semanticLabel: t.sorting_ceremony.assigned(house: widget.house),
+  Widget _teamLogo() {
+    return Semantics(
+      label: widget.team.name,
+      child: CachedNetworkImage(
+        imageUrl: widget.team.imageUrl,
+        height: 200,
+        width: 200,
+      ),
     );
   }
 }

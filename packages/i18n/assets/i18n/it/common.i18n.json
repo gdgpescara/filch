@@ -68,6 +68,5 @@
     "without_patch": "Versione $version",
     "new_patch_available_to_download": "Nuova patch disponibile, attendi il download...",
     "update_error": "Errore durante l'aggiornamento. Riprova più tardi."
-  },
-  "thanks": "Grazie per aver partecipato all'evento! Speriamo di rivederti presto."
+  }
 }

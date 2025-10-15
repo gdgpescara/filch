@@ -5,6 +5,7 @@ import { deployFirebaseFunctions } from "./deploy-functions.js";
 import { sendTShirtNotification } from "./send-t-shirt-notification.js";
 import { syncSessionizeData } from "./sync-sessionize.js";
 import { registerStaffUser } from "./register-staff-user.js";
+import { registerSponsorUser } from "./register-sponsor-user.js";
 
 const steps = [
   {
@@ -16,6 +17,11 @@ const steps = [
     name: "register-staff-user",
     message: "Register staff user",
     value: registerStaffUser,
+  },
+  {
+    name: "register-sponsor-user",
+    message: "Register sponsor user",
+    value: registerSponsorUser,
   },
   {
     name: "upload-quests",

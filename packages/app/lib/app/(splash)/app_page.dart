@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:i18n/i18n.dart';
 import 'package:routefly/routefly.dart';
 import 'package:ui/ui.dart';
 
@@ -21,13 +20,13 @@ class AppPage extends StatelessWidget {
         listener: _stateListener,
         child: Scaffold(
           backgroundColor: context.colorScheme.surface,
-          body: Center(
+          body: const Center(
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Image.asset('logo/logo.png', semanticLabel: t.devfest2024.semantic.logo, package: 'assets', width: 250),
-                const Gap.vertical(Spacing.xxl),
-                const LoaderAnimation(),
+                Logo(),
+                Gap.vertical(Spacing.xxl),
+                LoaderAnimation(),
               ],
             ),
           ),

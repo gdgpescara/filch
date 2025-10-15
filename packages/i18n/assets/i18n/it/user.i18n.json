@@ -7,9 +7,17 @@
       "email": {
         "label": "email: "
       },
+      "team": {
+        "label": "team: "
+      },
       "t_shirt": {
         "picked": "Hai ritirato la tua t-shirt!",
         "not_picked": "Non dimenticare di ritirare la tua t-shirt!"
+      },
+      "roles": {
+        "staff": "Staff",
+        "sponsor": "Sponsor",
+        "attendee": "Partecipante"
       }
     },
     "my_points": {
@@ -20,13 +28,23 @@
     },
     "remove_account": {
       "button": "Rimuovi Account",
-      "dialog": {
-        "title": "Rimuovi Account",
-        "content": "Sei sicuro di voler rimuovere il tuo account? Questa operazione è irreversibile.",
-        "confirm": "Rimuovi Account"
+      "need_login": {
+        "dialog": {
+          "content": "Questa operazione è sensibile e richiede un'autenticazione recente. Accedi nuovamente e riprova.",
+          "title": "Necessità di un nuovo accesso"
+        }
       },
-      "success": "Il tuo account è stato rimosso con successo.",
-      "error": "Si è verificato un errore durante la rimozione del tuo account, riprova più tardi."
+      "dialog": {
+        "confirm": "Rimuovi Account",
+        "content": "Sei sicuro di voler rimuovere il tuo account? Questa operazione è irreversibile.",
+        "title": "Rimuovi Account"
+      },
+      "error": "Si è verificato un errore durante la rimozione del tuo account, riprova più tardi.",
+      "success": "Il tuo account è stato rimosso con successo."
+    },
+    "qr_code": {
+      "show": "Mostra QR Code",
+      "close": "Chiudi"
     }
   },
   "my_points_details": {

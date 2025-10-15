@@ -8,14 +8,27 @@ part 'user_profile_state.dart';
 
 @injectable
 class UserProfileCubit extends SafeEmitterCubit<UserProfileState> {
-  UserProfileCubit(GetSignedUserUseCase getSignedUserUseCase, this._signOutUseCase, this._isStaffUserUseCase)
-    : super(UserProfileState(user: getSignedUserUseCase()));
+  UserProfileCubit(
+    GetSignedUserUseCase getSignedUserUseCase,
+    this._signOutUseCase,
+    this._staffUserUseCase,
+    this._sponsorUserUseCase,
+    this._getSignedUserTeamUseCase,
+  ) : super(UserProfileState(user: getSignedUserUseCase()));
 
-  final IsStaffUserUseCase _isStaffUserUseCase;
+  final IsStaffUserUseCase _staffUserUseCase;
+  final IsSponsorUserUseCase _sponsorUserUseCase;
   final SignOutUseCase _signOutUseCase;
+  final GetSignedUserTeamUseCase _getSignedUserTeamUseCase;
 
-  void init() {
-    _isStaffUserUseCase().when(success: (isStaff) => emit(state.copyWith(isStaff: isStaff)));
+  Future<void> init() async {
+    final (team, staff, sponsor) = await (
+      _getSignedUserTeamUseCase(),
+      _staffUserUseCase(),
+      _sponsorUserUseCase(),
+    ).wait;
+
+    emit(state.copyWith(team: team, staff: staff, sponsor: sponsor));
   }
 
   void signOut() {

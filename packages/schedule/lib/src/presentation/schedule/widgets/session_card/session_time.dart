@@ -92,10 +92,10 @@ class _SessionTimeState extends State<SessionTime> {
                     '${dateFormatter.format(widget.session.startsAt)} - ${dateFormatter.format(widget.session.endsAt)}',
                     style: context.textTheme.bodySmall?.copyWith(
                       fontWeight: FontWeight.w700,
-                      decoration: hasDelay ? TextDecoration.lineThrough : null,
+                      decoration: hasDelay && !widget.session.isEnded ? TextDecoration.lineThrough : null,
                     ),
                   ),
-                  if (hasDelay)
+                  if (hasDelay && !widget.session.isEnded)
                     Text(
                       '${dateFormatter.format(widget.session.realStartsAt)} - ${dateFormatter.format(widget.session.realEndsAt)}',
                       style: context.textTheme.bodySmall?.copyWith(
@@ -113,7 +113,7 @@ class _SessionTimeState extends State<SessionTime> {
             text: '${widget.session.durationInMinutes}min',
             customColor: appColors.googleBlue,
           ),
-        if (widget.session.hasEnded)
+        if (widget.session.isEnded)
           AppChip(
             text: t.schedule.sessions.session_status.ended,
             customColor: appColors.googleRed,

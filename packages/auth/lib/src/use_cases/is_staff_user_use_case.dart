@@ -11,7 +11,7 @@ class IsStaffUserUseCase {
   Future<bool> call() {
     return runSafetyFuture(() async {
       final idTokenResult = await _auth.currentUser?.getIdTokenResult();
-      return idTokenResult?.claims?['isStaff'] == true;
+      return idTokenResult?.claims?['staff'] == true;
     });
   }
 }

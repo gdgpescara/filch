@@ -12,14 +12,20 @@ class GetYourRankingPositionUseCase {
 
   Stream<int?> call() {
     return runSafetyStream(() async* {
-      yield* _firestore.collection('users').where('isStaff', isNotEqualTo: true).orderBy('points', descending: true).snapshots().map((
-        snapshot,
-      ) {
-        final docs = snapshot.docs;
-        final user = _getSignedUserUseCase();
-        final userIndex = docs.indexWhere((doc) => doc.id == user?.uid);
-        return userIndex == -1 ? null : userIndex + 1;
-      });
+      yield* _firestore
+          .collection('users')
+          .where('staff', isNotEqualTo: true)
+          .where('sponsor', isEqualTo: false)
+          .orderBy('points', descending: true)
+          .snapshots()
+          .map((
+            snapshot,
+          ) {
+            final docs = snapshot.docs;
+            final user = _getSignedUserUseCase();
+            final userIndex = docs.indexWhere((doc) => doc.id == user?.uid);
+            return userIndex == -1 ? null : userIndex + 1;
+          });
     });
   }
 }

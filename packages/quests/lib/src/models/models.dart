@@ -2,6 +2,7 @@ export 'active_quest.dart';
 export 'answer.dart';
 export 'assignable_points.dart';
 export 'assignable_points_type_enum.dart';
+export 'point_assigner.dart';
 export 'points.dart';
 export 'points_type_enum.dart';
 export 'quest.dart';

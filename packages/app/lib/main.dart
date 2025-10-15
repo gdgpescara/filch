@@ -15,7 +15,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_loggy/flutter_loggy.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
-import 'package:loggy/loggy.dart';
+import 'package:loggy/loggy.dart' hide LogLevel;
 
 import 'application.dart';
 import 'catch_and_flow_logger.dart';
@@ -33,6 +33,7 @@ void main() {
     await LocaleSettings.useDeviceLocale();
     Loggy.initLoggy(logPrinter: const PrettyDeveloperPrinter());
     CatchAndFlow.setLogger(CatchAndFlowLoggerLoggy());
+    CatchAndFlow.setLogLevel(LogLevel.error);
     await GetIt.I.init();
     FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterFatalError;
     PlatformDispatcher.instance.onError = (error, stack) {
@@ -59,13 +60,13 @@ void main() {
 
     if (kDebugMode) {
       await FirebaseAppCheck.instance.activate(
-        androidProvider: AndroidProvider.debug,
-        appleProvider: AppleProvider.debug,
+        providerAndroid: const AndroidDebugProvider(debugToken: 'debug-token'),
+        providerApple: const AppleDebugProvider(debugToken: 'debug-token'),
       );
     }
 
     if (kReleaseMode) {
-      await FirebaseAppCheck.instance.activate(appleProvider: AppleProvider.appAttest);
+      await FirebaseAppCheck.instance.activate(providerApple: const AppleAppAttestProvider());
       await FirebaseAppCheck.instance.setTokenAutoRefreshEnabled(true);
     }
 

@@ -3,17 +3,17 @@
 import 'package:flutter/widgets.dart';
 import 'package:routefly/routefly.dart';
 
-import 'app/(splash)/app_page.dart' as a4;
-import 'app/countdown/countdown_page.dart' as a1;
+import 'app/(splash)/app_page.dart' as a3;
 import 'app/home/home_page.dart' as a0;
-import 'app/notification/notification_page.dart' as a3;
+import 'app/notification/notification_page.dart' as a2;
 import 'app/session/[id]_page.dart' as a10;
-import 'app/sign_in/sign_in_page.dart' as a2;
+import 'app/sign_in/sign_in_page.dart' as a1;
+import 'app/sorting_ceremony/sorting_ceremony_page.dart' as a5;
 import 'app/staff/point_assignment_page.dart' as a7;
 import 'app/staff/schedule_delay_page.dart' as a8;
 import 'app/staff/t_shirt_assignment_page.dart' as a6;
 import 'app/thanks/thanks_page.dart' as a9;
-import 'app/user/all_points_page.dart' as a5;
+import 'app/user/all_points_page.dart' as a4;
 
 Route b0Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,
@@ -23,23 +23,23 @@ Route b0Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRou
 Route b1Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,
   settings,
-  const a1.CountdownPage(),
+  const a1.SignInPage(),
 );
-Route b2Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
+Route b2Builder(BuildContext context, RouteSettings settings) => a2.routeBuilder(context, settings);
+Route b3Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,
   settings,
-  const a2.SignInPage(),
+  const a3.AppPage(),
 );
-Route b3Builder(BuildContext context, RouteSettings settings) => a3.routeBuilder(context, settings);
 Route b4Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,
   settings,
-  const a4.AppPage(),
+  const a4.AllPointsPage(),
 );
 Route b5Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,
   settings,
-  const a5.AllPointsPage(),
+  const a5.SignInPage(),
 );
 Route b6Builder(BuildContext ctx, RouteSettings settings) => Routefly.defaultRouteBuilder(
   ctx,

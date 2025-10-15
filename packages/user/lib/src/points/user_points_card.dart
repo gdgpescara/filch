@@ -21,7 +21,7 @@ class UserPointsCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            t.profile.my_points.label,
+            t.user.profile.my_points.label,
             style: context.getTextTheme(TextThemeType.monospace).bodyMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: Spacing.s),

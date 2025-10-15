@@ -3,7 +3,6 @@ from pydantic import BaseModel
 
 
 class Points(BaseModel):
-    """Model representing points assigned to a user."""
     type: str
     points: int
     assignedBy: Optional[str] = None

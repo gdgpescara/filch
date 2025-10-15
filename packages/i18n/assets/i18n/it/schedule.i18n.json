@@ -6,6 +6,10 @@
     "ended_sessions_subtitle": "Visualizza le sessioni già concluse",
     "no_sessions_for_room": "Nessuna sessione disponibile per la sala selezionata.",
     "no_sessions_for_day": "Nessuna sessione disponibile per questo giorno.",
+    "no_sessions": {
+      "title": "Nessuna sessione disponibile",
+      "subtitle": "Non ci sono sessioni programmate per questo momento"
+    },
     "session_status": {
       "ended": "Terminato",
       "in_progress": "In corso"

@@ -8,6 +8,7 @@ import 'package:ui/ui.dart';
 import 'state/schedule_cubit.dart';
 import 'state/schedule_state.dart';
 import 'widgets/day_sessions_view.dart';
+import 'widgets/no_session_available.dart';
 
 class SchedulePage extends StatelessWidget {
   const SchedulePage({
@@ -44,6 +45,12 @@ class SchedulePage extends StatelessWidget {
     final days = state is ScheduleLoaded
         ? state.groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites)
         : <DateTime>[];
+    if (days.isEmpty) {
+      return Scaffold(
+        backgroundColor: _bgColor,
+        body: const SafeArea(child: NoSessionsAvailable()),
+      );
+    }
     final initialIndex = _calculateInitialIndex(days);
     return DefaultTabController(
       key: ValueKey('schedule_tab_controller_${days.length}_$initialIndex'),

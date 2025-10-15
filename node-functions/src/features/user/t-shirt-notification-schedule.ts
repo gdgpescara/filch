@@ -40,7 +40,8 @@ export const sendTShirtNotification = async () => {
       .collection("users")
       .where("tShirtPickupRequested", "==", false)
       .where("tShirtPickup", "==", false)
-      .where("isStaff", "==", false)
+      .where("staff", "==", false)
+      .where("sponsor", "==", false)
       .where("fcmToken", "!=", null)
       .get();
 

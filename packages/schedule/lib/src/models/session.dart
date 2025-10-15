@@ -130,8 +130,8 @@ class Session extends Equatable {
     return now.isAfter(realStartsAt) && now.isBefore(realEndsAt);
   }
 
-  /// Checks if the session has ended
-  bool get hasEnded {
+  /// Checks if the session is ended
+  bool get isEnded {
     return DateTime.now().isAfter(realEndsAt);
   }
 

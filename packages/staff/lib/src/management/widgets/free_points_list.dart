@@ -15,17 +15,12 @@ class FreePointsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocSelector<ManagementCubit, ManagementState, List<AssignablePoints>>(
-      selector: (state) => state is ManagementLoaded ? state.points : [],
+      selector: (state) => state is ManagementLoaded ? state.assignablePointsByUser : [],
       builder: (context, points) {
         return Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              t.staff.point_assignment.free_points.label,
-              style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const Gap.vertical(Spacing.m),
             GridView.builder(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),

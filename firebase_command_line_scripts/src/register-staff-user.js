@@ -23,13 +23,13 @@ export const registerStaffUser = async () => {
 
       // Aggiorna custom claims
       const currentClaims = fetchedUser.customClaims || {};
-      const newClaims = { ...currentClaims, isStaff: true };
+      const newClaims = { ...currentClaims, staff: true };
       await getAuth().setCustomUserClaims(fetchedUser.uid, newClaims);
       console.info(`✅ Custom claims aggiornati per ${fetchedUser.email}`);
 
       // Aggiorna documento Firestore
       await getFirestore().collection("users").doc(fetchedUser.uid).update({
-        isStaff: true,
+        staff: true,
       });
       console.info(`✅ Documento Firestore aggiornato per ${fetchedUser.email}`);
 

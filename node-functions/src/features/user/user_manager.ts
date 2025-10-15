@@ -7,12 +7,24 @@ export const onUserDeleteSentinel = functions
   .user()
   .onDelete(async (user) => {
     const batch = getFirestore().batch();
-    // remove user from users collection
+    
+    // remove user from users collection 
     batch.delete(
       getFirestore()
         .collection("users")
         .doc(user.uid)
     );
+    
+    // remove user from members subcollection in teams
+    const teamMembersSnapshot = await getFirestore()
+      .collectionGroup("members")
+      .where("uid", "==", user.uid)
+      .get();
+    teamMembersSnapshot.forEach((doc) => {
+      batch.delete(doc.ref);
+    });
+
+    // commit batch
     await batch.commit();
   });
 
@@ -30,7 +42,8 @@ export const onUserCreateSentinel = functions
         email: user.email,
         photoUrl: user.photoURL,
         createdAt: user.metadata.creationTime,
-        isStaff: false,
+        staff: false,
+        sponsor: false,
         tShirtPickup: false,
         tShirtPickupRequested: false,
         fcmToken: null,

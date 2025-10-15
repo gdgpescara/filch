@@ -25,13 +25,6 @@ class UserNeedSortingCeremony extends BootstrapState {
   List<Object> get props => [];
 }
 
-class BeforeDevFest extends BootstrapState {
-  const BeforeDevFest();
-
-  @override
-  List<Object> get props => [];
-}
-
 class AfterDevFest extends BootstrapState {
   const AfterDevFest();
 

@@ -7,11 +7,6 @@ Static assets package containing fonts, images, icons, and other media resources
 ### Images
 
 Application images and graphics:
-
-- **logos/** - Application logos and branding
-  - `filch_logo.png` - Main application logo
-  - `filch_logo_white.png` - White variant for dark backgrounds
-  - `devfest_logo.png` - DevFest Pescara logo
   
 - **backgrounds/** - Background images
   - `gradient_bg.png` - Main gradient background

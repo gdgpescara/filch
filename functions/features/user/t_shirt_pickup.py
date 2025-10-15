@@ -25,7 +25,7 @@ def t_shirt_pickup(request: https_fn.CallableRequest) -> bool:
     user_ref = firestore.client().collection("users").document(logged_user.get("uid"))
     user_doc = user_ref.get()
     
-    if not user_doc.exists or not user_doc.get("isStaff"):
+    if not user_doc.exists or not user_doc.get("staff"):
         logging.error(f"User {logged_user.get('uid')} is not authorized")
         raise https_fn.HttpsError(
             code=https_fn.FunctionsErrorCode.PERMISSION_DENIED,

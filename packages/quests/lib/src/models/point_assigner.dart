@@ -1,0 +1,4 @@
+enum PointAssigner {
+  staff,
+  sponsor,
+}

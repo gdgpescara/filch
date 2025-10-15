@@ -75,6 +75,15 @@ export const initConfigurations = async () => {
       batch.set(docRef, point, { merge: true });
     }
 
+    // Teams
+    const teamsData = fs.readFileSync(`data/teams.json`);
+    const teams = JSON.parse(teamsData);
+    for (const team of teams) {
+      const docRef = db.collection("teams").doc(team.id);
+      delete team.id;
+      batch.set(docRef, team, { merge: true });
+    }
+
     await batch.commit();
     console.info(`✅  Successfully uploaded ${collection}`);
   } catch (parseError) {

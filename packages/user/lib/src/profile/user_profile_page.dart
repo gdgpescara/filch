@@ -13,13 +13,11 @@ class UserProfilePage extends StatelessWidget {
   const UserProfilePage({
     super.key,
     required this.navigateToSplash,
-    required this.navigateToLogin,
     required this.navigateToAllPoints,
     this.embedded = false,
   });
 
   final VoidCallback navigateToSplash;
-  final VoidCallback navigateToLogin;
   final VoidCallback navigateToAllPoints;
   final bool embedded;
 
@@ -38,34 +36,36 @@ class UserProfilePage extends StatelessWidget {
         builder: (context, state) {
           final body = Scaffold(
             backgroundColor: _bgColor,
-            appBar: AppBar(
-              backgroundColor: _bgColor,
-              shadowColor: _bgColor,
-              forceMaterialTransparency: embedded,
-              elevation: _elevation,
-              actions: [
-                TextButton(
-                  onPressed: context.read<UserProfileCubit>().signOut,
-                  child: Text(t.common.buttons.sign_out.toUpperCase()),
-                ),
-              ],
-            ),
-            body: ListView(
-              padding: _padding,
-              shrinkWrap: true,
-              children: [
-                UserProfileHeader(user: state.user),
-                const SizedBox(height: Spacing.m),
-                const UserTShirt(),
-                const SizedBox(height: Spacing.m),
-                if (!state.isStaff) ...[
-                  UserPointsCard(navigateToAllPoints: navigateToAllPoints),
+            body: SafeArea(
+              bottom: false,
+              child: ListView(
+                padding: _padding,
+                shrinkWrap: true,
+                children: [
+                  UserProfileHeader(
+                    user: state.user,
+                    team: state.team,
+                    staffUser: state.staff,
+                    sponsorUser: state.sponsor,
+                  ),
+                  const SizedBox(height: Spacing.m),
+                  const UserTShirt(),
+                  const SizedBox(height: Spacing.m),
+                  if (!state.showPointsCard) ...[
+                    UserPointsCard(navigateToAllPoints: navigateToAllPoints),
+                    const SizedBox(height: Spacing.l),
+                  ],
                   const SizedBox(height: Spacing.l),
+                  ElevatedButton(
+                    onPressed: context.read<UserProfileCubit>().signOut,
+                    child: Text(t.common.buttons.sign_out.toUpperCase()),
+                  ),
+                  const SizedBox(height: Spacing.l),
+                  RemoveAccountButton(onAccountRemoved: navigateToSplash),
+                  const SizedBox(height: Spacing.l),
+                  const AppVersion(),
                 ],
-                RemoveAccountButton(onNeedLogin: navigateToLogin, onAccountRemoved: navigateToSplash),
-                const SizedBox(height: Spacing.l),
-                const AppVersion(),
-              ],
+              ),
             ),
           );
 
@@ -79,8 +79,6 @@ class UserProfilePage extends StatelessWidget {
   }
 
   Color? get _bgColor => embedded ? Colors.transparent : null;
-
-  double? get _elevation => embedded ? 0 : null;
 
   EdgeInsets get _padding {
     return const EdgeInsets.all(Spacing.m);

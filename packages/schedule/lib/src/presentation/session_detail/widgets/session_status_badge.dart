@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:i18n/i18n.dart';
 import 'package:ui/ui.dart';
 
 import '../../../models/models.dart';
@@ -18,11 +19,11 @@ class SessionStatusBadge extends StatelessWidget {
     final IconData statusIcon;
 
     if (session.isCurrentlyRunning) {
-      statusText = 'In corso';
+      statusText = context.t.schedule.sessions.session_status.in_progress;
       statusColor = context.colorScheme.primary;
       statusIcon = Icons.play_circle_filled;
-    } else if (session.hasEnded) {
-      statusText = 'Terminata';
+    } else if (session.isEnded) {
+      statusText = context.t.schedule.sessions.session_detail.status_ended;
       statusColor = context.colorScheme.secondary;
       statusIcon = Icons.check_circle;
     } else {

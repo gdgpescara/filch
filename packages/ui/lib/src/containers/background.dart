@@ -17,12 +17,15 @@ class Background extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Positioned.fill(
-            child: SvgPicture.asset(
-              'images/background.svg',
-              package: 'assets',
-              fit: BoxFit.fitWidth,
-              alignment: Alignment.bottomCenter,
-              excludeFromSemantics: true,
+            child: Opacity(
+              opacity: 0.6,
+              child: SvgPicture.asset(
+                'images/background.svg',
+                package: 'assets',
+                fit: BoxFit.fitWidth,
+                alignment: Alignment.bottomCenter,
+                excludeFromSemantics: true,
+              ),
             ),
           ),
           child,

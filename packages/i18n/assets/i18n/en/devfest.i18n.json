@@ -1,0 +1,13 @@
+{
+  "thanks": {
+    "title": "Thank you for participating!\n",
+    "subtitle": "The event has ended, but the memories will last forever.",
+    "see_you_soon_prefix": "We can't wait to ",
+    "see_you_soon_bold": "see you again soon",
+    "see_you_soon_suffix": "! 🌟"
+  },
+  "semantic": {
+    "logo_dev_fest": "DevFest Pescara Logo",
+    "logo_gdg": "GDG Pescara Logo"
+  }
+}

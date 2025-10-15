@@ -34,7 +34,7 @@ const getDocs = async () => {
   try {
     const usersSnap = await db
       .collection("users")
-      .where("isStaff", "!=", true)
+      .where("staff", "!=", true)
       .get();
 
     const users = [];

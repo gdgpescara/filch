@@ -30,15 +30,16 @@ class StaffPackageModule extends _i526.MicroPackageModule {
         () => _i553.ScheduleDelayCubit(gh<_i199.GetRoomsUseCase>()));
     gh.lazySingleton<_i119.GetFilteredShiftsUseCase>(
         () => _i119.GetFilteredShiftsUseCase(gh<_i974.FirebaseFirestore>()));
-    gh.factory<_i156.AssignmentCubit>(
-        () => _i156.AssignmentCubit(gh<_i177.AssignPointsUseCase>()));
     gh.factory<_i813.ManagementCubit>(() => _i813.ManagementCubit(
           gh<_i177.GetAssignablePointsUseCase>(),
           gh<_i177.GetSignedUserQuestsUseCase>(),
           gh<_i199.GetMaxRoomDelayUseCase>(),
           gh<_i662.CountUsersWithTShirtUseCase>(),
           gh<_i662.CountUsersWithoutTShirtUseCase>(),
+          gh<_i662.IsSponsorUserUseCase>(),
         ));
+    gh.factory<_i156.AssignmentCubit>(
+        () => _i156.AssignmentCubit(gh<_i177.AssignPointsUseCase>()));
     gh.factory<_i1034.ShiftsCubit>(
         () => _i1034.ShiftsCubit(gh<_i119.GetFilteredShiftsUseCase>()));
     gh.factory<_i734.TShirtAssignmentCubit>(

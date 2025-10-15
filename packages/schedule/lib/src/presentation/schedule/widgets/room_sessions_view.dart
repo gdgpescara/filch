@@ -93,7 +93,7 @@ class _RoomSessionsViewState extends State<RoomSessionsView> {
     final currentAndFutureSessions = <Session>[];
 
     for (final session in sessions) {
-      if (session.hasEnded) {
+      if (session.isEnded) {
         endedSessions.add(session);
         continue;
       }
