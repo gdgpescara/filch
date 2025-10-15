@@ -21,36 +21,38 @@ class UserQuestList extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              t.staff.point_assignment.user_quests.label,
-              style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const Gap.vertical(Spacing.m),
             Wrap(
               spacing: Spacing.l,
               runSpacing: Spacing.l,
               alignment: WrapAlignment.center,
               crossAxisAlignment: WrapCrossAlignment.center,
               children: quests.map((quest) {
-                return Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      quest.title?[LocaleSettings.currentLocale.languageCode] ?? ' - ',
-                      style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    const Gap.vertical(Spacing.m),
-                    Wrap(
-                      spacing: Spacing.l,
-                      runSpacing: Spacing.l,
-                      children: [
-                        ...quest.points.map((points) {
-                          return _ItemWidget(quest.id, quest.type, points, navigateToAssignment);
-                        }),
-                      ],
-                    ),
-                  ],
+                return AppCard(
+                  style: AppCardStyle.bordered,
+                  padding: const EdgeInsets.all(Spacing.m),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(quest.id, style: context.getTextTheme(TextThemeType.monospace).bodyMedium),
+                      Text(
+                        quest.title?[LocaleSettings.currentLocale.languageCode] ?? ' - ',
+                        style: context.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+                      ),
+                      const Gap.vertical(Spacing.m),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          crossAxisSpacing: Spacing.s,
+                          mainAxisSpacing: Spacing.s,
+                        ),
+                        itemCount: quest.points.length,
+                        itemBuilder: (context, index) => _ItemWidget(quest.id, quest.type, quest.points[index], navigateToAssignment),
+                      ),
+                    ],
+                  ),
                 );
               }).toList(),
             ),
@@ -72,17 +74,27 @@ class _ItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
+      borderRadius: BorderRadius.circular(RadiusSize.m),
       onTap: () => navigateToAssignment(
         AssignmentPageArgs.quest(points: points.toDouble(), questId: questId, questType: questType),
       ),
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.4,
-        child: AppCard(
-          style: AppCardStyle.bordered,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [Text(points.toString(), style: context.getTextTheme(TextThemeType.themeSpecific).displaySmall)],
+      child: AppCard(
+        style: AppCardStyle.bordered,
+        padding: const EdgeInsets.all(Spacing.s),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: Spacing.m, vertical: Spacing.s),
+          constraints: const BoxConstraints(minWidth: 50),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            color: context.colorScheme.secondaryContainer,
+            borderRadius: BorderRadius.circular(RadiusSize.m),
+          ),
+          child: Text(
+            points.toString(),
+            style: context
+                .getTextTheme(TextThemeType.monospace)
+                .titleMedium
+                ?.copyWith(color: context.colorScheme.onSecondaryContainer, fontWeight: FontWeight.w700),
           ),
         ),
       ),
