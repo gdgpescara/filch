@@ -44,7 +44,7 @@ dependencies:
   cloud_functions: ^6.0.3
   firebase_auth: ^6.1.1
   firebase_crashlytics: ^5.0.3
-  firebase_app_check: ^0.4.1
+  firebase_app_check: ^0.4.1+1
   loggy: ^2.0.3
   flutter_loggy: ^2.0.3+1
   bloc: ^9.1.0

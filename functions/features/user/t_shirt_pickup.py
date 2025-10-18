@@ -6,19 +6,6 @@ from shared.get_signed_in_user import get_signed_in_user
 
 @https_fn.on_call(region="europe-west3")
 def t_shirt_pickup(request: https_fn.CallableRequest) -> bool:
-    """
-    Cloud function to mark a user's t-shirt as picked up.
-    Can only be called by staff members.
-    
-    Args:
-        request: Contains the auth context and the user ID to mark
-        
-    Returns:
-        True if successful
-        
-    Raises:
-        HttpsError: If user is not staff or user ID is not provided
-    """
     logged_user = get_signed_in_user(request)
     
     # Check if the user is a staff member

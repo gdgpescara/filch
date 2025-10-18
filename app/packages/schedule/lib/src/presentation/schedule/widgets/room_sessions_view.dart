@@ -118,17 +118,20 @@ class _RoomSessionsViewState extends State<RoomSessionsView> {
         final (endedSessions, currentAndFutureSessions) = _partitionSessionsByStatus(sessionsToDisplay);
 
         return ListView(
+          padding: const EdgeInsets.all(Spacing.m),
           children: [
             if (selectedRoomSessions.scheduleDelay > 0) ...[
               const SizedBox(height: Spacing.m),
               RoomDelayHeader(roomDelay: selectedRoomSessions.scheduleDelay),
+              const SizedBox(height: Spacing.m),
             ],
-            const SizedBox(height: Spacing.m),
-            EndedSessions(
-              sessions: endedSessions,
-              onSessionTap: widget.onSessionTap,
-            ),
-            const SizedBox(height: Spacing.m),
+            if(endedSessions.isNotEmpty) ...[
+              EndedSessions(
+                sessions: endedSessions,
+                onSessionTap: widget.onSessionTap,
+              ),
+              const SizedBox(height: Spacing.m),
+            ],
             CurrentAndFutureSessions(
               sessions: currentAndFutureSessions,
               onSessionTap: widget.onSessionTap,

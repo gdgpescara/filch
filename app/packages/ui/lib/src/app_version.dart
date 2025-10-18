@@ -26,7 +26,7 @@ class _AppVersionState extends State<AppVersion> {
     _shorebirdUpdater.readCurrentPatch().then((patch) {
       setState(() {
         if (patch != null) {
-          _version = t.common.app_version.with_patch(version: packageInfo.version, patch: patch);
+          _version = t.common.app_version.with_patch(version: packageInfo.version, patch: patch.number);
         } else {
           _version = t.common.app_version.without_patch(version: packageInfo.version);
         }
