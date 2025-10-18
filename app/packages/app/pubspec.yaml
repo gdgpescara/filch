@@ -1,0 +1,84 @@
+name: filch
+description: GDG Pescara app.
+publish_to: "none"
+version: 3.0.0+21
+
+environment:
+  sdk: ^3.9.0
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  i18n:
+    path: ../i18n
+  core:
+    path: ../core
+  auth:
+    path: ../auth
+  sorting_ceremony:
+    path: ../sorting_ceremony
+  ui:
+    path: ../ui
+  quests:
+    path: ../quests
+  user:
+    path: ../user
+  staff:
+    path: ../staff
+  media_manager:
+    path: ../media_manager
+  schedule:
+    path: ../schedule
+
+  cupertino_icons: ^1.0.8
+  get_it: ^8.2.0
+  injectable: ^2.5.2
+  google_fonts: ^6.3.2
+  firebase_core: ^4.2.0
+  firebase_messaging: ^16.0.3
+  cloud_firestore: ^6.0.3
+  cloud_functions: ^6.0.3
+  firebase_auth: ^6.1.1
+  firebase_crashlytics: ^5.0.3
+  firebase_app_check: ^0.4.1+1
+  loggy: ^2.0.3
+  flutter_loggy: ^2.0.3+1
+  bloc: ^9.1.0
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.7
+  routefly: ^3.1.3
+  accessibility_tools: ^2.7.1
+  flutter_svg: ^2.2.1
+  font_awesome_flutter: ^10.10.0
+  rxdart: ^0.28.0
+  intl: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  build_runner: ^2.9.0
+  injectable_generator: ^2.9.0
+  flutter_launcher_icons: ^0.14.4
+
+flutter:
+  uses-material-design: true
+  assets:
+    - shorebird.yaml
+    - packages/assets/logo/gdg_logo_full.png
+    - certificates/sessionize.pem
+    
+  fonts:
+    - family: Digital
+      fonts:
+        - asset: packages/assets/fonts/Digital.ttf
+
+flutter_launcher_icons:
+  android: false
+  ios: true
+  remove_alpha_ios: true
+  image_path: "packages/assets/lib/logo/gdg_logo_alt.png"

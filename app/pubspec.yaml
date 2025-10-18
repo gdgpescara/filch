@@ -1,0 +1,268 @@
+name: filch_workspace
+publish_to: "none"
+
+environment:
+  sdk: ^3.9.0
+
+workspace:
+  - packages/app
+  - packages/assets
+  - packages/auth
+  - packages/core
+  - packages/i18n
+  - packages/media_manager
+  - packages/quests
+  - packages/schedule
+  - packages/sorting_ceremony
+  - packages/staff
+  - packages/ui
+  - packages/user
+
+dev_dependencies:
+  melos: ^7.1.1
+
+dependency_overrides:
+  analyzer: ^8.1.1
+
+melos:
+  name: filch
+  sdkPath: .fvm/flutter_sdk
+
+  ide:
+    intellij: true
+
+  command:
+    bootstrap:
+      runPubGetInParallel: false
+      usePubspecOverrides: true
+      environment:
+        sdk: ^3.9.0
+        flutter: ">=3.32.5"
+
+      dependencies:
+          get_it: ^8.2.0
+          injectable: ^2.5.2
+          firebase_core: ^4.2.0
+          firebase_messaging: ^16.0.3
+          cloud_firestore: ^6.0.3
+          cloud_functions: ^6.0.3
+          firebase_auth: ^6.1.1
+          firebase_crashlytics: ^5.0.3
+          firebase_storage: ^13.0.3
+          firebase_app_check: ^0.4.1+1
+          google_sign_in: ^7.2.0
+          mobile_scanner: ^7.1.2
+          bloc: ^9.1.0
+          flutter_bloc: ^9.1.1
+          equatable: ^2.0.7
+          json_annotation: ^4.9.0
+          reactive_forms: ^18.1.1
+          slang: ^4.9.1
+          font_awesome_flutter: ^10.10.0
+          flutter_svg: ^2.2.1
+          package_info_plus: ^9.0.0
+          image_picker: ^1.2.0
+          catch_and_flow: ^1.0.9
+          google_fonts: ^6.3.2
+          accessibility_tools: ^2.7.1
+          shorebird_code_push: ^2.0.5
+
+      dev_dependencies:
+        flutter_lints: ^6.0.0
+        mockito: ^5.5.1
+        build_runner: ^2.9.0
+        injectable_generator: ^2.9.0
+        json_serializable: ^6.11.1
+
+    clean:
+      hooks:
+        post: melos exec --flutter --concurrency=1 -- "flutter clean" && find . -type f -name "*.iml" -exec rm -f {} \;
+
+  scripts:
+    clean:all:
+      run: flutter clean
+      exec:
+        concurrency: 1
+        failFast: true
+    remove:iml:
+      run: find . -type f -name "*.iml" -exec rm -f {} \;
+
+    generate:
+      run: melos generate:routes --no-select && melos generate:build_runner --no-select
+
+    generate:i18n:
+      run: dart run slang
+      exec:
+        failFast: true
+      packageFilters:
+        dependsOn:
+          - slang_build_runner
+
+    generate:build_runner:
+      run: dart run build_runner build --delete-conflicting-outputs
+      exec:
+        concurrency: 1
+        failFast: true
+        orderDependents: true
+      packageFilters:
+        dependsOn:
+          - build_runner
+
+    generate:routes:
+      run: dart run routefly
+      exec:
+        failFast: true
+      packageFilters:
+        dependsOn:
+          - routefly
+
+    lint:all:
+      run: melos run format --no-select && melos run analyze --no-select
+
+    fix:all:
+      run: dart fix --apply
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+
+    test:all:
+      run: melos run test --no-select
+
+    analyze:
+      run: flutter analyze . --fatal-infos
+      exec:
+        concurrency: 1
+        failFast: true
+
+    test:
+      run: flutter test --coverage --reporter expanded
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        dirExists: test
+
+    test:update_goldens:
+      run: flutter test --update-goldens --reporter expanded
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        dependsOn:
+          - golden_toolkit
+
+    format:
+      run: dart format -o write . --line-length=120
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+
+    generate:icon_font:
+      run: /bin/zsh scripts/generate_icon_font.sh
+      exec:
+        failFast: true
+
+    test:show_coverage:
+      run: genhtml coverage/lcov.info -o coverage/html && open coverage/html/index.html
+      exec:
+        concurrency: 1
+        failFast: true
+      packageFilters:
+        dirExists: coverage
+
+    test:show_coverage:win:
+      run: perl C:\ProgramData\chocolatey\lib\lcov\tools\bin\genhtml -o coverage\html coverage\lcov.info && start coverage\html\index.html
+      exec:
+        concurrency: 1
+        failFast: true
+      packageFilters:
+        dirExists: coverage
+
+    test:remove_generated_file_from_coverage:
+      run: lcov --remove coverage/lcov.info "**/**/*.g.dart" "lib/dependency_injection/*" -o coverage/lcov.info
+      exec:
+        concurrency: 1
+        failFast: true
+      packageFilters:
+        dirExists: coverage
+
+    # build scripts ------------------------------------------------------------------------------
+    build:android:aab:
+      run: flutter build appbundle -t lib/main.dart --release --obfuscate --split-debug-info=bundle/debug --dart-define-from-file=.env/remote.json
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        scope:
+          - filch
+
+    build:android:apk:
+      run: flutter build apk -t lib/main.dart --release --obfuscate --split-debug-info=android/debug --dart-define-from-file=.env/remote.json
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        scope:
+          - filch
+
+    build:ios:ipa:
+      run: flutter build ipa -t lib/main.dart --release --obfuscate --split-debug-info=ios/debug --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        scope:
+          - filch
+
+    shorebird:release:android:
+      run: shorebird release android '--' --release --dart-define-from-file=.env/remote.json
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        scope:
+          - filch
+
+    shorebird:release:ios:
+      run: shorebird release ios '--' --release --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        scope:
+          - filch
+
+    shorebird:release:
+      run: melos shorebird:release:android --no-select && melos shorebird:release:ios --no-select
+
+    shorebird:patch:android:
+      run: shorebird patch android '--' --release --dart-define-from-file=.env/remote.json
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        scope:
+          - filch
+
+    shorebird:patch:ios:
+      run: shorebird patch ios '--' --release --export-options-plist=ios/ExportOptions/ExportOptions.plist --dart-define-from-file=.env/remote.json
+      exec:
+        concurrency: 1
+        failFast: true
+        flutter: true
+      packageFilters:
+        scope:
+          - filch
+
+    shorebird:patch:
+      run: melos shorebird:patch:android --no-select && melos shorebird:patch:ios --no-select
