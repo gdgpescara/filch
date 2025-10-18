@@ -9,6 +9,7 @@ import 'state/management_cubit.dart';
 import 'widgets/assign_t_shirt.dart';
 import 'widgets/assignable_points_list.dart';
 import 'widgets/report_schedule_delay.dart';
+import 'widgets/sync_sessionize.dart';
 
 class ManagementView extends StatelessWidget {
   const ManagementView({
@@ -41,6 +42,8 @@ class ManagementView extends StatelessWidget {
                       ReportScheduleDelay(navigateToScheduleDelayReporting),
                       const Gap.vertical(Spacing.m),
                       AssignTShirt(navigateToTShirtAssignment),
+                      const Gap.vertical(Spacing.m),
+                      const SyncSessionize(),
                     ],
                   ],
                   ManagementFailure() => [Center(child: Text(t.common.errors.generic))],
