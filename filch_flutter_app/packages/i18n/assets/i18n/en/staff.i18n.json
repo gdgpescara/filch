@@ -67,5 +67,12 @@
   "take_picture": {
     "title": "Take a picture",
     "instructions": "Before taking the photo, for better results, remember to:\n\n• Take the photo using the suggested background.\n• Avoid overlapping the subjects in the photo.\n• Try to take half-body shots."
+  },
+  "sessionize_sync": {
+    "title": "Sessionize sync:",
+    "description": "This button will overwrite all existing sessions in the app with the latest data from Sessionize.",
+    "success_message": "Sessionize data synced successfully.",
+    "error_message": "Failed to sync Sessionize data: $errorMessage",
+    "button_label": "Sync"
   }
 }

@@ -13,6 +13,7 @@ import 'package:quests/quests.dart' as _i177;
 import 'package:schedule/schedule.dart' as _i199;
 import 'package:staff/src/assignment/state/assignment_cubit.dart' as _i156;
 import 'package:staff/src/management/state/management_cubit.dart' as _i813;
+import 'package:staff/src/management/state/sessionize_sync_cubit.dart' as _i110;
 import 'package:staff/src/schedule_delay/state/room_card_cubit.dart' as _i528;
 import 'package:staff/src/schedule_delay/state/schedule_delay_cubit.dart'
     as _i553;
@@ -28,6 +29,8 @@ class StaffPackageModule extends _i526.MicroPackageModule {
   _i687.FutureOr<void> init(_i526.GetItHelper gh) {
     gh.factory<_i553.ScheduleDelayCubit>(
         () => _i553.ScheduleDelayCubit(gh<_i199.GetRoomsUseCase>()));
+    gh.factory<_i110.SessionizeSyncCubit>(
+        () => _i110.SessionizeSyncCubit(gh<_i199.SyncSessionizeUseCase>()));
     gh.lazySingleton<_i119.GetFilteredShiftsUseCase>(
         () => _i119.GetFilteredShiftsUseCase(gh<_i974.FirebaseFirestore>()));
     gh.factory<_i813.ManagementCubit>(() => _i813.ManagementCubit(

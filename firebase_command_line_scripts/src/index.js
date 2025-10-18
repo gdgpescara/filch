@@ -3,7 +3,6 @@ import Enquirer from "enquirer";
 import { updateQuests } from "./update-quests.js";
 import { deployFirebaseFunctions } from "./deploy-functions.js";
 import { sendTShirtNotification } from "./send-t-shirt-notification.js";
-import { syncSessionizeData } from "./sync-sessionize.js";
 import { registerStaffUser } from "./register-staff-user.js";
 import { registerSponsorUser } from "./register-sponsor-user.js";
 
@@ -32,11 +31,6 @@ const steps = [
     name: "send-t-shirt-notification",
     message: "Send t-shirt notification",
     value: sendTShirtNotification,
-  },
-  {
-    name: "sync-sessionize",
-    message: "Sync Sessionize data",
-    value: syncSessionizeData,
   },
   {
     name: "deploy-functions",
