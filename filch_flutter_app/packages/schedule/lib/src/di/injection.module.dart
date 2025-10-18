@@ -31,6 +31,7 @@ import 'package:schedule/src/use_cases/get_user_favorite_session_ids_use_case.da
     as _i634;
 import 'package:schedule/src/use_cases/register_room_delay_use_case.dart'
     as _i85;
+import 'package:schedule/src/use_cases/sync_sessionize_use_case.dart' as _i799;
 import 'package:schedule/src/use_cases/toggle_favorite_use_case.dart' as _i107;
 
 class SchedulePackageModule extends _i526.MicroPackageModule {
@@ -42,6 +43,11 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
       _,
     ) =>
         _i787.DaySessionsCubit(sessions));
+    gh.lazySingleton<_i799.SyncSessionizeUseCase>(
+        () => _i799.SyncSessionizeUseCase(
+              gh<_i809.FirebaseFunctions>(),
+              gh<_i974.FirebaseFirestore>(),
+            ));
     gh.lazySingleton<_i634.GetUserFavoriteSessionIdsUseCase>(
         () => _i634.GetUserFavoriteSessionIdsUseCase(
               gh<_i974.FirebaseFirestore>(),

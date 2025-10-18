@@ -67,6 +67,13 @@
   "take_picture": {
     "title": "Scatta una foto",
     "instructions": "Prima di scattare la foto, per un migliore risultato, ricorda:\n\n• Effettuare la foto usando lo sfondo suggerito.\n• Evitare di sovrapporre i soggetti scattati.\n• Cerca di fare foto a mezzo busto."
+  },
+  "sessionize_sync": {
+    "title": "Sincronizzazione Sessionize:",
+    "description": "Questo pulsante sovrascriverà tutte le sessioni esistenti nell'app con i dati più recenti da Sessionize.",
+    "success_message": "Dati Sessionize sincronizzati con successo.",
+    "error_message": "Impossibile sincronizzare i dati Sessionize: $errorMessage",
+    "button_label": "Sincronizza"
   }
 
 }
