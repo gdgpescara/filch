@@ -74,7 +74,14 @@ class RemoveAccountButton extends StatelessWidget {
             content: Text(t.user.profile.remove_account.need_login.dialog.content),
             actions: [
               TextButton(onPressed: () => Navigator.pop(context), child: Text(t.common.buttons.cancel)),
-              TextButton(onPressed: GetIt.I<SignOutUseCase>().call, child: Text(t.common.buttons.ok)),
+              TextButton(
+                onPressed: () async {
+                  Navigator.pop(context);
+                  await GetIt.I<SignOutUseCase>().call();
+                  onAccountRemoved();
+                },
+                child: Text(t.common.buttons.ok),
+              ),
             ],
           );
         },

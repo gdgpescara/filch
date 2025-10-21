@@ -18,7 +18,7 @@ class SortingCeremonyCubit extends SafeEmitterCubit<SortingCeremonyState> {
   final GetTeamUseCase _getTeamUseCase;
   
   Future<void> startSortingCeremony() async {
-    await Future<void>.delayed(const Duration(seconds: 10));
+    await Future<void>.delayed(const Duration(seconds: 4));
     await _assignTeamUseCase().when(
       progress: () => emit(SortingCeremonyLoading()),
       success: (teamId) async {
@@ -28,8 +28,6 @@ class SortingCeremonyCubit extends SafeEmitterCubit<SortingCeremonyState> {
           return;
         }
         emit(SortingCeremonySuccess(team: team));
-        await Future<void>.delayed(const Duration(seconds: 15));
-        emit(SortingCeremonyFinish());
       },
       error: (failure) {
         if (failure.code == 'already-exists') {
@@ -39,5 +37,9 @@ class SortingCeremonyCubit extends SafeEmitterCubit<SortingCeremonyState> {
         }
       },
     );
+  }
+
+  void exitCeremony() {
+    emit(SortingCeremonyFinish());
   }
 }
