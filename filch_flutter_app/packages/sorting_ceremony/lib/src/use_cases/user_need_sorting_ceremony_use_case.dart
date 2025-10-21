@@ -1,17 +1,22 @@
 import 'package:auth/auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:injectable/injectable.dart';
-import '../../sorting_ceremony.dart';
 
 @lazySingleton
 class UserNeedSortingCeremonyUseCase {
-  UserNeedSortingCeremonyUseCase(this._auth, this._signOutUseCase);
+  UserNeedSortingCeremonyUseCase(this._auth, this._signOutUseCase, this._firestore);
 
   final FirebaseAuth _auth;
   final SignOutUseCase _signOutUseCase;
 
+  final FirebaseFirestore _firestore;
+
   Future<bool> call() async {
+    final featureFlagsDoc = await _firestore.collection('configurations').doc('feature_flags').get();
+    final featureFlags = featureFlagsDoc.data() ?? {};
+    final sortingCeremonyEnabled = (featureFlags['sortingCeremony'] as bool?) ?? false;
     if (!sortingCeremonyEnabled) {
       return false;
     }

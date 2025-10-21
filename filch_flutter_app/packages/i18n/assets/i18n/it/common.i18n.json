@@ -3,6 +3,7 @@
   "buttons": {
     "cancel": "Annulla",
     "confirm": "Conferma",
+    "continue_next": "Continua",
     "ok": "OK",
     "sign_out": "Esci",
     "try_again": "Riprova"

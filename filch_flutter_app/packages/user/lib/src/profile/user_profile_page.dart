@@ -51,7 +51,7 @@ class UserProfilePage extends StatelessWidget {
                   const SizedBox(height: Spacing.m),
                   const UserTShirt(),
                   const SizedBox(height: Spacing.m),
-                  if (!state.showPointsCard) ...[
+                  if (state.showPointsCard) ...[
                     UserPointsCard(navigateToAllPoints: navigateToAllPoints),
                     const SizedBox(height: Spacing.l),
                   ],
