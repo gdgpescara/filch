@@ -95,7 +95,7 @@ else:
 cron_schedule = f"*/{EVERY_MINUTE} {START_HOUR}-{END_HOUR} {day_field} {MONTH} *"
 
 
-@scheduler_fn.on_schedule(schedule=cron_schedule, time_zone=TZ, region=FIREBASE_REGION)
+@scheduler_fn.on_schedule(schedule=cron_schedule, timezone=scheduler_fn.Timezone(TZ), region=FIREBASE_REGION)
 def t_shirt_notification_schedule(event: scheduler_fn.ScheduledEvent):
     logger.info("Scheduled T-shirt notification job triggered")
     send_tshirt_notification()
