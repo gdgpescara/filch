@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 
 EVERY_MINUTE = 1
 
+
 def send_tshirt_notification():
     try:
         config_ref = client.collection(COLLECTION_CONFIGURATIONS).document(DOCUMENT_TSHIRT)
