@@ -1,6 +1,6 @@
 from firebase_functions.https_fn import on_call, CallableRequest, HttpsError, FunctionsErrorCode
 from google.cloud.firestore import SERVER_TIMESTAMP
-
+from shared.env import COLLECTION_QUEST, SUBCOLLECTION_POINT, COLLECTION_USER
 from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from features.quests.types.quest import Quest
@@ -19,7 +19,7 @@ def submit_answer(request: CallableRequest) -> bool:
     answers = [int(ans) for ans in request.data.get("answers", [])]
 
     quest_snap = (firestore_client
-                  .collection("quests")
+                  .collection(COLLECTION_QUEST)
                   .document(quest_id)
                   .get())
     if not quest_snap.exists:
@@ -59,15 +59,15 @@ def submit_answer(request: CallableRequest) -> bool:
     if is_correct:
         doc_ref = (
             firestore_client
-            .collection("users")
+            .collection(COLLECTION_USER)
             .document(logged_user.uid)
-            .collection("points")
+            .collection(SUBCOLLECTION_POINT)
             .document(quest.id)
         )
 
         batch.set(doc_ref, archived_points.model_dump())
 
-    user_ref = firestore_client.collection("users").document(logged_user.uid)
+    user_ref = firestore_client.collection(COLLECTION_USER).document(logged_user.uid)
     batch.update(user_ref, {"activeQuest": None})
 
     batch.commit()

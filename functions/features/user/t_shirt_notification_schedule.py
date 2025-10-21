@@ -2,19 +2,17 @@ from firebase_functions import scheduler_fn
 from logger_config import logger
 from firestore_client import client
 from firebase_admin import messaging
-from shared.env import FIREBASE_REGION, TZ, START_DAY, END_DAY, MONTH, START_HOUR, END_HOUR
-from features.quests.prompt_functions import COLLECTION_CONFIGURATIONS
-
+from shared.env import (FIREBASE_REGION, TZ, START_DAY, END_DAY, MONTH, START_HOUR, END_HOUR, COLLECTION_CONFIGURATIONS,
+                        COLLECTION_USER, DOCUMENT_TSHIRT)
 import random
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-EVERY_MINUTE = 10
-
+EVERY_MINUTE = 1
 
 def send_tshirt_notification():
     try:
-        config_ref = client.collection(COLLECTION_CONFIGURATIONS).document("t-shirt")
+        config_ref = client.collection(COLLECTION_CONFIGURATIONS).document(DOCUMENT_TSHIRT)
         config_doc = config_ref.get()
 
         if not config_doc.exists:
@@ -38,7 +36,7 @@ def send_tshirt_notification():
         pool_size = boost_pool if is_boost_time else default_pool
 
         users_ref = (
-            client.collection("users")
+            client.collection(COLLECTION_USER)
             .where("tShirtPickupRequested", "==", False)
             .where("tShirtPickup", "==", False)
             .where("staff", "==", False)
@@ -77,7 +75,7 @@ def send_tshirt_notification():
 
             try:
                 messaging.send(message)
-                client.collection("users").document(user_id).update({
+                client.collection(COLLECTION_USER).document(user_id).update({
                     "tShirtPickupRequested": True
                 })
                 logger.info(f"✅ Notification sent to: {user_id}")
