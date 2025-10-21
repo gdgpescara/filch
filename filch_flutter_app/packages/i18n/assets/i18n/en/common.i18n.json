@@ -3,6 +3,7 @@
   "buttons": {
     "cancel": "Cancel",
     "confirm": "Confirm",
+    "continue_next": "Continue",
     "ok": "OK",
     "sign_out": "Sign Out",
     "try_again": "Try Again"

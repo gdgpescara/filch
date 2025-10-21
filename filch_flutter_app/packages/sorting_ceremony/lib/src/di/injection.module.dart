@@ -30,6 +30,7 @@ class SortingCeremonyPackageModule extends _i526.MicroPackageModule {
         () => _i702.UserNeedSortingCeremonyUseCase(
               gh<_i59.FirebaseAuth>(),
               gh<_i662.SignOutUseCase>(),
+              gh<_i974.FirebaseFirestore>(),
             ));
     gh.lazySingleton<_i409.GetLoadingSentencesUseCase>(
         () => _i409.GetLoadingSentencesUseCase(gh<_i974.FirebaseFirestore>()));

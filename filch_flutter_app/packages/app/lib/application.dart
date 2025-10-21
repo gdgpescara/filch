@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:accessibility_tools/accessibility_tools.dart';
+// import 'package:accessibility_tools/accessibility_tools.dart';
 import 'package:auth/auth.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
@@ -66,9 +66,9 @@ class _ApplicationState extends State<Application> {
           routerConfig: _router,
           themeAnimationCurve: Curves.easeInOut,
           themeAnimationDuration: const Duration(milliseconds: 400),
-          builder: (context, child) {
-            return AccessibilityTools(checkFontOverflows: true, child: child);
-          },
+          // builder: (context, child) {
+          //   return AccessibilityTools(checkFontOverflows: true, child: child);
+          // },
         ),
       ),
     );
