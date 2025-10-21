@@ -30,9 +30,9 @@ class UserProfileHeader extends StatelessWidget {
             children: [
               UserPicture(
                 imageUrl: user?.photoURL,
-                teamImageUrl: team?.imageUrl,
+                teamImageUrl: team?.profileImageUrl,
               ),
-              UserInfo(user, teamName: team?.name),
+              UserInfo(user, teamName: team?.name[LocaleSettings.currentLocale.languageCode]),
             ],
           ),
         ),
