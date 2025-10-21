@@ -2,8 +2,9 @@ from firebase_functions.https_fn import on_call, CallableRequest, HttpsError, Fu
 from firebase_admin import firestore
 from features.sessions.types.favorite import FavoriteSession
 from shared import get_signed_in_user
-from shared.env import FIREBASE_REGION
+from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_FAVORITE_SESSION
 from firestore_client import client as firestore_client
+
 
 @on_call(region=FIREBASE_REGION)
 def toggle_favorite_session(request: CallableRequest) -> bool:
@@ -14,9 +15,9 @@ def toggle_favorite_session(request: CallableRequest) -> bool:
         if session_id is None:
             raise HttpsError(FunctionsErrorCode.ABORTED, "sessionId is required")
 
-        favorite_ref = (firestore_client.collection("users")
+        favorite_ref = (firestore_client.collection(COLLECTION_USER)
             .document(logged_user.uid)
-            .collection("favorite_sessions")
+            .collection(SUBCOLLECTION_FAVORITE_SESSION)
             .document(session_id))
 
         favorite_doc = favorite_ref.get()

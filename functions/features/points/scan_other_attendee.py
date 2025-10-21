@@ -1,13 +1,13 @@
 import json
 from pydantic import BaseModel
 from firebase_functions.https_fn import on_call, CallableRequest
-from firebase_admin import auth, firestore
+from firebase_admin import auth
 from firestore_client import client as firestore_client
 from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from shared.get_signed_in_user import get_signed_in_user
-from shared.env import FIREBASE_REGION
+from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_POINT
 from google.cloud.firestore import SERVER_TIMESTAMP
 
 
@@ -27,9 +27,9 @@ def scan_other_attendee(req: CallableRequest) -> bool:
     if scanned_user:
         user_uid = scanned_user.uid
         logged_uid = logged_user.uid
-        user_point_snap = (firestore_client.collection("users")
+        user_point_snap = (firestore_client.collection(COLLECTION_USER)
                            .document(logged_uid)
-                           .collection("points")
+                           .collection(SUBCOLLECTION_POINT)
                            .where("type", "==", PointsTypeEnum.quest)
                            .where("assignedBy", "==", user_uid)
                            .get())
@@ -46,9 +46,9 @@ def scan_other_attendee(req: CallableRequest) -> bool:
         
         batch = firestore_client.batch()
         doc = (firestore_client
-               .collection("users")
+               .collection(COLLECTION_USER)
                .document(logged_uid)
-               .collection("points")
+               .collection(SUBCOLLECTION_POINT)
                .document())
         batch.set(doc, points.model_dump())
         batch.commit()
