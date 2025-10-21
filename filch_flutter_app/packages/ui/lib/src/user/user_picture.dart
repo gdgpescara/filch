@@ -114,18 +114,15 @@ class UserPicture extends StatelessWidget {
             ),
           ],
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: ClipOval(
-            child: ExcludeSemantics(
-              child: CachedNetworkImage(
-                imageUrl: teamImageUrl!,
-                fit: BoxFit.contain,
-                errorWidget: (context, error, stackTrace) => Icon(
-                  Icons.star_rounded,
-                  color: context.colorScheme.primary,
-                  size: 30,
-                ),
+        child: ClipOval(
+          child: ExcludeSemantics(
+            child: CachedNetworkImage(
+              imageUrl: teamImageUrl!,
+              fit: BoxFit.contain,
+              errorWidget: (context, error, stackTrace) => Icon(
+                Icons.star_rounded,
+                color: context.colorScheme.primary,
+                size: 30,
               ),
             ),
           ),

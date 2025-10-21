@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core/core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -15,7 +17,10 @@ class GoogleSignInUseCase {
   Future<UserCredential> call() async {
     return runSafetyFuture(
       () async {
-        var googleUser = await _googleSignIn.attemptLightweightAuthentication();
+        GoogleSignInAccount? googleUser;
+        if(Platform.isAndroid) {
+          googleUser = await _googleSignIn.attemptLightweightAuthentication();
+        }
 
         if (googleUser == null && _googleSignIn.supportsAuthenticate()) {
           googleUser = await _googleSignIn.authenticate(scopeHint: ['profile']);
