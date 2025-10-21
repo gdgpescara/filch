@@ -9,20 +9,24 @@ class Team extends Equatable {
     required this.id,
     required this.name,
     required this.claim,
+    required this.description,
     required this.membersCount,
     required this.imageUrl,
+    required this.profileImageUrl,
     required this.assignable,
   });
 
   factory Team.fromJson(Map<String, dynamic> json) => _$TeamFromJson(json);
 
   final String id;
-  final String name;
+  final Map<String, String> name;
   final Map<String, String> claim;
+  final Map<String, String> description;
   final int membersCount;
   final String imageUrl;
+  final String profileImageUrl;
   final bool assignable;
 
   @override
-  List<Object?> get props => [id, name, claim, membersCount, imageUrl, assignable];
+  List<Object?> get props => [id, name, claim, description, membersCount, imageUrl, profileImageUrl, assignable];
 }

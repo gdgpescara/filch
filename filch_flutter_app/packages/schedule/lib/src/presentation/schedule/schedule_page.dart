@@ -42,6 +42,17 @@ class SchedulePage extends StatelessWidget {
   }
 
   Widget _buildScheduleScaffold(BuildContext context, ScheduleState state) {
+    if(state is ScheduleLoading) {
+      return Scaffold(
+        backgroundColor: _bgColor,
+        body: const SafeArea(
+          child: Center(
+            child: CircularProgressIndicator(),
+          ),
+        ),
+      );
+    }
+
     final days = state is ScheduleLoaded
         ? state.groupedSessions.getAvailableDays(onlyFavorites: state.onlyFavorites)
         : <DateTime>[];
