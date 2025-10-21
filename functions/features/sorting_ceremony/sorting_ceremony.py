@@ -6,7 +6,7 @@ from firebase_admin import auth
 from shared.get_signed_in_user import get_signed_in_user
 from firestore_client import client as firestore_client
 from logger_config import logger
-from shared.env import FIREBASE_REGION
+from shared.env import FIREBASE_REGION, COLLECTION_TEAM, COLLECTION_USER
 
 
 @on_call(region=FIREBASE_REGION)
@@ -20,7 +20,7 @@ def sorting_ceremony(request: CallableRequest) -> str:
         logger.info(f"User {logged_user.email} is already in a team: {user_team}")
         return "user_already_in_team"
 
-    teams_data = firestore_client.collection("teams").where('assignable', '==', True).get()
+    teams_data = firestore_client.collection(COLLECTION_TEAM).where('assignable', '==', True).get()
     teams = {team.id: team.get("membersCount") for team in teams_data if team.exists}
     
     sizes =  [teams[team_id] for team_id in teams]
@@ -31,7 +31,7 @@ def sorting_ceremony(request: CallableRequest) -> str:
     logger.info(f"User {logged_user.email} assigned to team {chosen_team}")
     
     firestore_client \
-        .collection("users") \
+        .collection(COLLECTION_USER) \
         .document(logged_user.uid) \
         .update({
             "team": chosen_team,

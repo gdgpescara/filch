@@ -4,13 +4,10 @@ from firestore_client import client
 from features.rooms.types.room import Room
 from features.rooms.types.delay import Delay
 from features.sessions.types.session import Session
-from shared.env import FIREBASE_REGION
+from shared.env import FIREBASE_REGION, COLLECTION_ROOM_NAME, COLLECTION_DELAY_NAME
 from firebase_admin import firestore
 from logger_config import logger
 from shared.get_signed_in_user import get_signed_in_user
-
-COLLECTION_ROOM_NAME = "rooms"
-COLLECTION_DELAY_NAME = "room_delays"
 
 
 def infer_rooms_from_sessions(sessions: list[Session]) -> list[Room]:
