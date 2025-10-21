@@ -30,9 +30,8 @@ def send_tshirt_notification():
         boost_pool = config.get("boostPool", 0)
         boost_time_bands = config.get("boostTimeBands", [])
 
-        now = datetime.now(ZoneInfo(TZ))
-        is_boost_time = any(
-            band["start"].to_datetime() <= now <= band["end"].to_datetime() for band in boost_time_bands)
+        now = datetime.now(ZoneInfo(TZ)).isoformat()
+        is_boost_time = any(datetime.fromtimestamp(band["start"].timestamp()).isoformat() <= now <= datetime.fromtimestamp(band["end"].timestamp()).isoformat() for band in boost_time_bands)
 
         pool_size = boost_pool if is_boost_time else default_pool
 
