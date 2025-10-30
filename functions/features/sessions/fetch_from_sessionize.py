@@ -3,7 +3,6 @@ from typing import List
 from features.sessions.types.session import Session, NamedEntity, SessionSpeaker
 from logger_config import logger
 import json, requests
-from shared.env import COLLECTION_SESSION_NAME
 
 
 def transform_sessions(raw_data: list) -> List[Session]:
