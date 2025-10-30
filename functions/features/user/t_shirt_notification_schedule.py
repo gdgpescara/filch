@@ -8,7 +8,7 @@ import random
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-EVERY_MINUTE = 1
+EVERY_MINUTE = 10
 
 
 def send_tshirt_notification():
