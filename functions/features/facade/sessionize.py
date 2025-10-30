@@ -1,26 +1,47 @@
 from firebase_functions.https_fn import on_call, CallableRequest, HttpsError, FunctionsErrorCode
 from firestore_client import client as firestore_client
 from logger_config import logger
-from typing import List
+from typing import Sequence, Union
 
-from shared.env import FIREBASE_REGION, SESSIONIZE_EVENT_ID
+from shared.env import FIREBASE_REGION, COLLECTION_SPEAKER_NAME, COLLECTION_ROOM_NAME, COLLECTION_SESSION_NAME
 from features.speakers.types.speaker import Speaker
 from features.sessions.types.session import Session
 from features.rooms.types.room import Room
-from features.speakers.fetch_from_sessionize import fetch_speakers, COLLECTION_SPEAKER_NAME
-from features.sessions.fetch_from_sessionize import fetch_sessions, COLLECTION_SESSION_NAME
-from features.rooms.manage_room import infer_rooms_from_sessions, COLLECTION_ROOM_NAME
+from features.speakers.fetch_from_sessionize import fetch_speakers
+from features.sessions.fetch_from_sessionize import fetch_sessions
+from features.rooms.manage_room import infer_rooms_from_sessions
+
+EntityType = Union[Session, Speaker, Room]
 
 
-def upload_to_firestore(data: List[Session | Speaker | Room], collection_name: str) -> None:
+def upload_to_firestore(data: Sequence[EntityType], collection_name: str) -> None:
+    """
+    Uploads a sequence of Session, Speaker, or Room objects to a specified Firestore collection.
+
+    Args:
+        data (Sequence[Session | Speaker | Room]): The list of objects to upload.
+        collection_name (str): The name of the Firestore collection to upload the data to.
+
+    Raises:
+        Exception: If an error occurs during the upload process.
+    """
     try:
+        # Delete all documents in the collection if it exists
+        collection_ref = firestore_client.collection(collection_name)
+        docs = collection_ref.get()
+        if docs:
+            delete_batch = firestore_client.batch()
+            for doc in docs:
+                delete_batch.delete(doc.reference)
+            delete_batch.commit()
+            logger.info(f"Deleted existing documents in collection '{collection_name}'.")
         batch = firestore_client.batch()
         for d in data:
-            doc_ref = firestore_client.collection(collection_name).document(str(d.id))
+            doc_ref = collection_ref.document(str(d.id))
             session_dict = d.model_dump()
             batch.set(doc_ref, session_dict)
         batch.commit()
-        logger.info(f"Uploaded {len(data)} sessions to Firestore.")
+        logger.info(f"Uploaded {len(data)} items to Firestore collection '{collection_name}'.")
     except Exception as e:
         raise e
 

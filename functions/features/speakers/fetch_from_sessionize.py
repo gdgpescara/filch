@@ -3,7 +3,6 @@ from typing import List
 from features.speakers.types.speaker import Speaker, Social
 from logger_config import logger
 import json, requests
-from shared.env import COLLECTION_SPEAKER_NAME
 
 
 def transform_speakers(raw_data: list) -> List[Speaker]:
