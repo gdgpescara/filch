@@ -43,13 +43,11 @@ class SessionSpeakers extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.only(bottom: Spacing.s),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: speaker.hasTagLine || speaker.hasBio ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: [
           CircleAvatar(
             radius: speakerAvatarRadius,
-            backgroundImage: speaker.profilePicture?.isNotEmpty ?? false
-                ? CachedNetworkImageProvider(speaker.profilePicture!)
-                : null,
+            backgroundImage: speaker.profilePicture?.isNotEmpty ?? false ? CachedNetworkImageProvider(speaker.profilePicture!) : null,
             child: speaker.profilePicture?.isEmpty ?? false ? Text(speaker.name[0]) : null,
           ),
           const SizedBox(width: Spacing.s),
@@ -60,9 +58,9 @@ class SessionSpeakers extends StatelessWidget {
               children: [
                 Text(
                   speaker.name,
-                  style: speakerNameStyle ?? context.textTheme.bodyMedium,
+                  style: speakerNameStyle ?? context.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                 ),
-                if (speaker.tagLine != null && speaker.tagLine!.isNotEmpty) ...[
+                if (speaker.hasTagLine) ...[
                   const Gap.vertical(Spacing.xs),
                   Text(
                     speaker.tagLine!,
@@ -72,7 +70,7 @@ class SessionSpeakers extends StatelessWidget {
                     ),
                   ),
                 ],
-                if (showAllInfo && speaker.bio != null && speaker.bio!.isNotEmpty) ...[
+                if (showAllInfo && speaker.hasBio) ...[
                   const Gap.vertical(Spacing.m),
                   Text(
                     speaker.bio!,

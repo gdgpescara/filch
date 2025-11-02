@@ -24,18 +24,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "history": [
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;history&quot;: [
     {
-      "state": "OPEN",
-      "assignee": "os3albert"
+      &quot;state&quot;: &quot;OPEN&quot;,
+      &quot;assignee&quot;: &quot;os3albert&quot;
     }
   ],
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "os3albert"
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;os3albert&quot;
   }
-}]]></component>
+}</component>
   <component name="GithubPullRequestsUISettings">{
   &quot;selectedUrlAndAccountId&quot;: {
     &quot;url&quot;: &quot;https://github.com/gdgpescara/filch.git&quot;,
@@ -98,6 +98,7 @@
       <workItem from="1761757630028" duration="2016000" />
       <workItem from="1762071839417" duration="2292000" />
       <workItem from="1762071839417" duration="1882000" />
+      <workItem from="1762078959373" duration="41000" />
     </task>
     <task id="LOCAL-00001" summary="feat: Update localization strings and enhance Flask console options">
       <option name="closed" value="true" />

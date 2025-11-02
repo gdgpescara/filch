@@ -1,5 +1,5 @@
 git+https://github.com/camillobucciarelli/firebase-functions-python.git@fix-date-time-in-schedule_fn#egg=firebase_functions
 firebase_admin==7.1.0
 python-dotenv==1.2.1
-pydantic==2.12.2
+pydantic==2.12.3
 loguru==0.7.3

@@ -77,18 +77,18 @@ class SessionDetailInfo extends StatelessWidget {
         if (session.isCurrentlyRunning)
           SessionProgress(
             sessionDuration: session.duration,
-            startsAt: session.startsAt,
-            endsAt: session.endsAt,
+            startsAt: session.realStartsAt,
+            endsAt: session.realEndsAt,
           )
         else
-          AppChip(text: _statusLabel(session.startsAt), customColor: _statusColor),
+          AppChip(text: _statusLabel(session.realStartsAt), customColor: _statusColor),
       ],
     );
   }
 
   String _statusLabel(DateTime startAt) {
     if (session.isUpcoming) {
-      return t.schedule.sessions.session_detail.status_upcoming(minutes: startAt.difference(DateTime.now()).inMinutes);
+      return t.schedule.sessions.session_detail.status_upcoming(duration: startAt.difference(DateTime.now()).toHumanReadable(short: true));
     }
     return t.schedule.sessions.session_detail.status_ended;
   }

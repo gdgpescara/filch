@@ -76,13 +76,14 @@ class _SessionTimeState extends State<SessionTime> {
     );
   }
 
-  Row _timeSlot(BuildContext context) {
+  Widget _timeSlot(BuildContext context) {
     final dateFormatter = GetIt.I<DateFormat>(instanceName: DateFormatType.onlyTime);
     final hasDelay = !widget.session.startsAt.isAtSameMomentAs(widget.session.realStartsAt);
     return Row(
       children: [
         Expanded(
           child: Row(
+            mainAxisSize: MainAxisSize.min,
             children: [
               const Icon(Icons.schedule, size: 12),
               const SizedBox(width: Spacing.xs),
@@ -110,7 +111,9 @@ class _SessionTimeState extends State<SessionTime> {
         ),
         if (widget.session.isUpcoming)
           AppChip(
-            text: '${widget.session.durationInMinutes}min',
+            text: t.schedule.sessions.session_card.status_upcoming(
+              duration: widget.session.realStartsAt.difference(DateTime.now()).toHumanReadable(onlyMostRelevant: true),
+            ),
             customColor: appColors.googleBlue,
           ),
         if (widget.session.isEnded)
@@ -118,10 +121,10 @@ class _SessionTimeState extends State<SessionTime> {
             text: t.schedule.sessions.session_status.ended,
             customColor: appColors.googleRed,
           ),
-        if (!widget.session.isServiceSession) ...[
-          const SizedBox(width: Spacing.s),
-          FavoriteToggleButton(session: widget.session),
-        ],
+        if (!widget.session.isServiceSession)
+          FavoriteToggleButton(
+            session: widget.session,
+          ),
       ],
     );
   }

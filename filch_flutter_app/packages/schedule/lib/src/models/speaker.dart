@@ -56,6 +56,11 @@ class Speaker extends Equatable {
     );
   }
 
+  bool get hasTagLine => tagLine != null && tagLine!.isNotEmpty;
+
+  bool get hasBio => bio != null && bio!.isNotEmpty;
+
+
   @override
   List<Object?> get props => [id, name, bio, tagLine, profilePicture, links];
 }

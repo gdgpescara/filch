@@ -33,7 +33,7 @@
       "room_label": "Sala",
       "date_label": "Data",
       "time_label": "Orario",
-      "status_upcoming": "inizierà tra $minutes min",
+      "status_upcoming": "inizierà tra: $duration",
       "status_ended": "Terminata",
       "duration_minutes": "($minutes min)"
     },
@@ -47,7 +47,8 @@
     },
     "session_card": {
       "remove_favorite": "Rimuovi dai preferiti",
-      "add_favorite": "Aggiungi ai preferiti"
+      "add_favorite": "Aggiungi ai preferiti",
+      "status_upcoming": "tra: $duration"
     },
     "show_favorites": "Mostra Preferiti",
     "show_all": "Mostra Tutto"

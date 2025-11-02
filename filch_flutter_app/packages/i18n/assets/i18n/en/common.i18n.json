@@ -12,6 +12,18 @@
     "title": "Ops!"
   },
   "duration": {
+    "months": {
+      "one": "$n month",
+      "other": "$n months"
+    },
+    "weeks": {
+      "one": "$n week",
+      "other": "$n weeks"
+    },
+    "days": {
+      "one": "$n day",
+      "other": "$n days"
+    },
     "hours": {
       "one": "$n hour",
       "other": "$n hours"
@@ -23,6 +35,32 @@
     "seconds": {
       "one": "$n second",
       "other": "$n seconds"
+    }
+  },
+  "duration_short": {
+    "months": {
+      "one": "${n}mo",
+      "other": "${n}mo"
+    },
+    "weeks": {
+      "one": "${n}wk",
+      "other": "${n}wk"
+    },
+    "days": {
+      "one": "${n}d",
+      "other": "${n}d"
+    },
+    "hours": {
+      "one": "${n}h",
+      "other": "${n}h"
+    },
+    "minutes": {
+      "one": "${n}min",
+      "other": "${n}min"
+    },
+    "seconds": {
+      "one": "${n}s",
+      "other": "${n}s"
     }
   },
   "errors": {

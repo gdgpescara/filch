@@ -33,7 +33,7 @@
       "room_label": "Room",
       "date_label": "Date",
       "time_label": "Time",
-      "status_upcoming": "starts in $minutes min",
+      "status_upcoming": "starts in: $duration",
       "status_ended": "Ended",
       "duration_minutes": "($minutes min)"
     },
@@ -47,7 +47,8 @@
     },
     "session_card": {
       "remove_favorite": "Remove from favorites",
-      "add_favorite": "Add to favorites"
+      "add_favorite": "Add to favorites",
+      "status_upcoming": "in: $duration"
     },
     "show_favorites": "Show Favorites",
     "show_all": "Show All"

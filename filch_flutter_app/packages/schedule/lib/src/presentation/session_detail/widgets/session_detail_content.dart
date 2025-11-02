@@ -30,11 +30,6 @@ class SessionDetailContent extends StatelessWidget {
         if (session.description?.isNotEmpty ?? false) ...[
           const Gap.vertical(Spacing.l),
           Text(
-            'Descrizione',
-            style: context.getTextTheme(TextThemeType.monospace).titleMedium?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const Gap.vertical(Spacing.m),
-          Text(
             session.description!,
             style: context.textTheme.bodyMedium,
           ),
