@@ -53,16 +53,16 @@ class SchedulePackageModule extends _i526.MicroPackageModule {
               gh<_i974.FirebaseFirestore>(),
               gh<_i662.GetSignedUserUseCase>(),
             ));
-    gh.lazySingleton<_i234.GetRoomsUseCase>(
-        () => _i234.GetRoomsUseCase(gh<_i974.FirebaseFirestore>()));
-    gh.lazySingleton<_i882.GetRoomDelayUseCase>(
-        () => _i882.GetRoomDelayUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i707.GetMaxRoomDelayUseCase>(
         () => _i707.GetMaxRoomDelayUseCase(gh<_i974.FirebaseFirestore>()));
-    gh.lazySingleton<_i107.ToggleFavoriteUseCase>(
-        () => _i107.ToggleFavoriteUseCase(gh<_i809.FirebaseFunctions>()));
+    gh.lazySingleton<_i882.GetRoomDelayUseCase>(
+        () => _i882.GetRoomDelayUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i234.GetRoomsUseCase>(
+        () => _i234.GetRoomsUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i85.RegisterRoomDelayUseCase>(
         () => _i85.RegisterRoomDelayUseCase(gh<_i809.FirebaseFunctions>()));
+    gh.lazySingleton<_i107.ToggleFavoriteUseCase>(
+        () => _i107.ToggleFavoriteUseCase(gh<_i809.FirebaseFunctions>()));
     gh.lazySingleton<_i558.GetGroupedSessionsUseCase>(
         () => _i558.GetGroupedSessionsUseCase(
               gh<_i974.FirebaseFirestore>(),

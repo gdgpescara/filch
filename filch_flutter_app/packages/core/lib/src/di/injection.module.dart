@@ -95,10 +95,10 @@ class CorePackageModule extends _i526.MicroPackageModule {
       () => dateFormatModule.dateFormatFullReadable,
       instanceName: 'fullReadable',
     );
-    gh.lazySingleton<_i139.IsBeforeDevFestUseCase>(
-        () => _i139.IsBeforeDevFestUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i866.GetFeatureFlagsUseCase>(
         () => _i866.GetFeatureFlagsUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i139.IsBeforeDevFestUseCase>(
+        () => _i139.IsBeforeDevFestUseCase(gh<_i974.FirebaseFirestore>()));
   }
 }
 

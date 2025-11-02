@@ -42,28 +42,28 @@ class AuthPackageModule extends _i526.MicroPackageModule {
       preResolve: true,
     );
     gh.lazySingleton<_i59.FirebaseAuth>(() => externalLibraries.firebaseAuth);
-    gh.lazySingleton<_i972.RemoveAccountUseCase>(
-        () => _i972.RemoveAccountUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i499.HasSignedUserUseCase>(
-        () => _i499.HasSignedUserUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i643.SignOutUseCase>(
-        () => _i643.SignOutUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i1021.AppleSignInUseCase>(
         () => _i1021.AppleSignInUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i704.GetSignedUserUseCase>(
-        () => _i704.GetSignedUserUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i461.IsStaffUserUseCase>(
-        () => _i461.IsStaffUserUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i914.IsSponsorUserUseCase>(
-        () => _i914.IsSponsorUserUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i608.UserPasswordSignInUseCase>(
-        () => _i608.UserPasswordSignInUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i184.AuthStateChangesUseCase>(
         () => _i184.AuthStateChangesUseCase(gh<_i59.FirebaseAuth>()));
-    gh.lazySingleton<_i173.CountUsersWithoutTShirtUseCase>(() =>
-        _i173.CountUsersWithoutTShirtUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i704.GetSignedUserUseCase>(
+        () => _i704.GetSignedUserUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i499.HasSignedUserUseCase>(
+        () => _i499.HasSignedUserUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i914.IsSponsorUserUseCase>(
+        () => _i914.IsSponsorUserUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i461.IsStaffUserUseCase>(
+        () => _i461.IsStaffUserUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i972.RemoveAccountUseCase>(
+        () => _i972.RemoveAccountUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i643.SignOutUseCase>(
+        () => _i643.SignOutUseCase(gh<_i59.FirebaseAuth>()));
+    gh.lazySingleton<_i608.UserPasswordSignInUseCase>(
+        () => _i608.UserPasswordSignInUseCase(gh<_i59.FirebaseAuth>()));
     gh.lazySingleton<_i714.CountUsersWithTShirtUseCase>(
         () => _i714.CountUsersWithTShirtUseCase(gh<_i974.FirebaseFirestore>()));
+    gh.lazySingleton<_i173.CountUsersWithoutTShirtUseCase>(() =>
+        _i173.CountUsersWithoutTShirtUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i395.GoogleSignInUseCase>(() => _i395.GoogleSignInUseCase(
           gh<_i59.FirebaseAuth>(),
           gh<_i116.GoogleSignIn>(),
