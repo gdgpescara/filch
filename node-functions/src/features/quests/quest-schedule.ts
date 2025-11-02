@@ -7,7 +7,7 @@ import {ActiveQuest} from "./types/active-quest";
 import {logger} from "firebase-functions/v2";
 
 export const activeQuestsCleanerSchedule = onSchedule({
-  schedule: "every 1 minutes",
+  schedule: "*/1 9-22 8-9 11 *",
   timeZone: "Europe/Rome",
   region: "europe-west3",
 }, async () => {
