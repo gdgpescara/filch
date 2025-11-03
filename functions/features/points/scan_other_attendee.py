@@ -65,11 +65,8 @@ def scan_other_attendee(req: CallableRequest) -> bool:
 # {"quest":{"id":"social-qrcode-1","title":{"en":"Intergalactic Mission: Connections Between Worlds","it":"Missione Intergalattica: Connessioni tra Mondi"},"description":{"en":"MIB agents relay on you with a sensitive mission for the tech universe balance.\nThe devfest is teeming with aliens in human disguise, explore it and mingle with other beings and discover their incredible skills. Each diverse meetup widens your knowledge and it fosters the ultimate international cohesion.\nRemember: innovation comes from comparison and diversity, only together can we build a truly… out-of-this-world future!\n\nScan the QR codes, identify the species, and earn points for every new interstellar encounter.","it":"Gli agenti MIB ti affidano una missione cruciale per l’equilibrio dell’universo tech!\nLa DevFest pullula di specie aliene mimetizzate tra gli umani, esplorala, incontra esseri di altre razze e scopri le loro straordinarie abilità. Ogni incontro con una specie diversa arricchisce la tua conoscenza e sarà un passo verso la coesione interstellare definitiva.\nRicorda: l’innovazione nasce dal confronto e dalla diversità — solo insieme possiamo costruire un futuro davvero… fuori dal mondo!\n\nScansiona i codici QR, identifica le razze e guadagna punti per ogni nuovo incontro interstellare."},"points":[1],"executionTime":20,"type":"social","subType":"scan","verificationFunction":"https://scanhousemate-hoj3oup52q-ey.a.run.app"},"scanned_value":"{\"uid\":\"lO2lJqeosxRi0APBJQXnYf7gRk92\",\"displayName\":\"Camillo Bucciarelli\",\"email\":\"bucciarelli.camillo92@gmail.com\"}"}
 @on_call(region=FIREBASE_REGION)
 def scan_other_team_attendee(req: CallableRequest) -> dict:
-    # logged_user = get_signed_in_user(request=req)
-    # logged_user_team = logged_user.custom_claims['team']
-
-    logged_user = User(uid='123', email='test@gmail.com')
-    logged_user_team = 'test'
+    logged_user = get_signed_in_user(request=req)
+    logged_user_team = logged_user.custom_claims['team']
 
     payload = req.data
     # TODO Qui non posso creare l'istanza di quest perche' richiede dei campi che non ho in ingresso
