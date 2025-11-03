@@ -3,12 +3,11 @@ from pydantic import BaseModel
 from firebase_functions.https_fn import on_call, CallableRequest
 from firebase_admin import auth
 from firestore_client import client as firestore_client
-from features.user.types.user import User
 from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from shared.get_signed_in_user import get_signed_in_user
-from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_POINT, ASSIGN_POINT_EVERY, ONLY_ONE_TIME, \
+from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_POINT, ASSIGN_POINT_EVERY, MAX_TIMES_ASSIGNMENT, \
     POINTS_AFTER_SCAN, GET_POINTS_FROM_DB
 from google.cloud.firestore import SERVER_TIMESTAMP
 
@@ -84,17 +83,17 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
         hist_points = firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(
             SUBCOLLECTION_POINT).where("quest", "==", quest_id).get()
 
-        if ONLY_ONE_TIME:
-            if len(hist_points) > 0:
-                logger.info(f'Points for Quest {quest_id} Already Assigned to User {logged_user.email}')
-                return {
-                    "en": "Nice try, space explorer! Points for this alliance were already granted in a previous encounter. The universe remembers your deeds — no double rewards in this galaxy!",
-                    "it": "Bel tentativo, esploratore spaziale! I punti per questa alleanza ti sono già stati assegnati in un incontro precedente. L’universo ricorda le tue imprese — niente doppi premi in questa galassia!"
-                }
+        past_scan_nb = len(hist_points)
+        current_scan_nb = past_scan_nb + 1
 
-        past_scan = len(hist_points) + 1
+        if past_scan_nb // ASSIGN_POINT_EVERY >= MAX_TIMES_ASSIGNMENT:
+            logger.info(f'Points for Quest {quest_id} Already Assigned to User {logged_user.email}')
+            return {
+                "en": "Nice try, space explorer! Points for this alliance were already granted in a previous encounter. The universe remembers your deeds — no double rewards in this galaxy!",
+                "it": "Bel tentativo, esploratore spaziale! I punti per questa alleanza ti sono già stati assegnati in un incontro precedente. L’universo ricorda le tue imprese — niente doppi premi in questa galassia!"
+            }
 
-        if past_scan % ASSIGN_POINT_EVERY == 0:
+        if current_scan_nb % ASSIGN_POINT_EVERY == 0:
             emails = [point.to_dict()['assignedBy'] for point in hist_points]
             if scanned_user.email in emails:
                 logger.info(f'User {scanned_user.email} Already Scanned By {logged_user.email}')
@@ -128,7 +127,7 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
                 assignedBy=scanned_user.email
             )
 
-        logger.info(f'Assigning {assigned_points} For Scan Number {past_scan}')
+        logger.info(f'Assigning {assigned_points} For Scan Number {current_scan_nb}')
 
         firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).add(
             points.model_dump())
