@@ -14,12 +14,13 @@ class SocialQrCodeCubit extends SafeEmitterCubit<SocialQrCodeState> {
   final SocialQuestRegistrationUseCase _socialQuestRegistrationUseCase;
 
   void onScan(ActiveQuest activeQuest, String qrCode) {
+    final payload = {'quest': activeQuest.quest.toJsonWithId(), 'scanned_value': qrCode};
     _socialQuestRegistrationUseCase(
       functionUrl: activeQuest.quest.verificationFunction!,
-      payload: {'points': activeQuest.quest.points, 'scannedValue': qrCode},
+      payload: payload,
     ).when(
       progress: () => emit(const SocialQrCodeLoading()),
-      success: (result) async => emit(SocialQrCodeSaved(result, activeQuest.quest.points.first)),
+      success: (result) async => emit(SocialQrCodeSaved(result)),
       error: (_) => emit(const SocialQrCodeFailure()),
     );
   }

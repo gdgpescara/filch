@@ -9,7 +9,6 @@ import '../community/take_picture_bottom_sheet.dart';
 import 'state/assignment_cubit.dart';
 import 'widgets/assign_points_button.dart';
 import 'widgets/scanned_items.dart';
-import 'widgets/scanner_widget.dart';
 
 class AssignmentPage extends StatelessWidget {
   const AssignmentPage({super.key, required this.args});
@@ -62,13 +61,18 @@ class AssignmentPage extends StatelessWidget {
             extendBodyBehindAppBar: true,
             extendBody: true,
             appBar: AppBar(title: Text(t.staff.point_assignment.page.title)),
-            body: const SafeArea(
+            body: SafeArea(
               child: Column(
                 children: [
-                  SizedBox(height: Spacing.xl),
-                  ScannerWidget(),
-                  SizedBox(height: Spacing.l),
-                  ScannedItems(),
+                  const SizedBox(height: Spacing.xl),
+                  QrCodeScannerWidget(
+                    onDetect: (barcodes) {
+                      final scannedBarcodes = barcodes.barcodes.map((e) => e.rawValue).whereType<String>().toList();
+                      context.read<AssignmentCubit>().onQrCodesScanned(scannedBarcodes);
+                    },
+                  ),
+                  const SizedBox(height: Spacing.l),
+                  const ScannedItems(),
                 ],
               ),
             ),

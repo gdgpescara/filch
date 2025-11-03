@@ -7,14 +7,27 @@ export const onUserDeleteSentinel = functions
   .user()
   .onDelete(async (user) => {
     const batch = getFirestore().batch();
-    
+
+    //remove user subcollections
+    const userCollections = await getFirestore()
+      .collection("users")
+      .doc(user.uid)
+      .listCollections();
+    for (const collection of userCollections) {
+      const docsSnapshot = await collection.get();
+      docsSnapshot.forEach((doc) => {
+        batch.delete(doc.ref);
+      });
+    }
+
+
     // remove user from users collection 
     batch.delete(
       getFirestore()
         .collection("users")
         .doc(user.uid)
     );
-    
+
     // remove user from members subcollection in teams
     const teamMembersSnapshot = await getFirestore()
       .collectionGroup("members")

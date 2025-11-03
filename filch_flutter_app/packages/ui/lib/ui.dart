@@ -4,6 +4,7 @@ export 'src/app_version.dart';
 export 'src/containers/containers.dart';
 export 'src/loaders/loaders.dart';
 export 'src/logo.dart';
+export 'src/qr_code_scanner_widget.dart';
 export 'src/radius/radius.dart';
 export 'src/routes/routes.dart';
 export 'src/spacing/spacing.dart';

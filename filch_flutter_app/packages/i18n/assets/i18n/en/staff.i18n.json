@@ -60,7 +60,7 @@
   "home": {
     "bottom_nav": {
       "profile": "Profile",
-      "scan": "Management",
+      "scan": "Manage",
       "shifts": "Shifts"
     }
   },

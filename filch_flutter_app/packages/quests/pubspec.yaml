@@ -30,7 +30,6 @@ dependencies:
   flutter_bloc: ^9.1.1
   qr_flutter: ^4.1.0
   reactive_forms: ^18.1.1
-  mobile_scanner: ^7.1.3
   font_awesome_flutter: ^10.12.0
   rxdart: ^0.28.0
 

@@ -19,13 +19,12 @@ class SocialQrCodeLoading extends SocialQrCodeState {
 }
 
 class SocialQrCodeSaved extends SocialQrCodeState {
-  const SocialQrCodeSaved(this.isCorrect, this.points);
+  const SocialQrCodeSaved(this.result);
 
-  final bool isCorrect;
-  final int points;
+  final Map<String, String> result;
 
   @override
-  List<Object> get props => [points];
+  List<Object> get props => [result];
 }
 
 class SocialQrCodeFailure extends SocialQrCodeState {

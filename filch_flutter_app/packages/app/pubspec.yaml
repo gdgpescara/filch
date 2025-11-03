@@ -1,7 +1,7 @@
 name: filch
 description: GDG Pescara app.
 publish_to: "none"
-version: 3.0.2+23
+version: 3.0.2+24
 
 environment:
   sdk: ^3.9.0

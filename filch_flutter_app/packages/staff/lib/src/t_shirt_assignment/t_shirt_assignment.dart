@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:i18n/i18n.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:ui/ui.dart';
 
 import 'state/t_shirt_assignment_cubit.dart';
@@ -47,27 +46,13 @@ class TShirtAssignment extends StatelessWidget {
             backgroundColor: Colors.transparent,
             appBar: AppBar(title: Text(t.staff.t_shirt_assignment.page.title)),
             body: Center(
-              child: Container(
-                width: MediaQuery.sizeOf(context).width * 0.65,
-                height: MediaQuery.sizeOf(context).width * 0.65,
-                clipBehavior: Clip.hardEdge,
-                decoration: BoxDecoration(borderRadius: BorderRadius.circular(16), color: Colors.white),
-                child: Builder(
-                  builder: (context) {
-                    return MobileScanner(
-                      controller: MobileScannerController(
-                        detectionSpeed: DetectionSpeed.noDuplicates,
-                        formats: [BarcodeFormat.qrCode],
-                      ),
-                      onDetect: (barcodes) {
-                        final user = barcodes.barcodes.firstOrNull?.rawValue;
-                        if (user != null) {
-                          context.read<TShirtAssignmentCubit>().assignTShirt(user);
-                        }
-                      },
-                    );
-                  },
-                ),
+              child: QrCodeScannerWidget(
+                onDetect: (barcodes) {
+                  final user = barcodes.barcodes.firstOrNull?.rawValue;
+                  if (user != null) {
+                    context.read<TShirtAssignmentCubit>().assignTShirt(user);
+                  }
+                },
               ),
             ),
           ),

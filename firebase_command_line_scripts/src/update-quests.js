@@ -1,18 +1,17 @@
-import { getFirestore } from "firebase-admin/firestore";
+import { getFirestore, Timestamp } from "firebase-admin/firestore";
 import * as fs from "fs";
-import { Timestamp as timestamp } from "@google-cloud/firestore";
 
 const db = getFirestore();
 
 const collection = "quests";
 const dateFields = ["validityStart", "validityEnd"];
 
-const docConverter = {
+const docConverter= {
   toFirestore: (data) => {
     const newData = { ...data };
     for (const key in newData) {
       if (dateFields.includes(key)) {
-        newData[key] = timestamp.fromDate(new Date(newData[key]));
+        newData[key] = Timestamp.fromDate(new Date(newData[key]));
       }
     }
     return newData;
@@ -20,7 +19,7 @@ const docConverter = {
   fromFirestore: (snapshot, options) => {
     const data = snapshot.data(options);
     for (const key in data) {
-      if (data[key] instanceof timestamp) {
+      if (data[key] instanceof Timestamp) {
         data[key] = data[key].toDate();
       }
     }

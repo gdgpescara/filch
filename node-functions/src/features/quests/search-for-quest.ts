@@ -20,23 +20,52 @@ export const searchForQuest = onCall(
     const loggedUser = await getSignedInUser(request);
 
     // Get configurations
-    const config = await getFirestore()
-      .collection("configurations")
-      .doc("feature_flags")
-      .get();
+    // const config = await getFirestore()
+    //   .collection("configurations")
+    //   .doc("feature_flags")
+    //   .get();
 
-    const questsOrder = [
-      QuestTypeEnum.actor,
-      QuestTypeEnum.quiz,
-      QuestTypeEnum.community,
-      QuestTypeEnum.social,
+    // const actorQuestEnabled = config.data()?.actorQuestEnabled ?? false;
+    // const quizQuestEnabled = config.data()?.quizQuestEnabled ?? false;
+    // const communityQuestEnabled = config.data()?.communityQuestEnabled ?? false;
+    // const socialQuestEnabled = config.data()?.socialQuestEnabled ?? false;
+    const actorQuestEnabled = true;
+    const quizQuestEnabled = true;
+    const communityQuestEnabled = true;
+    const socialQuestEnabled = true;
+
+    const questSearchFunctions: Array<{
+      type: QuestTypeEnum;
+      enabled: boolean;
+      searchFn: (
+        user: UserRecord,
+        points: (string | null)[],
+        removed: string[]
+      ) => Promise<ActiveQuest | undefined>;
+    }> = [
+      {
+        type: QuestTypeEnum.actor,
+        enabled: actorQuestEnabled,
+        searchFn: searchForActorQuest,
+      },
+      {
+        type: QuestTypeEnum.quiz,
+        enabled: quizQuestEnabled,
+        searchFn: searchForQuizQuest,
+      },
+      {
+        type: QuestTypeEnum.community,
+        enabled: communityQuestEnabled,
+        searchFn: searchForCommunityQuest,
+      },
+      {
+        type: QuestTypeEnum.social,
+        enabled: socialQuestEnabled,
+        searchFn: searchForSocialQuest,
+      },
     ];
-    const actorQuestEnabled = config.data()?.actorQuestEnabled ?? false;
-    const quizQuestEnabled = config.data()?.quizQuestEnabled ?? false;
-    const communityQuestEnabled = config.data()?.communityQuestEnabled ?? false;
-    const socialQuestEnabled = config.data()?.socialQuestEnabled ?? false;
 
-    logger.info("Quests order: " + JSON.stringify(questsOrder));
+    logger.info("Quests order: " + JSON.stringify(questSearchFunctions.map((q) => q.type)));
     logger.info("Can search for actor quest: " + actorQuestEnabled);
     logger.info("Can search for quiz quest: " + quizQuestEnabled);
     logger.info("Can search for community quest: " + communityQuestEnabled);
@@ -66,47 +95,17 @@ export const searchForQuest = onCall(
     // Search for a quest
     let questFound: ActiveQuest | undefined = undefined;
 
-    for (const questType of questsOrder) {
+    for (const questConfig of questSearchFunctions) {
       if (questFound) {
         break;
       }
-      switch (questType) {
-      case QuestTypeEnum.actor:
-        if (!questFound && actorQuestEnabled) {
-          questFound = await searchForActorQuest(
-            loggedUser,
-            userQuestPoints,
-            removedQuests
-          );
-        }
-        break;
-      case QuestTypeEnum.quiz:
-        if (!questFound && quizQuestEnabled) {
-          questFound = await searchForQuizQuest(
-            loggedUser,
-            userQuestPoints,
-            removedQuests
-          );
-        }
-        break;
-      case QuestTypeEnum.community:
-        if (!questFound && communityQuestEnabled) {
-          questFound = await searchForCommunityQuest(
-            loggedUser,
-            userQuestPoints,
-            removedQuests
-          );
-        }
-        break;
-      case QuestTypeEnum.social:
-        if (!questFound && socialQuestEnabled) {
-          questFound = await searchForSocialQuest(
-            loggedUser,
-            userQuestPoints,
-            removedQuests
-          );
-        }
-        break;
+
+      if (questConfig.enabled) {
+        questFound = await questConfig.searchFn(
+          loggedUser,
+          userQuestPoints,
+          removedQuests
+        );
       }
     }
 

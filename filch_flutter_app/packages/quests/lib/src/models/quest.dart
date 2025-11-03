@@ -75,6 +75,9 @@ class Quest extends Equatable {
 
   Map<String, dynamic> toJson() => _$QuestToJson(this);
 
+  Map<String, dynamic> toJsonWithId() => {..._$QuestToJson(this), 'id': id};
+
+
   @override
   List<Object?> get props => [
     id,

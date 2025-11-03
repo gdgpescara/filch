@@ -8,10 +8,10 @@ class SocialQuestRegistrationUseCase {
 
   final FirebaseFunctions _functions;
 
-  Future<bool> call({required Map<String, dynamic> payload, required String functionUrl}) {
+  Future<Map<String, String>> call({required Map<String, dynamic> payload, required String functionUrl}) {
     return runSafetyFuture(() async {
-      final result = await _functions.httpsCallableFromUrl(functionUrl).call<bool>(payload);
-      return result.data;
+      final result = await _functions.httpsCallableFromUrl(functionUrl).call<Map<String, dynamic>>(payload);
+      return result.data.map((key, value) => MapEntry(key, value.toString()));
     }, onError: onFirebaseFunctionError);
   }
 }

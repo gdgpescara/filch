@@ -23,16 +23,22 @@ class SocialQrCodeView extends StatelessWidget {
             listener: (context, state) {
               switch (state) {
                 case SocialQrCodeSaved():
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(
-                        state.isCorrect
-                            ? t.quests.active_quest.social.qr_code.correct(n: state.points)
-                            : t.quests.active_quest.social.qr_code.incorrect,
-                      ),
-                      backgroundColor: state.isCorrect ? appColors.success.seed : appColors.error.seed,
-                    ),
-                  );
+                  final resultMessage = state.result[LocaleSettings.currentLocale.languageCode];
+                  if(resultMessage != null) {
+                    showDialog<void>(
+                      context: context,
+                      builder: (dialogContext) =>
+                          AlertDialog(
+                            content: Text(resultMessage),
+                            actions: [
+                              FilledButton(
+                                onPressed: () => Navigator.of(dialogContext).pop(),
+                                child: Text(t.common.buttons.ok),
+                              ),
+                            ],
+                          ),
+                    );
+                  }
                   break;
                 case SocialQrCodeFailure():
                   ScaffoldMessenger.of(context).showSnackBar(

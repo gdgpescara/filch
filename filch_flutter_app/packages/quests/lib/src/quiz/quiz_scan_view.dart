@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:i18n/i18n.dart';
-import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:ui/ui.dart';
 
 import '../commons/active_quest/quest_description_widget.dart';
@@ -43,27 +42,13 @@ class QuizScanView extends StatelessWidget {
   }
 
   Widget _scanView(BuildContext context, CurrentQuestLoaded currentQuestState) {
-    return Container(
-      width: 200,
-      height: 200,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(RadiusSize.m),
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(RadiusSize.m),
-        child: MobileScanner(
-          controller: MobileScannerController(
-            detectionSpeed: DetectionSpeed.noDuplicates,
-            formats: [BarcodeFormat.qrCode],
-          ),
-          onDetect: (capture) {
-            final barcodes = capture.barcodes;
-            if (barcodes.isNotEmpty && barcodes.first.rawValue != null) {
-              context.read<QuizCubit>().activateQuiz(currentQuestState.activeQuest.quest, barcodes.first.rawValue!);
-            }
-          },
-        ),
-      ),
+    return QrCodeScannerWidget(
+      onDetect: (capture) {
+        final barcodes = capture.barcodes;
+        if (barcodes.isNotEmpty && barcodes.first.rawValue != null) {
+          context.read<QuizCubit>().activateQuiz(currentQuestState.activeQuest.quest, barcodes.first.rawValue!);
+        }
+      },
     );
   }
 }

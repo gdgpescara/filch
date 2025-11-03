@@ -9,6 +9,7 @@ import 'dart:io' as _i497;
 
 import 'package:cloud_firestore/cloud_firestore.dart' as _i974;
 import 'package:cloud_functions/cloud_functions.dart' as _i809;
+import 'package:core/core.dart' as _i494;
 import 'package:core/src/di/date_format_module.dart' as _i1016;
 import 'package:core/src/di/external_libraries.dart' as _i545;
 import 'package:core/src/use_cases/get_feature_flags_use_case.dart' as _i866;
@@ -98,7 +99,7 @@ class CorePackageModule extends _i526.MicroPackageModule {
     gh.lazySingleton<_i866.GetFeatureFlagsUseCase>(
         () => _i866.GetFeatureFlagsUseCase(gh<_i974.FirebaseFirestore>()));
     gh.lazySingleton<_i139.IsBeforeDevFestUseCase>(
-        () => _i139.IsBeforeDevFestUseCase(gh<_i974.FirebaseFirestore>()));
+        () => _i139.IsBeforeDevFestUseCase(gh<_i494.GetFeatureFlagsUseCase>()));
   }
 }
 
