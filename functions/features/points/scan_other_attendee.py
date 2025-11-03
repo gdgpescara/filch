@@ -3,11 +3,12 @@ from pydantic import BaseModel
 from firebase_functions.https_fn import on_call, CallableRequest
 from firebase_admin import auth
 from firestore_client import client as firestore_client
+from features.user.types.user import User
 from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from shared.get_signed_in_user import get_signed_in_user
-from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_POINT
+from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_POINT, ASSIGN_POINT_EVERY, ONLY_ONE_TIME, POINTS_AFTER_SCAN, GET_POINTS_FROM_DB
 from google.cloud.firestore import SERVER_TIMESTAMP
 
 
@@ -16,6 +17,7 @@ class ScanOtherAttendeePayload(BaseModel):
     scanned_value: str
 
 
+# TODO Testare
 @on_call(region=FIREBASE_REGION)
 def scan_other_attendee(req: CallableRequest) -> bool:
     payload = req.data
@@ -58,3 +60,79 @@ def scan_other_attendee(req: CallableRequest) -> bool:
     else:
         logger.info("Scanned user not found")
         return False
+
+# TODO Testare funzione, gestire in modo intelligente i valori di ritorno
+# {"quest":{"id":"social-qrcode-1","title":{"en":"Intergalactic Mission: Connections Between Worlds","it":"Missione Intergalattica: Connessioni tra Mondi"},"description":{"en":"MIB agents relay on you with a sensitive mission for the tech universe balance.\nThe devfest is teeming with aliens in human disguise, explore it and mingle with other beings and discover their incredible skills. Each diverse meetup widens your knowledge and it fosters the ultimate international cohesion.\nRemember: innovation comes from comparison and diversity, only together can we build a truly… out-of-this-world future!\n\nScan the QR codes, identify the species, and earn points for every new interstellar encounter.","it":"Gli agenti MIB ti affidano una missione cruciale per l’equilibrio dell’universo tech!\nLa DevFest pullula di specie aliene mimetizzate tra gli umani, esplorala, incontra esseri di altre razze e scopri le loro straordinarie abilità. Ogni incontro con una specie diversa arricchisce la tua conoscenza e sarà un passo verso la coesione interstellare definitiva.\nRicorda: l’innovazione nasce dal confronto e dalla diversità — solo insieme possiamo costruire un futuro davvero… fuori dal mondo!\n\nScansiona i codici QR, identifica le razze e guadagna punti per ogni nuovo incontro interstellare."},"points":[1],"executionTime":20,"type":"social","subType":"scan","verificationFunction":"https://scanhousemate-hoj3oup52q-ey.a.run.app"},"scanned_value":"{\"uid\":\"lO2lJqeosxRi0APBJQXnYf7gRk92\",\"displayName\":\"Camillo Bucciarelli\",\"email\":\"bucciarelli.camillo92@gmail.com\"}"}
+@on_call(region=FIREBASE_REGION)
+def scan_other_team_attendee(req: CallableRequest) -> dict:
+    # logged_user = get_signed_in_user(request=req)
+    # logged_user_team = logged_user.custom_claims['team']
+
+    logged_user = User(uid='123', email='test@gmail.com')
+    logged_user_team = 'test'
+
+    payload = req.data
+    # TODO Qui non posso creare l'istanza di quest perche' richiede dei campi che non ho in ingresso
+    quest = payload['quest']
+
+    scanned_user = auth.get_user(uid=json.loads(payload['scanned_value'])["uid"])
+    scanned_user_data = firestore_client.collection(COLLECTION_USER).document(scanned_user.uid).get().to_dict()
+    scanned_user_team = scanned_user_data['team']
+
+    if scanned_user_team != logged_user_team:
+
+        if GET_POINTS_FROM_DB:
+            assigned_points = POINTS_AFTER_SCAN
+            logger.info(f'Taking Points From Config: {assigned_points}')
+        else:
+            assigned_points = quest.points[0]
+            logger.info(f'Taking Points From Quest: {assigned_points}')
+
+        quest_id = quest.id
+
+        hist_points = firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).where("quest", "==", quest_id).get()
+
+        if ONLY_ONE_TIME:
+            if len(hist_points) > 0:
+                logger.info(f'Points for Quest {quest_id} Already Assigned to User {logged_user.email}')
+                return {
+                    "en": "Nice try, space explorer! Points for this alliance were already granted in a previous encounter. The universe remembers your deeds — no double rewards in this galaxy!",
+                    "it": "Bel tentativo, esploratore spaziale! I punti per questa alleanza ti sono già stati assegnati in un incontro precedente. L’universo ricorda le tue imprese — niente doppi premi in questa galassia!"
+                }
+
+        if (len(hist_points) + 1) % ASSIGN_POINT_EVERY == 0:
+            emails = [point.to_dict()['assignedBy'] for point in hist_points]
+            if scanned_user.email in emails:
+                logger.info(f'User {scanned_user.email} Already Scanned By {logged_user.email}')
+                return {
+                    "en": "Déjà vu, agent! You've already linked with this ally before. No extra points this time, but your connection grows stronger across the galaxies!",
+                    "it": "Déjà vu, agente! Hai già stretto un legame con questo alleato in passato. Nessun punto extra stavolta, ma la vostra connessione risplende ancora più forte tra le galassie!"
+                }
+            else:
+                points = Points(
+                    type=PointsTypeEnum.quest,
+                    points=assigned_points,
+                    assignedAt=SERVER_TIMESTAMP,
+                    quest=quest_id,
+                    assignedBy=scanned_user.email
+                )
+        else:
+            points = Points(
+                type=PointsTypeEnum.quest,
+                points=0,
+                assignedAt=SERVER_TIMESTAMP,
+                quest=quest_id,
+                assignedBy=scanned_user.email
+            )
+
+        firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).add(points.model_dump())
+        return {
+            "en": "Well done! You’ve made a new intergalactic contact.\nYour knowledge grows… and so does your score!",
+            "it": "Ottimo lavoro! Hai stabilito un nuovo contatto intergalattico. La conoscenza si espande… e il tuo punteggio anche!"
+        }
+
+    else:
+        return {
+            "en": "Wow, takes one to know one!\nNo points for this match, but every bond makes your intergalactic network stronger. United, you’re a cosmic force!",
+            "it": "Wow, un altro come te! Nessun punto per questa scoperta, ma ogni alleanza rafforza la tua rete intergalattica. Uniti, siete una forza cosmica!"
+        }

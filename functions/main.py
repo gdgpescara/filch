@@ -10,7 +10,7 @@ from features.sessions.toggle_favorite_session import toggle_favorite_session
 from features.rooms.manage_room import add_room_delay
 from features.user.t_shirt_pickup import t_shirt_pickup
 from features.points.user_points_sentinel import user_points_sentinel
-from features.points.scan_other_attendee import scan_other_attendee
+from features.points.scan_other_attendee import scan_other_team_attendee
 from features.points.submit_answer import submit_answer
 from features.points.assign_points import assign_points
 from features.sorting_ceremony.teams_members_sync import on_team_member_created
