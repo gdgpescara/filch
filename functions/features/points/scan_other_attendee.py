@@ -77,13 +77,6 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
 
     if scanned_user_team != logged_user_team:
 
-        if GET_POINTS_FROM_DB:
-            assigned_points = POINTS_AFTER_SCAN
-            logger.info(f'Taking Points From Config: {assigned_points}')
-        else:
-            assigned_points = quest.points[0]
-            logger.info(f'Taking Points From Quest: {assigned_points}')
-
         quest_id = quest.id
 
         hist_points = firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).where("quest", "==", quest_id).get()
@@ -96,7 +89,9 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
                     "it": "Bel tentativo, esploratore spaziale! I punti per questa alleanza ti sono già stati assegnati in un incontro precedente. L’universo ricorda le tue imprese — niente doppi premi in questa galassia!"
                 }
 
-        if (len(hist_points) + 1) % ASSIGN_POINT_EVERY == 0:
+        past_scan = len(hist_points) + 1
+
+        if past_scan % ASSIGN_POINT_EVERY == 0:
             emails = [point.to_dict()['assignedBy'] for point in hist_points]
             if scanned_user.email in emails:
                 logger.info(f'User {scanned_user.email} Already Scanned By {logged_user.email}')
@@ -105,6 +100,14 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
                     "it": "Déjà vu, agente! Hai già stretto un legame con questo alleato in passato. Nessun punto extra stavolta, ma la vostra connessione risplende ancora più forte tra le galassie!"
                 }
             else:
+
+                if GET_POINTS_FROM_DB:
+                    assigned_points = POINTS_AFTER_SCAN
+                    logger.info(f'Taking Points From Config: {assigned_points}')
+                else:
+                    assigned_points = quest.points[0]
+                    logger.info(f'Taking Points From Quest: {assigned_points}')
+
                 points = Points(
                     type=PointsTypeEnum.quest,
                     points=assigned_points,
@@ -113,13 +116,16 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
                     assignedBy=scanned_user.email
                 )
         else:
+            assigned_points = 0
             points = Points(
                 type=PointsTypeEnum.quest,
-                points=0,
+                points=assigned_points,
                 assignedAt=SERVER_TIMESTAMP,
                 quest=quest_id,
                 assignedBy=scanned_user.email
             )
+
+        logger.info(f'Assigning {assigned_points} For Scan Number {past_scan}')
 
         firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).add(points.model_dump())
         return {
