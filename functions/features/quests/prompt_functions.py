@@ -5,10 +5,11 @@ import random
 from firestore_client import client as firestore_client
 from logger_config import logger
 from features.quests.types.localized_field import LocalizedField
+from shared.env import DOCUMENT_PROMPT, COLLECTION_CONFIGURATIONS
 
 
 async def love_words() -> LocalizedField:
-    config = firestore_client.collection("configurations").document("prompts").get().to_dict()
+    config = firestore_client.collection(COLLECTION_CONFIGURATIONS).document(DOCUMENT_PROMPT).get().to_dict()
 
     logger.info(f"prompts found: {config}")
 

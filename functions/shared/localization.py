@@ -3,12 +3,12 @@ from typing import Dict, Any
 # T-shirt notification localization
 T_SHIRT_NOTIFICATION_STRINGS = {
     "en": {
-        "title": "Hey, it's time to pick up your t-shirt!",
-        "body": "Go to the gadget desk and ask the staff for your t-shirt. Enjoy it!"
+        "title": "Alien, it's time to go undercover!",
+        "body": "Head to the Intergalactic Supply Division and collect your official t-shirt. Stay sharp. The galaxy’s watching."
     },
     "it": {
-        "title": "Ehi, è il momento di ritirare la tua maglietta!",
-        "body": "Vai al desk dei gadget e chiedi allo staff la tua maglietta. Goditela!"
+        "title": "Alieno, è ora di andare sotto copertura!",
+        "body": "Recati alla Divisione Forniture Intergalattica per ritirare la tua t-shirt ufficiale. Rimani vigile. La galassia ti osserva."
     }
 }
 

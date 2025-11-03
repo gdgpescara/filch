@@ -1,7 +1,5 @@
+from firebase_admin.auth import UserRecord, get_user, verify_id_token
 from firebase_functions.https_fn import CallableRequest, HttpsError, FunctionsErrorCode
-from firebase_admin import auth
-from firebase_admin._user_mgt import UserRecord
-
 from logger_config import logger
 
 
@@ -12,7 +10,7 @@ def get_signed_in_user(request: CallableRequest) -> UserRecord:
         logger.error("User is not logged in")
         raise HttpsError(code=FunctionsErrorCode.UNAUTHENTICATED, message="User is not logged in")
 
-    return auth.get_user(uid)
+    return get_user(uid)
 
 
 def verify_firebase_auth(request):
@@ -23,7 +21,7 @@ def verify_firebase_auth(request):
 
     id_token = auth_header.split("Bearer ")[1]
     try:
-        decoded = auth.verify_id_token(id_token)
+        decoded = verify_id_token(id_token)
         return decoded
     except Exception:
         logger.error("Invalid token.")

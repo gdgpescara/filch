@@ -4,8 +4,6 @@ from features.speakers.types.speaker import Speaker, Social
 from logger_config import logger
 import json, requests
 
-COLLECTION_SPEAKER_NAME = 'speakers'
-
 
 def transform_speakers(raw_data: list) -> List[Speaker]:
     result = []

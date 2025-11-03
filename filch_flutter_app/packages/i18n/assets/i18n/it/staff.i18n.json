@@ -1,0 +1,79 @@
+{
+  "point_assignment": {
+    "free_points": {
+      "label": "Seleziona i punti da assegnare: "
+    },
+    "user_quests": {
+      "label": "Seleziona una missione per assegnare i punti: "
+    },
+    "page": {
+      "title": "Scansiona il QR Code degli utenti",
+      "assign_button": "Assegna punti",
+      "assigning": "Assegnazione dei punti...",
+      "success": "I punti sono stati assegnati con successo.",
+      "generic_error": "Si è verificato un errore durante l'assegnazione dei punti, riprova più tardi.",
+      "errors(map)": {
+        "points_already_assigned": "Hai già assegnato punti agli utenti selezionati."
+      }
+    }
+  },
+  "t_shirt_assignment": {
+    "label": "Assegna t-shirt all'utente",
+    "message_part_1": "Sono state consegnate le magliette a ",
+    "message_part_2": " su ",
+    "message_part_3": " partecipanti.",
+    "page": {
+      "title": "Scansiona il QR Code dell'utente",
+      "assigning": "Assegnazione della t-shirt...",
+      "success": "La t-shirt è stata assegnata con successo.",
+      "error": "Si è verificato un errore durante l'assegnazione della t-shirt, riprova più tardi."
+    }
+  },
+  "schedule_delay": {
+    "label": "Gestisci ritardi programma:",
+    "button": {
+      "label": "Segnala Ritardo"
+    },
+    "current_reported_delay": {
+      "prefix": "Il ritardo massimo segnalato è di ",
+      "delay_unit": "$delay minuti",
+      "suffix": ", gli MC sono pregati di allinearsi al ritardo alla fine della sessione attuale."
+    },
+    "no_reported_delay": "Nessun ritardo segnalato",
+    "id_label": "ID: $id",
+    "decrease_delay_tooltip": "Diminuisci ritardo di 5 minuti",
+    "increase_delay_tooltip": "Aumenta ritardo di 5 minuti",
+    "delay_unit": "$delay min",
+    "confirm_delay_button": "Conferma Ritardo",
+    "no_rooms_available": "Nessuna stanza disponibile",
+    "available_rooms_title": "Stanze Disponibili",
+    "confirm_delay_dialog": {
+      "title": "Conferma Ritardo",
+      "message": "Sei sicuro di voler impostare il ritardo a $delay minuti per $roomName?"
+    }
+  },
+  "shifts": {
+    "title": "Turni giornalieri",
+    "me": "Io",
+    "empty": "Nessun turno disponibile"
+  },
+  "home": {
+    "bottom_nav": {
+      "profile": "Profilo",
+      "scan": "Gestione",
+      "shifts": "Turni"
+    }
+  },
+  "take_picture": {
+    "title": "Scatta una foto",
+    "instructions": "Prima di scattare la foto, per un migliore risultato, ricorda:\n\n• Effettuare la foto usando lo sfondo suggerito.\n• Evitare di sovrapporre i soggetti scattati.\n• Cerca di fare foto a mezzo busto."
+  },
+  "sessionize_sync": {
+    "title": "Sincronizzazione Sessionize:",
+    "description": "Questo pulsante sovrascriverà tutte le sessioni esistenti nell'app con i dati più recenti da Sessionize.",
+    "success_message": "Dati Sessionize sincronizzati con successo.",
+    "error_message": "Impossibile sincronizzare i dati Sessionize: $errorMessage",
+    "button_label": "Sincronizza"
+  }
+
+}

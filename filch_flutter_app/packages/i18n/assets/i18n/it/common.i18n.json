@@ -1,0 +1,111 @@
+{
+  "app_name": "Filch",
+  "buttons": {
+    "cancel": "Annulla",
+    "confirm": "Conferma",
+    "continue_next": "Continua",
+    "ok": "OK",
+    "sign_out": "Esci",
+    "try_again": "Riprova"
+  },
+  "dialogs": {
+    "title": "Ops!"
+  },
+  "duration": {
+    "months": {
+      "one": "$n mese",
+      "other": "$n mesi"
+    },
+    "weeks": {
+      "one": "$n settimana",
+      "other": "$n settimane"
+    },
+    "days": {
+      "one": "$n giorno",
+      "other": "$n giorni"
+    },
+    "hours": {
+      "one": "$n ora",
+      "other": "$n ore"
+    },
+    "minutes": {
+      "one": "$n minuto",
+      "other": "$n minuti"
+    },
+    "seconds": {
+      "one": "$n secondo",
+      "other": "$n secondi"
+    }
+  },
+  "duration_short": {
+    "months": {
+      "one": "${n}m",
+      "other": "${n}m"
+    },
+    "weeks": {
+      "one": "${n}sett",
+      "other": "${n}sett"
+    },
+    "days": {
+      "one": "${n}g",
+      "other": "${n}g"
+    },
+    "hours": {
+      "one": "${n}h",
+      "other": "${n}h"
+    },
+    "minutes": {
+      "one": "${n}min",
+      "other": "${n}min"
+    },
+    "seconds": {
+      "one": "${n}s",
+      "other": "${n}s"
+    }
+  },
+  "errors": {
+    "generic": "Si è verificato un errore",
+    "generic_retry": "Si è verificato un errore, riprova più tardi"
+  },
+  "time": {
+    "labels": {
+      "year": "Anno",
+      "month": "Mese",
+      "day": "Giorno",
+      "hour": "Ora",
+      "minute": "Minuto",
+      "second": "Secondo",
+      "am": "AM",
+      "pm": "PM"
+    }
+  },
+  "semantics": {
+    "yes": "Sì",
+    "no": "No",
+    "loading": "Caricamento..."
+  },
+  "home": {
+    "bottom_nav": {
+      "ranking": "Classifica",
+      "current_quest": "Missione",
+      "profile": "Profilo",
+      "scan": "Scan",
+      "shifts": "Turni",
+      "sessions": "Sessioni"
+    }
+  },
+  "user": {
+    "image": {
+      "semantic": "Immagine utente"
+    }
+  },
+  "notifications": {
+    "title": "Hai un messaggio dal continuum spazio-temporale."
+  },
+  "app_version": {
+    "with_patch": "Versione $version, patch $patch",
+    "without_patch": "Versione $version",
+    "new_patch_available_to_download": "Nuova patch disponibile, attendi il download...",
+    "update_error": "Errore durante l'aggiornamento. Riprova più tardi."
+  }
+}

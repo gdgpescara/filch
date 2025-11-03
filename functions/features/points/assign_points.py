@@ -1,18 +1,19 @@
 from logger_config import logger
 from firebase_functions.https_fn import on_call, CallableRequest
-from firebase_admin import auth, firestore
-from flask import jsonify, Response
+from firebase_admin import auth
 from shared.env import FIREBASE_REGION
 from features.points.types.points import Points
 from shared.get_signed_in_user import get_signed_in_user
 from features.points.types.points_type_enum import PointsTypeEnum
 from firestore_client import client as firestore_client
 from google.cloud.firestore import SERVER_TIMESTAMP
+from shared.env import COLLECTION_USER, COLLECTION_QUEST, SUBCOLLECTION_QUEUE, SUBCOLLECTION_POINT
+
 
 @on_call(region=FIREBASE_REGION)
 def assign_points(request: CallableRequest) -> str:
     logged_user = get_signed_in_user(request)
-    
+
     assigned_points = int(request.data.get("points"))
     point_type = request.data.get("type")
     quest_id = request.data.get("quest", None)
@@ -26,9 +27,9 @@ def assign_points(request: CallableRequest) -> str:
 
         for user in users:
             user_points_snap = (
-                firestore_client.collection("users")
+                firestore_client.collection(COLLECTION_USER)
                 .document(user.uid)
-                .collection("points")
+                .collection(SUBCOLLECTION_POINT)
                 .where("type", "==", point_type)
                 .where("assignedBy", "==", logged_user.email)
                 .get()
@@ -42,15 +43,15 @@ def assign_points(request: CallableRequest) -> str:
         batch.commit()
     else:
         filtered_users = users
-        
+
     # If no users to assign points to, return early
     if not filtered_users:
         return "points_already_assigned"
 
     points = Points(
-        type=point_type, 
+        type=point_type,
         points=assigned_points,
-        assignedAt=SERVER_TIMESTAMP, 
+        assignedAt=SERVER_TIMESTAMP,
         quest=quest_id,
         assignedBy=logged_user.email
     )
@@ -61,9 +62,9 @@ def assign_points(request: CallableRequest) -> str:
 
     for user in filtered_users:
         user_points_ref = (
-            firestore_client.collection("users")
+            firestore_client.collection(COLLECTION_USER)
             .document(user.uid)
-            .collection("points")
+            .collection(SUBCOLLECTION_POINT)
             .document()
         )
         batch.set(user_points_ref, points.model_dump(exclude_none=True))
@@ -72,7 +73,7 @@ def assign_points(request: CallableRequest) -> str:
             logger.info("Is quest points removing active quest and queue")
 
             # Get the user document
-            doc_ref = firestore_client.collection("users").document(user.uid)
+            doc_ref = firestore_client.collection(COLLECTION_USER).document(user.uid)
             user_data = doc_ref.get().to_dict() or {}
 
             # Check if this is the user's active quest
@@ -83,9 +84,9 @@ def assign_points(request: CallableRequest) -> str:
 
             # Remove user from quest queue
             queue_ref = (
-                firestore_client.collection("quests")
+                firestore_client.collection(COLLECTION_QUEST)
                 .document(quest_id)
-                .collection("queue")
+                .collection(SUBCOLLECTION_QUEUE)
                 .document(user.uid)
             )
             batch.delete(queue_ref)

@@ -4,8 +4,6 @@ from features.sessions.types.session import Session, NamedEntity, SessionSpeaker
 from logger_config import logger
 import json, requests
 
-COLLECTION_SESSION_NAME = 'sessions'
-
 
 def transform_sessions(raw_data: list) -> List[Session]:
     category_handlers = {
@@ -21,30 +19,30 @@ def transform_sessions(raw_data: list) -> List[Session]:
         for session in group.get("sessions", []):
             title = session.get("title", "")
             description = session.get("description", None)
-            roomId = session.get("roomId")
-            roomName = session.get("room")
-            startsAt = session.get("startsAt")
-            endsAt = session.get("endsAt")
-            isServiceSession = session.get("isServiceSession", False)
+            room_id = session.get("roomId")
+            room_name = session.get("room")
+            starts_at = session.get("startsAt")
+            ends_at = session.get("endsAt")
+            is_service_session = session.get("isServiceSession", False)
 
-            if roomId is None or roomName is None or startsAt is None or endsAt is None:
-                logger.info(f"Missing session information for session '{session.get('id')}'. Skipping.")
+            if room_id is None or room_name is None or starts_at is None or ends_at is None:
+                logger.info(f"Missing session information for session '{session.get('id') - session.get('title')}:\n roomId: {room_id}, roomName: {room_name}, startsAt: {starts_at}, endsAt: {ends_at}'. Skipping.")
                 continue
 
             pp_session = {
                 "id": session.get("id"),
                 "title": title,
                 "description": description,
-                "startsAt": startsAt,
-                "endsAt": endsAt,
+                "startsAt": starts_at,
+                "endsAt": ends_at,
                 "speakers": [SessionSpeaker(id=s.get("id"), name=s.get("name"), profilePicture=None, bio=None, links=[], tagLine=None) for s in session.get("speakers", [])],
-                "room": NamedEntity(id=roomId, name=roomName) if not isServiceSession else None,
+                "room": NamedEntity(id=room_id, name=room_name) if not is_service_session else None,
                 "sessionFormat": None,
                 "tracks": [],
                 "tags": [],
                 "level": None,
                 "language": None,
-                "isServiceSession": isServiceSession
+                "isServiceSession": is_service_session
             }
 
             for category in session.get("categories", []):

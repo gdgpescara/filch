@@ -1,0 +1,111 @@
+{
+  "app_name": "Filch",
+  "buttons": {
+    "cancel": "Cancel",
+    "confirm": "Confirm",
+    "continue_next": "Continue",
+    "ok": "OK",
+    "sign_out": "Sign Out",
+    "try_again": "Try Again"
+  },
+  "dialogs": {
+    "title": "Ops!"
+  },
+  "duration": {
+    "months": {
+      "one": "$n month",
+      "other": "$n months"
+    },
+    "weeks": {
+      "one": "$n week",
+      "other": "$n weeks"
+    },
+    "days": {
+      "one": "$n day",
+      "other": "$n days"
+    },
+    "hours": {
+      "one": "$n hour",
+      "other": "$n hours"
+    },
+    "minutes": {
+      "one": "$n minute",
+      "other": "$n minutes"
+    },
+    "seconds": {
+      "one": "$n second",
+      "other": "$n seconds"
+    }
+  },
+  "duration_short": {
+    "months": {
+      "one": "${n}mo",
+      "other": "${n}mo"
+    },
+    "weeks": {
+      "one": "${n}wk",
+      "other": "${n}wk"
+    },
+    "days": {
+      "one": "${n}d",
+      "other": "${n}d"
+    },
+    "hours": {
+      "one": "${n}h",
+      "other": "${n}h"
+    },
+    "minutes": {
+      "one": "${n}min",
+      "other": "${n}min"
+    },
+    "seconds": {
+      "one": "${n}s",
+      "other": "${n}s"
+    }
+  },
+  "errors": {
+    "generic": "An unknown error occurred.",
+    "generic_retry": "An unknown error occurred. Please try again."
+  },
+  "time": {
+    "labels": {
+      "year": "Year",
+      "month": "Month",
+      "day": "Day",
+      "hour": "Hour",
+      "minute": "Minute",
+      "second": "Second",
+      "am": "AM",
+      "pm": "PM"
+    }
+  },
+  "semantics": {
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading..."
+  },
+  "home": {
+    "bottom_nav": {
+      "ranking": "Ranking",
+      "current_quest": "Quest",
+      "profile": "Profile",
+      "scan": "Scan",
+      "shifts": "Shifts",
+      "sessions": "Sessions"
+    }
+  },
+  "user": {
+    "image": {
+      "semantic": "User image"
+    }
+  },
+  "notifications": {
+    "title": "You have a message from the continuum of space-time."
+  },
+  "app_version": {
+    "with_patch": "Version $version, patch $patch",
+    "without_patch": "Version $version",
+    "new_patch_available_to_download": "New patch available, waiting while downloading...",
+    "update_error": "Error while updating. Please try again later."
+  }
+}

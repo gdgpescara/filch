@@ -3,7 +3,7 @@ from firestore_client import client as firestore_client
 from google.cloud.firestore import Increment
 
 from logger_config import logger
-from shared.env import FIREBASE_REGION
+from shared.env import FIREBASE_REGION, COLLECTION_TEAM
 
 
 @on_document_created(
@@ -15,7 +15,7 @@ def on_team_member_created(event: Event[DocumentSnapshot]) -> None:
     logger.info(f"teams_members_sync triggered for document: {event}")
 
     firestore_client \
-        .collection("teams") \
+        .collection(COLLECTION_TEAM) \
         .document(event.params["id"]) \
         .update({
             "membersCount": Increment(1)
@@ -31,7 +31,7 @@ def on_team_member_deleted(event: Event[DocumentSnapshot]) -> None:
     logger.info(f"teams_members_sync triggered for document: {event}")
 
     firestore_client \
-        .collection("teams") \
+        .collection(COLLECTION_TEAM) \
         .document(event.params["id"]) \
         .update({
             "membersCount": Increment(-1)
