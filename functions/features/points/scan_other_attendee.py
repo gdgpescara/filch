@@ -8,7 +8,8 @@ from features.points.types.points import Points
 from features.points.types.points_type_enum import PointsTypeEnum
 from logger_config import logger
 from shared.get_signed_in_user import get_signed_in_user
-from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_POINT, ASSIGN_POINT_EVERY, ONLY_ONE_TIME, POINTS_AFTER_SCAN, GET_POINTS_FROM_DB
+from shared.env import FIREBASE_REGION, COLLECTION_USER, SUBCOLLECTION_POINT, ASSIGN_POINT_EVERY, ONLY_ONE_TIME, \
+    POINTS_AFTER_SCAN, GET_POINTS_FROM_DB
 from google.cloud.firestore import SERVER_TIMESTAMP
 
 
@@ -40,12 +41,12 @@ def scan_other_attendee(req: CallableRequest) -> bool:
             raise Exception("You have already scanned this user")
 
         points = Points(
-            type=PointsTypeEnum.quest, 
+            type=PointsTypeEnum.quest,
             points=payload.points,
-            assignedAt=SERVER_TIMESTAMP, 
+            assignedAt=SERVER_TIMESTAMP,
             assignedBy=user_uid
         )
-        
+
         batch = firestore_client.batch()
         doc = (firestore_client
                .collection(COLLECTION_USER)
@@ -54,12 +55,13 @@ def scan_other_attendee(req: CallableRequest) -> bool:
                .document())
         batch.set(doc, points.model_dump())
         batch.commit()
-        
+
         logger.info("Points added")
         return True
     else:
         logger.info("Scanned user not found")
         return False
+
 
 # TODO Testare funzione, gestire in modo intelligente i valori di ritorno
 @on_call(region=FIREBASE_REGION)
@@ -79,7 +81,8 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
 
         quest_id = quest.id
 
-        hist_points = firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).where("quest", "==", quest_id).get()
+        hist_points = firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(
+            SUBCOLLECTION_POINT).where("quest", "==", quest_id).get()
 
         if ONLY_ONE_TIME:
             if len(hist_points) > 0:
@@ -127,7 +130,8 @@ def scan_other_team_attendee(req: CallableRequest) -> dict:
 
         logger.info(f'Assigning {assigned_points} For Scan Number {past_scan}')
 
-        firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).add(points.model_dump())
+        firestore_client.collection(COLLECTION_USER).document(logged_user.uid).collection(SUBCOLLECTION_POINT).add(
+            points.model_dump())
         return {
             "en": "Well done! You’ve made a new intergalactic contact.\nYour knowledge grows… and so does your score!",
             "it": "Ottimo lavoro! Hai stabilito un nuovo contatto intergalattico. La conoscenza si espande… e il tuo punteggio anche!"
