@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Remote" type="FlutterRunConfigurationType" factoryName="Flutter">
+    <option name="additionalArgs" value="--dart-define-from-file=.env/remote.json" />
+    <option name="filePath" value="$PROJECT_DIR$/packages/app/lib/main.dart" />
+    <method v="2" />
+  </configuration>
+</component>

@@ -8,3 +8,5 @@ venv/
 # env
 .env
 .lh
+.idea/
+.vscode

@@ -18,8 +18,7 @@ firestore-snapshot/
 serviceAccountKey*.json
 
 # IDE & Editors
-.idea/*
-.idea/runConfigurations/melos_*.xml
+.idea/
 .atom/
 *.iml
 *.ipr

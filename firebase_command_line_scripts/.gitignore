@@ -13,3 +13,5 @@ node_modules/
 /serviceAccountKey23.json
 /serviceAccountKey24.json
 /data/
+.idea/
+.vscode/
