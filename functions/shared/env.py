@@ -3,6 +3,7 @@ Environment variables and configuration settings for the application.
 """
 import os
 
+# TODO Possibile spostare alcuni valori su DB
 START_DAY = 8
 END_DAY = 9
 MONTH = 11
@@ -11,6 +12,12 @@ END_HOUR = 18
 FIREBASE_REGION = os.environ.get("FIREBASE_REGION", "europe-west3")
 SESSIONIZE_EVENT_ID = os.environ.get("SESSIONIZE_EVENT_ID", None)
 TZ = 'Europe/Rome'
+
+# SCAN QUEST
+ASSIGN_POINT_EVERY = 1
+GET_POINTS_FROM_DB = False
+POINTS_AFTER_SCAN = 10
+MAX_TIMES_ASSIGNMENT = 1
 
 # COLLECTIONS
 COLLECTION_USER = 'users'
