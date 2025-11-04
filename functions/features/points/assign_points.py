@@ -1,13 +1,12 @@
 from logger_config import logger
 from firebase_functions.https_fn import on_call, CallableRequest
 from firebase_admin import auth
-from shared.env import FIREBASE_REGION
 from features.points.types.points import Points
 from shared.get_signed_in_user import get_signed_in_user
 from features.points.types.points_type_enum import PointsTypeEnum
 from firestore_client import client as firestore_client
 from google.cloud.firestore import SERVER_TIMESTAMP
-from shared.env import COLLECTION_USER, COLLECTION_QUEST, SUBCOLLECTION_QUEUE, SUBCOLLECTION_POINT
+from shared.env import COLLECTION_USER, COLLECTION_QUEST, SUBCOLLECTION_QUEUE, SUBCOLLECTION_POINT, FIREBASE_REGION
 
 
 @on_call(region=FIREBASE_REGION)
